@@ -7,7 +7,7 @@ import './index.less';
 
 const SubMenu = Menu.SubMenu;
 
-class VMSider extends Component{
+class SettingSider extends Component{
     // submenu keys of first level
   rootSubmenuKeys = ['sub1', 'sub2', 'sub3', '4', '5', '6'];
   state = {
@@ -90,4 +90,4 @@ class VMSider extends Component{
 /*export default withRouter(connect((state) => {
     return { ...state };
 })(LeftSider));*/
-export default withRouter(VMSider);
+export default withRouter(SettingSider);

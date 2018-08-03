@@ -40,7 +40,7 @@ class VMSider extends Component{
       if(pathName=="/config/device"){
           openKey = [];
           current = 'sub1';
-      }else if(pathName=="/config/area"){
+      }else if(pathName=="/vm/machine"){
           openKey = [];
           current = 'sub2';
       }else if(pathName=="/config/user"){
