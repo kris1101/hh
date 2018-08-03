@@ -1,23 +1,12 @@
 import React , {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
-import { Avatar, Menu, Dropdown, Icon} from 'antd';
+import { Avatar, Menu, Dropdown,Badge,Layout, Icon} from 'antd';
 import './index.less';
+import avater from '../../../static/img/b1.jpg';
 
-// const menu = (
-//     <Menu>
-//       <Menu.Item key="10">
-//           <Link to='/config/device'>设备</Link>
-//       </Menu.Item>
-//       <Menu.Item key="11">
-//           <Link to='/config/area'>区域管理</Link>
-//       </Menu.Item>
-//       <Menu.Item key="13"><Link to='/config/event'>事件管理</Link></Menu.Item>
-//       <Menu.Item key="14"><Link to='/config/member'>人员管理</Link></Menu.Item>
-//       <Menu.Item key="15"><Link to='/config/user'>用户管理</Link></Menu.Item>
-//       <Menu.Item key="16"><Link to='/config/system'>系统设置</Link></Menu.Item>
-//     </Menu>
-//   )
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 class Head extends React.Component {
     state = {
         current: 'index',
@@ -36,7 +25,7 @@ class Head extends React.Component {
 
        let pathName = location.pathname;
        let currentKey = 'index';
-       if(pathName=='/'){
+       if(pathName.indexOf('vm')>0){
             currentKey = 'index';
        }else if(pathName.indexOf("config")>0){
             currentKey = '6';
@@ -54,7 +43,7 @@ class Head extends React.Component {
                     selectedKeys={[this.state.currentKey]}
                     onClick={this.handleClick}
                 >
-                    <Menu.Item key="index"><Link to='/'>虚拟机</Link></Menu.Item>
+                    <Menu.Item key="index"><Link to='/vm/machine'>虚拟机</Link></Menu.Item>
                     <Menu.Item key="2"><Link to='/'>物理机</Link></Menu.Item>
                     <Menu.Item key="3"><Link to='/'>容器</Link></Menu.Item>
                     <Menu.Item key="4"><Link to='/attendance'>存储</Link></Menu.Item>
@@ -63,23 +52,28 @@ class Head extends React.Component {
                     <Menu.Item key="7"><Link to='/'>数据库</Link></Menu.Item>
                 </Menu>
                 <div className="right">
-                    <div className="invade-alert">
-                        <Icon type="bell" />
-                    </div>
-                    <div className="device-alert">
-                        <Icon type="notification" />
-                    </div>
-                    {/*<div className="setting">*/}
-                        {/*<Dropdown overlay={menu} trigger={['click']}>*/}
-                            {/*<span><Icon type="setting" /></span>*/}
-                        {/*</Dropdown>*/}
-                    {/*</div>*/}
-                    <div className="login-out">
-                        <Avatar icon="user" />
-                        <span> 张三 </span>
+                   <Menu
+                       mode="horizontal"
+                       style={{ lineHeight: '64px ' }}
+                       selectedKeys={[this.state.currentKey]}
+                       onClick={this.handleClick}
+                   >
+                    <Menu.Item key="1">
+                        <Badge count={25} overflowCount={20} style={{marginLeft: 10}}>
+                            <Icon type="notification" />
+                        </Badge>
+                    </Menu.Item>
+                    <SubMenu title={<span className="avatar"><img src={avater} alt="头像" /><i className="on bottom b-white" /></span>}>
+                        <MenuItemGroup title="用户中心">
+                            <Menu.Item key="setting:1">你好 - 超级管理员</Menu.Item>
+                            <Menu.Item key="setting:2">个人资料</Menu.Item>
+                            <Menu.Item key="logout"><span onClick={this.logout}>退出登录</span></Menu.Item>
+                        </MenuItemGroup>
+                    </SubMenu>
+                </Menu>
+
                     </div>
                 </div>
-            </div>
 		);
 	}
 }

@@ -19,6 +19,7 @@
     float: right;
 }
 
+
 /* 首页Header */
 .indexHeader{
     background-image: url("../../../static/img/bg-s.png");
@@ -61,5 +62,43 @@
     .login-out{
         color: #FFFFFF;
     }
+    .ant-menu-submenu-horizontal > .ant-menu {
+                        width: 120px;
+                        left: -40px;
+                    }
+    .avatar {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      line-height: 1;
+      border-radius: 500px;
+      white-space: nowrap;
+      font-weight: bold;
+      i {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 10px;
+        height: 10px;
+        margin: 1px;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 100%;
+        &.bottom {
+          left: auto;
+          top: auto;
+          bottom: 0;
+          right: 0;
+        }
+        &.on {
+          background-color: #6cc788;
+        }
+      }
+      img {
+        border-radius: 500px;
+        width: 100%;
+      }
+}
+
 }
 
