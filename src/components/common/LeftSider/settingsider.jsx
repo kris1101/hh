@@ -77,8 +77,8 @@ class SettingSider extends Component{
                 <Menu.Item key="/config/user"><Link to="/config/user">已读消息</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">未读消息</Link></Menu.Item>
             </SubMenu>
-            <Menu.Item key="sub1"><Link to="/config/device"><i className="icon1"></i>个人资料</Link></Menu.Item>
-            <Menu.Item key="sub2"><Link to="/config/device"><i className="icon1"></i>操作日志</Link></Menu.Item>
+            <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>个人资料</Link></Menu.Item>
+            <Menu.Item key="sub2"><Link to="/config/device"><i className="dasktop"></i>操作日志</Link></Menu.Item>
         </Menu>
       </div>
     );

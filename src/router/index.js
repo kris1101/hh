@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 
-import Machine from '../components/vm/machine/machinelist.jsx';
+import vm_routes from 'vm';
+import machine_routes from 'machine';
+import daas_routes from 'daas';
+import docker_routes from 'docker'
+import monitor_routes from 'monitor'
+import setting_routes from 'setting'
+import storage_routes from 'storage'
+import ticket_routes from 'ticket'
 
 
-
-const routes=[{
-        exact: true,
-        path: '/vm/machine',
-        component: Machine,
-    },{
-        exact: true,
-        path: '/config/machine',
-        component: Machine,
-    },]
+const routes=[
+    vm_routes,
+    machine_routes,
+    daas_routes,
+    docker_routes,
+    monitor_routes,
+    setting_routes,
+    storage_routes,
+    ticket_routes
+    ]
 export default routes;

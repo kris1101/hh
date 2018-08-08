@@ -40,20 +40,11 @@ class MachineSider extends Component{
       if(pathName=="/config/device"){
           openKey = [];
           current = 'sub1';
-      }else if(pathName=="/config/area"){
+      }else if(pathName=="/machine/machine"){
           openKey = [];
           current = 'sub2';
       }else if(pathName=="/config/user"){
           openKey = ["sub3"];
-          current = pathName;
-      }else if(pathName=="/config/employees"){
-          openKey = ["sub4"];
-          current = pathName;
-      }else if(pathName=="/config/userlist"||pathName=="/config/userManage"){
-          openKey = ["sub5"];
-          current = pathName;
-      }else if(pathName=="/config/emaillist"){
-          openKey = ["sub6"];
           current = pathName;
       }
 
@@ -73,9 +64,9 @@ class MachineSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="sub1"><Link to="/config/device"><i className="icon1"></i>概述</Link></Menu.Item>
-            <Menu.Item key="sub2"><Link to="/config/area"><i className="icon2"></i>机器列表</Link></Menu.Item>
-            <Menu.Item key="sub3"><Link to="/config/area"><i className="icon3"></i>机柜列表</Link></Menu.Item>
+            <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
+            <Menu.Item key="sub2"><Link to="/machine/machine"><i className="machine"></i>机器列表</Link></Menu.Item>
+            <Menu.Item key="sub3"><Link to="/config/area"><i className="engineroom"></i>机柜列表</Link></Menu.Item>
         </Menu>
       </div>
     );

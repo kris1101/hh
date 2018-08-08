@@ -73,7 +73,7 @@ class DockerSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="sub1"><Link to="/config/device"><i className="icon1"></i>概述</Link></Menu.Item>
+            <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
             <Menu.Item key="sub2"><Link to="/config/area"><i className="icon2"></i>应用</Link></Menu.Item>
             <Menu.Item key="sub3"><Link to="/config/area"><i className="icon3"></i>服务</Link></Menu.Item>
             <Menu.Item key="sub4"><Link to="/config/area"><i className="icon5"></i>容器</Link></Menu.Item>

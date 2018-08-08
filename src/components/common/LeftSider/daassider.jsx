@@ -73,7 +73,7 @@ class DassSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="sub1"><Link to="/config/device"><i className="icon1"></i>概述</Link></Menu.Item>
+            <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
              <SubMenu key="sub2" title={<span><i className="icon4"></i><span>关系型数据库</span></span>} >
                 <Menu.Item key="/config/user"><Link to="/config/user">实例</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">集群</Link></Menu.Item>

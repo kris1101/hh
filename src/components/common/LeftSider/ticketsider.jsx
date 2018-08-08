@@ -73,7 +73,7 @@ class TicketSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="sub1"><Link to="/config/device"><i className="icon1"></i>概述</Link></Menu.Item>
+            <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
              <SubMenu key="sub3" title={<span><i className="icon4"></i><span>工单管理</span></span>} >
                 <Menu.Item key="/config/user"><Link to="/config/user">待处理</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">已完成</Link></Menu.Item>

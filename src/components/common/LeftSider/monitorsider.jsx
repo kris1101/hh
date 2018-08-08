@@ -73,13 +73,14 @@ class MonitorSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="sub1"><Link to="/config/device"><i className="icon1"></i>概述</Link></Menu.Item>
-            <Menu.Item key="sub2"><Link to="/config/device"><i className="icon1"></i>云主机</Link></Menu.Item>
-            <Menu.Item key="sub3"><Link to="/config/device"><i className="icon1"></i>弹性IP</Link></Menu.Item>
-            <Menu.Item key="sub4"><Link to="/config/device"><i className="icon1"></i>Redis</Link></Menu.Item>
-            <Menu.Item key="sub5"><Link to="/config/device"><i className="icon1"></i>MongoDB</Link></Menu.Item>
-            <Menu.Item key="sub6"><Link to="/config/device"><i className="icon1"></i>关系型数据库</Link></Menu.Item>
-            <Menu.Item key="sub7"><Link to="/config/device"><i className="icon1"></i>负载均衡</Link></Menu.Item>
+            <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
+            <Menu.Item key="sub2"><Link to="/config/device"><i className="dasktop"></i>云主机</Link></Menu.Item>
+            <Menu.Item key="sub10"><Link to="/config/device"><i className="dasktop"></i>物理机</Link></Menu.Item>
+            <Menu.Item key="sub3"><Link to="/config/device"><i className="dasktop"></i>弹性IP</Link></Menu.Item>
+            <Menu.Item key="sub4"><Link to="/config/device"><i className="dasktop"></i>Redis</Link></Menu.Item>
+            <Menu.Item key="sub5"><Link to="/config/device"><i className="dasktop"></i>MongoDB</Link></Menu.Item>
+            <Menu.Item key="sub6"><Link to="/config/device"><i className="dasktop"></i>关系型数据库</Link></Menu.Item>
+            <Menu.Item key="sub7"><Link to="/config/device"><i className="dasktop"></i>负载均衡</Link></Menu.Item>
              <SubMenu key="sub8" title={<span><i className="icon4"></i><span>应用监控</span></span>} >
                 <Menu.Item key="/config/user"><Link to="/config/user">HTTP</Link></Menu.Item>
                 <Menu.Item key="/config/user"><Link to="/config/user">HTTPS</Link></Menu.Item>

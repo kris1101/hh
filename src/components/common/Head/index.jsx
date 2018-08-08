@@ -27,6 +27,8 @@ class Head extends React.Component {
        let currentKey = 'index';
        if(pathName.indexOf('vm')>0){
             currentKey = 'index';
+       }else if(pathName.indexOf("machine")>0){
+            currentKey = '2';
        }else if(pathName.indexOf("config")>0){
             currentKey = '6';
        }
@@ -44,7 +46,7 @@ class Head extends React.Component {
                     onClick={this.handleClick}
                 >
                     <Menu.Item key="index"><Link to='/vm/machine'>虚拟机</Link></Menu.Item>
-                    <Menu.Item key="2"><Link to='/'>物理机</Link></Menu.Item>
+                    <Menu.Item key="2"><Link to='/machine/machine'>物理机</Link></Menu.Item>
                     <Menu.Item key="3"><Link to='/'>容器</Link></Menu.Item>
                     <Menu.Item key="4"><Link to='/attendance'>存储</Link></Menu.Item>
                     <Menu.Item key="5"><Link to='/'>工单</Link></Menu.Item>
