@@ -29,7 +29,15 @@ class Head extends React.Component {
             currentKey = 'index';
        }else if(pathName.indexOf("machine")>0){
             currentKey = '2';
-       }else if(pathName.indexOf("config")>0){
+       }else if(pathName.indexOf("daas")>0){
+            currentKey = '7';
+       }else if(pathName.indexOf("docker")>0){
+            currentKey = '3';
+       }else if(pathName.indexOf("storage")>0){
+            currentKey = '4';
+       }else if(pathName.indexOf("ticket")>0){
+            currentKey = '5';
+       }else if(pathName.indexOf("monitor")>0){
             currentKey = '6';
        }
              this.setState({currentKey: currentKey});
@@ -47,11 +55,11 @@ class Head extends React.Component {
                 >
                     <Menu.Item key="index"><Link to='/vm/machine'>虚拟机</Link></Menu.Item>
                     <Menu.Item key="2"><Link to='/machine/machine'>物理机</Link></Menu.Item>
-                    <Menu.Item key="3"><Link to='/'>容器</Link></Menu.Item>
-                    <Menu.Item key="4"><Link to='/attendance'>存储</Link></Menu.Item>
-                    <Menu.Item key="5"><Link to='/'>工单</Link></Menu.Item>
-                    <Menu.Item key="6"><Link to='/config/device'>监控</Link></Menu.Item>
-                    <Menu.Item key="7"><Link to='/'>数据库</Link></Menu.Item>
+                    <Menu.Item key="3"><Link to='/docker/server'>容器</Link></Menu.Item>
+                    <Menu.Item key="4"><Link to='/storage/server'>存储</Link></Menu.Item>
+                    <Menu.Item key="5"><Link to='/ticket/wait'>工单</Link></Menu.Item>
+                    <Menu.Item key="6"><Link to='/monitor/machine'>监控</Link></Menu.Item>
+                    <Menu.Item key="7"><Link to='/daas/machine'>数据库</Link></Menu.Item>
                 </Menu>
                 <div className="right">
                    <Menu

@@ -4,7 +4,7 @@ import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getmachines } from './TableTpl/tabletpl';
-import './machinelist.less';
+import './serverlist.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;

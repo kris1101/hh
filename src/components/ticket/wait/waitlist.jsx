@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import Machinesider from '../../../components/common/LeftSider/machinesider';
+import Ticketsider from '../../../components/common/LeftSider/ticketsider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getmachines } from './TableTpl/tabletpl';
-import './machinelist.less';
+import './waitlist.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class MachineManageForm extends Component {
+class TicketManageForm extends Component {
     constructor(props) {
         super(props);
         this.columns = getmachines.call(this);
@@ -57,7 +57,7 @@ class MachineManageForm extends Component {
     return (
       <Layout className="config">
         <Sider style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}>
-            <Machinesider/>
+            <Ticketsider/>
         </Sider>
         <Content style={{ padding: 0, margin:10, marginLeft:210, marginBottom: 0, minHeight: window.innerHeight-84 }}>
             <BreadcrumbCustom first="物理机管理" second="物理机列表" />
@@ -97,7 +97,7 @@ class MachineManageForm extends Component {
   }
 }
 
-const VMManage = Form.create()(MachineManageForm);
+const TicketManage = Form.create()(TicketManageForm);
 export default connect((state) => {
     return { ...state };
-})(VMManage);
+})(TicketManage);

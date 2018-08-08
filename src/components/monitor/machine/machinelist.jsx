@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Settingsider from '../../../components/common/LeftSider/settingsider';
+import Monitorsider from '../../../components/common/LeftSider/monitorsider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
@@ -10,7 +10,7 @@ const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class SettingManageForm extends Component {
+class MoniterManageForm extends Component {
     constructor(props) {
         super(props);
         this.columns = getmachines.call(this);
@@ -57,7 +57,7 @@ class SettingManageForm extends Component {
     return (
       <Layout className="config">
         <Sider style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}>
-            <Settingsider/>
+            <Monitorsider/>
         </Sider>
         <Content style={{ padding: 0, margin:10, marginLeft:210, marginBottom: 0, minHeight: window.innerHeight-84 }}>
             <BreadcrumbCustom first="物理机管理" second="物理机列表" />
@@ -97,7 +97,7 @@ class SettingManageForm extends Component {
   }
 }
 
-const SettingManage = Form.create()(SettingManageForm);
+const MoniterManage = Form.create()(MoniterManageForm);
 export default connect((state) => {
     return { ...state };
-})(SettingManage);
+})(MoniterManage);

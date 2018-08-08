@@ -37,10 +37,10 @@ class DassSider extends Component{
       let openKey = [];
       let current = 'sub1';
 
-      if(pathName=="/config/device"){
+      if(pathName=="/daas/machine"){
           openKey = [];
           current = 'sub1';
-      }else if(pathName=="/config/area"){
+      }else if(pathName=="/daas/machine"){
           openKey = [];
           current = 'sub2';
       }else if(pathName=="/config/user"){
@@ -76,7 +76,7 @@ class DassSider extends Component{
             <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
              <SubMenu key="sub2" title={<span><i className="icon4"></i><span>关系型数据库</span></span>} >
                 <Menu.Item key="/config/user"><Link to="/config/user">实例</Link></Menu.Item>
-                <Menu.Item key="2"><Link to="/config/user">集群</Link></Menu.Item>
+                <Menu.Item key="/daas/machine"><Link to="/daas/machine">集群</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">备份</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">binlog日志</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">慢查询</Link></Menu.Item>

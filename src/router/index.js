@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import vm_routes from 'vm';
-import machine_routes from 'machine';
-import daas_routes from 'daas';
-import docker_routes from 'docker'
-import monitor_routes from 'monitor'
-import setting_routes from 'setting'
-import storage_routes from 'storage'
-import ticket_routes from 'ticket'
+import vm_routes from './vm.js';
+import machine_routes from './machine.js';
+import daas_routes from './daas';
+import docker_routes from './docker';
+import monitor_routes from './monitor';
+import setting_routes from './setting';
+import storage_routes from './storage';
+import ticket_routes from './ticket';
 
 
 const routes=[
