@@ -37,13 +37,13 @@ class DockerSider extends Component{
       let openKey = [];
       let current = 'sub1';
 
-      if(pathName=="/config/device"){
+      if(pathName=="/docker/server"){
           openKey = [];
           current = 'sub1';
       }else if(pathName=="/config/area"){
           openKey = [];
           current = 'sub2';
-      }else if(pathName=="/config/user"){
+      }else if(pathName=="/docker/server"){
           openKey = ["sub3"];
           current = pathName;
       }else if(pathName=="/config/employees"){
@@ -74,11 +74,11 @@ class DockerSider extends Component{
           style={{ width: 200 }}
         >
             <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
-            <Menu.Item key="sub2"><Link to="/config/area"><i className="icon2"></i>应用</Link></Menu.Item>
-            <Menu.Item key="sub3"><Link to="/config/area"><i className="icon3"></i>服务</Link></Menu.Item>
-            <Menu.Item key="sub4"><Link to="/config/area"><i className="icon5"></i>容器</Link></Menu.Item>
-            <Menu.Item key="sub5"><Link to="/config/area"><i className="icon6"></i>镜像仓库</Link></Menu.Item>
-            <Menu.Item key="sub6"><Link to="/config/area"><i className="icon8"></i>CI/CD</Link></Menu.Item>
+            <Menu.Item key="sub2"><Link to="/config/area"><i className="docker_app"></i>应用</Link></Menu.Item>
+            <Menu.Item key="sub3"><Link to="/docker/server"><i className="docker_server"></i>服务</Link></Menu.Item>
+            <Menu.Item key="sub4"><Link to="/config/area"><i className="docker_docker"></i>容器</Link></Menu.Item>
+            <Menu.Item key="sub5"><Link to="/config/area"><i className="docker_house"></i>镜像仓库</Link></Menu.Item>
+            <Menu.Item key="sub6"><Link to="/config/area"><i className="docker_ci"></i>CI/CD</Link></Menu.Item>
 
         </Menu>
       </div>

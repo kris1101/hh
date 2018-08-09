@@ -74,17 +74,17 @@ class TicketSider extends Component{
           style={{ width: 200 }}
         >
             <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
-             <SubMenu key="sub3" title={<span><i className="icon4"></i><span>工单管理</span></span>} >
+             <SubMenu key="sub3" title={<span><i className="snippets"></i><span>工单管理</span></span>} >
                 <Menu.Item key="/config/user"><Link to="/config/user">待处理</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">已完成</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">已撤销</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">已删除</Link></Menu.Item>
             </SubMenu>
-             <SubMenu key="sub4" title={<span><i className="icon4"></i><span>定制管理</span></span>} >
+             <SubMenu key="sub4" title={<span><i className="diff"></i><span>定制管理</span></span>} >
                 <Menu.Item key="/config/user"><Link to="/config/user">工单类型</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">工单对象</Link></Menu.Item>
             </SubMenu>
-            <SubMenu key="sub5" title={<span><i className="icon4"></i><span>通讯录</span></span>} >
+            <SubMenu key="sub5" title={<span><i className="solution"></i><span>通讯录</span></span>} >
                 <Menu.Item key="/config/user"><Link to="/config/user">通讯组</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">联系人</Link></Menu.Item>
             </SubMenu>

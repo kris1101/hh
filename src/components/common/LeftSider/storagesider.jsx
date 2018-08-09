@@ -74,12 +74,12 @@ class StorageSider extends Component{
           style={{ width: 200 }}
         >
             <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
-             <SubMenu key="sub2" title={<span><i className="icon4"></i><span>集群</span></span>} >
+             <SubMenu key="sub2" title={<span><i className="gold"></i><span>集群</span></span>} >
                 <Menu.Item key="/config/user"><Link to="/config/user">控制节点</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">存储节点</Link></Menu.Item>
 
             </SubMenu>
-             <SubMenu key="sub3" title={<span><i className="icon4"></i><span>服务</span></span>} >
+             <SubMenu key="sub3" title={<span><i className="docker_server"></i><span>服务</span></span>} >
                 <Menu.Item key="/config/user"><Link to="/config/user">节点服务</Link></Menu.Item>
             </SubMenu>
         </Menu>
