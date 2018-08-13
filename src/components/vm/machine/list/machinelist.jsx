@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import VMSider from '../../../components/common/LeftSider/vmsider';
+import VMSider from '../../../common/LeftSider/vmsider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
-import BreadcrumbCustom from '../../BreadcrumbCustom';
+import BreadcrumbCustom from '../../../BreadcrumbCustom';
 import { getmachines } from './TableTpl/tabletpl';
 import './machinelist.less';
 

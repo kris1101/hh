@@ -53,7 +53,7 @@ class Head extends React.Component {
                     selectedKeys={[this.state.currentKey]}
                     onClick={this.handleClick}
                 >
-                    <Menu.Item key="index"><Link to='/vm/machine'>虚拟机</Link></Menu.Item>
+                    <Menu.Item key="index"><Link to='/vm/machine/list'>虚拟机</Link></Menu.Item>
                     <Menu.Item key="2"><Link to='/machine/machine'>物理机</Link></Menu.Item>
                     <Menu.Item key="3"><Link to='/docker/server'>容器</Link></Menu.Item>
                     <Menu.Item key="4"><Link to='/storage/server'>存储</Link></Menu.Item>
