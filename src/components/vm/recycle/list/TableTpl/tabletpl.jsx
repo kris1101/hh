@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import chart from '../../../../../static/icons/area_chart.png'
 
 export function getmachines() {
     return [{
@@ -6,7 +7,9 @@ export function getmachines() {
         dataIndex: 'name',
     }, {
         title: '监控',
-        dataIndex: 'monitor'
+        render:(data)=>(
+            <a href="http://www.baidu.com"><img className="img" src={chart} alt="监控"/></a>
+        )
     },{
         title: 'IP地址',
         dataIndex: 'ip'

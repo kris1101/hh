@@ -24,9 +24,16 @@ class VMManageForm extends Component {
     componentDidMount () {
         this.setState({
             deviceList:[
-                {'name':'test'}
+                {'name':'test'},
+                {'name':'test'},
+                {'name':'test'},
+                {'name':'test'},
+                {'name':'test'},
+                {'name':'test'},
+                {'name':'test'},
+
             ],
-            total:10
+            total:15
         })
     }
     //重置表单
