@@ -40,10 +40,10 @@ class VMSider extends Component{
       if(pathName=="/config/device"){
           openKey = [];
           current = 'sub1';
-      }else if(pathName=="/vm/machine/list"){
+      }else if(pathName=="/vm/machine"){
           openKey = [];
           current = 'sub2';
-      }else if(pathName=="/config/user"){
+      }else if(pathName=="/vm/recycle"){
           openKey = ["sub3"];
           current = pathName;
       }else if(pathName=="/config/employees"){
@@ -74,8 +74,8 @@ class VMSider extends Component{
           style={{ width: 200 }}
         >
             <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
-            <Menu.Item key="sub2"><Link to="/vm/machine/list"><i className="cloud"></i>虚拟机管理</Link></Menu.Item>
-            <Menu.Item key="sub3"><Link to="/config/area"><i className="delete"></i>虚拟机回收站</Link></Menu.Item>
+            <Menu.Item key="sub2"><Link to="/vm/machine"><i className="cloud"></i>虚拟机管理</Link></Menu.Item>
+            <Menu.Item key="sub3"><Link to="/vm/recycle"><i className="delete"></i>虚拟机回收站</Link></Menu.Item>
             <SubMenu key="sub4" title={<span><i className="camera"></i><span>快照管理</span></span>} >
                 <Menu.Item key="/config/user"><Link to="/config/user">快照管理</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">快照策略</Link></Menu.Item>

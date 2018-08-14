@@ -23,7 +23,8 @@ class VMManageForm extends Component {
     }
     componentDidMount () {
         this.setState({
-            deviceList:[]
+            deviceList:[],
+            total:10
         })
     }
     //重置表单

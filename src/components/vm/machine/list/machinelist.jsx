@@ -19,11 +19,14 @@ class VMManageForm extends Component {
         deviceList: [],
         currentPage: 1,
         pageSize: 10,
-        total: 0
-    }
+        total:0
+    };
     componentDidMount () {
         this.setState({
-            deviceList:[]
+            deviceList:[
+                {'name':'test'}
+            ],
+            total:10
         })
     }
     //重置表单

@@ -6,7 +6,7 @@ export function getmachines() {
         dataIndex: 'name',
     }, {
         title: '监控',
-        dataIndex: 'ip'
+        dataIndex: 'monitor'
     },{
         title: 'IP地址',
         dataIndex: 'ip'
@@ -26,6 +26,12 @@ export function getmachines() {
         title: '操作',
         render: (data) => (
             <div>
+                <select>
+                      <option value ="volvo">Volvo</option>
+                      <option value ="saab">Saab</option>
+                      <option value="opel">Opel</option>
+                      <option value="audi">Audi</option>
+                </select>
                 <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>查看</span>
                 <span style={{cursor: 'pointer',color:'#0350CF'}}>添加</span>
             </div>

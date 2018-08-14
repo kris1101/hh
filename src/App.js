@@ -13,7 +13,6 @@ class App extends Component {
         const routers = Routes.map((item, index) => {
             return item.exact ? <Route key={index} exact path={item.path} component={item.component} /> : <Route key={index} path={item.path} component={item.component} />
         })
-        console.log(routers)
         return (
             <Router>
                 <div className="App">
