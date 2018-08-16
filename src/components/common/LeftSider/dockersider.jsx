@@ -1,7 +1,6 @@
 import React ,{Component}from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
-import { connect } from 'react-redux';
 import { Menu } from 'antd';
 import './index.less';
 
