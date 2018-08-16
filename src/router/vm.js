@@ -4,6 +4,7 @@ import VM_Machine from '../components/vm/machine/list/machinelist';
 import VM_Recycle from '../components/vm/recycle/list/recyclelist';
 import VM_Snapshot from "../components/vm/snapshot/list/list"
 import VM_Backup from "../components/vm/snapshot/backlist/list"
+import VM_Mirror from "../components/vm/mirror/list/list"
 
 const vm_routes=[{
         exact: true,
@@ -24,6 +25,11 @@ const vm_routes=[{
         exact: true,
         path: '/vm/backup',
         component: VM_Backup,
+    },
+    {
+        exact: true,
+        path: '/vm/mirror',
+        component: VM_Mirror,
     },
 ]
 export default vm_routes;

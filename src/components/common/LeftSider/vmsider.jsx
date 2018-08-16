@@ -1,7 +1,6 @@
 import React ,{Component}from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
-import { connect } from 'react-redux';
 import { Menu } from 'antd';
 import './index.less';
 
@@ -80,7 +79,7 @@ class VMSider extends Component{
                 <Menu.Item key="/vm/snapshot"><Link to="/vm/snapshot">快照管理</Link></Menu.Item>
                 <Menu.Item key="/vm/backup"><Link to="/vm/backup">快照策略</Link></Menu.Item>
             </SubMenu>
-            <Menu.Item key="sub5"><Link to="/config/area"><i className="gold"></i>镜像</Link></Menu.Item>
+            <Menu.Item key="sub5"><Link to="/vm/mirror"><i className="gold"></i>镜像</Link></Menu.Item>
             <Menu.Item key="sub6"><Link to="/config/area"><i className="drag"></i>弹性伸缩</Link></Menu.Item>
 
             <SubMenu key="sub7" title={<span><i className="wifi"></i><span>网络</span></span>} >

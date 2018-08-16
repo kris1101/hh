@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu,Dropdown,Icon } from 'antd';
 import chart from '../../../../../static/icons/area_chart.png'
 
-export function getsnapshots() {
+export function getbanckups() {
     return [{
         title: '名称',
         dataIndex: 'name',

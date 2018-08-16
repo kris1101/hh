@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import chart from '../../../../../static/icons/area_chart.png'
 
-export function getmachines() {
+export function getrecycles() {
     return [{
         title: '实例名称',
         dataIndex: 'name',

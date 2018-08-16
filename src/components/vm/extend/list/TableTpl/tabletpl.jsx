@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Menu,Dropdown,Icon } from 'antd';
+import chart from '../../../../../static/icons/area_chart.png'
 
 export function getsnapshots() {
     return [{

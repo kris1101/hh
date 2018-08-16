@@ -3,7 +3,7 @@ import VMSider from '../../../common/LeftSider/vmsider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
-import { getmachines } from './TableTpl/tabletpl';
+import { getrecycles } from './TableTpl/tabletpl';
 import './recyclelist.less';
 
 const { Sider, Content } = Layout;
@@ -13,7 +13,7 @@ const Option = Select.Option;
 class VMRecycleForm extends Component {
     constructor(props) {
         super(props);
-        this.columns = getmachines.call(this);
+        this.columns = getrecycles.call(this);
     }
     state = {
         deviceList: [],

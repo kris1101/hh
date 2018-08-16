@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
 
-export function getsnapshots() {
+
+export function getsharts() {
     return [{
         title: '名称',
         dataIndex: 'name',
     }, {
-        title: '关联主机',
-        dataIndex: 'host'
+        title: '操作系统',
+        dataIndex: 'mirror'
     }, {
         title: '创建时间',
         dataIndex: 'date',
     },{
-        title: '用户名称',
+        title: '标签',
         dataIndex: 'username',
     },{
-        title: '描述',
+        title: '状态',
         dataIndex: 'username',
     },{
         title: '操作',
         render: (data) => (
             <div>
-                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>回滚</span>
+                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>创建实例</span>
                 <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>删除</span>
-                <span style={{cursor: 'pointer',color:'#0350CF'}}>添加描述</span>
+                <span style={{cursor: 'pointer',color:'#0350CF'}}>添加标签</span>
             </div>
         )
     }];

@@ -3,7 +3,7 @@ import VMSider from '../../../common/LeftSider/vmsider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
-import {getmachines, getsnapshots} from './TableTpl/tabletpl';
+import { getsnapshots } from './TableTpl/tabletpl';
 import './list.less';
 
 const { Sider, Content } = Layout;
