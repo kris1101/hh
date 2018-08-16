@@ -35,20 +35,16 @@ class DassSider extends Component{
       let pathName = location.pathname;
       console.log(pathName);
       let openKey = [];
-      let current = '';
+      let current = pathName;
 
       if(pathName=="/daas/machine"){
           openKey = ["sub2"];
-          current = pathName;
       }else if(pathName=="/config/userlist"||pathName=="/config/userManage"){
           openKey = ["sub5"];
-          current = pathName;
       }else if(pathName=="/config/emaillist"){
           openKey = ["sub6"];
-          current = pathName;
       }else {
           openKey = [];
-          current = pathName;
       }
 
       this.setState({current: current,openKeys: openKey});

@@ -33,20 +33,16 @@ class MonitorSider extends Component{
       const { location } = this.props;
       let pathName = location.pathname;
       let openKey = [];
-      let current = '';
+      let current = pathName;
 
       if(pathName=="/vm/backup"||pathName=="/vm/snapshot"){
           openKey = ["sub4"];
-          current = pathName;
       }else if(pathName=="/vm/network/ip"||pathName=="/vm/network/load"||pathName=="/vm/network/safety"||pathName=="/vm/network/virtual"){
           openKey = ["sub7"];
-          current = pathName;
       }else if(pathName=="/vm/disk"||pathName=="/vm/disk/backup"){
           openKey = ["sub8"];
-          current = pathName;
       }else{
           openKey = [];
-          current = pathName;
       }
 
       this.setState({current: current,openKeys: openKey});
