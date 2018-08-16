@@ -25,7 +25,7 @@ class MachineSider extends Component{
     }
   }
   handleClick = (e) => {
-      console.log(e.key);
+
       this.setState({
           current: e.key
       })

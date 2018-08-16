@@ -25,7 +25,6 @@ class MonitorSider extends Component{
     }
   }
   handleClick = (e) => {
-      console.log(e.key);
       this.setState({
           current: e.key
       })
@@ -33,7 +32,6 @@ class MonitorSider extends Component{
   componentWillMount () {
       const { location } = this.props;
       let pathName = location.pathname;
-      console.log(pathName);
       let openKey = [];
       let current = '';
 
