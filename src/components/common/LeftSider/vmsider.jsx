@@ -75,6 +75,7 @@ class VMSider extends Component{
             </SubMenu>
             <Menu.Item key="/vm/mirror"><Link to="/vm/mirror"><i className="gold"></i>镜像</Link></Menu.Item>
             <Menu.Item key="/vm/extend"><Link to="/vm/extend"><i className="drag"></i>弹性伸缩</Link></Menu.Item>
+            <Menu.Item key="/vm/key"><Link to="/vm/key"><i className="key"></i>密钥管理</Link></Menu.Item>
 
             <SubMenu key="sub7" title={<span><i className="wifi"></i><span>网络</span></span>} >
                 <Menu.Item key="/vm/network/ip"><Link to="/vm/network/ip">弹性IP</Link></Menu.Item>

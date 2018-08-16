@@ -52,7 +52,7 @@ class MachineSider extends Component{
           style={{ width: 200 }}
         >
             <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
-            <Menu.Item key="sub2"><Link to="/machine/machine"><i className="machine"></i>机器列表</Link></Menu.Item>
+            <Menu.Item key="/machine/machine"><Link to="/machine/machine"><i className="machine"></i>机器列表</Link></Menu.Item>
             <Menu.Item key="sub3"><Link to="/config/area"><i className="engineroom"></i>机柜列表</Link></Menu.Item>
         </Menu>
       </div>
