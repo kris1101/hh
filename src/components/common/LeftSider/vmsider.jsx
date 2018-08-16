@@ -8,10 +8,10 @@ const SubMenu = Menu.SubMenu;
 
 class VMSider extends Component{
     // submenu keys of first level
-  rootSubmenuKeys = ['sub1', 'sub2', 'sub3', '4', '5', '6'];
+  rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6','sub7', 'sub8'];
   state = {
     openKeys: [],
-    current: 'sub1'
+    current: ''
   };
   onOpenChange = (openKeys) => {
     const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
@@ -41,18 +41,24 @@ class VMSider extends Component{
           current = 'sub1';
       }else if(pathName=="/vm/machine"){
           openKey = [];
-          current = 'sub2';
+          current = pathName;
       }else if(pathName=="/vm/recycle"){
-          openKey = ["sub3"];
+          openKey = [];
           current = pathName;
       }else if(pathName=="/vm/backup"||pathName=="/vm/snapshot"){
           openKey = ["sub4"];
           current = pathName;
-      }else if(pathName=="/config/userlist"||pathName=="/config/userManage"){
-          openKey = ["sub5"];
+      }else if(pathName=="/vm/mirror"){
+          openKey = [];
           current = pathName;
-      }else if(pathName=="/config/emaillist"){
-          openKey = ["sub6"];
+      }else if(pathName=="/vm/extend"){
+          openKey = [];
+          current = pathName;
+      }else if(pathName=="/vm/network") {
+          openKey = ["sub7"];
+          current = pathName;
+      }else if(pathName=="/vm/disk") {
+          openKey = ["sub8"];
           current = pathName;
       }
 
@@ -73,23 +79,23 @@ class VMSider extends Component{
           style={{ width: 200 }}
         >
             <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
-            <Menu.Item key="sub2"><Link to="/vm/machine"><i className="cloud"></i>虚拟机管理</Link></Menu.Item>
-            <Menu.Item key="sub3"><Link to="/vm/recycle"><i className="delete"></i>虚拟机回收站</Link></Menu.Item>
+            <Menu.Item key="/vm/machine"><Link to="/vm/machine"><i className="cloud"></i>虚拟机管理</Link></Menu.Item>
+            <Menu.Item key="/vm/recycle"><Link to="/vm/recycle"><i className="delete"></i>虚拟机回收站</Link></Menu.Item>
             <SubMenu key="sub4" title={<span><i className="camera"></i><span>快照管理</span></span>} >
                 <Menu.Item key="/vm/snapshot"><Link to="/vm/snapshot">快照管理</Link></Menu.Item>
                 <Menu.Item key="/vm/backup"><Link to="/vm/backup">快照策略</Link></Menu.Item>
             </SubMenu>
-            <Menu.Item key="sub5"><Link to="/vm/mirror"><i className="gold"></i>镜像</Link></Menu.Item>
-            <Menu.Item key="sub6"><Link to="/config/area"><i className="drag"></i>弹性伸缩</Link></Menu.Item>
+            <Menu.Item key="/vm/mirror"><Link to="/vm/mirror"><i className="gold"></i>镜像</Link></Menu.Item>
+            <Menu.Item key="/vm/extend"><Link to="/vm/extend"><i className="drag"></i>弹性伸缩</Link></Menu.Item>
 
             <SubMenu key="sub7" title={<span><i className="wifi"></i><span>网络</span></span>} >
-                <Menu.Item key="/config/employees"><Link to="/config/employees">弹性IP</Link></Menu.Item>
+                <Menu.Item key="/vm/network"><Link to="/vm/network">弹性IP</Link></Menu.Item>
                 <Menu.Item key="5"><Link to="/config/worker">负载均衡</Link></Menu.Item>
                 <Menu.Item key="6"><Link to="/config/visitors">虚拟网络</Link></Menu.Item>
-                <Menu.Item key="6"><Link to="/config/visitors">安全组</Link></Menu.Item>
+                <Menu.Item key="7"><Link to="/config/visitors">安全组</Link></Menu.Item>
             </SubMenu>
             <SubMenu key="sub8" title={<span><i className="file"></i><span>硬盘</span></span>} >
-                <Menu.Item key="/config/user"><Link to="/config/user">云硬盘</Link></Menu.Item>
+                <Menu.Item key="/vm/disk"><Link to="/vm/disk">云硬盘</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">备份</Link></Menu.Item>
             </SubMenu>
         </Menu>

@@ -66,10 +66,10 @@ class VMManageForm extends Component {
 
     return (
       <Layout className="config">
-        <Sider style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}>
+        <Sider >
             <VMSider/>
         </Sider>
-        <Content style={{ padding: 0, margin:10, marginLeft:210, marginBottom: 0, minHeight: window.innerHeight-84 }}>
+        <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
             <BreadcrumbCustom first="虚拟机管理" second="虚拟机列表" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline" onSubmit={this.handleSubmit}>

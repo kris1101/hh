@@ -3,17 +3,17 @@ import VMSider from '../../../common/LeftSider/vmsider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
-import {getmachines, getsnapshots} from './TableTpl/tabletpl';
+import {getnetwork} from './TableTpl/tabletpl';
 import './list.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class VMSnapshotForm extends Component {
+class VMNetworkForm extends Component {
     constructor(props) {
         super(props);
-        this.columns = getsnapshots.call(this);
+        this.columns = getnetwork.call(this);
     }
     state = {
         deviceList: [],
@@ -24,14 +24,6 @@ class VMSnapshotForm extends Component {
     componentDidMount () {
         this.setState({
             deviceList:[
-                {'name':'test'},
-                {'name':'test'},
-                {'name':'test'},
-                {'name':'test'},
-                {'name':'test'},
-                {'name':'test'},
-                {'name':'test'},
-
             ],
             total:15
         })
@@ -66,10 +58,10 @@ class VMSnapshotForm extends Component {
 
     return (
       <Layout className="config">
-        <Sider style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}>
+        <Sider >
             <VMSider/>
         </Sider>
-        <Content style={{ padding: 0, margin:10, marginLeft:210, marginBottom: 0, minHeight: window.innerHeight-84 }}>
+        <Content style={{ padding: 0, margin:10,  marginBottom: 0, minHeight: window.innerHeight-84 }}>
             <BreadcrumbCustom first="虚拟机管理" second="快照列表" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline" onSubmit={this.handleSubmit}>
@@ -102,7 +94,7 @@ class VMSnapshotForm extends Component {
   }
 }
 
-const VMSnapshot = Form.create()(VMSnapshotForm);
+const VMNetwork = Form.create()(VMNetworkForm);
 export default connect((state) => {
     return { ...state };
-})(VMSnapshot);
+})(VMNetwork);

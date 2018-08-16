@@ -35,14 +35,14 @@ class DockerSider extends Component{
       let pathName = location.pathname;
       console.log(pathName);
       let openKey = [];
-      let current = 'sub1';
+      let current = '';
 
       if(pathName=="/docker/server"){
           openKey = [];
-          current = 'sub1';
+          current = pathName;
       }else if(pathName=="/config/area"){
           openKey = [];
-          current = 'sub2';
+          current = pathName;
       }else if(pathName=="/docker/server"){
           openKey = ["sub3"];
           current = pathName;

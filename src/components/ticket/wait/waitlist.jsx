@@ -56,10 +56,10 @@ class TicketManageForm extends Component {
 
     return (
       <Layout className="config">
-        <Sider style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}>
+        <Sider >
             <Ticketsider/>
         </Sider>
-        <Content style={{ padding: 0, margin:10, marginLeft:210, marginBottom: 0, minHeight: window.innerHeight-84 }}>
+        <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
             <BreadcrumbCustom first="物理机管理" second="物理机列表" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline" onSubmit={this.handleSubmit}>

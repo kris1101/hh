@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu,Dropdown,Icon } from 'antd';
 import chart from '../../../../../static/icons/area_chart.png'
 
-export function getsnapshots() {
+export function getnetwork() {
     return [{
         title: '名称',
         dataIndex: 'name',
@@ -17,7 +17,7 @@ export function getsnapshots() {
         dataIndex: 'username',
     },{
         title: '描述',
-        dataIndex: 'username',
+        dataIndex: 'ps',
     },{
         title: '操作',
         render: (data) => (

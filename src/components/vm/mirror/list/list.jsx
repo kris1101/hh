@@ -26,14 +26,6 @@ class VMMirrorsForm extends Component {
     componentDidMount () {
         this.setState({
             deviceList:[
-                {'name':'test'},
-                {'name':'test'},
-                {'name':'test'},
-                {'name':'test'},
-                {'name':'test'},
-                {'name':'test'},
-                {'name':'test'},
-
             ],
             total:15
         })
@@ -71,10 +63,10 @@ class VMMirrorsForm extends Component {
     }
     return (
       <Layout className="config">
-        <Sider style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}>
+        <Sider>
             <VMSider/>
         </Sider>
-        <Content style={{ padding: 0, margin:10, marginLeft:210, marginBottom: 0, minHeight: window.innerHeight-84 }}>
+        <Content style={{ padding: 0, margin:10,  marginBottom: 0, minHeight: window.innerHeight-84 }}>
             <BreadcrumbCustom first="虚拟机管理" second="镜像列表" />
             <Tabs onChange={callback} type="card">
                 <TabPane tab="公共镜像" key="1">

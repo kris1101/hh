@@ -17,7 +17,7 @@ export function getsnapshots() {
         dataIndex: 'username',
     },{
         title: '描述',
-        dataIndex: 'username',
+        dataIndex: 'ps',
     },{
         title: '操作',
         render: (data) => (

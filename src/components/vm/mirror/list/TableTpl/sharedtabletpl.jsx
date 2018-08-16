@@ -13,10 +13,10 @@ export function getsharts() {
         dataIndex: 'date',
     },{
         title: '标签',
-        dataIndex: 'username',
+        dataIndex: 'type',
     },{
         title: '状态',
-        dataIndex: 'username',
+        dataIndex: 'status',
     },{
         title: '操作',
         render: (data) => (
