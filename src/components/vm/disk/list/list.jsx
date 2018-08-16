@@ -3,17 +3,17 @@ import VMSider from '../../../common/LeftSider/vmsider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
-import {getmachines, getsnapshots} from './TableTpl/tabletpl';
+import {getdisks} from './TableTpl/tabletpl';
 import './list.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class VMSnapshotForm extends Component {
+class VMDiskForm extends Component {
     constructor(props) {
         super(props);
-        this.columns = getsnapshots.call(this);
+        this.columns = getdisks.call(this);
     }
     state = {
         deviceList: [],
@@ -94,7 +94,7 @@ class VMSnapshotForm extends Component {
   }
 }
 
-const VMSnapshot = Form.create()(VMSnapshotForm);
+const VMDisk = Form.create()(VMDiskForm);
 export default connect((state) => {
     return { ...state };
-})(VMSnapshot);
+})(VMDisk);

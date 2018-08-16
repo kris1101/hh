@@ -37,23 +37,17 @@ class StorageSider extends Component{
       let openKey = [];
       let current = '';
 
-      if(pathName=="/config/device"){
-          openKey = [];
-          current = pathName;
-      }else if(pathName=="/config/area"){
-          openKey = [];
-          current = pathName;
-      }else if(pathName=="/config/user"){
-          openKey = ["sub3"];
-          current = pathName;
-      }else if(pathName=="/config/employees"){
+      if(pathName=="/vm/backup"||pathName=="/vm/snapshot"){
           openKey = ["sub4"];
           current = pathName;
-      }else if(pathName=="/config/userlist"||pathName=="/config/userManage"){
-          openKey = ["sub5"];
+      }else if(pathName=="/vm/network/ip"||pathName=="/vm/network/load"||pathName=="/vm/network/safety"||pathName=="/vm/network/virtual"){
+          openKey = ["sub7"];
           current = pathName;
-      }else if(pathName=="/config/emaillist"){
-          openKey = ["sub6"];
+      }else if(pathName=="/vm/disk"||pathName=="/vm/disk/backup"){
+          openKey = ["sub8"];
+          current = pathName;
+      }else{
+          openKey = [];
           current = pathName;
       }
 

@@ -32,30 +32,8 @@ class DockerSider extends Component{
   }
   componentWillMount () {
       const { location } = this.props;
-      let pathName = location.pathname;
-      console.log(pathName);
+      let current = location.pathname;
       let openKey = [];
-      let current = '';
-
-      if(pathName=="/docker/server"){
-          openKey = [];
-          current = pathName;
-      }else if(pathName=="/config/area"){
-          openKey = [];
-          current = pathName;
-      }else if(pathName=="/docker/server"){
-          openKey = ["sub3"];
-          current = pathName;
-      }else if(pathName=="/config/employees"){
-          openKey = ["sub4"];
-          current = pathName;
-      }else if(pathName=="/config/userlist"||pathName=="/config/userManage"){
-          openKey = ["sub5"];
-          current = pathName;
-      }else if(pathName=="/config/emaillist"){
-          openKey = ["sub6"];
-          current = pathName;
-      }
 
       this.setState({current: current,openKeys: openKey});
 

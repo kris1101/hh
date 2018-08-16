@@ -3,17 +3,17 @@ import VMSider from '../../../common/LeftSider/vmsider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
-import {getextends} from './TableTpl/tabletpl';
+import {getnetwork} from './TableTpl/iptabletpl';
 import './list.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class VMExtendForm extends Component {
+class VMNetworkForm extends Component {
     constructor(props) {
         super(props);
-        this.columns = getextends.call(this);
+        this.columns = getnetwork.call(this);
     }
     state = {
         deviceList: [],
@@ -61,17 +61,17 @@ class VMExtendForm extends Component {
         <Sider >
             <VMSider/>
         </Sider>
-        <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="虚拟机管理" second="弹性伸缩" />
+        <Content style={{ padding: 0, margin:10,  marginBottom: 0, minHeight: window.innerHeight-84 }}>
+            <BreadcrumbCustom first="虚拟机管理" second="弹性IP" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline" onSubmit={this.handleSubmit}>
                     <FormItem>
-                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>创建弹性伸缩</Button>
+                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建弹性IP</Button>
                     </FormItem>
                     <div style={{ float:'right'}}>
                         <FormItem label="">
                             {getFieldDecorator('name')(
-                                <Input placeholder="弹性伸缩名称" />
+                                <Input placeholder="弹性IP名称" />
                             )}
                         </FormItem>
                     <FormItem>
@@ -94,7 +94,7 @@ class VMExtendForm extends Component {
   }
 }
 
-const VMExtend = Form.create()(VMExtendForm);
+const VMNetwork = Form.create()(VMNetworkForm);
 export default connect((state) => {
     return { ...state };
-})(VMExtend);
+})(VMNetwork);

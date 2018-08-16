@@ -3,17 +3,17 @@ import VMSider from '../../../common/LeftSider/vmsider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
-import {getnetwork} from './TableTpl/tabletpl';
+import {getsafaty} from './TableTpl/safatytabletpl';
 import './list.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class VMNetworkForm extends Component {
+class VMSafetyForm extends Component {
     constructor(props) {
         super(props);
-        this.columns = getnetwork.call(this);
+        this.columns = getsafaty.call(this);
     }
     state = {
         deviceList: [],
@@ -62,16 +62,16 @@ class VMNetworkForm extends Component {
             <VMSider/>
         </Sider>
         <Content style={{ padding: 0, margin:10,  marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="虚拟机管理" second="快照列表" />
+            <BreadcrumbCustom first="虚拟机管理" second="安全组" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline" onSubmit={this.handleSubmit}>
                     <FormItem>
-                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>创建快照</Button>
+                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建安全组</Button>
                     </FormItem>
                     <div style={{ float:'right'}}>
                         <FormItem label="">
                             {getFieldDecorator('name')(
-                                <Input placeholder="快照名称" />
+                                <Input placeholder="安全组名称" />
                             )}
                         </FormItem>
                     <FormItem>
@@ -94,7 +94,7 @@ class VMNetworkForm extends Component {
   }
 }
 
-const VMNetwork = Form.create()(VMNetworkForm);
+const VMSafaty = Form.create()(VMSafetyForm);
 export default connect((state) => {
     return { ...state };
-})(VMNetwork);
+})(VMSafaty);

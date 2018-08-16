@@ -32,21 +32,8 @@ class MachineSider extends Component{
   }
   componentWillMount () {
       const { location } = this.props;
-      let pathName = location.pathname;
-      console.log(pathName);
+      let current = location.pathname;
       let openKey = [];
-      let current = '';
-
-      if(pathName=="/config/device"){
-          openKey = [];
-          current = pathName;
-      }else if(pathName=="/machine/machine"){
-          openKey = [];
-          current = pathName;
-      }else if(pathName=="/config/user"){
-          openKey = ["sub3"];
-          current = pathName;
-      }
 
       this.setState({current: current,openKeys: openKey});
 

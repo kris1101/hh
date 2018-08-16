@@ -34,31 +34,19 @@ class VMSider extends Component{
       let pathName = location.pathname;
       console.log(pathName);
       let openKey = [];
-      let current = 'sub1';
+      let current = '';
 
-      if(pathName=="/config/device"){
-          openKey = [];
-          current = 'sub1';
-      }else if(pathName=="/vm/machine"){
-          openKey = [];
-          current = pathName;
-      }else if(pathName=="/vm/recycle"){
-          openKey = [];
-          current = pathName;
-      }else if(pathName=="/vm/backup"||pathName=="/vm/snapshot"){
+      if(pathName=="/vm/backup"||pathName=="/vm/snapshot"){
           openKey = ["sub4"];
           current = pathName;
-      }else if(pathName=="/vm/mirror"){
-          openKey = [];
-          current = pathName;
-      }else if(pathName=="/vm/extend"){
-          openKey = [];
-          current = pathName;
-      }else if(pathName=="/vm/network") {
+      }else if(pathName=="/vm/network/ip"||pathName=="/vm/network/load"||pathName=="/vm/network/safety"||pathName=="/vm/network/virtual"){
           openKey = ["sub7"];
           current = pathName;
-      }else if(pathName=="/vm/disk") {
+      }else if(pathName=="/vm/disk"||pathName=="/vm/disk/backup"){
           openKey = ["sub8"];
+          current = pathName;
+      }else{
+          openKey = [];
           current = pathName;
       }
 
@@ -89,14 +77,14 @@ class VMSider extends Component{
             <Menu.Item key="/vm/extend"><Link to="/vm/extend"><i className="drag"></i>弹性伸缩</Link></Menu.Item>
 
             <SubMenu key="sub7" title={<span><i className="wifi"></i><span>网络</span></span>} >
-                <Menu.Item key="/vm/network"><Link to="/vm/network">弹性IP</Link></Menu.Item>
-                <Menu.Item key="5"><Link to="/config/worker">负载均衡</Link></Menu.Item>
-                <Menu.Item key="6"><Link to="/config/visitors">虚拟网络</Link></Menu.Item>
-                <Menu.Item key="7"><Link to="/config/visitors">安全组</Link></Menu.Item>
+                <Menu.Item key="/vm/network/ip"><Link to="/vm/network/ip">弹性IP</Link></Menu.Item>
+                <Menu.Item key="/vm/network/load"><Link to="/vm/network/load">负载均衡</Link></Menu.Item>
+                <Menu.Item key="/vm/network/virtual"><Link to="/vm/network/virtual">虚拟网络</Link></Menu.Item>
+                <Menu.Item key="/vm/network/safety"><Link to="/vm/network/safety">安全组</Link></Menu.Item>
             </SubMenu>
             <SubMenu key="sub8" title={<span><i className="file"></i><span>硬盘</span></span>} >
                 <Menu.Item key="/vm/disk"><Link to="/vm/disk">云硬盘</Link></Menu.Item>
-                <Menu.Item key="2"><Link to="/config/user">备份</Link></Menu.Item>
+                <Menu.Item key="/vm/disk/backup"><Link to="/vm/disk/backup">备份</Link></Menu.Item>
             </SubMenu>
         </Menu>
       </div>

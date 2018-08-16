@@ -3,17 +3,17 @@ import VMSider from '../../../common/LeftSider/vmsider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
-import { getbanckups } from './TableTpl/tabletpl';
+import { getloads } from './TableTpl/loadtabletpl';
 import './list.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class VMBackForm extends Component {
+class VMLoadForm extends Component {
     constructor(props) {
         super(props);
-        this.columns = getbanckups.call(this);
+        this.columns = getloads.call(this);
     }
     state = {
         deviceList: [],
@@ -62,16 +62,16 @@ class VMBackForm extends Component {
             <VMSider/>
         </Sider>
         <Content style={{ padding: 0, margin:10,  marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="虚拟机管理" second="快照策略列表" />
+            <BreadcrumbCustom first="虚拟机管理" second="负载均衡" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline" onSubmit={this.handleSubmit}>
                     <FormItem>
-                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>创建策略</Button>
+                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>创建负载均衡</Button>
                     </FormItem>
                     <div style={{ float:'right'}}>
                         <FormItem label="">
                             {getFieldDecorator('name')(
-                                <Input placeholder="策略名称" />
+                                <Input placeholder="负载均衡名称" />
                             )}
                         </FormItem>
                     <FormItem>
@@ -94,7 +94,7 @@ class VMBackForm extends Component {
   }
 }
 
-const VMBack = Form.create()(VMBackForm);
+const VMLoad = Form.create()(VMLoadForm);
 export default connect((state) => {
     return { ...state };
-})(VMBack);
+})(VMLoad);
