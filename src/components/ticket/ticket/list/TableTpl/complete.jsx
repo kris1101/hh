@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export function getmachines() {
+export function getcompletes() {
     return [{
         title: '编号',
         dataIndex: 'id',
@@ -29,8 +29,8 @@ export function getmachines() {
         title: '操作',
         render: (data) => (
             <div>
-                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>查看</span>
-                <span style={{cursor: 'pointer',color:'#0350CF'}}>添加</span>
+                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>详情</span>
+                <span style={{cursor: 'pointer',color:'#0350CF'}}>销毁</span>
             </div>
         )
     }];
