@@ -2,7 +2,9 @@ import React ,{Component}from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
 import { Menu } from 'antd';
+import FontAwesome  from 'react-fontawesome';
 import './index.less';
+
 
 const SubMenu = Menu.SubMenu;
 
@@ -49,12 +51,12 @@ class DockerSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
-            <Menu.Item key="sub2"><Link to="/config/area"><i className="docker_app"></i>应用</Link></Menu.Item>
-            <Menu.Item key="/docker/server"><Link to="/docker/server"><i className="docker_server"></i>服务</Link></Menu.Item>
-            <Menu.Item key="sub4"><Link to="/config/area"><i className="docker_docker"></i>容器</Link></Menu.Item>
-            <Menu.Item key="sub5"><Link to="/config/area"><i className="docker_house"></i>镜像仓库</Link></Menu.Item>
-            <Menu.Item key="sub6"><Link to="/config/area"><i className="docker_ci"></i>CI/CD</Link></Menu.Item>
+            <Menu.Item key="dashboard"><Link to="/config/device"><FontAwesome name='tachometer'  className="fonticonstyle"/>总览</Link></Menu.Item>
+            <Menu.Item key="application"><Link to="/config/area"><FontAwesome name='crosshairs' className="fonticonstyle"/>应用</Link></Menu.Item>
+            <Menu.Item key="service"><Link to="/docker/server"><FontAwesome name='crosshairs' className="fonticonstyle"/>服务</Link></Menu.Item>
+            <Menu.Item key="sub1"><Link to="/config/area"><FontAwesome name='crosshairs' className="fonticonstyle"/>容器</Link></Menu.Item>
+            <Menu.Item key="registry"><Link to="/config/area"><FontAwesome name='database' className="fonticonstyle"/>镜像仓库</Link></Menu.Item>
+            <Menu.Item key="cicd"><Link to="/config/area"><FontAwesome name='random' className="fonticonstyle"/>CI/CD</Link></Menu.Item>
 
         </Menu>
       </div>
