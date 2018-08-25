@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Dockersider from '../../../components/common/LeftSider/dockersider';
+import Dockersider from '../../../../common/LeftSider/dockersider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
-import BreadcrumbCustom from '../../BreadcrumbCustom';
+import BreadcrumbCustom from '../../../../../components/BreadcrumbCustom';
 import { getmachines } from './TableTpl/tabletpl';
-import './serverlist.less';
+import './harborproject.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
