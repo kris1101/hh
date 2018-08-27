@@ -37,7 +37,13 @@ class DockerSider extends Component{
   componentWillMount () {
       const { location } = this.props;
       let current = location.pathname.replace(/\//g,'');
-      this.setState({ current });
+      let openKeys = []
+      if (current == "paasregistrylog" || current == "paasregistryproject"){
+            openKeys = ["dockerregistry"]
+      }else if(current == "paasregistryuser" || current == "paasregistryconfig"){
+            openKeys = ["dockerregistry", "registrysystem"]
+      }
+      this.setState({ current , openKeys});
 
   }
 

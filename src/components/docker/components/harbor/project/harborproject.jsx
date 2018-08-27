@@ -3,28 +3,27 @@ import Dockersider from '../../../../common/LeftSider/dockersider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../components/BreadcrumbCustom';
-import { getmachines } from './TableTpl/tabletpl';
+import { getprojects } from './TableTpl/tabletpl';
 import './harborproject.less';
+import { getProjectList } from '../../../../../containers/Paas/harbor/project.redux'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class DockerManageForm extends Component {
+class HarborProjectForm extends Component {
     constructor(props) {
         super(props);
-        this.columns = getmachines.call(this);
+        this.columns = getprojects.call(this);
     }
     state = {
-        deviceList: [],
+        loading: false,
         currentPage: 1,
         pageSize: 10,
         total: 0
     }
     componentDidMount () {
-        this.setState({
-            deviceList:[]
-        })
+        this.props.getProjectList({});
     }
     //重置表单
     handleReset = () => {
@@ -42,6 +41,7 @@ class DockerManageForm extends Component {
           current: this.state.currentPage,
           total: this.state.total,
           pageSize: this.state.pageSize,
+          showSizeChanger: true,
           showQuickJumper: true,
           //当表格有变化时，如：点击分页  current是当前页面页码
           onChange() {
@@ -60,11 +60,11 @@ class DockerManageForm extends Component {
             <Dockersider/>
         </Sider>
         <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="物理机管理" second="物理机列表" />
+            <BreadcrumbCustom first="镜像仓库" second="项目" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline" onSubmit={this.handleSubmit}>
                     <FormItem>
-                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>创建物理机</Button>
+                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建项目</Button>
                     </FormItem>
                     <div style={{ float:'right'}}>
                         <FormItem label="">
@@ -86,10 +86,7 @@ class DockerManageForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered rowKey={record => record.key} columns={this.columns} dataSource={this.state.deviceList} pagination={pagination} />
-            </div>
-            <div style={{margin: 20}}>
-                <span className='num'>共找到 { this.state.total }条结果， 每页显示10条</span>
+                <Table bordered loading={this.state.loading} rowKey={record => record.project_id} columns={this.columns} dataSource={this.props.projectList} pagination={pagination} />
             </div>
         </Content>
       </Layout>
@@ -97,7 +94,8 @@ class DockerManageForm extends Component {
   }
 }
 
-const DockerManage = Form.create()(DockerManageForm);
-export default connect((state) => {
-    return { ...state };
-})(DockerManage);
+
+const HarborProjectManage = Form.create()(HarborProjectForm);
+export default connect(
+  state => state.harborProject,
+  { getProjectList })(HarborProjectManage);

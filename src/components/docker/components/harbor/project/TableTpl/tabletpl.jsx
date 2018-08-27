@@ -1,33 +1,31 @@
 import React, { Component } from 'react';
+import { Button } from 'antd';
 
-export function getmachines() {
+import { formatStrDate } from '../../../../utils/time_helper'
+
+export function getprojects() {
     return [{
-        title: '实例名称',
-        dataIndex: 'name',
+        title: '项目名称',
+        dataIndex: 'name'
     }, {
-        title: '监控',
-        dataIndex: 'ip'
-    },{
-        title: 'IP地址',
-        dataIndex: 'ip'
-    }, {
-        title: '配置',
-        dataIndex: 'config',
-    },{
-        title: '状态',
-        dataIndex: 'type',
-    },{
-        title: '所属网络',
-        dataIndex: 'network',
-    },{
         title: '创建时间',
-        dataIndex: 'date',
+        dataIndex: 'creation_time',
+        render: (data) => formatStrDate(data)
+    },{
+        title: '更新时间',
+        dataIndex: 'update_time',
+        render: (data) => formatStrDate(data)
+    }, {
+        title: 'repo数量',
+        dataIndex: 'repo_count'
+    },{
+        title: '是否公开',
+        dataIndex: 'metadata.public',
     },{
         title: '操作',
         render: (data) => (
             <div>
-                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>查看</span>
-                <span style={{cursor: 'pointer',color:'#0350CF'}}>添加</span>
+              <Button size="small" icon="delete">delete</Button>
             </div>
         )
     }];
