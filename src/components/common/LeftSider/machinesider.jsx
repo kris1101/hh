@@ -1,7 +1,7 @@
 import React ,{Component}from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
-import { Menu } from 'antd';
+import { Menu,Icon } from 'antd';
 import './index.less';
 
 const SubMenu = Menu.SubMenu;
@@ -48,9 +48,9 @@ class MachineSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
-            <Menu.Item key="/machine/machine"><Link to="/machine/machine"><i className="machine"></i>机器列表</Link></Menu.Item>
-            <Menu.Item key="sub3"><Link to="/config/area"><i className="engineroom"></i>机柜列表</Link></Menu.Item>
+            <Menu.Item key="sub1"><Link to="/config/device"><Icon type="desktop" />概述</Link></Menu.Item>
+            <Menu.Item key="/machine/machine"><Link to="/machine/machine"><Icon type="database" />机器列表</Link></Menu.Item>
+            <Menu.Item key="sub3"><Link to="/config/area"><Icon type="switcher" />机柜列表</Link></Menu.Item>
         </Menu>
       </div>
     );

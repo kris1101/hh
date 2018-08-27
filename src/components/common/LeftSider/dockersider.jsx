@@ -1,7 +1,7 @@
 import React, {Component}from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
-import { Menu } from 'antd';
+import { Menu,Icon } from 'antd';
 import './index.less';
 
 
@@ -59,14 +59,14 @@ class DockerSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="paasdashboard"><Link to="/paas/dashboard"><i className="dasktop"></i>概述</Link></Menu.Item>
-            <Menu.Item key="paasapplication"><Link to="/paas/application"><i className="docker_app"></i>应用</Link></Menu.Item>
-            <Menu.Item key="/paas/servce"><Link to="/paas/service"><i className="docker_server"></i>服务</Link></Menu.Item>
-            <Menu.Item key="paascontainer"><Link to="/paas/container"><i className="docker_docker"></i>容器</Link></Menu.Item>
+            <Menu.Item key="/paas/dashboard"><Link to="/paas/dashboard"><Icon type="desktop" />概述</Link></Menu.Item>
+            <Menu.Item key="/paas/application"><Link to="/paas/application"><Icon type="wallet" />应用</Link></Menu.Item>
+            <Menu.Item key="/paas/servce"><Link to="/paas/service"><Icon type="customer-service" />服务</Link></Menu.Item>
+            <Menu.Item key="paascontainer"><Link to="/paas/container"><Icon type="link" />容器</Link></Menu.Item>
             <SubMenu
                key="dockerregistry"
-               title={<span><i className="docker_house"></i><span>镜像仓库</span></span>}
-            >   
+               title={<span><Icon type="codepen" /><span>镜像仓库</span></span>}
+            >
               <Menu.Item key="paasregistryproject"><Link to="/paas/registryproject"><span>项目</span></Link></Menu.Item>
               <Menu.Item key="paasregistrylog"><Link to="/paas/registrylog"><span>日志</span></Link></Menu.Item>
                 <SubMenu
@@ -75,9 +75,9 @@ class DockerSider extends Component{
                 >
                   <Menu.Item key="paasregistryuser"><Link to="/paas/registryuser"><span>用户管理</span></Link></Menu.Item>
                   <Menu.Item key="paasregistryconfig"><Link to="/paas/registryconfig"><span>配置管理</span></Link></Menu.Item>
-                </SubMenu> 
-            </SubMenu> 
-            <Menu.Item key="paascicd"><Link to="/paas/cicd"><i className="docker_ci"></i>CI/CD</Link></Menu.Item>
+                </SubMenu>
+            </SubMenu>
+            <Menu.Item key="paascicd"><Link to="/paas/cicd"><Icon type="dropbox" />CI/CD</Link></Menu.Item>
 
         </Menu>
       </div>
