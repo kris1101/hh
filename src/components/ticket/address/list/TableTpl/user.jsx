@@ -12,7 +12,7 @@ export function getusers() {
         dataIndex: 'department'
     }, {
         title: '职位',
-        dataIndex: 'post',
+        dataIndex: 'position',
     },{
         title: '邮箱',
         dataIndex: 'email',
