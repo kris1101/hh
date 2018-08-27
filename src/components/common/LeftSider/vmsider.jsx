@@ -1,14 +1,14 @@
 import React ,{Component}from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
-import { Menu } from 'antd';
+import { Menu, Icon } from 'antd';
 import './index.less';
 
 const SubMenu = Menu.SubMenu;
 
 class VMSider extends Component{
     // submenu keys of first level
-  rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6','sub7', 'sub8'];
+  rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6','sub7', 'sub8', 'accounts'];
   state = {
     openKeys: [],
     current: ''
@@ -42,6 +42,8 @@ class VMSider extends Component{
           openKey = ["sub7"];
       }else if(pathName=="/vm/disk"||pathName=="/vm/disk/backup"){
           openKey = ["sub8"];
+      }else if(pathName.startsWith('/vm/accounts')){
+          openKey = ["accounts"];
       }else{
           openKey = [];
       }
@@ -82,6 +84,12 @@ class VMSider extends Component{
             <SubMenu key="sub8" title={<span><i className="file"></i><span>硬盘</span></span>} >
                 <Menu.Item key="/vm/disk"><Link to="/vm/disk">云硬盘</Link></Menu.Item>
                 <Menu.Item key="/vm/disk/backup"><Link to="/vm/disk/backup">备份</Link></Menu.Item>
+            </SubMenu>
+            <SubMenu key="accounts" title={<span><Icon type="team"></Icon><span>用户管理</span></span>} >
+              <Menu.Item key="/vm/accounts/users"><Link to="/vm/accounts/users">用户列表</Link></Menu.Item>
+              <Menu.Item key="/vm/accounts/groups"><Link to="/vm/accounts/groups">用户组</Link></Menu.Item>
+              <Menu.Item key="/vm/accounts/projects"><Link to="/vm/accounts/projects">项目列表</Link></Menu.Item>
+              <Menu.Item key="/vm/accounts/logs"><Link to="/vm/accounts/logs">操作日志</Link></Menu.Item>
             </SubMenu>
         </Menu>
       </div>
