@@ -54,25 +54,12 @@ class DockerSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-          <Menu.Item key="paasdashboard"><Link to="/paas/dashboard"><FontAwesome name='tachometer'  className="fonticonstyle"/><span>总览</span></Link></Menu.Item>
-          <Menu.Item key="paasapplication"><Link to="/paas/application"><FontAwesome name='archive' className="fonticonstyle"/><span>应用</span></Link></Menu.Item>
-          <Menu.Item key="paasservice"><Link to="/paas/service"><FontAwesome name='server' className="fonticonstyle"/><span>服务</span></Link></Menu.Item>
-          <Menu.Item key="paascontainer"><Link to="/paas/container"><FontAwesome name='snowflake-o' className="fonticonstyle"/><span>容器</span></Link></Menu.Item>
-            <SubMenu
-               key="dockerregistry"
-               title={<span><FontAwesome name='database' className="fonticonstyle"/><span>镜像仓库</span></span>}
-            >
-              <Menu.Item key="paasregistryproject"><Link to="/paas/registryproject"><span>项目</span></Link></Menu.Item>
-              <Menu.Item key="paasregistrylog"><Link to="/paas/paasregistrylog"><span>日志</span></Link></Menu.Item>
-                <SubMenu
-                   key="registrysystem"
-                   title="系统管理"
-                >
-                  <Menu.Item key="paasregistryuser"><Link to="/paas/paasregistryuser"><span>用户管理</span></Link></Menu.Item>
-                  <Menu.Item key="paasregistryconfig"><Link to="/paas/paasregistryconfig"><span>配置管理</span></Link></Menu.Item>
-                </SubMenu> 
-            </SubMenu> 
-            <Menu.Item key="cicd"><Link to="/paas/cicd"><FontAwesome name='random' className="fonticonstyle"/><span>CI/CD</span></Link></Menu.Item>
+            <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
+            <Menu.Item key="sub2"><Link to="/config/area"><i className="docker_app"></i>应用</Link></Menu.Item>
+            <Menu.Item key="/docker/server"><Link to="/docker/server"><i className="docker_server"></i>服务</Link></Menu.Item>
+            <Menu.Item key="sub4"><Link to="/config/area"><i className="docker_docker"></i>容器</Link></Menu.Item>
+            <Menu.Item key="sub5"><Link to="/config/area"><i className="docker_house"></i>镜像仓库</Link></Menu.Item>
+            <Menu.Item key="sub6"><Link to="/config/area"><i className="docker_ci"></i>CI/CD</Link></Menu.Item>
 
         </Menu>
       </div>
