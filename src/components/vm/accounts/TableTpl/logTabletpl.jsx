@@ -9,6 +9,7 @@ export function getColumes() {
   }, {
     title: '操作用户',
     dataIndex: 'username',
+    render: (text, record) => <span>{text}({record.realname})</span>
   },{
     title: '动作',
     dataIndex: 'action',
