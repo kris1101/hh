@@ -17,13 +17,12 @@ class HarborProjectForm extends Component {
         this.columns = getprojects.call(this);
     }
     state = {
-        loading: false,
         currentPage: 1,
         pageSize: 10,
-        total: 0
     }
     componentDidMount () {
         this.props.getProjectList({});
+        console.log(this.props);
     }
     //重置表单
     handleReset = () => {
@@ -39,9 +38,10 @@ class HarborProjectForm extends Component {
     let _that = this;
     const pagination = {
           current: this.state.currentPage,
-          total: this.state.total,
+          total: this.props.total,
           pageSize: this.state.pageSize,
           showSizeChanger: true,
+          showTotal:(total, range) => `${range[0]}-${range[1]} of ${total} items`,
           showQuickJumper: true,
           //当表格有变化时，如：点击分页  current是当前页面页码
           onChange() {
@@ -86,7 +86,7 @@ class HarborProjectForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered loading={this.state.loading} rowKey={record => record.project_id} columns={this.columns} dataSource={this.props.projectList} pagination={pagination} />
+                <Table bordered loading={this.props.loading} rowKey={record => record.project_id} columns={this.columns} dataSource={this.props.projectList} pagination={pagination} />
             </div>
         </Content>
       </Layout>
