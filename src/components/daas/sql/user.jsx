@@ -3,17 +3,17 @@ import Daassider from '../../../components/common/LeftSider/daassider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
-import { getmachines } from './TableTpl/tabletpl';
-import './machinelist.less';
+import { getusers } from './TableTpl/user';
+import './list.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class DaasManageForm extends Component {
+class DaasUserManageForm extends Component {
     constructor(props) {
         super(props);
-        this.columns = getmachines.call(this);
+        this.columns = getusers.call(this);
     }
     state = {
         deviceList: [],
@@ -60,21 +60,17 @@ class DaasManageForm extends Component {
             <Daassider/>
         </Sider>
         <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="物理机管理" second="物理机列表" />
+            <BreadcrumbCustom first="关系型数据库" second="慢日志查询用户列表" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline" onSubmit={this.handleSubmit}>
                     <FormItem>
-                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>创建物理机</Button>
+                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建邮件组</Button>
                     </FormItem>
                     <div style={{ float:'right'}}>
-                        <FormItem label="">
-                            {getFieldDecorator('value')(
-                                <Input placeholder="请输入IP地址" />
-                            )}
-                        </FormItem>
+
                         <FormItem label="">
                             {getFieldDecorator('name')(
-                                <Input placeholder="实例名称" />
+                                <Input placeholder="组名" />
                             )}
                         </FormItem>
                     <FormItem>
@@ -97,7 +93,7 @@ class DaasManageForm extends Component {
   }
 }
 
-const DaasManage = Form.create()(DaasManageForm);
+const DaasUserManage = Form.create()(DaasUserManageForm);
 export default connect((state) => {
     return { ...state };
-})(DaasManage);
+})(DaasUserManage);
