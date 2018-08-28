@@ -33,9 +33,7 @@ class MachineSider extends Component{
       const { location } = this.props;
       let current = location.pathname;
       let openKey = [];
-
       this.setState({current: current,openKeys: openKey});
-
   }
 
   render() {
