@@ -15,6 +15,7 @@ import VM_Network_Safety from "../components/vm/network/list/safetylist"
 import VM_Network_virtual from "../components/vm/network/list/virtuallist"
 
 import VM_UserList from "../components/vm/accounts/UserList"
+import VM_LogList from "../components/vm/accounts/LogList"
 
 
 const vm_routes=[{
@@ -98,7 +99,7 @@ const vm_routes=[{
     {
         exact: true,
         path: '/vm/accounts/logs',
-        component: VM_Network_virtual,
+        component: VM_LogList,
     },
 
 ]

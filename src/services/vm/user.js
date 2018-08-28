@@ -12,3 +12,4 @@ var ins = axios.create({
 
 
 export const userList = () => ins.get('accounts/users/').then(res => res.data).catch(err => console.log(err));
+export const logList = () => ins.get('accounts/log/').then(res => res.data).catch(err => console.log(err));
