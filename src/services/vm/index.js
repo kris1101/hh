@@ -33,17 +33,9 @@ const handleData = (state = {isFetching: true, data: {}}, action) => {
     }
 };
 export const httpData = (state = {}, action) => {
-    console.log(2)
-    console.log(state)
-    console.log(action)
     switch (action.type) {
         case config.RECEIVE_DATA:
         case config.REQUEST_DATA:
-    console.log(3)
-    console.log({
-                ...state,
-                [action.category]: handleData(state[action.category], action)
-            })
             return {
                 ...state,
                 [action.category]: handleData(state[action.category], action)
