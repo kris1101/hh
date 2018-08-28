@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import  SlowQuery_Group from '../components/daas/slowquery/grouplist';
+import  SlowQuery_User from '../components/daas/slowquery/userlist';
 import Daas_Instance from '../components/daas/sql/Instance';
 import Daas_Cluster from '../components/daas/sql/cluster';
 import Daas_Backup from '../components/daas/sql/backup';
@@ -39,6 +41,14 @@ const daas_routes=
         exact: true,
         path: '/daas/machine',
         component: Daas_Machine,
+    }, {
+        exact: true,
+        path: '/daas/slowquery/grouplist',
+        component: SlowQuery_Group,
+    }, {
+        exact: true,
+        path: '/daas/slowquery/userlist',
+        component: SlowQuery_User,
     },{
         exact: true,
         path: '/daas/user',
