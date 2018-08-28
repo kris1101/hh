@@ -31,7 +31,7 @@ class Head extends React.Component {
             currentKey = '2';
        }else if(pathName.indexOf("daas")>0){
             currentKey = '7';
-       }else if(pathName.indexOf("docker")>0){
+       }else if(pathName.indexOf("paas")>0){
             currentKey = '3';
        }else if(pathName.indexOf("storage")>0){
             currentKey = '4';
@@ -57,7 +57,7 @@ class Head extends React.Component {
                 >
                     <Menu.Item key="index"><Link to='/vm/machine'>虚拟机</Link></Menu.Item>
                     {/*<Menu.Item key="2"><Link to='/machine/machine'>物理机</Link></Menu.Item>*/}
-                    <Menu.Item key="3"><Link to='/docker/server'>容器</Link></Menu.Item>
+                    <Menu.Item key="3"><Link to='/paas/'>容器</Link></Menu.Item>
                     <Menu.Item key="4"><Link to='/storage/server'>存储</Link></Menu.Item>
                     <Menu.Item key="5"><Link to='/ticket/wait'>工单</Link></Menu.Item>
                     {/*<Menu.Item key="6"><Link to='/monitor/machine'>监控</Link></Menu.Item>*/}

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-
-import Docker_server from '../components/docker/server/serverlist'
+import paaschildroute from '../components/docker/commonrouter/commonrouter'
 
 const docker_routes=
     [{
-        exact: true,
-        path: '/docker/server',
-        component: Docker_server,
+        path: '/paas/',
+        component: paaschildroute,
     }]
 export default docker_routes;
