@@ -6,6 +6,7 @@ import todos from '../containers/Todo/_reducer';
 import { setCounter, test } from '../containers/Index/_reducer';
 import { httpData } from '../services/vm';
 import { harborProject } from '../containers/Paas/harbor/project.redux'
+import { harborLogs } from '../containers/Paas/harbor/logs.redux'
 
 
 const App = combineReducers({
@@ -14,6 +15,7 @@ const App = combineReducers({
     test,
     httpData,
     harborProject,
+    harborLogs,
 });
 
 export default App

@@ -1,16 +1,16 @@
 import axios from 'axios'
 import { notification  } from 'antd';
 
-const LOAD_DATA = 'LOAD_HARBORPROJECT_DATA'
-const START_LOADING = 'START_HARBORPROJECT_LOADING' 
-const END_LOADING = 'END_HARBORPROJECT_LOADING' 
+const LOAD_DATA = 'LOAD_HARBORLOG_DATA'
+const START_LOADING = 'START_HARBORLOG_LOADING' 
+const END_LOADING = 'END_HARBORLOG_LOADING' 
 
 const initState={
 	redirectTo:'',
 	msg:'',
     total: 0,
     loading: false,
-	projectList:[]
+	logsList:[]
 }
 const axios_instance = axios.create({
     baseURL: 'http://paas.sinochem.cloud/api/paas',
@@ -18,10 +18,10 @@ const axios_instance = axios.create({
 })
 
 // reducer
-export function harborProject(state=initState, action){
+export function harborLogs(state=initState, action){
 	switch(action.type){
 		case LOAD_DATA:
-			return {...state, projectList: action.payload.result, total: action.payload.total}
+			return {...state, logsList: action.payload.result, total: action.payload.total}
 		case START_LOADING:
 			return {...state, loading: true}
 		case END_LOADING:
@@ -31,8 +31,8 @@ export function harborProject(state=initState, action){
 	}
 } 
 
-export function loadData(projectlistinfo){
-	return { type:LOAD_DATA, payload:projectlistinfo}
+export function loadData(logslistinfo){
+	return { type:LOAD_DATA, payload:logslistinfo}
 }
 
 export function startLoading(){
@@ -43,10 +43,10 @@ export function endLoading(){
 	return { type:END_LOADING}
 }
 
-export function getProjectList(params){
+export function getLogsList(params){
 	return dispatch=>{
       dispatch(startLoading());
-      axios_instance.get('/harbor/projects/',{params: params})
+      axios_instance.get('/harbor/logs/',{params: params})
 			.then(res=>{
                 dispatch(endLoading());
                 if (res.data.code == 0){

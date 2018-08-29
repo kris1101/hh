@@ -8,6 +8,20 @@ export function getprojects() {
         title: '项目名称',
         dataIndex: 'name'
     }, {
+        title: '镜像仓库数量',
+        dataIndex: 'repo_count'
+    },{
+        title: '访问级别',
+        dataIndex: 'metadata.public',
+        render: (data) => {
+          if (data == "true"){
+            return "公开";
+          }else{
+            return "私有";
+          }
+
+        } 
+    }, {
         title: '创建时间',
         dataIndex: 'creation_time',
         render: (data) => formatStrDate(data)
@@ -15,12 +29,6 @@ export function getprojects() {
         title: '更新时间',
         dataIndex: 'update_time',
         render: (data) => formatStrDate(data)
-    }, {
-        title: 'repo数量',
-        dataIndex: 'repo_count'
-    },{
-        title: '是否公开',
-        dataIndex: 'metadata.public',
     },{
         title: '操作',
         render: (data) => (
