@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Dockersider from '../../../../common/LeftSider/dockersider';
-import { Col, Row, DatePicker, Layout, Form, Input, Button, Select, Table } from 'antd';
+import { notification, Col, Row, DatePicker, Layout, Form, Input, Button, Select, Table } from 'antd';
   
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../components/BreadcrumbCustom';
 import { getlogs } from './TableTpl/tabletpl';
 import './logs.less';
 import { getLogsList } from '../../../../../containers/Paas/harbor/logs.redux'
+import { compareDate } from '../../../utils/time_helper' 
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -46,9 +47,14 @@ class HarborLogsForm extends Component {
         page_args.repository = value.repository !== undefined  ? value.repository : "";
         page_args.tag = value.tag !== undefined  ? value.tag : "";
         page_args.operation = value.operation  !== undefined  ? value.operation : "";
-        page_args.begin_timestamp = value.begin_timestamp !== undefined  ? value.begin_timestamp.format('X') : "";
-        page_args.end_timestamp = value.end_timestamp !== undefined  ? value.end_timestamp.format('X') : "";
-        this.props.getLogsList(page_args);
+        page_args.begin_timestamp = value.begin_timestamp ? value.begin_timestamp.unix() : "";
+        page_args.end_timestamp = value.end_timestamp ? value.end_timestamp.unix() : "";
+        if (compareDate(page_args.begin_timestamp, page_args.end_timestamp)){
+            this.props.getLogsList(page_args);
+        }else{
+            notification.error({description: "结束时间必须大于起始时间"})
+            return;
+        }
     }
 
   render() {
@@ -73,9 +79,14 @@ class HarborLogsForm extends Component {
               page_args.repository = value.repository !== undefined  ? value.repository : "";
               page_args.tag = value.tag !== undefined  ? value.tag : "";
               page_args.operation = value.operation  !== undefined  ? value.operation : "";
-              page_args.begin_timestamp = value.begin_timestamp !== undefined  ? value.begin_timestamp.format('X') : "";
-              page_args.end_timestamp = value.end_timestamp !== undefined  ? value.end_timestamp.format('X') : "";
-              _that.props.getLogsList(page_args);
+              page_args.begin_timestamp = value.begin_timestamp ? value.begin_timestamp.unix() : "";
+              page_args.end_timestamp = value.end_timestamp ? value.end_timestamp.unix() : "";
+              if (compareDate(page_args.begin_timestamp, page_args.end_timestamp)){
+                  _that.props.getLogsList(page_args);
+              }else{
+                  notification.error({description: "结束时间必须大于起始时间"})
+                  return;
+              }
           },
           onShowSizeChange(current, size) {
               let value = _that.props.form.getFieldsValue()
@@ -88,9 +99,14 @@ class HarborLogsForm extends Component {
               page_args.repository = value.repository !== undefined  ? value.repository : "";
               page_args.tag = value.tag !== undefined  ? value.tag : "";
               page_args.operation = value.operation  !== undefined  ? value.operation : "";
-              page_args.begin_timestamp = value.begin_timestamp !== undefined  ? value.begin_timestamp.format('X') : "";
-              page_args.end_timestamp = value.end_timestamp !== undefined  ? value.end_timestamp.format('X') : "";
-              _that.props.getLogsList(page_args);
+              page_args.begin_timestamp = value.begin_timestamp  ? value.begin_timestamp.unix() : "";
+              page_args.end_timestamp = value.end_timestamp ? value.end_timestamp.unix() : "";
+              if (compareDate(page_args.begin_timestamp, page_args.end_timestamp)){
+                  _that.props.getLogsList(page_args);
+              }else{
+                  notification.error({description: "结束时间必须大于起始时间"})
+                  return;
+              }
           }
     };
 
@@ -142,14 +158,14 @@ class HarborLogsForm extends Component {
                   <Col span={5}>
                         <FormItem label="">
           					{getFieldDecorator('begin_timestamp', begin_config)(
-          					  <DatePicker placeholder="begin time" showTime format="YYYY-MM-DD HH:mm:ss" />
+          					  <DatePicker placeholder="起始时间" showTime format="YYYY-MM-DD HH:mm:ss" />
           					)}
                         </FormItem>
                   </Col>
                   <Col span={5}>
                         <FormItem label="">
           					{getFieldDecorator('end_timestamp', end_config)(
-          					  <DatePicker placeholder="end time" showTime format="YYYY-MM-DD HH:mm:ss" />
+          					  <DatePicker placeholder="结束时间" showTime format="YYYY-MM-DD HH:mm:ss" />
           					)}
                         </FormItem>
                   </Col>

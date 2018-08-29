@@ -9,3 +9,16 @@ export function formatStrDate(strtime) {
       return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
 
 }
+
+export function compareDate(startdate, enddate){
+//startdate and enddate must be moment object or "".
+      if (startdate && enddate){
+          if (parseInt(enddate) > parseInt(startdate)){
+            return true
+          }else{
+            return false
+          }
+      }else{
+          return true
+      }
+}
