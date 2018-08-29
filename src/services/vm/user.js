@@ -11,5 +11,7 @@ var ins = axios.create({
 });
 
 
-export const userList = () => ins.get('accounts/users/').then(res => res.data).catch(err => console.log(err));
-export const logList = () => ins.get('accounts/log/').then(res => res.data).catch(err => console.log(err));
+export const userList = (params) => ins.get('accounts/users/', {params: params}).then(res => res.data).catch(err => console.log(err));
+export const logList = (params) => ins.get('accounts/log/', {params: params}).then(res => res.data).catch(err => console.log(err));
+
+export const keypairList = (params) => ins.get('keypairs/', {params: params}).then(res => res.data).catch(err => console.log(err));

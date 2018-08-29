@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
-export function getkeys() {
+export function getColumes() {
     return [{
         title: '名称',
         dataIndex: 'name',
     }, {
         title: '指纹',
-        dataIndex: 'status'
+        dataIndex: 'fingerprint'
     }, {
         title: '创建时间',
-        dataIndex: 'date',
+        dataIndex: 'created_at',
     },{
         title: '操作',
         render: (data) => (
