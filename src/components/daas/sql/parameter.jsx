@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
+import Daassider from '../../../components/common/LeftSider/daassider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
-
-import Daassider from '../../../components/common/LeftSider/daassider';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
-import { getgroups } from './TableTpl/group';
+import { getparameters } from './TableTpl/parameter';
 import './list.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class DaasGroupManageForm extends Component {
+class DaasParameterManageForm extends Component {
     constructor(props) {
         super(props);
-        this.columns = getgroups.call(this);
+        this.columns = getparameters.call(this);
     }
     state = {
         deviceList: [],
@@ -61,17 +60,17 @@ class DaasGroupManageForm extends Component {
             <Daassider/>
         </Sider>
         <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="关系型数据库" second="慢日志查询组列表" />
+            <BreadcrumbCustom first="关系型数据库" second="参数组" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline" onSubmit={this.handleSubmit}>
                     <FormItem>
-                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建邮件组</Button>
+                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建集群</Button>
                     </FormItem>
                     <div style={{ float:'right'}}>
 
                         <FormItem label="">
                             {getFieldDecorator('name')(
-                                <Input placeholder="组名" />
+                                <Input placeholder="集群名称" />
                             )}
                         </FormItem>
                     <FormItem>
@@ -94,7 +93,7 @@ class DaasGroupManageForm extends Component {
   }
 }
 
-const DaasGroupManage = Form.create()(DaasGroupManageForm);
+const DaasParameterManage = Form.create()(DaasParameterManageForm);
 export default connect((state) => {
     return { ...state };
-})(DaasGroupManage);
+})(DaasParameterManage);
