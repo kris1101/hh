@@ -1,7 +1,7 @@
 import React ,{Component}from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
-import { Menu } from 'antd';
+import { Menu,Icon } from 'antd';
 import './index.less';
 
 const SubMenu = Menu.SubMenu;
@@ -61,18 +61,18 @@ class TicketSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="sub1"><Link to="/config/device"><i className="dasktop"></i>概述</Link></Menu.Item>
-             <SubMenu key="sub3" title={<span><i className="snippets"></i><span>工单管理</span></span>} >
+            <Menu.Item key="sub1"><Link to="/config/device"><Icon type="desktop" />概述</Link></Menu.Item>
+             <SubMenu key="sub3" title={<span><Icon type="file-text" /><span>工单管理</span></span>} >
                 <Menu.Item key="/ticket/wait"><Link to="/ticket/wait">待处理</Link></Menu.Item>
                 <Menu.Item key="/ticket/complete"><Link to="/ticket/complete">已完成</Link></Menu.Item>
                 <Menu.Item key="/ticket/cancel"><Link to="/ticket/cancel">已撤销</Link></Menu.Item>
                 <Menu.Item key="/ticket/delete"><Link to="/ticket/delete">已删除</Link></Menu.Item>
             </SubMenu>
-             <SubMenu key="sub4" title={<span><i className="diff"></i><span>定制管理</span></span>} >
+             <SubMenu key="sub4" title={<span><Icon type="file-add" /><span>定制管理</span></span>} >
                 <Menu.Item key="/ticket/type"><Link to="/ticket/type">工单类型</Link></Menu.Item>
                 <Menu.Item key="/ticket/object"><Link to="/ticket/object">工单对象</Link></Menu.Item>
             </SubMenu>
-            <SubMenu key="sub5" title={<span><i className="solution"></i><span>通讯录</span></span>} >
+            <SubMenu key="sub5" title={<span><Icon type="solution" /><span>通讯录</span></span>} >
                 <Menu.Item key="/ticket/group"><Link to="/ticket/group">通讯组</Link></Menu.Item>
                 <Menu.Item key="/ticket/user"><Link to="/ticket/user">联系人</Link></Menu.Item>
             </SubMenu>
