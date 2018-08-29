@@ -38,6 +38,8 @@ class DassSider extends Component{
 
       if(pathName=="/daas/destop"){
           openKey = [];
+      }else if(pathName=="/daas/slowquery/grouplist"||pathName=="/daas/slowquery/userlist"||pathName=="/config/userManage"){
+          openKey = ["slowquery"];
       }else if(pathName=="/config/userlist"||pathName=="/config/userManage"){
           openKey = ["sub5"];
       }else if(pathName=="/config/emaillist"){
@@ -62,8 +64,8 @@ class DassSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="sub1"><Link to="/daas/destop"><i className="dasktop"></i>概述</Link></Menu.Item>
-             <SubMenu key="sub2" title={<span><i className="engineroom"></i><span>关系型数据库</span></span>} >
+            <Menu.Item key="sub1"><Link to="/daas/destop"><Icon type="desktop" />概述</Link></Menu.Item>
+             <SubMenu key="sub2" title={<span><Icon type="database" /><span>关系型数据库</span></span>} >
                 <Menu.Item key="/daas/instance"><Link to="/daas/instance">实例</Link></Menu.Item>
                 <Menu.Item key="/daas/cluster"><Link to="/daas/cluster">集群</Link></Menu.Item>
                 <Menu.Item key="/daas/backup"><Link to="/daas/backup">备份</Link></Menu.Item>
@@ -75,11 +77,11 @@ class DassSider extends Component{
                 <Menu.Item key="/daas/email"><Link to="/daas/email">邮件记录</Link></Menu.Item>
                 <Menu.Item key="/daas/cluster"><Link to="/daas/cluster">参数组</Link></Menu.Item>
             </SubMenu>
-             <SubMenu key="sub3" title={<span><i className="mongo"></i><span>云数据库MongoDB</span></span>} >
+             <SubMenu key="sub3" title={<span><Icon type="api" /><span>云数据库MongoDB</span></span>} >
                 <Menu.Item key="/config/user"><Link to="/config/user">副本集实例</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">分片集实例</Link></Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4" title={<span><i className="redis"></i><span>云数据库Redis</span></span>} >
+            <SubMenu key="sub4" title={<span><Icon type="switcher" /><span>云数据库Redis</span></span>} >
                 <Menu.Item key="/config/user"><Link to="/config/user">实例列表</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/config/user">参数组</Link></Menu.Item>
             </SubMenu>
