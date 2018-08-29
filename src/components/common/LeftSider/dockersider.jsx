@@ -36,9 +36,8 @@ class DockerSider extends Component{
 
   componentWillMount () {
       const { location } = this.props;
-       let current = location.pathname;
-      let openKey = [];
-      this.setState({current: current,openKeys: openKey});
+      let current = location.pathname.replace(/\//g,'');
+      this.setState({ current });
 
   }
 
@@ -54,12 +53,25 @@ class DockerSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="sub1"><Link to="/config/device"><Icon type="desktop" />概述</Link></Menu.Item>
-            <Menu.Item key="sub2"><Link to="/config/area"><Icon type="wallet" />应用</Link></Menu.Item>
-            <Menu.Item key="/docker/server"><Link to="/docker/server"><Icon type="customer-service" />服务</Link></Menu.Item>
-            <Menu.Item key="sub4"><Link to="/config/area"><Icon type="link" />容器</Link></Menu.Item>
-            <Menu.Item key="sub5"><Link to="/config/area"><Icon type="codepen" />镜像仓库</Link></Menu.Item>
-            <Menu.Item key="sub6"><Link to="/config/area"><Icon type="dropbox" />CI/CD</Link></Menu.Item>
+            <Menu.Item key="/paas/dashboard"><Link to="/paas/dashboard"><Icon type="desktop" />概述</Link></Menu.Item>
+            <Menu.Item key="/paas/application"><Link to="/paas/application"><Icon type="wallet" />应用</Link></Menu.Item>
+            <Menu.Item key="/paas/servce"><Link to="/paas/service"><Icon type="customer-service" />服务</Link></Menu.Item>
+            <Menu.Item key="paascontainer"><Link to="/paas/container"><Icon type="link" />容器</Link></Menu.Item>
+            <SubMenu
+               key="dockerregistry"
+               title={<span><Icon type="codepen" /><span>镜像仓库</span></span>}
+            >
+              <Menu.Item key="paasregistryproject"><Link to="/paas/registryproject"><span>项目</span></Link></Menu.Item>
+              <Menu.Item key="paasregistrylog"><Link to="/paas/registrylog"><span>日志</span></Link></Menu.Item>
+                <SubMenu
+                   key="registrysystem"
+                   title="系统管理"
+                >
+                  <Menu.Item key="paasregistryuser"><Link to="/paas/registryuser"><span>用户管理</span></Link></Menu.Item>
+                  <Menu.Item key="paasregistryconfig"><Link to="/paas/registryconfig"><span>配置管理</span></Link></Menu.Item>
+                </SubMenu>
+            </SubMenu>
+            <Menu.Item key="paascicd"><Link to="/paas/cicd"><Icon type="dropbox" />CI/CD</Link></Menu.Item>
 
         </Menu>
       </div>
