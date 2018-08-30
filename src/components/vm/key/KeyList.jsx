@@ -41,7 +41,6 @@ class KeyList extends Component {
     const loading = (httpData.hasOwnProperty('keypairList')) ? httpData['keypairList']['isFetching'] : true;
     const pager = { ...this.state.pagination };
     pager.total = (httpData.hasOwnProperty('keypairList')) ? httpData['keypairList']['data']['count'] : 0;
-    // this.setState({ pagination: pager, });
     return (
       <Layout className="config">
         <Sider>

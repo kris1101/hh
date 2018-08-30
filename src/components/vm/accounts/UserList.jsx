@@ -18,9 +18,7 @@ class UserList extends Component {
       this.columns = getColumes.call(this);
   }
   state = {
-      currentPage: 1,
-      pageSize: 10,
-      total:0
+    pagination: {total: 0, defaultPageSize: 10, defaultCurrent: 1, pageSize: 10}
   };
   componentDidMount () {
     this.getList();
@@ -31,17 +29,19 @@ class UserList extends Component {
     this.setState({
       pagination: pager,
     });
-    this.getList(0, pagination.current);
+    this.getList(pagination.current);
   }
   getList = (page=1) => {
-    this.setState({ loading: true });
     const { fetchData } = this.props;
-    fetchData({funcName: 'userList', stateName: 'userList'});
+    fetchData({funcName: 'userList', stateName: 'userList', params: {page: page}});
   };
 
   render() {
     const httpData = this.props.httpData;
     const userList = (httpData.hasOwnProperty('userList')) ? httpData['userList']['data']['data'] : [];
+    const loading = (httpData.hasOwnProperty('userList')) ? httpData['userList']['isFetching'] : true;
+    const pager = { ...this.state.pagination };
+    pager.total = (httpData.hasOwnProperty('keypairList')) ? httpData['keypairList']['data']['count'] : 0;
     return (
       <Layout className="config">
         <Sider>
@@ -50,11 +50,8 @@ class UserList extends Component {
         <Content style={{ padding: 0, margin:10,  marginBottom: 0, minHeight: window.innerHeight-84 }}>
             <BreadcrumbCustom first="用户管理" second="用户列表" />
             <div style={{ background:'#fff' }}>
-              <Table bordered columns={this.columns} onChange={this.handleTableChange}
-                     dataSource={userList} rowKey="id" pagination={this.state.pagination} />
-            </div>
-            <div style={{margin: 20}}>
-                <span className='num'>共找到{this.state.total}条结果，每页显示10条</span>
+              <Table bordered columns={this.columns} onChange={this.handleTableChange} loading={loading}
+                     dataSource={userList} rowKey="id" pagination={pager} />
             </div>
         </Content>
       </Layout>
