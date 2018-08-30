@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export function getkeys() {
+export function getColumes() {
     return [{
         title: '名称',
         dataIndex: 'name',

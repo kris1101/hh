@@ -8,7 +8,6 @@ import { getColumes } from './TableTpl/userTabletpl';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
 import { fetchData, receiveData } from '../../../services/vm';
-import store from '../../../redux/index';
 
 const { Sider, Content } = Layout;
 
@@ -19,7 +18,6 @@ class UserList extends Component {
       this.columns = getColumes.call(this);
   }
   state = {
-      userList: [],
       currentPage: 1,
       pageSize: 10,
       total:0
@@ -42,7 +40,7 @@ class UserList extends Component {
   };
 
   render() {
-    const httpData = store.getState()['httpData'];
+    const httpData = this.props.httpData;
     const userList = (httpData.hasOwnProperty('userList')) ? httpData['userList']['data']['data'] : [];
     return (
       <Layout className="config">
