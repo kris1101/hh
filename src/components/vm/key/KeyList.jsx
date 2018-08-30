@@ -47,7 +47,7 @@ class KeyList extends Component {
             <VMSider/>
         </Sider>
         <Content style={{ padding: 0, margin:10,  marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="用户管理" second="操作日志" />
+            <BreadcrumbCustom first="密钥管理" second="密钥列表" />
             <div style={{ background:'#fff' }}>
               <Table bordered columns={this.columns} onChange={this.handleTableChange} loading={loading}
                      dataSource={dataList} rowKey="id" pagination={pager} />
