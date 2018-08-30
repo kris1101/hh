@@ -11,7 +11,6 @@ export function formatStrDate(strtime) {
 }
 
 export function compareDate(startdate, enddate){
-//startdate and enddate must be moment object or "".
       if (startdate && enddate){
           if (parseInt(enddate) > parseInt(startdate)){
             return true

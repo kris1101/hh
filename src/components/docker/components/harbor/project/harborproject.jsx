@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Dockersider from '../../../../common/LeftSider/dockersider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { message, Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../components/BreadcrumbCustom';
 import { getprojects } from './TableTpl/tabletpl';
 import './harborproject.less';
 import { getProjectList } from '../../../../../containers/Paas/harbor/project.redux'
+import { ProjectCreateForm } from './projectforms/projectcreateform'
+import { postAjax } from '../../../utils/axios'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -19,30 +21,104 @@ class HarborProjectForm extends Component {
     state = {
         currentPage: 1,
         pageSize: 10,
+        ProjectCreateVisible: false,
+        ProjectDeleteVisible: false,
+        ProjectCreateConfirmLoading: false,
+        ProjectDeleteConfirmLoading: false,
     }
+
     componentDidMount () {
         this.props.getProjectList({});
     }
+
     //重置表单
     handleReset = () => {
         this.props.form.resetFields();
     }
 
-    handleProjectQuery = () => {
-        let value = this.props.form.getFieldsValue()
-        this.setState({
-            currentPage: 1,
-            pageSize: 10 
-        })
-        let page_args = {page: 1, pagesize: 10}
-        page_args.name = value.name !== undefined ? value.name : "";
-        page_args.public = value.public !== undefined ? value.public : "";
-        page_args.owner = value.owner !== undefined ? value.owner : "";
-        this.props.getProjectList(page_args);
+    showProjectCreateModel = () => {
+        this.setState({ProjectCreateVisible: true}) 
     }
 
-    openAddDevicePage = (value) => {
-        this.props.history.push({pathname:'/config/add-device', data:value});
+    showProjectDeleteModel = () => {
+        this.setState({ProjectDeleteVisible: true}) 
+    }
+    
+    handleProjectCreateCancel = () => {
+        this.setState({ProjectCreateVisible: false}) 
+        this.setState({ProjectCreateConfirmLoading: false})
+        const form = this.projectCreateFormRef.props.form;
+        form.resetFields();
+    }
+
+    handleProjectDeleteCancel = () => {
+        this.setState({ProjectDeleteVisible: false}) 
+        this.setState({ProjectDeleteConfirmLoading: false})
+        const form = this.projectCreateFormRef.props.form;
+        form.resetFields();
+    }
+
+    handleProjectListWithArgs = (page, pageSize) => {
+       let value = this.props.form.getFieldsValue()
+       this.setState({
+           currentPage: page,
+           pageSize: pageSize 
+       })
+       let page_args = {page: page, pagesize: pageSize}
+       page_args.name = value.name !== undefined ? value.name : "";
+       page_args.public = value.public !== undefined ? value.public : "";
+       page_args.owner = value.owner !== undefined ? value.owner : "";
+       this.props.getProjectList(page_args);
+    }
+
+    handleProjectCreate = () => {
+      const form = this.projectCreateFormRef.props.form;
+      form.validateFields((err, values) => {
+        if (err) {
+          return;
+        }
+        this.setState({ProjectCreateConfirmLoading: true})
+        const _that = this;
+        console.log(values);
+        postAjax('/harbor/projects/', values, function(res){
+            console.log(res);
+            if(res.data.code == 0){
+                message.success("创建成功") 
+                _that.setState({ProjectCreateConfirmLoading: false})
+                form.resetFields();
+                _that.setState({ ProjectCreateVisible: false });
+                _that.handleProjectListWithArgs(1, 10);
+            }else{
+                message.error(res.data.msg) 
+                _that.setState({ProjectCreateConfirmLoading: false})
+            }
+        })
+      });
+    }
+
+    handleProjectDelete = () => {
+      const form = this.projectDeleteFormRef.props.form;
+      form.validateFields((err, values) => {
+        if (err) {
+          return;
+        }
+
+        console.log('Received values of form: ', values);
+        form.resetFields();
+        this.setState({ ProjectDeleteVisible: false });
+      });
+    }
+
+    saveProjectCreateFormRef = (formRef) => {
+      this.projectCreateFormRef = formRef;
+    } 
+
+    saveProjectDeleteFormRef = (formRef) => {
+      this.projectDeleteFormRef = formRef;
+    } 
+
+    handleProjectQuery = () => {
+      this.handleProjectListWithArgs(1, 10);
     }
 
   render() {
@@ -57,28 +133,10 @@ class HarborProjectForm extends Component {
           showQuickJumper: true,
           //当表格有变化时，如：点击分页  current是当前页面页码
           onChange(page, pageSize) {
-              let value = _that.props.form.getFieldsValue()
-              _that.setState({
-                  currentPage: page,
-                  pageSize: pageSize
-              })
-              let page_args = {page: page, pagesize: pageSize}
-              page_args.name = value.name !== undefined ? value.name : "";
-              page_args.public = value.public !== undefined ? value.public : "";
-              page_args.owner = value.owner !== undefined ? value.owner : "";
-              _that.props.getProjectList(page_args);
+              _that.handleProjectListWithArgs(page, pageSize);
           },
           onShowSizeChange(current, size) {
-              let value = _that.props.form.getFieldsValue()
-              _that.setState({
-                  currentPage: 1,
-                  pageSize: size 
-              })
-              let page_args = {page: 1, pagesize: size}
-              page_args.name = value.name !== undefined ? value.name : "";
-              page_args.public = value.public !== undefined ? value.public : "";
-              page_args.owner = value.owner !== undefined ? value.owner : "";
-              _that.props.getProjectList(page_args);
+              _that.handleProjectListWithArgs(1, size);
           }
     };
 
@@ -92,7 +150,14 @@ class HarborProjectForm extends Component {
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline">
                     <FormItem>
-                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建项目</Button>
+                        <Button type="primary" onClick={this.showProjectCreateModel}>新建项目</Button>
+        				<ProjectCreateForm
+        				  wrappedComponentRef={this.saveProjectCreateFormRef}
+        				  visible={this.state.ProjectCreateVisible}
+                          confirmLoading={this.state.ProjectCreateConfirmLoading}
+        				  onCancel={this.handleProjectCreateCancel}
+        				  onCreate={this.handleProjectCreate}
+        				/>
                     </FormItem>
                     <div style={{ float:'right'}}>
                         <FormItem label="">

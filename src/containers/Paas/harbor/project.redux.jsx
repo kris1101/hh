@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { notification  } from 'antd';
+import { getAjax } from '../../../components/docker/utils/axios'
 
 const LOAD_DATA = 'LOAD_HARBORPROJECT_DATA'
 const START_LOADING = 'START_HARBORPROJECT_LOADING' 
@@ -12,10 +13,6 @@ const initState={
     loading: false,
 	projectList:[]
 }
-const axios_instance = axios.create({
-    baseURL: 'http://paas.sinochem.cloud/api/paas',
-    timeout: 2000
-})
 
 // reducer
 export function harborProject(state=initState, action){
@@ -46,21 +43,17 @@ export function endLoading(){
 export function getProjectList(params){
 	return dispatch=>{
       dispatch(startLoading());
-      axios_instance.get('/harbor/projects/',{params: params})
-			.then(res=>{
-                dispatch(endLoading());
-                if (res.data.code == 0){
-                  dispatch(loadData(res.data.data))
-                }else{
-                  notification.error({
-                    description: res.data.msg,
-                    message: "提示" 
-                  })
-                }
-			})
-			.catch(function(error){
-                dispatch(endLoading());
-				console.log(error);
-			})
+      console.log(params);
+      getAjax('/harbor/projects/', params, function(res){
+          dispatch(endLoading());
+          if (res.data.code == 0){
+            dispatch(loadData(res.data.data))
+          }else{
+            notification.error({
+              description: res.data.msg,
+              message: "提示" 
+            })
+          }
+          })
 	}
 }
