@@ -6,6 +6,7 @@ import BreadcrumbCustom from '../../../../../components/BreadcrumbCustom';
 import { getprojects } from './TableTpl/tabletpl';
 import './harborproject.less';
 import { getProjectList } from '../../../../../containers/Paas/harbor/project.redux'
+import { clearProjectDetailsData } from '../../../../../containers/Paas/harbor/projectdetails.redux'
 import { ProjectCreateForm } from './projectforms/projectcreateform'
 import { postAjax } from '../../../utils/axios'
 
@@ -22,12 +23,11 @@ class HarborProjectForm extends Component {
         currentPage: 1,
         pageSize: 10,
         ProjectCreateVisible: false,
-        ProjectDeleteVisible: false,
         ProjectCreateConfirmLoading: false,
-        ProjectDeleteConfirmLoading: false,
     }
 
     componentDidMount () {
+        this.props.clearProjectDetailsData();
         this.props.getProjectList({});
     }
 
@@ -40,20 +40,9 @@ class HarborProjectForm extends Component {
         this.setState({ProjectCreateVisible: true}) 
     }
 
-    showProjectDeleteModel = () => {
-        this.setState({ProjectDeleteVisible: true}) 
-    }
-    
     handleProjectCreateCancel = () => {
         this.setState({ProjectCreateVisible: false}) 
         this.setState({ProjectCreateConfirmLoading: false})
-        const form = this.projectCreateFormRef.props.form;
-        form.resetFields();
-    }
-
-    handleProjectDeleteCancel = () => {
-        this.setState({ProjectDeleteVisible: false}) 
-        this.setState({ProjectDeleteConfirmLoading: false})
         const form = this.projectCreateFormRef.props.form;
         form.resetFields();
     }
@@ -79,9 +68,7 @@ class HarborProjectForm extends Component {
         }
         this.setState({ProjectCreateConfirmLoading: true})
         const _that = this;
-        console.log(values);
         postAjax('/harbor/projects/', values, function(res){
-            console.log(res);
             if(res.data.code == 0){
                 message.success("创建成功") 
                 _that.setState({ProjectCreateConfirmLoading: false})
@@ -96,25 +83,8 @@ class HarborProjectForm extends Component {
       });
     }
 
-    handleProjectDelete = () => {
-      const form = this.projectDeleteFormRef.props.form;
-      form.validateFields((err, values) => {
-        if (err) {
-          return;
-        }
-
-        console.log('Received values of form: ', values);
-        form.resetFields();
-        this.setState({ ProjectDeleteVisible: false });
-      });
-    }
-
     saveProjectCreateFormRef = (formRef) => {
       this.projectCreateFormRef = formRef;
-    } 
-
-    saveProjectDeleteFormRef = (formRef) => {
-      this.projectDeleteFormRef = formRef;
     } 
 
     handleProjectQuery = () => {
@@ -199,4 +169,4 @@ class HarborProjectForm extends Component {
 const HarborProjectManage = Form.create()(HarborProjectForm);
 export default connect(
   state => state.harborProject,
-  { getProjectList })(HarborProjectManage);
+  { getProjectList, clearProjectDetailsData })(HarborProjectManage);

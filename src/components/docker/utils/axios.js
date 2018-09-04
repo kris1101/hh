@@ -9,6 +9,8 @@ var instance = axios.create({
     timeout: 2000,
 });
 
+instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+
 export function getAjax(url,params,Callback) {
     let token = sessionStorage.token;
     if(token){
@@ -29,7 +31,6 @@ export function getAjax(url,params,Callback) {
 }
 
 export function postAjax(url,params,Callback) {
-    instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
     let token = sessionStorage.token;
     if(token){
         instance.defaults.headers.common['Authorization'] = token;
@@ -54,7 +55,7 @@ export function putAjax(url,params,Callback) {
     if(token){
         instance.defaults.headers.common['Authorization'] = token;
     }
-    instance.put(url,{params})
+    instance.put(url,qs.stringify(params))
         .then(function (response) {
 
             Callback(response);
@@ -95,7 +96,7 @@ export function deleteAjax(url,params,Callback) {
     if(token){
         instance.defaults.headers.common['Authorization'] = token;
     }
-    instance.delete(url,{params})
+    instance.delete(url, {data:params})
         .then(function (response) {
 
             Callback(response);
