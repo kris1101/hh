@@ -38,9 +38,6 @@ class DaasGroupManageForm extends Component {
         })
         let page_args = {page: 1, pagesize: 10}
         page_args.name = value.name !== undefined  ? value.name : "";
-        page_args.repository = value.repository !== undefined  ? value.repository : "";
-        page_args.tag = value.tag !== undefined  ? value.tag : "";
-        page_args.operation = value.operation  !== undefined  ? value.operation : "";
     }
 
 
@@ -67,10 +64,6 @@ class DaasGroupManageForm extends Component {
               })
               let page_args = {page, page_size: pageSize}
               page_args.name = value.name !== undefined  ? value.name : "";
-              page_args.repository = value.repository !== undefined  ? value.repository : "";
-              page_args.tag = value.tag !== undefined  ? value.tag : "";
-              page_args.operation = value.operation  !== undefined  ? value.operation : "";
-              
           },
 
           onShowSizeChange(current, size) {
@@ -81,10 +74,6 @@ class DaasGroupManageForm extends Component {
               })
               let page_args = {page: 1, page_size: size}
               page_args.name = value.name !== undefined  ? value.name : "";
-              page_args.repository = value.repository !== undefined  ? value.repository : "";
-              page_args.tag = value.tag !== undefined  ? value.tag : "";
-              page_args.operation = value.operation  !== undefined  ? value.operation : "";
-           
           }
     };
 

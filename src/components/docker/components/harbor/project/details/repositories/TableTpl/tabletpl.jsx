@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { Button, Popconfirm, message } from 'antd';
 
 import { Link  } from 'react-router-dom';
-import { deleteAjax  } from '../../../../utils/axios'
+import { deleteAjax  } from '../../../../../../utils/axios'
 
-import { formatStrDate } from '../../../../utils/time_helper'
-const roleDict = {1: "项目管理员", 2: "开发者", 3: "访客"}
+import { formatStrDate } from '../../../../../../utils/time_helper'
 
 function confirm(project_id, _that) {
   const hide = message.loading('Action in progress..', 0);
-  deleteAjax('/harbor/projects/', "project_id=" + project_id, function (res){
+  deleteAjax('/harbor/repositories/', "project_id=" + project_id, function (res){
     hide();
     if(res.data.code == 0){
         message.success(res.data.msg);
@@ -21,32 +20,16 @@ function confirm(project_id, _that) {
 }
 
 
-export function getprojects() {
+export function getrepositories() {
     return [{
-        title: '项目名称',
-        dataIndex: 'name',
-        render: (data, record, index) => {
-          let path = '/paas/registryproject/details/?project_id=' + record.project_id; 
-          return <Link to={path}>{data}</Link>
-        } 
-    }, {
-        title: '镜像仓库数量',
-        dataIndex: 'repo_count'
+        title: '名称',
+        dataIndex: 'name'
     },{
-        title: '访问级别',
-        dataIndex: 'metadata.public',
-        render: (data) => {
-          if (data == "true"){
-            return "公开";
-          }else{
-            return "私有";
-          }
-
-        } 
-    }, {
-        title: '角色',
-        dataIndex: 'current_user_role_id',
-        render: (data) => roleDict[data]
+        title: '标签数',
+        dataIndex: 'tags_count',
+    },{
+        title: '下载数',
+        dataIndex: 'pull_count',
     }, {
         title: '创建时间',
         dataIndex: 'creation_time',
