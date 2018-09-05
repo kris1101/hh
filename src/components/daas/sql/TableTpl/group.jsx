@@ -4,13 +4,13 @@ import chart from '../../../../static/icons/area_chart.png'
 export function getgroups() {
     return [{
         title: '组名',
-        dataIndex: 'name',
+        dataIndex: 'fields.name',
     }, {
         title: '创建时间',
-        dataIndex: 'date'
+        dataIndex: 'fields.create_time'
     }, {
         title: '更新时间',
-        dataIndex: 'update',
+        dataIndex: 'fields.update_time',
     },{
         title: '操作',
         render: (data) => (

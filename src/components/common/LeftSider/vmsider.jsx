@@ -38,17 +38,19 @@ class VMSider extends Component{
 
       if(pathName=="/vm/backup"||pathName=="/vm/snapshot"){
           openKey = ["sub4"];
-      }else if(pathName=="/vm/network/ip"||pathName=="/vm/network/load"||pathName=="/vm/network/safety"||pathName=="/vm/network/virtual"){
+      }else if(pathName.startsWith('/vm/network')){
           openKey = ["sub7"];
-      }else if(pathName=="/vm/disk"||pathName=="/vm/disk/backup"){
+      }else if(pathName.startsWith('/vm/disk')){
           openKey = ["sub8"];
       }else if(pathName.startsWith('/vm/accounts')){
           openKey = ["accounts"];
+      }else if(pathName.startsWith('/vm/key')){
+          current = "/vm/key";
       }else{
           openKey = [];
       }
 
-      this.setState({current: current,openKeys: openKey});
+      this.setState({current: current, openKeys: openKey});
 
   }
 

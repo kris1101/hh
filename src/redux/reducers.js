@@ -6,6 +6,7 @@ import { httpData } from '../services/vm';
 import { harborProject } from '../containers/Paas/harbor/project.redux'
 import { harborProjectDetails } from '../containers/Paas/harbor/projectdetails.redux'
 import { harborLogs } from '../containers/Paas/harbor/logs.redux'
+import { daasGroups } from '../containers/Daas/groups.redux'
 
 
 const App = combineReducers({
@@ -15,6 +16,7 @@ const App = combineReducers({
     httpData,
     harborProject,
     harborLogs,
+    daasGroups,
     harborProjectDetails,
 });
 

@@ -6,15 +6,15 @@ import { connect } from 'react-redux';
 
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
-import { getColumes } from './TableTpl/tabletpl';
+import { getColumes } from './TableTpl/projectTabletpl';
 import { fetchData, receiveData } from '../../../services/vm';
 
-import KeyCreate from './KeyCreate';
+// import ProjectCreate from './ProjectCreate';
 
 const { Sider, Content } = Layout;
 
 
-class KeyList extends Component {
+class ProjectList extends Component {
   constructor(props) {
       super(props);
       this.columns = getColumes.call(this);
@@ -35,7 +35,7 @@ class KeyList extends Component {
   }
   getList = (page=1) => {
     const { fetchData } = this.props;
-    fetchData({funcName: 'keypairList', stateName: 'keypairList', params: {page: page}});
+    fetchData({funcName: 'projectList', stateName: 'projectList', params: {page: page}});
   };
   refresh = () => {
     this.getList(this.state.pagination.current);
@@ -43,21 +43,21 @@ class KeyList extends Component {
 
   render() {
     const httpData = this.props.httpData;
-    const dataList = (httpData.hasOwnProperty('keypairList')) ? httpData['keypairList']['data']['data'] : [];
-    const loading = (httpData.hasOwnProperty('keypairList')) ? httpData['keypairList']['isFetching'] : true;
+    const dataList = (httpData.hasOwnProperty('projectList')) ? httpData['projectList']['data']['data'] : [];
+    const loading = (httpData.hasOwnProperty('projectList')) ? httpData['projectList']['isFetching'] : true;
     const pager = { ...this.state.pagination };
-    pager.total = (httpData.hasOwnProperty('keypairList')) ? httpData['keypairList']['data']['count'] : 0;
+    pager.total = (httpData.hasOwnProperty('projectList')) ? httpData['projectList']['data']['count'] : 0;
     return (
       <Layout className="config">
         <Sider>
             <VMSider/>
         </Sider>
         <Content style={{ padding: 0, margin:10,  marginBottom: 0, minHeight: window.innerHeight-84 }}>
-          <BreadcrumbCustom first="密钥管理" second="密钥列表" />
+          <BreadcrumbCustom first="用户管理" second="项目列表" />
           <Row gutter={16}>
             <Col className="gutter-row" md={24}>
-              <Card title="密钥列表" bordered={false}>
-                <KeyCreate refresh={this.refresh} />
+              <Card title="项目列表" bordered={false}>
+                {/* <ProjectCreate refresh={this.refresh} /> */}
                 <Table bordered columns={this.columns} onChange={this.handleTableChange} loading={loading}
                        dataSource={dataList} rowKey="id" pagination={pager} />
               </Card>
@@ -72,8 +72,6 @@ class KeyList extends Component {
 
 
 const mapStateToPorps = state => {
-  // const { auth } = state.httpData;
-  // return { auth };
   return { ...state };
 };
 const mapDispatchToProps = dispatch => ({
@@ -81,4 +79,4 @@ const mapDispatchToProps = dispatch => ({
     receiveData: bindActionCreators(receiveData, dispatch)
 });
 
-export default connect(mapStateToPorps, mapDispatchToProps)(KeyList);
+export default connect(mapStateToPorps, mapDispatchToProps)(ProjectList);

@@ -26,3 +26,10 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.mygreen {
+  color: #00a854
+}
+.myred {
+  color: #f04134
+}
