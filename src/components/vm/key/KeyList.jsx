@@ -38,7 +38,7 @@ class KeyList extends Component {
     fetchData({funcName: 'keypairList', stateName: 'keypairList', params: {page: page}});
   };
   refresh = () => {
-    this.getList();
+    this.getList(this.state.pagination.current);
   }
 
   render() {

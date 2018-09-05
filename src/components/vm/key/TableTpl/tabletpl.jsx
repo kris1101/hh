@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Divider } from 'antd';
 
 import KeyDetail from '../KeyDetail'
+import KeyDelete from '../KeyDelete'
 
 export function getColumes() {
   return [{
@@ -17,8 +19,8 @@ export function getColumes() {
     render: (record) => (
       <div>
         <KeyDetail record={ record } />
-        <span className="ant-divider" />
-        <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>删除</span>
+        <Divider type="vertical" />
+        <KeyDelete id={ record.id } refresh={this.refresh} />
       </div>
     )
   }];
