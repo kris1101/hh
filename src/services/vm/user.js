@@ -19,3 +19,7 @@ export const keypairList = (params) => axios.get('keypairs/', {params: params}).
 export const keypairCreate = (data) => axios.post('keypairs/create/', data).then(res => res.data).catch(err => console.log(err));
 export const keypairDetail = (params) => axios.get(`keypairs/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
 export const keypairDelete = (id) => axios.delete(`keypairs/${id}/`).then(res => res.data).catch(err => console.log(err));
+
+
+export const projectList = (params) => axios.get('accounts/projects/', {params: params}).then(res => res.data).catch(err => console.log(err));
+
