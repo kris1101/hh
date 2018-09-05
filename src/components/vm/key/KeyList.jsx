@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import VMSider from '../../common/LeftSider/vmsider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Form, Input, Button, Select, Table, Row, Col, Card } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+// import { Link } from 'react-router-dom';
 
 import BreadcrumbCustom from '../../BreadcrumbCustom';
+import VMSider from '../../common/LeftSider/vmsider';
 import { getColumes } from './TableTpl/tabletpl';
 import { fetchData, receiveData } from '../../../services/vm';
+
+import KeyCreate from './KeyCreate';
 
 const { Sider, Content } = Layout;
 
@@ -34,6 +37,9 @@ class KeyList extends Component {
     const { fetchData } = this.props;
     fetchData({funcName: 'keypairList', stateName: 'keypairList', params: {page: page}});
   };
+  refresh = () => {
+    this.getList();
+  }
 
   render() {
     const httpData = this.props.httpData;
@@ -47,11 +53,17 @@ class KeyList extends Component {
             <VMSider/>
         </Sider>
         <Content style={{ padding: 0, margin:10,  marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="密钥管理" second="密钥列表" />
-            <div style={{ background:'#fff' }}>
-              <Table bordered columns={this.columns} onChange={this.handleTableChange} loading={loading}
-                     dataSource={dataList} rowKey="id" pagination={pager} />
-            </div>
+          <BreadcrumbCustom first="密钥管理" second="密钥列表" />
+          <Row gutter={16}>
+            <Col className="gutter-row" md={24}>
+              <Card title="密钥列表" bordered={false}>
+                <KeyCreate refresh={this.refresh} />
+                <Table bordered columns={this.columns} onChange={this.handleTableChange} loading={loading}
+                       dataSource={dataList} rowKey="id" pagination={pager} />
+              </Card>
+            </Col>
+          </Row>
+
         </Content>
       </Layout>
     );

@@ -16,6 +16,7 @@ import VM_Network_virtual from "../components/vm/network/list/virtuallist"
 import VM_UserList from "../components/vm/accounts/UserList"
 import VM_LogList from "../components/vm/accounts/LogList"
 import VM_Key from "../components/vm/key/KeyList"
+import VM_KeyCreate from "../components/vm/key/KeyCreate"
 
 
 const vm_routes=[{
@@ -41,8 +42,11 @@ const vm_routes=[{
         exact: true,
         path: '/vm/key',
         component: VM_Key,
-    },
-    {
+    },{
+        exact: true,
+        path: '/vm/key/create',
+        component: VM_KeyCreate,
+    },{
         exact: true,
         path: '/vm/mirror',
         component: VM_Mirror,
