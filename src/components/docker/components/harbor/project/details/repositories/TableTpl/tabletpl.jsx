@@ -6,13 +6,13 @@ import { deleteAjax  } from '../../../../../../utils/axios'
 
 import { formatStrDate } from '../../../../../../utils/time_helper'
 
-function confirm(project_id, _that) {
+function confirm(repo_name, _that) {
   const hide = message.loading('Action in progress..', 0);
-  deleteAjax('/harbor/repositories/', "project_id=" + project_id, function (res){
+  deleteAjax('/harbor/repositories/', "repo_name=" + repo_name, function (res){
     hide();
     if(res.data.code == 0){
         message.success(res.data.msg);
-        _that.handleProjectListWithArgs(1, 10);
+        _that.handleRepositoriesQuery();
     }else{
         message.error(res.data.msg);
     }
@@ -42,9 +42,9 @@ export function getrepositories() {
         title: '操作',
         render: (data, record, index) => {
             return (
-              <Popconfirm title={"Are you sure delete " + record.name + " project?"} onConfirm={() => confirm(record.project_id, this)} okText="Yes" cancelText="No">
+              <Popconfirm title={"Are you sure delete " + record.name + " project?"} onConfirm={() => confirm(record.name, this)} okText="是" cancelText="否">
             <div>
-              <Button size="small" icon="delete">delete</Button>
+              <Button size="small" icon="delete">删除</Button>
             </div>
               </Popconfirm>
         )}

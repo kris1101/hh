@@ -99,7 +99,7 @@ class HarborProjectForm extends Component {
           total: this.props.total,
           pageSize: this.state.pageSize,
           showSizeChanger: true,
-          showTotal:(total, range) => `${range[0]}-${range[1]} of ${total} items`,
+          showTotal:(total, range) => `${range[0]}-${range[1]} 共 ${total} 条`,
           showQuickJumper: true,
           //当表格有变化时，如：点击分页  current是当前页面页码
           onChange(page, pageSize) {

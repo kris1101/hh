@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import Dockersider from '../../../../common/LeftSider/dockersider';
-import { notification, Col, Row, DatePicker, Layout, Form, Input, Button, Select, Table } from 'antd';
+import { notification, Col, Row, DatePicker, Form, Input, Button, Select, Table } from 'antd';
   
 import { connect } from 'react-redux';
-import BreadcrumbCustom from '../../../../../components/BreadcrumbCustom';
-import { getlogs } from './TableTpl/tabletpl';
+import { getprojectlogs } from './TableTpl/tabletpl';
+import {getProjectLogsList} from '../../../../../../../containers/Paas/harbor/projectdetails.redux'
 import './logs.less';
-import { getLogsList } from '../../../../../containers/Paas/harbor/logs.redux'
-import { compareDate } from '../../../utils/time_helper' 
+import { compareDate } from '../../../../../utils/time_helper' 
 
-const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
 const begin_config = {
@@ -19,24 +16,23 @@ const end_config = {
   rules: [{ type: 'object', message: 'end time!'  }],
 };
 
-class HarborLogsForm extends Component {
+class HarborProjectLogsForm extends Component {
     constructor(props) {
         super(props);
-        this.columns = getlogs.call(this);
+        this.columns = getprojectlogs.call(this);
+        this.project_id = this.props.project_id;
     }
     state = {
         currentPage: 1,
         pageSize: 10,
     }
-    componentDidMount () {
-        this.props.getLogsList({});
-    }
+
     //重置表单
     handleReset = () => {
         this.props.form.resetFields();
     }
 
-    handleLogsQuery = () => {
+    handleProjectLogsQuery = () => {
         let value = this.props.form.getFieldsValue()
         this.setState({
             currentPage: 1,
@@ -49,8 +45,9 @@ class HarborLogsForm extends Component {
         page_args.operation = value.operation  !== undefined  ? value.operation : "";
         page_args.begin_timestamp = value.begin_timestamp ? value.begin_timestamp.unix() : "";
         page_args.end_timestamp = value.end_timestamp ? value.end_timestamp.unix() : "";
+        page_args.project_id = this.project_id;
         if (compareDate(page_args.begin_timestamp, page_args.end_timestamp)){
-            this.props.getLogsList(page_args);
+            this.props.getProjectLogsList(page_args);
         }else{
             notification.error({description: "结束时间必须大于起始时间"})
             return;
@@ -62,7 +59,7 @@ class HarborLogsForm extends Component {
     let _that = this;
     const pagination = {
           current: this.state.currentPage,
-          total: this.props.total,
+          total: this.props.projectLogs_total,
           pageSize: this.state.pageSize,
           showSizeChanger: true,
           showTotal:(total, range) => `${range[0]}-${range[1]} 共 ${total} 条`,
@@ -81,8 +78,9 @@ class HarborLogsForm extends Component {
               page_args.operation = value.operation  !== undefined  ? value.operation : "";
               page_args.begin_timestamp = value.begin_timestamp ? value.begin_timestamp.unix() : "";
               page_args.end_timestamp = value.end_timestamp ? value.end_timestamp.unix() : "";
+              page_args.project_id = _that.project_id;
               if (compareDate(page_args.begin_timestamp, page_args.end_timestamp)){
-                  _that.props.getLogsList(page_args);
+                  _that.props.getProjectLogsList(page_args);
               }else{
                   notification.error({description: "结束时间必须大于起始时间"})
                   return;
@@ -101,8 +99,9 @@ class HarborLogsForm extends Component {
               page_args.operation = value.operation  !== undefined  ? value.operation : "";
               page_args.begin_timestamp = value.begin_timestamp  ? value.begin_timestamp.unix() : "";
               page_args.end_timestamp = value.end_timestamp ? value.end_timestamp.unix() : "";
+              page_args.project_id = _that.project_id;
               if (compareDate(page_args.begin_timestamp, page_args.end_timestamp)){
-                  _that.props.getLogsList(page_args);
+                  _that.props.getProjectLogsList(page_args);
               }else{
                   notification.error({description: "结束时间必须大于起始时间"})
                   return;
@@ -111,12 +110,7 @@ class HarborLogsForm extends Component {
     };
 
     return (
-      <Layout className="config">
-        <Sider>
-            <Dockersider/>
-        </Sider>
-        <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="镜像仓库" second="日志" />
+           <div>
             <div className="form-search-box" style={{ background:'#fff', padding: 10}}>
                 <Form layout="inline">
                 <Row type="flex" justify="space-around">
@@ -171,7 +165,7 @@ class HarborLogsForm extends Component {
                   </Col>
                   <Col span={5}>
                     <FormItem>
-                        <Button type="primary"  style={{width: 174}} onClick={this.handleLogsQuery}>查询</Button>
+                        <Button type="primary"  style={{width: 174}} onClick={this.handleProjectLogsQuery}>查询</Button>
                     </FormItem>
                   </Col>
                   <Col span={5}>
@@ -184,16 +178,15 @@ class HarborLogsForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered loading={this.props.loading} rowKey={record => record.log_id} columns={this.columns} dataSource={this.props.logsList} pagination={pagination} />
+                <Table bordered loading={this.props.projectlogs_loading} rowKey={record => record.log_id} columns={this.columns} dataSource={this.props.projectLogsList} pagination={pagination} />
             </div>
-        </Content>
-      </Layout>
+        </div>
     );
   }
 }
 
 
-const HarborLogsManage = Form.create()(HarborLogsForm);
+const HarborProjectLogsManage = Form.create()(HarborProjectLogsForm);
 export default connect(
-  state => state.harborLogs,
-  { getLogsList })(HarborLogsManage);
+  state => state.harborProjectDetails,
+  { getProjectLogsList })(HarborProjectLogsManage);
