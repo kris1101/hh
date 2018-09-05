@@ -9,7 +9,7 @@ import VMSider from '../../common/LeftSider/vmsider';
 import { getColumes } from './TableTpl/projectTabletpl';
 import { fetchData, receiveData } from '../../../services/vm';
 
-// import ProjectCreate from './ProjectCreate';
+import ProjectCreate from './ProjectCreate';
 
 const { Sider, Content } = Layout;
 
@@ -57,7 +57,7 @@ class ProjectList extends Component {
           <Row gutter={16}>
             <Col className="gutter-row" md={24}>
               <Card title="项目列表" bordered={false}>
-                {/* <ProjectCreate refresh={this.refresh} /> */}
+                <ProjectCreate refresh={this.refresh} />
                 <Table bordered columns={this.columns} onChange={this.handleTableChange} loading={loading}
                        dataSource={dataList} rowKey="id" pagination={pager} />
               </Card>
