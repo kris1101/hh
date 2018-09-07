@@ -13,7 +13,7 @@ const initState={
 	groupsList:[]
 }
 const axios_instance = axios.create({
-  baseURL: 'http://127.0.0.1:8000',
+    baseURL: 'http://127.0.0.1:8000',
     // baseURL: 'http:/127.0.0.1:8000/v1/api/slow/query/groups',
     // baseURL: 'http://daas.sinochem.cloud/api/daas',
     timeout: 2000
@@ -50,8 +50,8 @@ export function getGroupsList(params){
       dispatch(startLoading());
       axios_instance.get('/v1/api/slow/query/groups',{params: params})
 			.then(res=>{
-                console.log(res)
                 dispatch(endLoading());
+                console.log(res.data)
                 if (res.data.code == 0){
                   dispatch(loadData(res.data))
                 }else{
