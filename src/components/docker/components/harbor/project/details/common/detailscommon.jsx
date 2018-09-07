@@ -10,7 +10,7 @@ import HarborRepositoriesForm from '../repositories/repositories'
 import HarborPorjectMemberForm from '../members/members'
 import HarborPorjectLogsForm from '../logs/logs'
 import ProjectConfigForm from '../configs/projectconfig'
-import { getProjectMemberList, getRepositoriesList, getProjectLogsList  } from '../../../../../../../containers/Paas/harbor/projectdetails.redux';
+import { getProjectMetadata, getProjectMemberList, getRepositoriesList, getProjectLogsList  } from '../../../../../../../containers/Paas/harbor/projectdetails.redux';
 
 const { Sider, Content } = Layout;
 const TabPane = Tabs.TabPane;
@@ -18,10 +18,14 @@ const TabPane = Tabs.TabPane;
 class projectDetailsCommon extends Component {
     constructor(props) {
         super(props);
+        this.project_name = getQueryString(this.props.location.search).project_name;
+        this.project_id = getQueryString(this.props.location.search).project_id;
     }
     state = {
     }
-
+    componentDidMount () {
+        this.props.getProjectMetadata({project_id: getQueryString(this.props.location.search).project_id});
+    }
     handleChangeTab = (activekey) => {
 
       switch (activekey){
@@ -32,6 +36,9 @@ class projectDetailsCommon extends Component {
           case "logging":
               this.logsform ? this.logsform.handleReset() : null;
               this.props.getProjectLogsList({project_id: getQueryString(this.props.location.search).project_id});
+              break;
+          case "settings":
+              this.props.getProjectMetadata({project_id: getQueryString(this.props.location.search).project_id});
               break;
           case "repositories":
               this.repositoriesform.handleReset();
@@ -44,13 +51,13 @@ class projectDetailsCommon extends Component {
     }
 
   render() {
-    return getQueryString(this.props.location.search).project_id ? (
+    return getQueryString(this.props.location.search).project_id  && getQueryString(this.props.location.search).project_name? (
       <Layout className="config">
         <Sider>
             <Dockersider/>
         </Sider>
         <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="镜像仓库" second="项目" />
+            <BreadcrumbCustom first="镜像仓库" second={`项目[${this.project_name}]`} />
             <div style={{ background:'#fff', padding:10 }}>
             <Tabs defaultActiveKey="repositories" onChange={this.handleChangeTab}>
               <TabPane tab={<span><Icon type="appstore" theme="outlined"/>镜像仓库</span>} key="repositories">
@@ -76,4 +83,4 @@ class projectDetailsCommon extends Component {
 
 export default connect(
   state => state.harborProjectDetails,
-  { getProjectMemberList, getRepositoriesList, getProjectLogsList })(projectDetailsCommon);
+  { getProjectMetadata, getProjectMemberList, getRepositoriesList, getProjectLogsList })(projectDetailsCommon);

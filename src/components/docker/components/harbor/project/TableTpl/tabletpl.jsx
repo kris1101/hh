@@ -26,7 +26,7 @@ export function getprojects() {
         title: '项目名称',
         dataIndex: 'name',
         render: (data, record, index) => {
-          let path = '/paas/registryproject/details/?project_id=' + record.project_id; 
+          let path = '/paas/registryproject/details/?project_id=' + record.project_id + "&project_name=" + record.name; 
           return <Link to={path}>{data}</Link>
         } 
     }, {

@@ -38,12 +38,12 @@ class DockerSider extends Component{
       const { location } = this.props;
       let current = location.pathname.replace(/\//g,'');
       let openKeys = []
-      if (current == "paasregistrylog" || current == "paasregistryproject" || current == "paasregistryprojectdetails"){
+      if (current == "paasregistrylog" || current == "paasregistryproject" || current == "paasregistryprojectdetails" || current == "paasregistryprojectrepositories"){
             openKeys = ["dockerregistry"]
       }else if(current == "paasregistryuser" || current == "paasregistryconfig"){
             openKeys = ["dockerregistry", "registrysystem"]
       }
-      if (current == "paasregistryprojectdetails"){
+    if (current == "paasregistryprojectdetails" || current == "paasregistryprojectrepositories"){
           this.setState({ current: "paasregistryproject" , openKeys});
       }else{
           this.setState({ current , openKeys});

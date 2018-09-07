@@ -22,6 +22,7 @@ export function getAjax(url,params,Callback) {
         })
         .catch(function (error,resoponse) {
             /* return Promise.reject(error);*/
+            console.log(error, resoponse);
             notification.error({
                 message: '提示',
                 description: `服务器错误！`,

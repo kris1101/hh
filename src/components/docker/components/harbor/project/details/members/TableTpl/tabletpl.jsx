@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Menu, Dropdown, Icon, Button, Popconfirm, message } from 'antd';
 
 import { Link  } from 'react-router-dom';
-import { deleteAjax  } from '../../../../../../utils/axios'
-import { putAjax  } from '../../../../../../utils/axios'
+import { deleteAjax, putAjax  } from '../../../../../../utils/axios'
 
 import { formatStrDate } from '../../../../../../utils/time_helper'
 

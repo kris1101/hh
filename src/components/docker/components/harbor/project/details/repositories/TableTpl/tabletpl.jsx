@@ -23,7 +23,11 @@ function confirm(repo_name, _that) {
 export function getrepositories() {
     return [{
         title: '名称',
-        dataIndex: 'name'
+        dataIndex: 'name',
+        render: (data, record, index) => {
+          let path = '/paas/registryproject/repositories/?repo_name=' + record.name; 
+          return <Link to={path}>{data}</Link>
+        }   
     },{
         title: '标签数',
         dataIndex: 'tags_count',

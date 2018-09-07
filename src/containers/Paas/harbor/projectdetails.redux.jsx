@@ -5,6 +5,11 @@ import { getAjax } from '../../../components/docker/utils/axios'
 const LOAD_HARBORPROJECTREPOSITORIES_DATA = 'LOAD_HARBORPROJECTREPOSITORIES_DATA'
 const START_HARBORPROJECTREPOSITORIES_LOADING = 'START_HARBORPROJECTREPOSITORIES_LOADING' 
 const END_HARBORPROJECTREPOSITORIES_LOADING = 'END_HARBORPROJECTREPOSITORIES_LOADING' 
+
+const LOAD_HARBORPROJECTREPOSITORIESTAGS_DATA = 'LOAD_HARBORPROJECTREPOSITORIESTAGS_DATA'
+const START_HARBORPROJECTREPOSITORIESTAGS_LOADING = 'START_HARBORPROJECTREPOSITORIESTAGS_LOADING' 
+const END_HARBORPROJECTREPOSITORIESTAGS_LOADING = 'END_HARBORPROJECTREPOSITORIESTAGS_LOADING' 
+
 const CLEAR_DATA = "CLEAR_DATA"
 
 const LOAD_PROJECTMEMBER_DATA = 'LOAD_PROJECTMEMBER_DATA'
@@ -17,18 +22,24 @@ const END_PROJECTLOGS_LOADING = 'END_PROJECTLOGS_LOADING'
 
 const LOAD_VALIDMEMBER_DATA = 'LOAD_VALIDMEMBER_DATA'
 
+const LOAD_PROJECTMETADATA_DATA = 'LOAD_PROJECTMETADATA_DATA'
+
 const initState={
 	repositories_msg:'',
     repositories_total: 0,
     repositories_loading: false,
+    repositoriestags_total: 0,
+    repositoriestags_loading: false,
     projectlogs_loading: false,
 	repositoriesList:[],
+	repositoriesTagsList:[],
 	projectmember_msg:'',
     projectmember_loading: false,
 	projectmemberList:[],
     validMemberData: [],
     projectLogsList:[],
-    projectLogs_total:0
+    projectLogs_total:0,
+    project_ispublic:'false'
 
 }
 
@@ -41,6 +52,12 @@ export function harborProjectDetails(state=initState, action){
 			return {...state, repositories_loading: true}
 		case END_HARBORPROJECTREPOSITORIES_LOADING:
 			return {...state, repositories_loading: false}
+		case LOAD_HARBORPROJECTREPOSITORIESTAGS_DATA:
+			return {...state, repositoriesTagsList: action.payload, repositoriestags_total: action.payload.length}
+		case START_HARBORPROJECTREPOSITORIESTAGS_LOADING:
+			return {...state, repositoriestags_loading: true}
+		case END_HARBORPROJECTREPOSITORIESTAGS_LOADING:
+			return {...state, repositoriestags_loading: false}
 		case LOAD_PROJECTMEMBER_DATA:
 			return {...state, projectmemberList: action.payload}
 		case LOAD_VALIDMEMBER_DATA:
@@ -55,6 +72,8 @@ export function harborProjectDetails(state=initState, action){
 			return {...state, projectlogs_loading: false}
 		case LOAD_PROJECTLOGS_DATA:
 			return {...state, projectLogsList: action.payload.result, projectLogs_total: action.payload.total }
+		case LOAD_PROJECTMETADATA_DATA:
+			return {...state, project_ispublic: action.payload.public }
 		case CLEAR_DATA:
 			return initState
 		default:
@@ -64,6 +83,14 @@ export function harborProjectDetails(state=initState, action){
 
 export function loadRepositoriesData(projectRepositoriesListInfo){
 	return { type:LOAD_HARBORPROJECTREPOSITORIES_DATA, payload:projectRepositoriesListInfo}
+}
+
+export function loadRepositoriesTagsData(projectRepositoriesTagsListInfo){
+	return { type:LOAD_HARBORPROJECTREPOSITORIESTAGS_DATA, payload:projectRepositoriesTagsListInfo}
+}
+
+export function loadProjectMetadataData(projectMetadataInfo){
+	return { type:LOAD_PROJECTMETADATA_DATA, payload:projectMetadataInfo}
 }
 
 export function loadValidMemberData(validMemberDataInfo){
@@ -88,6 +115,14 @@ export function startRepositoriesLoading(){
 
 export function endRepositoriesLoading(){
 	return { type:END_HARBORPROJECTREPOSITORIES_LOADING}
+}
+
+export function startRepositoriesTagsLoading(){
+	return { type:START_HARBORPROJECTREPOSITORIESTAGS_LOADING}
+}
+
+export function endRepositoriesTagsLoading(){
+	return { type:END_HARBORPROJECTREPOSITORIESTAGS_LOADING}
 }
 
 export function startProjectLogsLoading(){
@@ -123,6 +158,24 @@ export function getRepositoriesList(params){
 	}
 }
 
+export function getRepositoriesTagsList(params){
+	return dispatch=>{
+      dispatch(startRepositoriesTagsLoading());
+      console.log(params);
+      getAjax('/harbor/repositories/tags/', params, function(res){
+          dispatch(endRepositoriesTagsLoading());
+          if (res.data.code == 0){
+            dispatch(loadRepositoriesTagsData(res.data.data))
+          }else{
+            notification.error({
+              description: res.data.msg,
+              message: "提示" 
+            })
+          }
+          })
+	}
+}
+
 export function getProjectLogsList(params){
 	return dispatch=>{
       dispatch(startProjectLogsLoading());
@@ -131,6 +184,21 @@ export function getProjectLogsList(params){
           dispatch(endProjectLogsLoading());
           if (res.data.code == 0){
             dispatch(loadProjectLogsData(res.data.data))
+          }else{
+            notification.error({
+              description: res.data.msg,
+              message: "提示" 
+            })
+          }
+          })
+	}
+}
+
+export function getProjectMetadata(params){
+	return dispatch=>{
+      getAjax('/harbor/project/metadata/', params, function(res){
+          if (res.data.code == 0){
+            dispatch(loadProjectMetadataData(res.data.data))
           }else{
             notification.error({
               description: res.data.msg,
