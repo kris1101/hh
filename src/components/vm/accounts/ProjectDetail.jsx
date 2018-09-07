@@ -22,7 +22,7 @@ class ProjectDetail extends React.Component {
     loading: false,
     activeKey: "1",
     base_data: [],
-    project_data: [],
+    quota_data: [],
     build_data: [],
 
     build_log_data: [],
@@ -36,7 +36,7 @@ class ProjectDetail extends React.Component {
     this.setState({ activeKey: activeKey });
     if (activeKey === '4'){
       // console.log(activeKey);
-      this.build_log_request(1);
+      this.quota_request();
     }
   }
 
@@ -63,25 +63,43 @@ class ProjectDetail extends React.Component {
           {'title': '状态', 'key': 'status', 'value': res.data.status},
           {'title': '创建时间', 'key': 'create_time', 'value': res.data.create_time},
         ],
-        project_data: [
-          {'title': '基础镜像', 'key': 'image_name', 'value': res.data.image_name+':'+res.data.image_tag},
-          {'title': '安装依赖命令', 'key': 'install_cmd', 'value': res.data.install_cmd},
-          {'title': '代码存放路径', 'key': 'code_path', 'value': res.data.code_path},
-          {'title': '编译命令', 'key': 'compile_cmd', 'value': res.data.compile_cmd},
-          {'title': '工作目录', 'key': 'work_dir', 'value': res.data.work_dir},
-          {'title': '启动命令', 'key': 'start_cmd', 'value': res.data.start_cmd},
-          {'title': 'User in Docker', 'key': 'docker_user', 'value': res.data.docker_user},
-        ],
-        build_data: [
-          {'title': 'Gitlab', 'key': 'git', 'value': res.data.git},
-          {'title': '自动构建分支', 'key': 'git_branch', 'value': res.data.git_branch},
-        ],
         loading: false,
       });
     });
 
   };
 
+  quota_request = () => {
+    this.setState({ loading: true });
+    projectDetail(this.props.match.params.id, {tab: 'quota'}).then(res => {
+      if(res.code === -2){
+        notification['warning']({message: res.msg});
+        this.setState({loading: false});
+        return
+      } else if(res.code === -1){
+        notification['warning']({message: res.msg});
+        this.setState({loading: false});
+        return
+      }
+
+      this.setState({
+        quota_data: [
+          {'title': '实例', 'key': 'instances', 'value': res.data.instances},
+          {'title': 'VCPU数量', 'key': 'cores', 'value': res.data.cores},
+          {'title': '密钥对', 'key': 'key_pairs', 'value': res.data.key_pairs},
+          {'title': '内存', 'key': 'ram', 'value': res.data.ram},
+          {'title': '主机组', 'key': 'server_groups', 'value': res.data.server_groups},
+          {'title': '主机组成员', 'key': 'server_group_members', 'value': res.data.server_group_members},
+          {'title': '网络数量', 'key': 'network', 'value': res.data.network},
+          {'title': '子网数量', 'key': 'subnet', 'value': res.data.subnet},
+          {'title': '安全组数量', 'key': 'security_groups', 'value': res.data.security_groups},
+          {'title': '安全组规则数量', 'key': 'security_group_rule', 'value': res.data.security_group_rule},
+        ],
+        loading: false,
+      });
+    });
+
+  };
   build_log_request = (page=1) => {
     const { log_pagination } = this.state;
     this.setState({ loading: true });
@@ -142,7 +160,7 @@ class ProjectDetail extends React.Component {
                   </TabPane>
 
                   <TabPane tab={<span>项目成员</span>} key="2">
-                    <Table columns={this.columns} dataSource={this.state.project_data}
+                    <Table columns={this.columns} dataSource={this.state.quota_data}
                       loading={this.state.loading}
                       pagination={false}
                       showHeader={false}
@@ -160,17 +178,7 @@ class ProjectDetail extends React.Component {
                   </TabPane>
 
                   <TabPane tab={<span>配额</span>} key="4">
-                    <div style={{ marginBottom: 16 }}>
-                      <Form layout="inline">
-                        <FormItem>
-                          <Button type="primary" onClick={() => this.build_log_request(1)}
-                                  disabled={this.state.loading} loading={this.state.loading}
-                          ><Icon type="reload" /></Button>
-                        </FormItem>
-                      </Form>
-                    </div>
-
-                    <Table columns={this.log_columns} dataSource={this.state.build_log_data}
+                    <Table columns={this.columns} dataSource={this.state.quota_data}
                       loading={this.state.loading}
                       pagination={this.state.log_pagination}
                       onChange={this.handleTableChange}
