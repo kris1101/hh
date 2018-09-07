@@ -5,6 +5,7 @@ import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
 import { projectDetail } from '../../../services/vm/user';
 import { getDetailColumes, getDetailMemeberColumes } from './TableTpl/projectTabletpl';
+import { humansize } from '../../../utils/vm'
 
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
@@ -87,7 +88,7 @@ class ProjectDetail extends React.Component {
           {'title': '实例', 'key': 'instances', 'value': res.data.instances},
           {'title': 'VCPU数量', 'key': 'cores', 'value': res.data.cores},
           {'title': '密钥对', 'key': 'key_pairs', 'value': res.data.key_pairs},
-          {'title': '内存', 'key': 'ram', 'value': res.data.ram},
+          {'title': '内存', 'key': 'ram', 'value': humansize(res.data.ram, 'MB')},
           {'title': '主机组', 'key': 'server_groups', 'value': res.data.server_groups},
           {'title': '主机组成员', 'key': 'server_group_members', 'value': res.data.server_group_members},
           {'title': '网络数量', 'key': 'network', 'value': res.data.network},
@@ -180,7 +181,6 @@ class ProjectDetail extends React.Component {
                   <TabPane tab={<span>配额</span>} key="4">
                     <Table columns={this.columns} dataSource={this.state.quota_data}
                       loading={this.state.loading}
-                      pagination={this.state.log_pagination}
                       onChange={this.handleTableChange}
                     />
                   </TabPane>
