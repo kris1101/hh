@@ -44,10 +44,14 @@ class VMSider extends Component{
           openKey = ["sub8"];
       }else if(pathName.startsWith('/vm/accounts')){
           openKey = ["accounts"];
-      }else if(pathName.startsWith('/vm/key')){
-          current = "/vm/key";
       }else{
           openKey = [];
+      }
+
+      if(pathName.startsWith('/vm/key')){
+          current = "/vm/key";
+      }else if(pathName.startsWith('/vm/accounts/projects')){
+          current = "/vm/accounts/projects";
       }
 
       this.setState({current: current, openKeys: openKey});

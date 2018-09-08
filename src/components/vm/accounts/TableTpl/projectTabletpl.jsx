@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Divider } from 'antd';
+import { Divider, Tooltip, Icon } from 'antd';
 import { Link } from 'react-router-dom';
+
+import ProjectUpdate from '../ProjectUpdate';
 
 
 export function getColumes() {
@@ -33,7 +35,11 @@ export function getColumes() {
     title: '操作',
     render: (record) => (
       <div>
+        <Tooltip  title="项目详情">
+          <Link to={`/vm/accounts/projects/${record.id}`} className="href-class"><Icon type="bars" /></Link>
+        </Tooltip>
         <Divider type="vertical" />
+        <ProjectUpdate record={ record } refresh={this.refresh} />
       </div>
     )
   }];

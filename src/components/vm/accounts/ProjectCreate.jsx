@@ -35,7 +35,7 @@ class CreateForm extends React.Component {
     return (
       <Modal
           visible={visible}
-          title="新增配置"
+          title="新增项目"
           okText="创建"
           onCancel={onCancel}
           onOk={onCreate}
