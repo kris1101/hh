@@ -68,6 +68,25 @@ class DockerSider extends Component{
             <Menu.Item key="/paas/servce"><Link to="/paas/service"><Icon type="customer-service" />服务</Link></Menu.Item>
             <Menu.Item key="paascontainer"><Link to="/paas/container"><Icon type="link" />容器</Link></Menu.Item>
             <SubMenu
+               key="/paas/workload"
+               title={<span><Icon type="codepen" /><span>平台管理</span></span>}
+            >
+                <SubMenu
+                   key="paasworkload"
+                   title="Workload"
+                >
+                  <Menu.Item key="paasworkloadpods"><Link to="/paas/workload/podlist"><span>Pods</span></Link></Menu.Item>
+                  <Menu.Item key="paasworkloaddeployments"><Link to="/paas/workload/deploylist"><span>Deployments</span></Link></Menu.Item>
+                  <Menu.Item key="paasworkloadreplication"><Link to="/paas/workload/replicationlist"><span>Replicationcontrollers</span></Link></Menu.Item>
+                  <Menu.Item key="paasworkloadreplica"><Link to="/paas/workload/replicalist"><span>Replicasets</span></Link></Menu.Item>
+                  <Menu.Item key="paasworkloaddaemonsets"><Link to="/paas/workload/daemonsetlist"><span>Daemonsets</span></Link></Menu.Item>
+                  <Menu.Item key="paasworkloadcronjobs"><Link to="/paas/workload/cronjoblist"><span>Cronjobs</span></Link></Menu.Item>
+                  <Menu.Item key="paasworkloadjobs"><Link to="/paas/workload/joblist"><span>Jobs</span></Link></Menu.Item>
+                  <Menu.Item key="paasworkloadstatefulsets"><Link to="/paas/workload/statefullist"><span>Statefulsets</span></Link></Menu.Item>
+                </SubMenu>
+            </SubMenu>
+
+            <SubMenu
                key="dockerregistry"
                title={<span><Icon type="codepen" /><span>镜像仓库</span></span>}
             >
