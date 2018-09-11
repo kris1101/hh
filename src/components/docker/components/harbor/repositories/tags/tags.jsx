@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getrepositoriestags } from './TableTpl/tabletpl';
 import './tags.less';
 import { getRepositoriesTagsList } from '../../../../../../containers/Paas/harbor/projectdetails.redux'
+import { getHarborSysteminfo } from '../../../../../../containers/Paas/harbor/configurations.redux'
 
 class HarborRepositoriesTagsForm extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class HarborRepositoriesTagsForm extends Component {
     }
 
     componentDidMount () {
+        this.props.getHarborSysteminfo({});
         this.props.getRepositoriesTagsList({repo_name: this.repo_name});
     }
     handleRepositoriesTagsQuery = (page, pagesize) => {
@@ -56,5 +58,5 @@ class HarborRepositoriesTagsForm extends Component {
 
 const HarborRepositoriesTagsManage = Form.create()(HarborRepositoriesTagsForm);
 export default connect(
-  state => state.harborProjectDetails,
-  { getRepositoriesTagsList })(HarborRepositoriesTagsManage);
+  state => ({...state.harborProjectDetails, ...state.harborConfigurations}),
+  { getRepositoriesTagsList, getHarborSysteminfo })(HarborRepositoriesTagsManage);

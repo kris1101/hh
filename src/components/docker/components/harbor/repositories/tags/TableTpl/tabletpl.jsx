@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Popconfirm, message, Icon } from 'antd';
+import copy from 'copy-to-clipboard';
 
 import { Link  } from 'react-router-dom';
 import { deleteAjax  } from '../../../../../utils/axios'
@@ -19,8 +20,9 @@ function confirm(tag, _that) {
   })
 }
 
-function handleIconClick(){
-    console.log("icon click");
+function handleIconClick(_that, tag){
+  copy(_that.props.registry_url + "/" + _that.props.repo_name + ":" + tag); 
+  message.success("复制成功");
 }
 export function getrepositoriestags() {
     return [{
@@ -32,10 +34,12 @@ export function getrepositoriestags() {
       render: (data) => ((data/1024/1024).toFixed(2) + "M")
     },{
         title: 'pull命令',
-        render: (data) => (<Icon type="copy" onClick={handleIconClick} style={{cursor: "pointer"}}/>)
+      render: (data, record, index) => (<Icon type="copy" onClick={() => handleIconClick(this, record.name)} style={{cursor: "pointer"}}/>)
     }, {
         title: '作者',
-        dataIndex: 'author'
+        dataIndex: 'author',
+        render: (data) => (data ? data : "-")
+
     },{
         title: '创建时间',
         dataIndex: 'created',

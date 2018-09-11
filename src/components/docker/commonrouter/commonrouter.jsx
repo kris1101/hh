@@ -5,6 +5,7 @@ import harborProjectDetailsComponent from '../components/harbor/project/details/
 import harborProjectRepositoriesComponent from '../components/harbor/repositories/common/detailscommon'
 import harborLogComponent from '../components/harbor/logs/logs'
 import harborUserComponent from '../components/harbor/user/user'
+import harborConfigurationsComponent from '../components/harbor/configurations/common/configurations'
 import notFoundPage from '../components/404/404page'
 
 class PaasChildRouter extends Component {
@@ -19,6 +20,7 @@ class PaasChildRouter extends Component {
                   <Route path={`${this.props.match.path}registryproject/repositories/`} exact component={harborProjectRepositoriesComponent}></Route>
                   <Route path={`${this.props.match.path}registrylog`} exact component={harborLogComponent}></Route>
                   <Route path={`${this.props.match.path}registryuser`} exact component={harborUserComponent}></Route>
+                  <Route path={`${this.props.match.path}registryconfig`} exact component={harborConfigurationsComponent}></Route>
                   <Route component={notFoundPage}></Route>
 				</Switch>	
     );
