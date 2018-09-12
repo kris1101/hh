@@ -3,6 +3,7 @@ import { connect   } from 'react-redux';
 import { Button, message, Form, Radio} from 'antd';
 import {getProjectMetadata} from '../../../../../../../containers/Paas/harbor/projectdetails.redux'
 import { putAjax } from '../../../../../utils/axios'
+import { generateformdata } from '../../../../../utils/tools_helper'
 
 const FormItem = Form.Item;
 
@@ -18,7 +19,7 @@ class  ProjectConfigForm extends React.Component {
     this.setState({submit_isloading: true})
     let value = this.props.form.getFieldsValue()
     console.log(value)
-    putAjax('/harbor/changepublic/', {project_id: this.props.project_id, public: value.public}, function(res){
+    putAjax('/harbor/changepublic/', generateformdata({project_id: this.props.project_id, public: value.public}), function(res){
       _that.setState({submit_isloading: false})
       if(res.data.code == 0){                                                                                     
           _that.props.getProjectMetadata({project_id: _that.props.project_id});                                                                     

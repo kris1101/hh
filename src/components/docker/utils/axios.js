@@ -9,7 +9,8 @@ var instance = axios.create({
     timeout: 2000,
 });
 
-instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+instance.defaults.headers.post['Content-Type'] = 'multipart/form-data'
+instance.defaults.headers.put['Content-Type'] = 'multipart/form-data'
 
 export function getAjax(url,params,Callback) {
     let token = sessionStorage.token;
@@ -36,7 +37,7 @@ export function postAjax(url,params,Callback) {
     if(token){
         instance.defaults.headers.common['Authorization'] = token;
     }
-    instance.post(url,qs.stringify(params))
+    instance.post(url, params)
         .then(function (response) {
 
             Callback(response);
@@ -56,7 +57,7 @@ export function putAjax(url,params,Callback) {
     if(token){
         instance.defaults.headers.common['Authorization'] = token;
     }
-    instance.put(url,qs.stringify(params))
+    instance.put(url,params)
         .then(function (response) {
 
             Callback(response);

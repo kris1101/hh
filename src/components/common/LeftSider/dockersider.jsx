@@ -63,10 +63,11 @@ class DockerSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="/paas/dashboard"><Link to="/paas/dashboard"><Icon type="desktop" />概述</Link></Menu.Item>
-            <Menu.Item key="/paas/application"><Link to="/paas/application"><Icon type="wallet" />应用</Link></Menu.Item>
-            <Menu.Item key="/paas/servce"><Link to="/paas/service"><Icon type="customer-service" />服务</Link></Menu.Item>
+            <Menu.Item key="paasdashboard"><Link to="/paas/dashboard"><Icon type="desktop" />概述</Link></Menu.Item>
+            <Menu.Item key="paasapplication"><Link to="/paas/application"><Icon type="wallet" />应用</Link></Menu.Item>
+            <Menu.Item key="paasservce"><Link to="/paas/service"><Icon type="customer-service" />服务</Link></Menu.Item>
             <Menu.Item key="paascontainer"><Link to="/paas/container"><Icon type="link" />容器</Link></Menu.Item>
+            <Menu.Item key="paasclustersettings"><Link to="/paas/clustersettings"><Icon type="folder-add" />集群配置</Link></Menu.Item>
             <SubMenu
                key="dockerregistry"
                title={<span><Icon type="codepen" /><span>镜像仓库</span></span>}

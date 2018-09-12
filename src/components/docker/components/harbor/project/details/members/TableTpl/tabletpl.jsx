@@ -5,6 +5,7 @@ import { Link  } from 'react-router-dom';
 import { deleteAjax, putAjax  } from '../../../../../../utils/axios'
 
 import { formatStrDate } from '../../../../../../utils/time_helper'
+import { generateformdata } from '../../../../../../utils/tools_helper'
 
 const roleDict = {1: "项目管理员", 2: "开发者", 3: "访客"}
 const ButtonGroup = Button.Group;
@@ -19,7 +20,7 @@ function getMenuItem(record, thisarg) {
 
 function handleRoleMenuClick(e, record, thisarg) {
     const hide = message.loading('Action in progress..', 0);
-    putAjax('/harbor/projectmember/', {project_id: record.project_id, user_id: record.id, role_id: e.key}, function(res){
+    putAjax('/harbor/projectmember/', generateformdata({project_id: record.project_id, user_id: record.id, role_id: e.key}), function(res){
       hide();
       if(res.data.code == 0){
           thisarg.handleProjectMemberQuery();

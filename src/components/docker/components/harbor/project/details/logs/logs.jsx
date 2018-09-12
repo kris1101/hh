@@ -114,28 +114,28 @@ class HarborProjectLogsForm extends Component {
             <div className="form-search-box" style={{ background:'#fff', padding: 10}}>
                 <Form layout="inline">
                 <Row type="flex" justify="space-around">
-                  <Col span={5}>
+                  <Col span={6} className="col-center">
                         <FormItem label="">
                             {getFieldDecorator('username')(
                                 <Input placeholder="用户名" />
                             )}
                         </FormItem>
                   </Col>
-                  <Col span={5}>
+                  <Col span={6} className="col-center">
                         <FormItem label="">
                             {getFieldDecorator('repository')(
                                 <Input placeholder="镜像仓库" />
                             )}
                         </FormItem>
                   </Col>
-                  <Col span={5}>
+                  <Col span={6} className="col-center">
                         <FormItem label="">
                             {getFieldDecorator('tag')(
                                 <Input placeholder="标签" />
                             )}
                         </FormItem>
                   </Col>
-                  <Col span={5}>
+                  <Col span={6} className="col-center">
                         <FormItem label="">
                             {getFieldDecorator('operation')(
                                 <Select style={{ width: 174  }} showSearch placeholder="操作类型">
@@ -149,26 +149,26 @@ class HarborProjectLogsForm extends Component {
                   </Col>
                 </Row>
                 <Row type="flex" justify="space-around">
-                  <Col span={5}>
+                  <Col span={6} className="col-center">
                         <FormItem label="">
           					{getFieldDecorator('begin_timestamp', begin_config)(
           					  <DatePicker placeholder="起始时间" showTime format="YYYY-MM-DD HH:mm:ss" />
           					)}
                         </FormItem>
                   </Col>
-                  <Col span={5}>
+                  <Col span={6} className="col-center">
                         <FormItem label="">
           					{getFieldDecorator('end_timestamp', end_config)(
           					  <DatePicker placeholder="结束时间" showTime format="YYYY-MM-DD HH:mm:ss" />
           					)}
                         </FormItem>
                   </Col>
-                  <Col span={5}>
+                  <Col span={6} className="col-center">
                     <FormItem>
                         <Button type="primary"  style={{width: 174}} onClick={this.handleProjectLogsQuery}>查询</Button>
                     </FormItem>
                   </Col>
-                  <Col span={5}>
+                  <Col span={6} className="col-center">
                     <FormItem>
                         <Button style={{width: 174}} onClick={this.handleReset}>重置</Button>
                     </FormItem>

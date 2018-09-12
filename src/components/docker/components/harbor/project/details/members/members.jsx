@@ -7,6 +7,7 @@ import './members.less';
 import { getProjectMemberList, getValidMemberData } from '../../../../../../../containers/Paas/harbor/projectdetails.redux';
 import { MemberCreateForm } from './membersforms/membercreateform'
 import {postAjax} from '../../../../../utils/axios'
+import { generateformdata } from '../../../../../utils/tools_helper'
 
 const FormItem = Form.Item;
 
@@ -60,7 +61,7 @@ class HarborMembersForm extends Component {
         this.setState({memberCreateConfirmLoading: true})
         values.project_id = this.project_id;
         const _that = this;
-        postAjax('/harbor/projectmember/', values, function(res){
+        postAjax('/harbor/projectmember/', generateformdata(values), function(res){
             if(res.data.code == 0){ 
                 message.success("添加成功") 
                 _that.setState({memberCreateConfirmLoading: false})

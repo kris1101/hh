@@ -59,7 +59,7 @@ export function getprojects() {
         title: '操作',
         render: (data, record, index) => {
             return (
-              <Popconfirm title={"Are you sure delete " + record.name + " project?"} onConfirm={() => confirm(record.project_id, this)} okText="Yes" cancelText="No">
+              <Popconfirm title={"确定删除" + record.name + "项目?"} onConfirm={() => confirm(record.project_id, this)} okText="是" cancelText="否">
             <div>
               <Button size="small" icon="delete">删除</Button>
             </div>

@@ -3,6 +3,7 @@ import { connect   } from 'react-redux';
 import { Button, message, Form, Radio} from 'antd';
 import { getHarborConfigurations } from '../../../../../../containers/Paas/harbor/configurations.redux'
 import { putAjax } from '../../../../utils/axios'
+import { generateformdata } from '../../../../utils/tools_helper'
 
 const FormItem = Form.Item;
 
@@ -17,8 +18,7 @@ class  HarborPermissionForm extends React.Component {
     let _that = this;
     this.setState({submit_isloading: true})
     let value = this.props.form.getFieldsValue()
-    console.log(value)
-    putAjax('/harbor/configurations/', {config_data: JSON.stringify(value)}, function(res){
+    putAjax('/harbor/configurations/', generateformdata({config_data: JSON.stringify(value)}), function(res){
       _that.setState({submit_isloading: false})
       if(res.data.code == 0){                                                                                     
           message.success("更新成功");

@@ -46,7 +46,7 @@ export function getrepositories() {
         title: '操作',
         render: (data, record, index) => {
             return (
-              <Popconfirm title={"Are you sure delete " + record.name + " project?"} onConfirm={() => confirm(record.name, this)} okText="是" cancelText="否">
+              <Popconfirm title={"确定删除" + record.name + "镜像?"} onConfirm={() => confirm(record.name, this)} okText="是" cancelText="否">
             <div>
               <Button size="small" icon="delete">删除</Button>
             </div>

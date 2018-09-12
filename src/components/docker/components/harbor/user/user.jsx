@@ -8,6 +8,7 @@ import { getHarborUserList } from '../../../../../containers/Paas/harbor/user.re
 import { UserCreateForm } from './userforms/usercreateform'
 import './user.less';
 import { postAjax } from '../../../utils/axios'
+import { generateformdata  } from '../../../utils/tools_helper'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -65,7 +66,7 @@ class HarborUserForm extends Component {
         }
         this.setState({UserCreateConfirmLoading: true})
         const _that = this;
-        postAjax('/harbor/user/', values, function(res){
+        postAjax('/harbor/user/', generateformdata(values), function(res){
             if(res.data.code == 0){
                 message.success("创建成功") 
                 _that.setState({UserCreateConfirmLoading: false})

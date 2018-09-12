@@ -6,6 +6,7 @@ import harborProjectRepositoriesComponent from '../components/harbor/repositorie
 import harborLogComponent from '../components/harbor/logs/logs'
 import harborUserComponent from '../components/harbor/user/user'
 import harborConfigurationsComponent from '../components/harbor/configurations/common/configurations'
+import k8sClusterComponent from '../components/k8s/kubeconfig/kubeconfig'
 import notFoundPage from '../components/404/404page'
 
 class PaasChildRouter extends Component {
@@ -21,6 +22,7 @@ class PaasChildRouter extends Component {
                   <Route path={`${this.props.match.path}registrylog`} exact component={harborLogComponent}></Route>
                   <Route path={`${this.props.match.path}registryuser`} exact component={harborUserComponent}></Route>
                   <Route path={`${this.props.match.path}registryconfig`} exact component={harborConfigurationsComponent}></Route>
+                  <Route path={`${this.props.match.path}clustersettings`} exact component={k8sClusterComponent}></Route>
                   <Route component={notFoundPage}></Route>
 				</Switch>	
     );

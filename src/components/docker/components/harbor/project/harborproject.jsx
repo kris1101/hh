@@ -9,6 +9,7 @@ import { getProjectList } from '../../../../../containers/Paas/harbor/project.re
 import { clearProjectDetailsData } from '../../../../../containers/Paas/harbor/projectdetails.redux'
 import { ProjectCreateForm } from './projectforms/projectcreateform'
 import { postAjax } from '../../../utils/axios'
+import { generateformdata  } from '../../../utils/tools_helper'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -68,7 +69,7 @@ class HarborProjectForm extends Component {
         }
         this.setState({ProjectCreateConfirmLoading: true})
         const _that = this;
-        postAjax('/harbor/projects/', values, function(res){
+        postAjax('/harbor/projects/', generateformdata(values), function(res){
             if(res.data.code == 0){
                 message.success("创建成功") 
                 _that.setState({ProjectCreateConfirmLoading: false})
