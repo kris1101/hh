@@ -25,3 +25,4 @@ export const projectList = (params) => axios.get('accounts/projects/', {params: 
 export const projectCreate = (data) => axios.post('accounts/projects/create/', data).then(res => res.data).catch(err => console.log(err));
 export const projectDetail = (id, params) => axios.get(`accounts/projects/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
 export const projectUpdate = (id, data) => axios.put(`accounts/projects/${id}/`, data).then(res => res.data).catch(err => console.log(err));
+export const projectQuotaUpdate = (id, data) => axios.put(`accounts/projects/quota/${id}/`, data).then(res => res.data).catch(err => console.log(err));
