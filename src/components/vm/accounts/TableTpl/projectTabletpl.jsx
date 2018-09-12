@@ -3,6 +3,7 @@ import { Divider, Tooltip, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 
 import ProjectUpdate from '../ProjectUpdate';
+import ProjectQuotaUpdate from '../ProjectQuotaUpdate';
 
 
 export function getColumes() {
@@ -40,6 +41,8 @@ export function getColumes() {
         </Tooltip>
         <Divider type="vertical" />
         <ProjectUpdate record={ record } refresh={this.refresh} />
+        <Divider type="vertical" />
+        <ProjectQuotaUpdate record={ record } refresh={this.refresh} />
       </div>
     )
   }];
