@@ -61,7 +61,7 @@ export function getprojects() {
             return (
               <Popconfirm title={"确定删除" + record.name + "项目?"} onConfirm={() => confirm(record.project_id, this)} okText="是" cancelText="否">
             <div>
-              <Button size="small" icon="delete">删除</Button>
+              <Button size="small" icon="delete" disabled={record.repo_count != 0 || record.name == "library"? true : false}>删除</Button>
             </div>
               </Popconfirm>
         )}

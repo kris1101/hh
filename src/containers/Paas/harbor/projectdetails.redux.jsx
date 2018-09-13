@@ -20,7 +20,6 @@ const LOAD_PROJECTLOGS_DATA = 'LOAD_PROJECTLOGS_DATA'
 const START_PROJECTLOGS_LOADING = 'START_PROJECTLOGS_LOADING' 
 const END_PROJECTLOGS_LOADING = 'END_PROJECTLOGS_LOADING' 
 
-const LOAD_VALIDMEMBER_DATA = 'LOAD_VALIDMEMBER_DATA'
 
 const LOAD_PROJECTMETADATA_DATA = 'LOAD_PROJECTMETADATA_DATA'
 
@@ -60,8 +59,6 @@ export function harborProjectDetails(state=initState, action){
 			return {...state, repositoriestags_loading: false}
 		case LOAD_PROJECTMEMBER_DATA:
 			return {...state, projectmemberList: action.payload}
-		case LOAD_VALIDMEMBER_DATA:
-			return {...state, validMemberData: action.payload}
 		case START_PROJECTMEMBER_LOADING:
 			return {...state, projectmember_loading: true}
 		case END_PROJECTMEMBER_LOADING:
@@ -91,10 +88,6 @@ export function loadRepositoriesTagsData(projectRepositoriesTagsListInfo){
 
 export function loadProjectMetadataData(projectMetadataInfo){
 	return { type:LOAD_PROJECTMETADATA_DATA, payload:projectMetadataInfo}
-}
-
-export function loadValidMemberData(validMemberDataInfo){
-	return { type:LOAD_VALIDMEMBER_DATA, payload:validMemberDataInfo}
 }
 
 export function loadProjectMemberData(projectMemberListInfo){
@@ -216,21 +209,6 @@ export function getProjectMemberList(params){
           dispatch(endProjectmemberLoading());
           if (res.data.code == 0){
             dispatch(loadProjectMemberData(res.data.data))
-          }else{
-            notification.error({
-              description: res.data.msg,
-              message: "提示" 
-            })
-          }
-          })
-	}
-}
-
-export function getValidMemberData(params){
-	return dispatch=>{
-      getAjax('/harbor/projectvalidmember/', params, function(res){
-          if (res.data.code == 0){
-            dispatch(loadValidMemberData(res.data.data))
           }else{
             notification.error({
               description: res.data.msg,

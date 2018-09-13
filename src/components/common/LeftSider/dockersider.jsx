@@ -70,7 +70,7 @@ class DockerSider extends Component{
             <Menu.Item key="paasclustersettings"><Link to="/paas/clustersettings"><Icon type="folder-add" />集群配置</Link></Menu.Item>
             <SubMenu
                key="/paas/workload"
-               title={<span><Icon type="codepen" /><span>平台管理</span></span>}
+               title={<span><Icon type="bank" /><span>平台管理</span></span>}
             >
                 <SubMenu
                    key="paasworkload"

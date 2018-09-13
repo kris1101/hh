@@ -59,7 +59,7 @@ export function getprojectmembers() {
         render: (data, record, index) => {
             return (
             <div>
-              <Popconfirm title={"Are you sure delete " + record.entity_name + " member?"} onConfirm={() => confirm(record, this)} okText="是" cancelText="否">
+              <Popconfirm title={"确定删除" + record.entity_name + "成员?"} onConfirm={() => confirm(record, this)} okText="是" cancelText="否">
             <Button disabled={record.entity_name == "admin" ? true : false }><Icon type="delete" />删除</Button>
               </Popconfirm>
     		<Dropdown disabled={record.entity_name == "admin" ? true : false } overlay={getMenuItem(record, this)}>

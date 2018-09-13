@@ -6,7 +6,7 @@ import qs from 'qs'
 const baseUrl = 'http://paas.sinochem.cloud/api/paas';
 var instance = axios.create({
     baseURL: baseUrl,//测试环境
-    timeout: 2000,
+    timeout: 5000,
 });
 
 instance.defaults.headers.post['Content-Type'] = 'multipart/form-data'

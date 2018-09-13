@@ -1,15 +1,31 @@
 import React from 'react'
-import { message, Modal, Form, Input, Radio, Select } from 'antd';
+import { message, Modal, Form, Input, Radio } from 'antd';
 import { getAjax  } from '../../../../../../utils/axios'
 
 const FormItem = Form.Item;
-const Option = Select.Option
 
 const MemberCreateForm = Form.create()(
   class extends React.Component {
+    checkvaildmember = (rule, value, callback, project_id) =>{ 
+        if(!value){
+           callback("成员名称不能为空"); 
+        }else{
+          getAjax('/harbor/projectvalidmember/', {username: value, project_id: project_id}, function(res){
+            if(res.data.code == 0){ 
+                if(res.data.data !== true){
+                    callback(res.data.data);
+                }else{
+                    callback();
+                }   
+            }else{
+                callback("未知错误,无法判断项目是否存在,请查看后端日志");
+            }   
+          })  
+        }   
+    }   
 
     render() {
-      const { validMemberData, confirmLoading, visible, onCancel, onCreate, form } = this.props;
+      const { project_id, confirmLoading, visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
       return (
         <Modal
@@ -21,20 +37,12 @@ const MemberCreateForm = Form.create()(
           confirmLoading={confirmLoading}
         >
           <Form>
-            <FormItem label="成员名称"  labelCol={{span: 4}}  wrapperCol={{ span: 20 }}>
+            <FormItem label="成员名称"  labelCol={{span: 4}}  wrapperCol={{ span: 20 }} hasFeedback={true}>
               {getFieldDecorator('username', {
-              rules: [{ required: true }],
-              })(
-                <Select
-                   showSearch
-                   style={{ width: '100%' }}
-                   placeholder="Select a member"
-                   optionFilterProp="children"
-                   filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                 >
-                   {validMemberData.map(d => <Option key={d}>{d}</Option>)}
-                 </Select>
-              )}
+              rules: [{ required: true, validator: (rule, value, callback) => this.checkvaildmember(rule, value, callback, project_id)}],
+              })( 
+                <Input disabled={confirmLoading} />
+              )}  
             </FormItem>
             <FormItem label="角色权限"  labelCol={{span: 4}}  wrapperCol={{ span: 20  }}>
               {getFieldDecorator('role_id', {

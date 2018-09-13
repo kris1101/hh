@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../../BreadcrumbCustom';
 import { getprojectmembers } from './TableTpl/tabletpl';
 import './members.less';
-import { getProjectMemberList, getValidMemberData } from '../../../../../../../containers/Paas/harbor/projectdetails.redux';
+import { getProjectMemberList } from '../../../../../../../containers/Paas/harbor/projectdetails.redux';
 import { MemberCreateForm } from './membersforms/membercreateform'
 import {postAjax} from '../../../../../utils/axios'
 import { generateformdata } from '../../../../../utils/tools_helper'
@@ -24,7 +24,6 @@ class HarborMembersForm extends Component {
     }
 
     showMemberCreateModel = () => {
-        this.props.getValidMemberData({project_id: this.project_id})
         this.setState({memberCreateVisible: true}) 
     }   
 
@@ -95,7 +94,7 @@ class HarborMembersForm extends Component {
                           confirmLoading={this.state.memberCreateConfirmLoading}
                           onCancel={this.handleMemberCreateCancel}
                           onCreate={this.handleMemberCreate}
-                          validMemberData={this.props.validMemberData}
+                          project_id={this.project_id}
                         />
                     </FormItem>
                     <div style={{ float:'right'  }}>
@@ -124,4 +123,4 @@ class HarborMembersForm extends Component {
 const HarborMembersManage = Form.create()(HarborMembersForm);
 export default connect(
   state => state.harborProjectDetails,
-  { getProjectMemberList, getValidMemberData })(HarborMembersManage);
+  { getProjectMemberList })(HarborMembersManage);
