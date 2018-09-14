@@ -71,7 +71,7 @@ const TillerUpdateForm = Form.create()(
           <Form>
             <FormItem label="加密访问"  labelCol={{span: 5}}  wrapperCol={{ span: 19 }}>
               {getFieldDecorator('is_ssl', { initialValue: tillerinfo.is_ssl })(
-                  <Switch defaultChecked onChange={onChange} />
+                  <Switch defaultChecked onChange={this.handleChange} />
               )}
             </FormItem>
             {this.state.is_ssl ? (<FormItem label="kubeconfig"  labelCol={{span: 5}}  wrapperCol={{ span: 19  }}>

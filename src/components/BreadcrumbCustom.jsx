@@ -12,7 +12,7 @@ class BreadcrumbCustom extends React.Component {
         const second = <Breadcrumb.Item>{this.props.second}</Breadcrumb.Item> || '';
         const third = <Breadcrumb.Item>{this.props.third}</Breadcrumb.Item> || '';
         return (
-            <span>
+            <span style={{display: 'inline-block'}}>
                 <Breadcrumb style={{ margin: '12px 0' }}>
                     {first}
                     {second}

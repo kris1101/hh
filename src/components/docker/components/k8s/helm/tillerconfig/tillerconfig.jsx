@@ -10,6 +10,7 @@ import { TillerCreateForm } from './tillerconfigforms/tillerconfigcreate'
 import { postAjax } from '../../../../utils/axios'
 import { putAjax } from '../../../../utils/axios'
 import { generateformdata  } from '../../../../utils/tools_helper'
+import K8sClusterSelectForm from '../../../common/k8sclusterselect'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -28,12 +29,17 @@ class K8sTillerForm extends Component {
     }
 
     componentDidMount () {
-        this.props.getK8sTillerList({});
+        this.showinitmessage();
+        console.log(this.props);
     }
 
     //重置表单
     handleReset = () => {
-        this.props.form.resetFields();
+      this.props.form.resetFields(); 
+    }
+
+    showinitmessage = () => {
+        message.info("请在右上角选择集群查看!")
     }
 
     showTillerCreateModel = () => {
@@ -60,7 +66,16 @@ class K8sTillerForm extends Component {
         form.resetFields();
     }
 
+    handleClusterSelect = (value) => {
+        console.log(value);
+        this.props.getK8sTillerList({'Cluster-Id': value})
+    }
+
     handleTillerCreate = () => {
+      if(!this.ClusterSelectFormRef.props.form.getFieldsValue().clustername){
+          message.warn("请选择集群");
+          return;
+      }
       const form = this.TillerCreateFormRef.props.form;
       console.log(form.getFieldsValue())
       form.validateFields((err, values) => {
@@ -72,17 +87,16 @@ class K8sTillerForm extends Component {
         postAjax('/k8s/tillerconfig/', generateformdata(values), function(res){
             if(res.data.code == 0){
                 message.success("创建成功") 
-                message.success(res.data.data) 
                 _that.setState({TillerCreateConfirmLoading: false})
                 form.resetFields();
-                _that.TillerCreateFormRef.resetfilelist();
+                _that.TillerCreateFormRef.reset();
                 _that.setState({ TillerCreateVisible: false });
                 _that.handleTillerQuery();
             }else{
                 message.error(res.data.msg) 
                 _that.setState({TillerCreateConfirmLoading: false})
             }
-        })
+        }, {'Cluster-Id': this.ClusterSelectFormRef.props.form.getFieldsValue().clustername})
       });
     }
 
@@ -102,7 +116,7 @@ class K8sTillerForm extends Component {
                 _that.setState({TillerUpdateConfirmLoading: false})
                 form.resetFields();
                 _that.setState({ TillerUpdateVisible: false });
-                _that.TillerUpdateFormRef.resetfilelist();
+                _that.TillerUpdateFormRef.reset();
                 _that.setState({ TillerCreateVisible: false });
                 _that.handleTillerQuery();
             }else{
@@ -117,12 +131,20 @@ class K8sTillerForm extends Component {
       this.TillerCreateFormRef = formRef;
     } 
 
+    saveclusterselectFormRef = (formRef) => {
+      this.ClusterSelectFormRef = formRef;
+    } 
+
     saveTillerUpdateFormRef = (formRef) => {
       this.TillerUpdateFormRef = formRef;
     } 
 
     handleTillerQuery = () => {
-      this.props.getK8sTillerList();
+      if(!this.ClusterSelectFormRef.props.form.getFieldsValue().clustername){
+          message.warn("请选择集群");
+          return;
+      }
+      this.props.getK8sTillerList({'Cluster-Id': this.ClusterSelectFormRef.props.form.getFieldsValue().clustername});
     }
 
   render() {
@@ -134,6 +156,10 @@ class K8sTillerForm extends Component {
         </Sider>
         <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
             <BreadcrumbCustom first="镜像仓库" second="Tiller配置" />
+            <K8sClusterSelectForm 
+              handleSelctEvent={this.handleClusterSelect}
+        	  wrappedComponentRef={this.saveclusterselectFormRef}
+            />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline">
                     <FormItem>
@@ -155,7 +181,7 @@ class K8sTillerForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered loading={this.props.loading} rowKey={record => record.id} columns={this.columns} dataSource={this.props.clusterList} />
+                <Table bordered loading={this.props.loading} rowKey={record => record.id} columns={this.columns} dataSource={this.props.tillerConfigList} />
             </div>
         </Content>
       </Layout>

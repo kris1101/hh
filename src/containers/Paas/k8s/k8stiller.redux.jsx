@@ -4,7 +4,7 @@ import { getAjax } from '../../../components/docker/utils/axios'
 
 const LOAD_DATA = 'LOAD_K8STILLER_DATA'
 const START_LOADING = 'START_K8STILLER_LOADING' 
-const END_LOADING = 'END_K8sTILLER_LOADING' 
+const END_LOADING = 'END_K8STILLER_LOADING' 
 
 const initState={
 	redirectTo:'',
@@ -17,7 +17,8 @@ const initState={
 export function k8sTiller(state=initState, action){
 	switch(action.type){
 		case LOAD_DATA:
-			return {...state, tillerConfigList: action.payload.data}
+            console.log(action);
+			return {...state, tillerConfigList: action.payload}
 		case START_LOADING:
 			return {...state, loading: true}
 		case END_LOADING:
@@ -39,11 +40,10 @@ export function endLoading(){
 	return { type:END_LOADING}
 }
 
-export function getK8sTillerList(params){
+export function getK8sTillerList(header={}){
 	return dispatch=>{
       dispatch(startLoading());
-      console.log(params);
-      getAjax('/k8s/tillerconfig/', params, function(res){
+      getAjax('/k8s/tillerconfig/', {}, function(res){
           dispatch(endLoading());
           if (res.data.code == 0){
             dispatch(loadData(res.data.data))
@@ -53,7 +53,7 @@ export function getK8sTillerList(params){
               message: "提示" 
             })
           }
-          })
+          }, header)
 	}
 }
 

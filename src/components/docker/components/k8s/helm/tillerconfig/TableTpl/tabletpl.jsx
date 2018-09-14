@@ -7,7 +7,7 @@ import { deleteAjax  } from '../../../../../utils/axios'
 
 function confirm(tiller_config_id, _that) {
   const hide = message.loading('Action in progress..', 0);
-  deleteAjax('/k8s/tillerconfig/', "tiller_config_id=" + tiller_config_id, function (res){
+  deleteAjax('/k8s/tillerconfig/', "id=" + tiller_config_id, function (res){
     hide();
     if(res.data.code == 0){
         message.success(res.data.msg);
@@ -15,7 +15,7 @@ function confirm(tiller_config_id, _that) {
     }else{
         message.error(res.data.msg);
     }
-  })
+  }, {'Cluster-Id': _that.ClusterSelectFormRef.props.form.getFieldsValue().clustername})
 }
 
 
@@ -25,7 +25,8 @@ export function getTillerConfig() {
         dataIndex: 'clustername'
     }, {
         title: '加密访问',
-        dataIndex: 'is_ssl'
+        dataIndex: 'is_ssl',
+        render: (data, record, index) => { return (data ? "是" : "否") }
     }, {
         title: '创建时间',
         dataIndex: 'create_time'
@@ -35,7 +36,7 @@ export function getTillerConfig() {
             return (
             <Row>
               <Col span={6} offset={6}>
-              <Popconfirm title={"确认删除" + record.cluster_name + "Tiller配置吗?"} onConfirm={() => confirm(record.id, this)} okText="确定" cancelText="取消">
+              <Popconfirm title={"确认删除" + record.clustername + "Tiller配置吗?"} onConfirm={() => confirm(record.id, this)} okText="确定" cancelText="取消">
             <div>
                  <Icon type="delete" theme="outlined" style={{cursor: "pointer"}}/>
             </div>

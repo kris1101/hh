@@ -8,6 +8,7 @@ import { harborProjectDetails } from '../containers/Paas/harbor/projectdetails.r
 import { harborLogs } from '../containers/Paas/harbor/logs.redux'
 import { k8sCluster } from '../containers/Paas/k8s/k8scluster.redux'
 import { k8sTiller } from '../containers/Paas/k8s/k8stiller.redux'
+import { PaasCommon } from '../containers/Paas/common/paascommon.redux'
 import { harborConfigurations } from '../containers/Paas/harbor/configurations.redux'
 import { harborUser } from '../containers/Paas/harbor/user.redux'
 import { daasGroups } from '../containers/Daas/groups.redux'
@@ -23,6 +24,7 @@ const App = combineReducers({
     harborLogs,
     daasGroups,
     k8sTiller,
+    PaasCommon,
     harborUser,
     harborConfigurations,
     harborProjectDetails,
