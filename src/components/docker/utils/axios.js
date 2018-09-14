@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { notification } from 'antd';
-import qs from 'qs'
 
 
 const baseUrl = 'http://paas.sinochem.cloud/api/paas';
@@ -12,12 +11,12 @@ var instance = axios.create({
 instance.defaults.headers.post['Content-Type'] = 'multipart/form-data'
 instance.defaults.headers.put['Content-Type'] = 'multipart/form-data'
 
-export function getAjax(url,params,Callback) {
+export function getAjax(url, params, Callback, headers={}) {
     let token = sessionStorage.token;
     if(token){
         instance.defaults.headers.common['Authorization'] = token;
     }
-    instance.get(url,{params})
+    instance.get(url,{params, headers})
         .then(function (response) {
             Callback(response);
         })
@@ -32,12 +31,12 @@ export function getAjax(url,params,Callback) {
         });
 }
 
-export function postAjax(url,params,Callback) {
+export function postAjax(url,params,Callback, headers={}) {
     let token = sessionStorage.token;
     if(token){
         instance.defaults.headers.common['Authorization'] = token;
     }
-    instance.post(url, params)
+    instance.post(url, params, {headers})
         .then(function (response) {
 
             Callback(response);
@@ -52,12 +51,12 @@ export function postAjax(url,params,Callback) {
         });
 }
 
-export function putAjax(url,params,Callback) {
+export function putAjax(url,params,Callback, headers={}) {
     let token = sessionStorage.token;
     if(token){
         instance.defaults.headers.common['Authorization'] = token;
     }
-    instance.put(url,params)
+    instance.put(url,params,{headers})
         .then(function (response) {
 
             Callback(response);
@@ -93,12 +92,12 @@ export function requestAjax(config,Callback) {
         });
 }
 
-export function deleteAjax(url,params,Callback) {
+export function deleteAjax(url, params, Callback, headers={}) {
     let token = sessionStorage.token;
     if(token){
         instance.defaults.headers.common['Authorization'] = token;
     }
-    instance.delete(url, {data:params})
+    instance.delete(url, {data:params, headers})
         .then(function (response) {
 
             Callback(response);

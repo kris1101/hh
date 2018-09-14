@@ -43,6 +43,11 @@ class DockerSider extends Component{
       }else if(current == "paasregistryuser" || current == "paasregistryconfig"){
             openKeys = ["dockerregistry", "registrysystem"]
       }
+
+      if (current == "paastillerconfig" || current == "paashelmrepomanage" || current == "paashelmchartmanage" || current == "paashelmreleasemanage" || current == "paashelmtaskstate"){
+            openKeys = ["paashelmmanage"]
+      }
+
     if (current == "paasregistryprojectdetails" || current == "paasregistryprojectrepositories"){
           this.setState({ current: "paasregistryproject" , openKeys});
       }else{
@@ -68,6 +73,16 @@ class DockerSider extends Component{
             <Menu.Item key="paasservce"><Link to="/paas/service"><Icon type="customer-service" />服务</Link></Menu.Item>
             <Menu.Item key="paascontainer"><Link to="/paas/container"><Icon type="link" />容器</Link></Menu.Item>
             <Menu.Item key="paasclustersettings"><Link to="/paas/clustersettings"><Icon type="folder-add" />集群配置</Link></Menu.Item>
+            <SubMenu
+               key="paashelmmanage"
+               title={<span><Icon type="rocket" /><span>helm管理</span></span>}
+            >
+                <Menu.Item key="paastillerconfig"><Link to="/paas/tillerconfig">tiller配置</Link></Menu.Item>
+                <Menu.Item key="paashelmrepomanage"><Link to="/paas/helmrepomanage">repo管理</Link></Menu.Item>
+                <Menu.Item key="paashelmchartmanage"><Link to="/paas/helmchartmanage">chart管理</Link></Menu.Item>
+                <Menu.Item key="paashelmreleasemanage"><Link to="/paas/helmreleasemanage">release管理</Link></Menu.Item>
+                <Menu.Item key="paashelmtaskstate"><Link to="/paas/helmtaskstate">helm任务状态</Link></Menu.Item>
+            </SubMenu>
             <SubMenu
                key="/paas/workload"
                title={<span><Icon type="bank" /><span>平台管理</span></span>}
