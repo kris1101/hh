@@ -18,5 +18,4 @@ monitor_routes.map((item) => routes.push(item));
 setting_routes.map((item) => routes.push(item));
 storage_routes.map((item) => routes.push(item));
 ticket_routes.map((item) => routes.push(item));
-
 export default routes;
