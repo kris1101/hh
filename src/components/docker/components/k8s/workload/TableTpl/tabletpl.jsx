@@ -7,9 +7,9 @@ import { deleteAjax  } from '../../../../utils/axios'
 
 import { formatStrDate } from '../../../../utils/time_helper'
 
-function confirm(cluster_id, _that) {
+function confirm(name, _that) {
   const hide = message.loading('Action in progress..', 0);
-  deleteAjax('/k8s/pod_list/', "cluster_id=" + cluster_id, function (res){
+  deleteAjax('/workload/pod/', "name=" + name, function (res){
     hide();
     if(res.data.code == 0){
         message.success(res.data.msg);
@@ -24,31 +24,29 @@ function confirm(cluster_id, _that) {
 export function getk8spods() {
     return [{
         title: '名称',
-        dataIndex: 'cluster_name'
+        dataIndex: 'name'
     }, {
         title: '创建时间',
-        dataIndex: 'dns_type'
+        dataIndex: 'create_time'
     },{
         title: '命名空间',
-        dataIndex: 'cluster_address'
+        dataIndex: 'namespace'
     },{
         title: '节点',
-        dataIndex: 'server_address'
+        dataIndex: 'node'
     },{
         title: '状态',
-        dataIndex: 'time',
-        render: (data) => formatStrDate(data)
+        dataIndex: 'status',
     },{
         title: '已重启',
-        dataIndex: 'time',
-        render: (data) => formatStrDate(data)
+        dataIndex: 'reboot',
     },{
         title: '操作',
         render: (data, record, index) => {
             return (
             <Row>
               <Col span={6} offset={6}>
-              <Popconfirm title={"确认删除" + record.cluster_name + "集群?"} onConfirm={() => confirm(record.id, this)} okText="确定" cancelText="取消">
+              <Popconfirm title={"确认删除" + record.name + "pod?"} onConfirm={() => confirm(record.name, this)} okText="确定" cancelText="取消">
             <div>
                  <Icon type="delete" theme="outlined" style={{cursor: "pointer"}}/>
             </div>
