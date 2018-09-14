@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../components/BreadcrumbCustom';
 import { getk8spods } from './TableTpl/tabletpl';
 import './pods.less';
-import { getK8sPodList } from '../../../../../containers/Paas/k8s/k8scluster.redux'
+import { getK8sPodList } from '../../../../../containers/Paas/k8s/k8spod.redux'
 import { PodCreateForm } from './podsforms/podscreateform'
 import { postAjax } from '../../../utils/axios'
 import { putAjax } from '../../../utils/axios'
