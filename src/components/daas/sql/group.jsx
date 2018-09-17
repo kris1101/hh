@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import qs from 'qs'
+import { message, Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -7,6 +8,8 @@ import Daassider from '../../../components/common/LeftSider/daassider';
 import { getGroupsList } from '../../../containers/Daas/groups.redux'
 
 import { GroupCreateForm } from './groupforms/groupcreateform'
+import {GroupUpdateForm} from './groupforms/groupupdateform'
+
 import { postAjax } from '../../../utils/axios'
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getgroups } from './TableTpl/group';
@@ -31,8 +34,11 @@ class DaasGroupManageForm extends Component {
     state = {
         currentPage: 1,
         pageSize: 10,
+        updateRecord:{fields:{}},
         GroupCreateVisible: false,
         GroupCreateConfirmLoading: false,
+        GroupUpdateVisible: false,
+        GroupUpdateConfirmLoading: false,
     }
     componentDidMount () {
         this.props.getGroupsList({});
@@ -45,38 +51,98 @@ class DaasGroupManageForm extends Component {
     showGroupCreateModel = () => {
         this.setState({GroupCreateVisible: true}) 
     }
+    
+    showGroupUpdateModel = (record) => {
+        this.setState({GroupUpdateVisible: true}) 
+        this.setState({updateRecord: record})
+
+    }
 
     handleGroupCreateCancel = () => {
         this.setState({GroupCreateVisible: false}) 
         this.setState({GroupCreateConfirmLoading: false})
-        const form = this.groupCreateFormRef.props.form;
+        const form = this.GroupCreateFormRef.props.form;
         form.resetFields();
     }
 
+    handleGroupUpdateCancel = () => {
+        this.setState({GroupUpdateVisible: false}) 
+        this.setState({GroupUpdateConfirmLoading: false})
+        const form = this.GroupUpdateFormRef.props.form;
+        form.resetFields();
+    }
+
+    handleGroupListWithArgs = (page, pageSize) => {
+       let value = this.props.form.getFieldsValue()
+       this.setState({
+           currentPage: page,
+           pageSize: pageSize 
+       })
+       let page_args = {page: page, pagesize: pageSize}
+       page_args.name = value.name !== undefined ? value.name : "";
+       this.props.getGroupsList(page_args);
+    }
+
     handleGroupCreate = () => {
-      const form = this.groupCreateFormRef.props.form;
+      const form = this.GroupCreateFormRef.props.form;
       form.validateFields((err, values) => {
         if (err) {
           return;
         }
         this.setState({GroupCreateConfirmLoading: true})
         const _that = this;
-        instance.post('/v1/api/slow/query/groups', values, function(res){
+        console.log(values);
+        instance.post('/v1/api/slow/query/groups', qs.stringify(values))
+          .then(function(res){
             if(res.data.code == 0){
                 message.success("创建成功") 
                 _that.setState({GroupCreateConfirmLoading: false})
                 form.resetFields();
                 _that.setState({ GroupCreateVisible: false });
+                _that.handleGroupListWithArgs(1, 10);
             }else{
-                message.error(res.data.msg) 
+                message.error(res.data.message) 
                 _that.setState({GroupCreateConfirmLoading: false})
             }
         })
       });
     }
 
+    handleGroupUpdate = (group_id) => {
+      const form = this.GroupUpdateFormRef.props.form;
+      form.validateFields((err, values) => {
+        if (err) {
+          return;
+        }
+        this.setState({GroupUpdateConfirmLoading: true})
+        const _that = this;
+        console.log(values);
+        // values.pk = group_id
+        instance.put('/v1/api/slow/query/groups/' +  group_id.pk, qs.stringify(values))
+          .then(function(res){
+            if(res.data.code == 0){
+                console.log(values)
+                message.success("更新成功") 
+                _that.setState({GroupUpdateConfirmLoading: false})
+                form.resetFields();
+                _that.setState({ GroupUpdateVisible: false });
+                _that.setState({ GroupCreateVisible: false });
+                _that.handleGroupListWithArgs(1, 10);
+            }else{
+                message.error(res.data.message) 
+                _that.setState({GroupUpdateConfirmLoading: false})
+            }
+        })
+      });
+    }
+
+
     saveGroupCreateFormRef = (formRef) => {
-      this.groupCreateFormRef = formRef;
+      this.GroupCreateFormRef = formRef;
+    }
+
+    saveGroupUpdateFormRef = (formRef) => {
+      this.GroupUpdateFormRef = formRef;
     } 
 
     handleGroupsQuery = () => {
@@ -88,11 +154,6 @@ class DaasGroupManageForm extends Component {
         let page_args = {page: 1, pagesize: 10}
         page_args.name = value.name !== undefined  ? value.name : "";
         this.props.getGroupsList(page_args);
-    }
-
-
-    openAddDevicePage = (value) => {
-        this.props.history.push({pathname:'/config/add-device', data:value});
     }
 
   render() {
@@ -148,6 +209,14 @@ class DaasGroupManageForm extends Component {
         				  onCancel={this.handleGroupCreateCancel}
         				  onCreate={this.handleGroupCreate}
         				/>
+                        <GroupUpdateForm
+                          wrappedComponentRef={this.saveGroupUpdateFormRef}
+                          visible={this.state.GroupUpdateVisible}
+                          groupinfo={this.state.updateRecord}
+                          confirmLoading={this.state.GroupUpdateConfirmLoading}
+                          onCancel={this.handleGroupUpdateCancel}
+                          onCreate={() => this.handleGroupUpdate(this.state.updateRecord)}
+                        />       
                  
                     </FormItem>
                     <div style={{ float:'right'}}>
