@@ -1,6 +1,7 @@
 import React from 'react'
 import { message, Modal, Form, Input, Radio } from 'antd';
 import { getAjax  } from '../../../../utils/axios'
+import axios from 'axios';
 
 const FormItem = Form.Item;
 const groupnamePatten = new RegExp("^[0-9a-z][0-9a-z\._-]{1,}$"); 
@@ -37,11 +38,12 @@ const GroupCreateForm = Form.create()(
           okText="创建"
           onCancel={onCancel}
           onOk={onCreate}
+          centered={true}
           confirmLoading={confirmLoading}
         >
           <Form>
             <FormItem label="组名称"  labelCol={{span: 4}}  wrapperCol={{ span: 20 }} hasFeedback={true}>
-              {getFieldDecorator('group_name', {
+              {getFieldDecorator('name', {
               rules: [{ required: true}],
               })(
                 <Input disabled={confirmLoading} />
@@ -55,7 +57,7 @@ const GroupCreateForm = Form.create()(
               )}
             </FormItem>
             <FormItem label="组类型"  labelCol={{span: 4}}  wrapperCol={{ span: 20  }}>
-              {getFieldDecorator('manager', {
+              {getFieldDecorator('type', {
                 initialValue: 'true', rules: [{required: true}],
               })(
                 <Radio.Group disabled={confirmLoading}>

@@ -56,7 +56,7 @@ export function getGroupsList(params){
                   dispatch(loadData(res.data))
                 }else{
                   notification.error({
-                    description: res.data.msg,
+                    description: res.data.message,
                     message: "提示" 
                   })
                 }
