@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { notification, Select, Tooltip, Icon, Button, Modal, Form, Input } from 'antd';
 
-import { projectUpdate } from '../../../services/vm/user';
+import { roleUpdate } from '../../../services/vm/user';
 
 const Option = Select.Option;
 const FormItem = Form.Item;
@@ -35,40 +35,16 @@ class CreateForm extends React.Component {
     const { getFieldDecorator, getFieldValue } = form;
 
     return (
-      <Modal visible={visible} title="编辑项目" okText="编辑" onCancel={onCancel} onOk={onCreate} confirmLoading={confirmLoading} >
+      <Modal visible={visible} title="编辑角色" okText="编辑" onCancel={onCancel} onOk={onCreate} confirmLoading={confirmLoading} >
         <Form>
-          <FormItem {...formItemLayout} label="项目名">
+          <FormItem {...formItemLayout} label="角色名">
             {getFieldDecorator('name', {
               rules: [
-                { required: true, message: '请输入项目名!' },
+                { required: true, message: '请输入角色名!' },
               ],
               initialValue: record.name,
             })(
               <Input placeholder="只能是小写字母，数字，.-_，字母数字开头" disabled={true} />
-            )}
-          </FormItem>
-          <FormItem {...formItemLayout} label="描述">
-            {getFieldDecorator('description', {
-              rules: [{ required: false, message: '描述!' }],
-              initialValue: record.description,
-            })(
-              <TextArea rows={6} />
-            )}
-          </FormItem>
-          <FormItem {...formItemLayout} label="状态">
-            {getFieldDecorator('status', {
-              validateTrigger: ['onChange', 'onBlur'],
-              rules: [{
-                required: true,
-                whitespace: true,
-                message: "请选择状态.",
-              }],
-              initialValue: record ? (record.status ? '1' : '0') : '0',
-            })(
-              <Select placeholder="状态">
-                <Option key="1">正常</Option>
-                <Option key="0">禁用</Option>
-              </Select>
             )}
           </FormItem>
 
@@ -79,7 +55,7 @@ class CreateForm extends React.Component {
 }
 const CollectionCreateForm = Form.create()(CreateForm);
 
-class ProjectUpdate extends Component {
+class RoleUpdate extends Component {
   state = {
     visible: false,
     confirmLoading: false,
@@ -100,8 +76,8 @@ class ProjectUpdate extends Component {
 
       console.log('Received values of form: ', values);
       this.setState({ confirmLoading: true });
-      projectUpdate(this.props.record.id, {
-        name: values.name, description: values.description, status: values.status,
+      roleUpdate(this.props.record.id, {
+        name: values.name,
       }).then(res => {
         if (res.code === 0) {
           notification['success']({message: res.msg});
@@ -124,7 +100,7 @@ class ProjectUpdate extends Component {
   render() {
     return (
       <span>
-        <Tooltip  title="编辑项目信息">
+        <Tooltip  title="编辑角色信息">
           <a onClick={this.showModal} ><Icon type="edit" /></a>
         </Tooltip>
         <CollectionCreateForm
@@ -141,4 +117,4 @@ class ProjectUpdate extends Component {
 }
 
 
-export default ProjectUpdate;
+export default RoleUpdate;
