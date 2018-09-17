@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Icon, Popconfirm, message, Row, Col } from 'antd';
-import { TillerUpdateForm  } from '../../tillerconfig/tillerconfigforms/tillerconfigupdate'
 
 import { Link  } from 'react-router-dom';
 import { deleteAjax  } from '../../../../../utils/axios'
@@ -44,15 +43,7 @@ export function getTillerConfig() {
             </Col>
             <Col span={6}>
             <div>
-                 <Icon type="form" theme="outlined" style={{cursor: "pointer"}} onClick={this.showTillerUpdateModel}/>
-                 <TillerUpdateForm
-                   wrappedComponentRef={this.saveTillerUpdateFormRef}
-                   visible={this.state.ClusterTillerVisible}
-                   tillerinfo={record}
-                   confirmLoading={this.state.TillerUpdateConfirmLoading}
-                   onCancel={this.handleTillerUpdateCancel}
-                   onCreate={() => this.handleTillerUpdate(record.id)}
-                 />
+              <Icon type="form" theme="outlined" style={{cursor: "pointer"}} onClick={() => this.showTillerUpdateModel(record)}/>
             </div>
             </Col>
             </Row>

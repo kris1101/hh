@@ -7,6 +7,7 @@ import { getTillerConfig } from './TableTpl/tabletpl';
 import './tillerconfig.less';
 import { getK8sTillerList } from '../../../../../../containers/Paas/k8s/k8stiller.redux'
 import { TillerCreateForm } from './tillerconfigforms/tillerconfigcreate'
+import { TillerUpdateForm } from './tillerconfigforms/tillerconfigupdate'
 import { postAjax } from '../../../../utils/axios'
 import { putAjax } from '../../../../utils/axios'
 import { generateformdata  } from '../../../../utils/tools_helper'
@@ -22,6 +23,7 @@ class K8sTillerForm extends Component {
         this.columns = getTillerConfig.call(this);
     }
     state = {
+        updateRecord: {},
         TillerCreateVisible: false,
         TillerCreateConfirmLoading: false,
         TillerUpdateVisible: false,
@@ -46,8 +48,11 @@ class K8sTillerForm extends Component {
         this.setState({TillerCreateVisible: true}) 
     }
 
-    showTillerUpdateModel = () => {
+    showTillerUpdateModel = (record) => {
         this.setState({TillerUpdateVisible: true}) 
+        this.TillerUpdateFormRef.updateState(record.is_ssl);
+        this.setState({updateRecord: record});
+
     }
 
     handleTillerCreateCancel = () => {
@@ -101,6 +106,10 @@ class K8sTillerForm extends Component {
     }
 
     handleTillerUpdate = (tiller_config_id) => {
+      if(!this.ClusterSelectFormRef.props.form.getFieldsValue().clustername){
+          message.warn("请选择集群");
+          return;
+      }
       const form = this.TillerUpdateFormRef.props.form;
       console.log(form.getFieldsValue())
       form.validateFields((err, values) => {
@@ -109,7 +118,7 @@ class K8sTillerForm extends Component {
         }
         this.setState({TillerUpdateConfirmLoading: true})
         const _that = this;
-        values.tiller_config_id = tiller_config_id;
+        values.id = tiller_config_id;
         putAjax('/k8s/tillerconfig/', generateformdata(values), function(res){
             if(res.data.code == 0){
                 message.success("更新成功") 
@@ -123,7 +132,7 @@ class K8sTillerForm extends Component {
                 message.error(res.data.msg) 
                 _that.setState({TillerUpdateConfirmLoading: false})
             }
-        })
+        }, {'Cluster-Id': this.ClusterSelectFormRef.props.form.getFieldsValue().clustername})
       });
     }
 
@@ -171,6 +180,13 @@ class K8sTillerForm extends Component {
         				  onCancel={this.handleTillerCreateCancel}
         				  onCreate={this.handleTillerCreate}
         				/>
+                        <TillerUpdateForm
+                          wrappedComponentRef={this.saveTillerUpdateFormRef}
+                          visible={this.state.TillerUpdateVisible}
+                          confirmLoading={this.state.TillerUpdateConfirmLoading}
+                          onCancel={this.handleTillerUpdateCancel}
+                          onCreate={() => this.handleTillerUpdate(this.state.updateRecord.id)}
+                        />  
                     </FormItem>
                     <div style={{ float:'right'}}>
                     <FormItem>

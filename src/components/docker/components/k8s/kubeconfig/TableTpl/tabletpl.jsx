@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Icon, Popconfirm, message, Row, Col } from 'antd';
-import { ClusterUpdateForm  } from '../kubeconfigforms/kubeconfigupdateform'
 
 import { Link  } from 'react-router-dom';
 import { deleteAjax  } from '../../../../utils/axios'
@@ -52,15 +51,7 @@ export function getk8sclusters() {
             </Col>
             <Col span={6}>
             <div>
-                 <Icon type="form" theme="outlined" style={{cursor: "pointer"}} onClick={this.showClusterUpdateModel}/>
-                 <ClusterUpdateForm
-                   wrappedComponentRef={this.saveClusterUpdateFormRef}
-                   visible={this.state.ClusterUpdateVisible}
-                   clusterinfo={record}
-                   confirmLoading={this.state.ClusterUpdateConfirmLoading}
-                   onCancel={this.handleClusterUpdateCancel}
-                   onCreate={() => this.handleClusterUpdate(record.id)}
-                 />
+              <Icon type="form" theme="outlined" style={{cursor: "pointer"}} onClick={() => this.showClusterUpdateModel(record)}/>
             </div>
             </Col>
             </Row>
