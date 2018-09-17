@@ -6,6 +6,7 @@ import BreadcrumbCustom from '../../../../../../components/BreadcrumbCustom';
 import { getTillerConfig } from './TableTpl/tabletpl';
 import './tillerconfig.less';
 import { getK8sTillerList } from '../../../../../../containers/Paas/k8s/k8stiller.redux'
+import { clearData } from '../../../../../../containers/Paas/k8s/k8stiller.redux'
 import { TillerCreateForm } from './tillerconfigforms/tillerconfigcreate'
 import { TillerUpdateForm } from './tillerconfigforms/tillerconfigupdate'
 import { postAjax } from '../../../../utils/axios'
@@ -32,7 +33,8 @@ class K8sTillerForm extends Component {
 
     componentDidMount () {
         this.showinitmessage();
-        console.log(this.props);
+        this.props.clearData(); 
+        
     }
 
     //重置表单
@@ -164,7 +166,7 @@ class K8sTillerForm extends Component {
             <Dockersider/>
         </Sider>
         <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="镜像仓库" second="Tiller配置" />
+            <BreadcrumbCustom first="helm管理" second="Tiller配置" />
             <K8sClusterSelectForm 
               handleSelctEvent={this.handleClusterSelect}
         	  wrappedComponentRef={this.saveclusterselectFormRef}
@@ -209,4 +211,4 @@ class K8sTillerForm extends Component {
 const K8sTillerManage = Form.create()(K8sTillerForm);
 export default connect(
   state => state.k8sTiller,
-  { getK8sTillerList })(K8sTillerManage);
+  { getK8sTillerList, clearData})(K8sTillerManage);

@@ -166,7 +166,7 @@ class K8sClusterForm extends Component {
             <Dockersider/>
         </Sider>
         <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="镜像仓库" second="集群配置" />
+            <BreadcrumbCustom first="Paas" second="集群配置" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline">
                     <FormItem>
