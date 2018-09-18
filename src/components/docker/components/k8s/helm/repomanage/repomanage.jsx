@@ -117,7 +117,7 @@ class HelmRepoForm extends Component {
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline">
                     <FormItem>
-                        <Button type="primary" onClick={this.showHelmRepoCreateModel}>新增repo</Button>
+                        <Button type="primary" onClick={this.showHelmRepoCreateModel}>新增Repo</Button>
         				<HelmRepoCreateForm
         				  wrappedComponentRef={this.saveHelmRepoCreateFormRef}
         				  visible={this.state.HelmRepoCreateVisible}
@@ -132,7 +132,7 @@ class HelmRepoForm extends Component {
                                 <Input placeholder="Repo名称" />
                             )}
                         </FormItem>
-                    <FormItem>
+                    <FormItem style={{marginRight: 0}}>
                         <Button type="primary" className="btn-search" style={{marginRight: 10}} onClick={this.handleHelmRepoQuery}>查询</Button>
                         <Button className="btn-search" onClick={this.handleReset}>重置</Button>
                     </FormItem>
