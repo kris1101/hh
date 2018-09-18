@@ -34,14 +34,16 @@ class HelmChartForm extends Component {
         this.props.form.resetFields();
     }
 
-    showHelmChartDeployModel = () => {
+    showHelmChartDeployModel = (chartinfo) => {
+        console.log(chartinfo);
         this.setState({HelmChartDeployVisible: true}) 
+        this.helmchartDeployFormRef.setState({chartinfo})
     }
 
     handleHelmChartDeployCancel = () => {
         this.setState({HelmChartDeployVisible: false}) 
         this.setState({HelmChartDeployConfirmLoading: false})
-        const form = this.helmchartCreateFormRef.props.form;
+        const form = this.helmchartDeployFormRef.props.form;
         form.resetFields();
     }
 
@@ -57,7 +59,7 @@ class HelmChartForm extends Component {
     }
 
     handleHelmChartDeploy = () => {
-      const form = this.helmchartCreateFormRef.props.form;
+      const form = this.helmchartDeployFormRef.props.form;
       form.validateFields((err, values) => {
         if (err) {
           return;
@@ -79,7 +81,7 @@ class HelmChartForm extends Component {
     }
 
     saveHelmChartDeployFormRef = (formRef) => {
-      this.helmchartCreateFormRef = formRef;
+      this.helmchartDeployFormRef = formRef;
     } 
 
     handlereposelect = (value) => {
