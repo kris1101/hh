@@ -191,8 +191,8 @@ class K8sTillerForm extends Component {
                         />  
                     </FormItem>
                     <div style={{ float:'right'}}>
-                    <FormItem>
-                        <Button type="primary" icon="reload" style={{marginRight: 10}} onClick={this.handleTillerQuery}>刷新</Button>
+                    <FormItem style={{marginRight: 0}}>
+                        <Button icon="reload" onClick={this.handleTillerQuery}>刷新</Button>
                     </FormItem>
                     </div>
                 </Form>

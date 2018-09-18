@@ -5,3 +5,12 @@ export function generateformdata(values){
     })  
     return params
 }
+
+export function omitstring(originstr, n){
+    if (originstr.length <= n){
+      return originstr;
+    }else{
+      return originstr.slice(0, n) + "...";
+    }
+
+}

@@ -193,7 +193,7 @@ class K8sClusterForm extends Component {
                                 <Input placeholder="集群名称" />
                             )}
                         </FormItem>
-                    <FormItem>
+                    <FormItem style={{marginRight: 0}}>
                         <Button type="primary" className="btn-search" style={{marginRight: 10}} onClick={this.handleClusterQuery}>查询</Button>
                         <Button className="btn-search" onClick={this.handleReset}>重置</Button>
                     </FormItem>
