@@ -7,6 +7,7 @@ import { getk8sclusters } from './TableTpl/tabletpl';
 import './kubeconfig.less';
 import { getK8sClusterList } from '../../../../../containers/Paas/k8s/k8scluster.redux'
 import { ClusterCreateForm } from './kubeconfigforms/kubeconfigcreateform'
+import { ClusterUpdateForm  } from './kubeconfigforms/kubeconfigupdateform'
 import { postAjax } from '../../../utils/axios'
 import { putAjax } from '../../../utils/axios'
 import { generateformdata  } from '../../../utils/tools_helper'
@@ -21,6 +22,7 @@ class K8sClusterForm extends Component {
         this.columns = getk8sclusters.call(this);
     }
     state = {
+        updateRecord:{},
         currentPage: 1,
         pageSize: 10,
         ClusterCreateVisible: false,
@@ -42,8 +44,9 @@ class K8sClusterForm extends Component {
         this.setState({ClusterCreateVisible: true}) 
     }
 
-    showClusterUpdateModel = () => {
+    showClusterUpdateModel = (record) => {
         this.setState({ClusterUpdateVisible: true}) 
+        this.setState({updateRecord: record})
     }
 
     handleClusterCreateCancel = () => {
@@ -163,7 +166,7 @@ class K8sClusterForm extends Component {
             <Dockersider/>
         </Sider>
         <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="镜像仓库" second="集群配置" />
+            <BreadcrumbCustom first="Paas" second="集群配置" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline">
                     <FormItem>
@@ -175,6 +178,14 @@ class K8sClusterForm extends Component {
         				  onCancel={this.handleClusterCreateCancel}
         				  onCreate={this.handleClusterCreate}
         				/>
+                        <ClusterUpdateForm           
+                          wrappedComponentRef={this.saveClusterUpdateFormRef}
+                          visible={this.state.ClusterUpdateVisible}
+                          clusterinfo={this.state.updateRecord}
+                          confirmLoading={this.state.ClusterUpdateConfirmLoading}
+                          onCancel={this.handleClusterUpdateCancel}
+                          onCreate={() => this.handleClusterUpdate(this.state.updateRecord.id)}
+                        />
                     </FormItem>
                     <div style={{ float:'right'}}>
                         <FormItem label="">

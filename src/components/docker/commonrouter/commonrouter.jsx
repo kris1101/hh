@@ -8,6 +8,7 @@ import harborUserComponent from '../components/harbor/user/user'
 import harborConfigurationsComponent from '../components/harbor/configurations/common/configurations'
 import k8sClusterComponent from '../components/k8s/kubeconfig/kubeconfig'
 import k8sTillerComponent from '../components/k8s/helm/tillerconfig/tillerconfig'
+import k8sHelmRepoComponent from '../components/k8s/helm/repomanage/repomanage'
 import k8sWorkloadPodsComponent from '../components/k8s/workload/pods'
 import notFoundPage from '../components/404/404page'
 
@@ -26,6 +27,7 @@ class PaasChildRouter extends Component {
                   <Route path={`${this.props.match.path}registryconfig`} exact component={harborConfigurationsComponent}></Route>
                   <Route path={`${this.props.match.path}clustersettings`} exact component={k8sClusterComponent}></Route>
                   <Route path={`${this.props.match.path}tillerconfig`} exact component={k8sTillerComponent}></Route>
+                  <Route path={`${this.props.match.path}helmrepomanage`} exact component={k8sHelmRepoComponent}></Route>
 
                   <Route path={`${this.props.match.path}workload/podlist`} exact component={k8sWorkloadPodsComponent}></Route>
                   <Route component={notFoundPage}></Route>

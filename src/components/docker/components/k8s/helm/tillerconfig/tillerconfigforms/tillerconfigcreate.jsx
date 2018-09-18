@@ -118,7 +118,7 @@ const TillerCreateForm = Form.create()(
         >
           <Form>
             <FormItem label="加密访问"  labelCol={{span: 5}}  wrapperCol={{ span: 19 }}>
-              {getFieldDecorator('is_ssl',{initialValue: false, rules:[{required: true}]})(
+              {getFieldDecorator('is_ssl',{rules:[{required: true}]})(
                 <Switch disabled={confirmLoading} onChange={this.handleswitchchange} checked={this.state.is_ssl}/>
               )}
             </FormItem>
