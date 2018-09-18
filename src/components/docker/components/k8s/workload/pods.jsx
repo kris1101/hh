@@ -10,6 +10,7 @@ import { PodCreateForm } from './podsforms/podscreateform'
 import { postAjax } from '../../../utils/axios'
 import { putAjax } from '../../../utils/axios'
 import { generateformdata  } from '../../../utils/tools_helper'
+import K8sClusterSelectForm from '../../common/k8sclusterselect'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -30,7 +31,7 @@ class K8sPodsForm extends Component {
     }
 
     componentDidMount () {
-        this.props.getK8sPodList({});
+        this.props.getK8sPodList({}, {'Cluster-Id': this.ClusterSelectFormRef.props.form.getFieldsValue().clustername});
     }
 
     //重置表单
@@ -63,6 +64,10 @@ class K8sPodsForm extends Component {
     }
 
     handlePodListWithArgs = (page, pageSize) => {
+       if(!this.ClusterSelectFormRef.props.form.getFieldsValue().clustername){
+          message.warn("请选择集群");
+          return;
+       }
        let value = this.props.form.getFieldsValue()
        this.setState({
            currentPage: page,
@@ -70,7 +75,7 @@ class K8sPodsForm extends Component {
        })
        let page_args = {page: page, pagesize: pageSize}
        page_args.podname = value.Podname !== undefined ? value.Podname : "";
-       this.props.getK8sPodList(page_args);
+       this.props.getK8sPodList(page_args, {'Cluster-Id': this.ClusterSelectFormRef.props.form.getFieldsValue().clustername});
     }
 
     handlePodCreate = () => {
@@ -126,6 +131,14 @@ class K8sPodsForm extends Component {
       });
     }
 
+    handleClusterSelect = (value) => {
+        this.props.getK8sPodList({},{'Cluster-Id': value})
+    }
+
+    saveclusterselectFormRef = (formRef) => {
+      this.ClusterSelectFormRef = formRef;
+    } 
+
     savePodCreateFormRef = (formRef) => {
       this.PodCreateFormRef = formRef;
     }
@@ -164,6 +177,10 @@ class K8sPodsForm extends Component {
         </Sider>
         <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
             <BreadcrumbCustom first="平台管理" second="Workload" third="Pods" />
+            <K8sClusterSelectForm 
+              handleSelctEvent={this.handleClusterSelect}
+        	  wrappedComponentRef={this.saveclusterselectFormRef}
+            />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline">
                     <FormItem>
