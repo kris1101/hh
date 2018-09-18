@@ -13,7 +13,7 @@ function confirm(name, _that) {
     hide();
     if(res.data.code == 0){
         message.success(res.data.msg);
-        _that.handleTillerQuery();
+        _that.handlePodQuery();
     }else{
         message.error(res.data.msg);
     }
