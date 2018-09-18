@@ -94,6 +94,7 @@ class VMSider extends Component{
             <SubMenu key="accounts" title={<span><Icon type="user" /><span>用户管理</span></span>} >
               <Menu.Item key="/vm/accounts/users"><Link to="/vm/accounts/users">用户列表</Link></Menu.Item>
               <Menu.Item key="/vm/accounts/groups"><Link to="/vm/accounts/groups">用户组</Link></Menu.Item>
+              <Menu.Item key="/vm/accounts/roles"><Link to="/vm/accounts/roles">角色列表</Link></Menu.Item>
               <Menu.Item key="/vm/accounts/projects"><Link to="/vm/accounts/projects">项目列表</Link></Menu.Item>
               <Menu.Item key="/vm/accounts/logs"><Link to="/vm/accounts/logs">操作日志</Link></Menu.Item>
             </SubMenu>

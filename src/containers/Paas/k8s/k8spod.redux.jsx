@@ -18,9 +18,9 @@ export function loadData(projectlistinfo){
 	return { type:LOAD_DATA, payload:projectlistinfo}
 }
 
-export function getK8sPodList(params){
+export function getK8sPodList(params, header={}){
 	return dispatch=>{
-      getAjax('/k8s_pod/', params, function(res){
+      getAjax('/workload/podlist/', params, function(res){
           if (res.data.code == 0){
             dispatch(loadData(res.data.data))
           }else{
@@ -29,6 +29,6 @@ export function getK8sPodList(params){
               message: "提示"
             })
           }
-          })
+          }, header)
 	}
 }

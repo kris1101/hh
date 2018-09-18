@@ -16,6 +16,7 @@ import VM_Network_virtual from "../components/vm/network/list/virtuallist"
 import VM_UserList from "../components/vm/accounts/UserList"
 import VM_ProjectList from "../components/vm/accounts/ProjectList"
 import VM_ProjectDetail from "../components/vm/accounts/ProjectDetail"
+import VM_RoleList from "../components/vm/accounts/RoleList"
 import VM_LogList from "../components/vm/accounts/LogList"
 
 import VM_Key from "../components/vm/key/KeyList"
@@ -105,6 +106,10 @@ const vm_routes=[{
         exact: true,
         path: '/vm/accounts/projects/:id',
         component: VM_ProjectDetail,
+    }, {
+        exact: true,
+        path: '/vm/accounts/roles',
+        component: VM_RoleList,
     }, {
         exact: true,
         path: '/vm/accounts/logs',
