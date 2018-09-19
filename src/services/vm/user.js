@@ -31,3 +31,8 @@ export const projectQuotaUpdate = (id, data) => axios.put(`accounts/projects/quo
 export const roleList = (params) => axios.get('accounts/roles/', {params: params}).then(res => res.data).catch(err => console.log(err));
 export const roleCreate = (data) => axios.post('accounts/roles/create/', data).then(res => res.data).catch(err => console.log(err));
 export const roleUpdate = (id, data) => axios.put(`accounts/roles/${id}/`, data).then(res => res.data).catch(err => console.log(err));
+
+
+export const groupList = (params) => axios.get('accounts/groups/', {params: params}).then(res => res.data).catch(err => console.log(err));
+export const groupCreate = (data) => axios.post('accounts/groups/create/', data).then(res => res.data).catch(err => console.log(err));
+export const groupUpdate = (id, data) => axios.put(`accounts/groups/${id}/`, data).then(res => res.data).catch(err => console.log(err));
