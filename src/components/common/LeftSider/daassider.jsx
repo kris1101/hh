@@ -38,8 +38,8 @@ class DassSider extends Component{
 
       if(pathName=="/daas/destop"){
           openKey = [];
-      }else if(pathName=="/daas/grouplist"||pathName=="/daas/userlist"||pathName=="/daas/emaillist"||pathName=="/config/userManage"){
-          openKey = ["slowquery"];
+      }else if(pathName=="/daas/group"){
+          openKey = ["sub3"];
       }else if(pathName=="/config/userlist"||pathName=="/config/userManage"){
           openKey = ["sub5"];
       }else if(pathName=="/config/emaillist"){
@@ -79,7 +79,7 @@ class DassSider extends Component{
             <SubMenu key="sub3" title={<span><Icon type="database" /><span>慢查询</span></span>} >
                 <Menu.Item key="/daas/group"><Link to="/daas/group">组列表</Link></Menu.Item>
                 <Menu.Item key="/daas/user"><Link to="/daas/user">人员列表</Link></Menu.Item>
-                <Menu.Item key="/daas/user"><Link to="/daas/user">主机列表</Link></Menu.Item>
+                <Menu.Item key="/daas/host"><Link to="/daas/host">主机列表</Link></Menu.Item>
                 <Menu.Item key="/daas/email"><Link to="/daas/email">邮件发送记录</Link></Menu.Item>
             </SubMenu>
              

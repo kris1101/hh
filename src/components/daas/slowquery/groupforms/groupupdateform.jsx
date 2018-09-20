@@ -10,7 +10,6 @@ const GroupUpdateForm = Form.create()(
       const { confirmLoading, visible, onCancel, onCreate, groupinfo, form } = this.props;
       const { getFieldDecorator } = form;
       const _that = this;
-      console.log(confirmLoading, visible, onCancel, onCreate, groupinfo)
       return (
         <Modal
           visible={visible}
