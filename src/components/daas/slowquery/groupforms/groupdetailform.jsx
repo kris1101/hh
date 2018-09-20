@@ -2,6 +2,8 @@ import React from 'react'
 import { Modal, Button, Form, message, List, Avatar } from 'antd';
 import axios from 'axios';
 
+import { formatStrDate } from '../../../docker/utils/time_helper'
+
 const baseUrl = 'http://127.0.0.1:8000';
 var instance = axios.create({
     baseURL: baseUrl,//测试环境
@@ -25,9 +27,11 @@ export function groupdetail(pk, _that) {
                                  },{
                                      title: '创建时间',
                                      dataIndex: ret.create_time,
+                                     render: (data) => formatStrDate(data)
                                  },{
                                      title: '更新时间',
                                      dataIndex: ret.update_time,
+                                     render: (data) => formatStrDate(data)
                                  },{
                                      title: '类型',
                                      dataIndex: ret.type,
@@ -51,6 +55,7 @@ export function groupdetail(pk, _that) {
               </div>
             ),
             onOk() {},
+            okText: "返回",
           });
     }else{
         message.error(res.data.message);

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Popconfirm, message } from 'antd';
 import axios from 'axios';
+
+import { formatStrDate } from '../../../docker/utils/time_helper'
 import chart from '../../../../static/icons/area_chart.png'
 import {groupdetail} from '../groupforms/groupdetailform'
 import {GroupUpdateForm} from '../groupforms/groupupdateform'
@@ -30,10 +32,12 @@ export function getgroups() {
         dataIndex: 'fields.name',
     }, {
         title: '创建时间',
-        dataIndex: 'fields.create_time'
+        dataIndex: 'fields.create_time',
+        render: (data) => formatStrDate(data)
     }, {
         title: '更新时间',
         dataIndex: 'fields.update_time',
+        render: (data) => formatStrDate(data)
     },{
         title: '操作',
         render: (data, record, index) => (
@@ -43,7 +47,7 @@ export function getgroups() {
               <Popconfirm title={"Are you sure delete " + record.fields.name + "group?"} onConfirm={() => confirm(record.pk, this)} okText="Yes" cancelText="No">
                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>删除</span>
               </Popconfirm>
-              <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>编辑成员</span>
+              <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}} pk={99}  onClick={() => this.showGroupMemberUpdateModel(record)}>编辑成员</span>
             </div>
         )
     }];
