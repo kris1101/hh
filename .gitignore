@@ -11,6 +11,9 @@ todo
 # production
 /build
 
+# sftp
+sftp-config.json
+
 # misc
 .DS_Store
 .env.local
