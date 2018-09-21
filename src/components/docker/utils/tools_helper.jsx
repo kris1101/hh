@@ -14,3 +14,18 @@ export function omitstring(originstr, n){
     }
 
 }
+
+
+export function combinekeyvalue(keylist, valuelist){
+  let result ={};
+  if (keylist.length != valuelist.length){
+        return [1, result] 
+  }else{
+    for (var item in keylist){
+      if(keylist[item] && valuelist[item]){
+        result[keylist[item]] = valuelist[item]
+      }
+    }
+        return [0, result] 
+  }
+}
