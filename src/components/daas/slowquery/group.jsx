@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import Daassider from '../../../components/common/LeftSider/daassider';
 import { getGroupsList } from '../../../containers/Daas/groups.redux'
+import { getGroupMembersList } from '../../../containers/Daas/groupmembers.redux'
 
 import { GroupCreateForm } from './groupforms/groupcreateform'
 import {GroupUpdateForm} from './groupforms/groupupdateform'
@@ -54,14 +55,15 @@ class DaasGroupManageForm extends Component {
     }
     
     showGroupUpdateModel = (record) => {
-        this.setState({GroupUpdateVisible: true}) 
         this.setState({updateRecord: record})
+        this.setState({GroupUpdateVisible: true}) 
 
     }
     showGroupMemberUpdateModel = (record) => {
-        this.setState({GroupMemberUpdateVisible: true}) 
         this.setState({updateRecord: record})
-
+        this.setState({GroupMemberUpdateVisible: true}) 
+        this.GroupMemberUpdateFormRef.getUsers(record.pk)
+        console.log(record.pk)
     }
 
     handleGroupCreateCancel = () => {
@@ -150,6 +152,7 @@ class DaasGroupManageForm extends Component {
     }
 
     handleGroupMemberUpdate = (group_obj) => {
+      console.log(group_obj)
       const form = this.GroupMemberUpdateFormRef.props.form;
       form.validateFields((err, values) => {
         if (err) {

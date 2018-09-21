@@ -47,7 +47,7 @@ export function getgroups() {
               <Popconfirm title={"Are you sure delete " + record.fields.name + "group?"} onConfirm={() => confirm(record.pk, this)} okText="Yes" cancelText="No">
                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>删除</span>
               </Popconfirm>
-              <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}} pk={99}  onClick={() => this.showGroupMemberUpdateModel(record)}>编辑成员</span>
+              <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}} onClick={() => this.showGroupMemberUpdateModel(record)}>编辑成员</span>
             </div>
         )
     }];
