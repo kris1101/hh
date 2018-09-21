@@ -23,12 +23,14 @@ class DassSider extends Component{
       });
     }
   }
+
   handleClick = (e) => {
       console.log(e.key);
       this.setState({
           current: e.key
       })
   }
+
   componentWillMount () {
       const { location } = this.props;
       let pathName = location.pathname;
@@ -38,16 +40,11 @@ class DassSider extends Component{
 
       if(pathName=="/daas/destop"){
           openKey = [];
-      }else if(pathName=="/daas/grouplist"||pathName=="/daas/userlist"||pathName=="/daas/emaillist"||pathName=="/config/userManage"){
+      }else if(pathName=="/daas/slowquery/group"||pathName=="/daas/slowquery/user"||pathName=="/daas/slowquery/instance"||pathName=="/daas/slowquery/email"){
           openKey = ["slowquery"];
-      }else if(pathName=="/config/userlist"||pathName=="/config/userManage"){
-          openKey = ["sub5"];
-      }else if(pathName=="/config/emaillist"){
-          openKey = ["sub6"];
       }else {
           openKey = ["sub2"];
       }
-
       this.setState({current: current,openKeys: openKey});
 
   }
@@ -62,6 +59,7 @@ class DassSider extends Component{
           onOpenChange={this.onOpenChange}
           onClick={this.handleClick}
           selectedKeys={[this.state.current]}
+          defaultOpenKeys={['sub1']}
           style={{ width: 200 }}
         >
             <Menu.Item key="sub1"><Link to="/daas/destop"><Icon type="desktop" />概述</Link></Menu.Item>
@@ -76,12 +74,12 @@ class DassSider extends Component{
                 <Menu.Item key="/daas/email"><Link to="/daas/email">邮件记录</Link></Menu.Item>
                 <Menu.Item key="/daas/parameter"><Link to="/daas/parameter">参数组</Link></Menu.Item>
             </SubMenu>
-            {/*<SubMenu key="sub3" title={<span><Icon type="database" /><span>慢查询</span></span>} >
-                <Menu.Item key="/daas/group"><Link to="/daas/group">组列表</Link></Menu.Item>
-                <Menu.Item key="/daas/user"><Link to="/daas/user">人员列表</Link></Menu.Item>
-                <Menu.Item key="/daas/user"><Link to="/daas/user">主机列表</Link></Menu.Item>
-                <Menu.Item key="/daas/email"><Link to="/daas/email">邮件发送记录</Link></Menu.Item>
-              </SubMenu>*/}
+            <SubMenu key="slowquery" title={<span><Icon type="database" /><span>慢查询</span></span>} >
+                <Menu.Item key="/daas/slowquery/group"><Link to="/daas/slowquery/group">组列表</Link></Menu.Item>
+                <Menu.Item key="/daas/slowquery/user"><Link to="/daas/slowquery/user">人员列表</Link></Menu.Item>
+                <Menu.Item key="/daas/slowquery/instance"><Link to="/daas/slowquery/instance">实例列表</Link></Menu.Item>
+                <Menu.Item key="/daas/slowquery/email"><Link to="/daas/slowquery/email">邮件发送记录</Link></Menu.Item>
+             </SubMenu>
              
              {/*<SubMenu key="sub3" title={<span><Icon type="api" /><span>云数据库MongoDB</span></span>} >*/}
                 {/*<Menu.Item key="/config/user"><Link to="/config/user">副本集实例</Link></Menu.Item>*/}
