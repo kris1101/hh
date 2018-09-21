@@ -7,6 +7,7 @@ import Daas_Cluster from '../components/daas/sql/cluster';
 import Daas_Backup from '../components/daas/sql/backup';
 import Daas_Binlog from '../components/daas/sql/binlog';
 import Daas_Verify from '../components/daas/sql/verify';
+// import Daas_Group from '../components/daas/slowquery/group';
 import Daas_Group from '../components/daas/sql/group';
 import Daas_User from '../components/daas/sql/user';
 import Daas_Email from '../components/daas/sql/email';

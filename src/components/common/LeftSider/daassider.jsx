@@ -69,9 +69,9 @@ class DassSider extends Component{
                 <Menu.Item key="/daas/backup"><Link to="/daas/backup">备份</Link></Menu.Item>
                 <Menu.Item key="/daas/binlog"><Link to="/daas/binlog">binlog日志</Link></Menu.Item>
                 <Menu.Item key="/daas/verify"><Link to="/daas/verify">sql审核</Link></Menu.Item>
-                <Menu.Item key="/daas/group"><Link to="/daas/group">邮件组</Link></Menu.Item>
+                {/*<Menu.Item key="/daas/group"><Link to="/daas/group">邮件组</Link></Menu.Item>
                 <Menu.Item key="/daas/user"><Link to="/daas/user">人员列表</Link></Menu.Item>
-                <Menu.Item key="/daas/email"><Link to="/daas/email">邮件记录</Link></Menu.Item>
+                <Menu.Item key="/daas/email"><Link to="/daas/email">邮件记录</Link></Menu.Item>*/}
                 <Menu.Item key="/daas/parameter"><Link to="/daas/parameter">参数组</Link></Menu.Item>
             </SubMenu>
             <SubMenu key="slowquery" title={<span><Icon type="database" /><span>慢查询</span></span>} >
@@ -80,7 +80,6 @@ class DassSider extends Component{
                 <Menu.Item key="/daas/slowquery/instance"><Link to="/daas/slowquery/instance">实例列表</Link></Menu.Item>
                 <Menu.Item key="/daas/slowquery/email"><Link to="/daas/slowquery/email">邮件发送记录</Link></Menu.Item>
              </SubMenu>
-             
              {/*<SubMenu key="sub3" title={<span><Icon type="api" /><span>云数据库MongoDB</span></span>} >*/}
                 {/*<Menu.Item key="/config/user"><Link to="/config/user">副本集实例</Link></Menu.Item>*/}
                 {/*<Menu.Item key="2"><Link to="/config/user">分片集实例</Link></Menu.Item>*/}

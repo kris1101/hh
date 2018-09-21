@@ -14,8 +14,6 @@ const initState={
 }
 const axios_instance = axios.create({
     baseURL: 'http://127.0.0.1:8000',
-    // baseURL: 'http:/127.0.0.1:8000/v1/api/slow/query/groups',
-    // baseURL: 'http://daas.sinochem.cloud/api/daas',
     timeout: 2000
 })
 
@@ -23,7 +21,7 @@ const axios_instance = axios.create({
 export function daasGroups(state=initState, action){
 	switch(action.type){
 		case LOAD_DATA:
-			return {...state, groupsList: action.payload.data}
+			return {...state, groupsList: action.payload.data, total: action.payload.data.length}
 		case START_LOADING:
 			return {...state, loading: true}
 		case END_LOADING:
@@ -56,7 +54,7 @@ export function getGroupsList(params){
                   dispatch(loadData(res.data))
                 }else{
                   notification.error({
-                    description: res.data.msg,
+                    description: res.data.message,
                     message: "提示" 
                   })
                 }

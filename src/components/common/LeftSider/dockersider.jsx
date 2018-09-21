@@ -89,7 +89,7 @@ class DockerSider extends Component{
             >
                 <SubMenu
                    key="paasworkload"
-                   title="Workload"
+                   title="workload"
                 >
                   <Menu.Item key="paasworkloadpods"><Link to="/paas/workload/podlist"><span>Pods</span></Link></Menu.Item>
                   <Menu.Item key="paasworkloaddeployments"><Link to="/paas/workload/deploylist"><span>Deployments</span></Link></Menu.Item>

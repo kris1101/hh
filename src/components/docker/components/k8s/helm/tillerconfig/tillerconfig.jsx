@@ -6,7 +6,9 @@ import BreadcrumbCustom from '../../../../../../components/BreadcrumbCustom';
 import { getTillerConfig } from './TableTpl/tabletpl';
 import './tillerconfig.less';
 import { getK8sTillerList } from '../../../../../../containers/Paas/k8s/k8stiller.redux'
+import { clearData } from '../../../../../../containers/Paas/k8s/k8stiller.redux'
 import { TillerCreateForm } from './tillerconfigforms/tillerconfigcreate'
+import { TillerUpdateForm } from './tillerconfigforms/tillerconfigupdate'
 import { postAjax } from '../../../../utils/axios'
 import { putAjax } from '../../../../utils/axios'
 import { generateformdata  } from '../../../../utils/tools_helper'
@@ -22,6 +24,7 @@ class K8sTillerForm extends Component {
         this.columns = getTillerConfig.call(this);
     }
     state = {
+        updateRecord: {},
         TillerCreateVisible: false,
         TillerCreateConfirmLoading: false,
         TillerUpdateVisible: false,
@@ -30,7 +33,8 @@ class K8sTillerForm extends Component {
 
     componentDidMount () {
         this.showinitmessage();
-        console.log(this.props);
+        this.props.clearData(); 
+        
     }
 
     //重置表单
@@ -46,8 +50,11 @@ class K8sTillerForm extends Component {
         this.setState({TillerCreateVisible: true}) 
     }
 
-    showTillerUpdateModel = () => {
+    showTillerUpdateModel = (record) => {
         this.setState({TillerUpdateVisible: true}) 
+        this.TillerUpdateFormRef.updateState(record.is_ssl);
+        this.setState({updateRecord: record});
+
     }
 
     handleTillerCreateCancel = () => {
@@ -101,6 +108,10 @@ class K8sTillerForm extends Component {
     }
 
     handleTillerUpdate = (tiller_config_id) => {
+      if(!this.ClusterSelectFormRef.props.form.getFieldsValue().clustername){
+          message.warn("请选择集群");
+          return;
+      }
       const form = this.TillerUpdateFormRef.props.form;
       console.log(form.getFieldsValue())
       form.validateFields((err, values) => {
@@ -109,7 +120,7 @@ class K8sTillerForm extends Component {
         }
         this.setState({TillerUpdateConfirmLoading: true})
         const _that = this;
-        values.tiller_config_id = tiller_config_id;
+        values.id = tiller_config_id;
         putAjax('/k8s/tillerconfig/', generateformdata(values), function(res){
             if(res.data.code == 0){
                 message.success("更新成功") 
@@ -123,7 +134,7 @@ class K8sTillerForm extends Component {
                 message.error(res.data.msg) 
                 _that.setState({TillerUpdateConfirmLoading: false})
             }
-        })
+        }, {'Cluster-Id': this.ClusterSelectFormRef.props.form.getFieldsValue().clustername})
       });
     }
 
@@ -155,7 +166,7 @@ class K8sTillerForm extends Component {
             <Dockersider/>
         </Sider>
         <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="镜像仓库" second="Tiller配置" />
+            <BreadcrumbCustom first="helm管理" second="Tiller配置" />
             <K8sClusterSelectForm 
               handleSelctEvent={this.handleClusterSelect}
         	  wrappedComponentRef={this.saveclusterselectFormRef}
@@ -171,10 +182,17 @@ class K8sTillerForm extends Component {
         				  onCancel={this.handleTillerCreateCancel}
         				  onCreate={this.handleTillerCreate}
         				/>
+                        <TillerUpdateForm
+                          wrappedComponentRef={this.saveTillerUpdateFormRef}
+                          visible={this.state.TillerUpdateVisible}
+                          confirmLoading={this.state.TillerUpdateConfirmLoading}
+                          onCancel={this.handleTillerUpdateCancel}
+                          onCreate={() => this.handleTillerUpdate(this.state.updateRecord.id)}
+                        />  
                     </FormItem>
                     <div style={{ float:'right'}}>
-                    <FormItem>
-                        <Button type="primary" icon="reload" style={{marginRight: 10}} onClick={this.handleTillerQuery}>刷新</Button>
+                    <FormItem style={{marginRight: 0}}>
+                        <Button icon="reload" onClick={this.handleTillerQuery}>刷新</Button>
                     </FormItem>
                     </div>
                 </Form>
@@ -193,4 +211,4 @@ class K8sTillerForm extends Component {
 const K8sTillerManage = Form.create()(K8sTillerForm);
 export default connect(
   state => state.k8sTiller,
-  { getK8sTillerList })(K8sTillerManage);
+  { getK8sTillerList, clearData})(K8sTillerManage);

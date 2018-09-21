@@ -13,7 +13,7 @@ function confirm(name, _that) {
     hide();
     if(res.data.code == 0){
         message.success(res.data.msg);
-        _that.handlePodListWithArgs(1, 10);
+        _that.handlePodQuery();
     }else{
         message.error(res.data.msg);
     }

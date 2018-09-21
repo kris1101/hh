@@ -16,26 +16,32 @@ const TillerUpdateForm = Form.create()(
       }
       return e.file;
     }
-    
-    handleChange = (checked) => {
+
+    handleswitchchange = (checked) => {
         this.setState({is_ssl: checked})
-        console.log(`switch to ${checked}`); 
+        console.log(checked);
     }
+
+    updateState = (is_ssl) => {
+       this.setState({is_ssl})
+    }
+
     reset = () => {
       this.setState(
-        {   
-          fileList:[],
+        {
+          cafileList:[],
+          keyfileList:[],
+          certfileList:[],
           is_ssl: false
-        }   
-      )   
-    }   
-
+        }
+      )
+    }
 
     render() {
-      const { confirmLoading, visible, onCancel, onCreate, tillerinfo, form } = this.props;
+      const { confirmLoading, visible, onCancel, onCreate, tillerinfo,  form } = this.props;
       const { getFieldDecorator } = form;
       const _that = this;
-      const props = {
+      const caprops = {
         withCredentials: true,
         onRemove: (file) => {
           return false;
@@ -44,25 +50,71 @@ const TillerUpdateForm = Form.create()(
         showUploadList: {
           showRemoveIcon: false
         },
-        fileList: _that.state.fileList,
+        fileList: _that.state.cafileList,
         onChange: (info) => {
             let fileList = info.fileList;
             fileList = fileList.slice(-1);
-            _that.setState({fileList})
+            _that.setState({cafileList: fileList})
         },
         beforeUpload: (file) => {
-          this.setState(({ fileList }) => ({
-            fileList: [file],
+          this.setState(({ cafileList }) => ({
+            cafileList: [file],
           }));
           return false;
         },
-        fileList: this.state.fileList,
+        cafileList: this.state.cafileList,
+      };
+      const keyprops = {
+        withCredentials: true,
+        onRemove: (file) => {
+          return false;
+        },
+        disabled:confirmLoading,
+        showUploadList: {
+          showRemoveIcon: false
+        },
+        fileList: _that.state.keyfileList,
+        onChange: (info) => {
+            let fileList = info.fileList;
+            fileList = fileList.slice(-1);
+            _that.setState({keyfileList: fileList})
+        },
+        beforeUpload: (file) => {
+          this.setState(({ keyfileList }) => ({
+            keyfileList: [file],
+          }));
+          return false;
+        },
+        keyfileList: this.state.keyfileList,
+      };
+      const certprops = {
+        withCredentials: true,
+        onRemove: (file) => {
+          return false;
+        },
+        disabled:confirmLoading,
+        showUploadList: {
+          showRemoveIcon: false
+        },
+        fileList: _that.state.certfileList,
+        onChange: (info) => {
+            let fileList = info.fileList;
+            fileList = fileList.slice(-1);
+            _that.setState({certfileList: fileList})
+        },
+        beforeUpload: (file) => {
+          this.setState(({ certfileList }) => ({
+            certfileList: [file],
+          }));
+          return false;
+        },
+        certfileList: this.state.certfileList,
       };
       return (
         <Modal
           visible={visible}
-          title="编辑Tiiler配置"
-          okText="更新"
+          title="新增Tiller配置"
+          okText="提交"
           onCancel={onCancel}
           onOk={onCreate}
           centered={true}
@@ -70,21 +122,48 @@ const TillerUpdateForm = Form.create()(
         >
           <Form>
             <FormItem label="加密访问"  labelCol={{span: 5}}  wrapperCol={{ span: 19 }}>
-              {getFieldDecorator('is_ssl', { initialValue: tillerinfo.is_ssl })(
-                  <Switch defaultChecked onChange={this.handleChange} />
+              {getFieldDecorator('is_ssl',{initialValue: true, rules:[{required: true}]})(
+                <Switch disabled={confirmLoading} onChange={this.handleswitchchange} checked={this.state.is_ssl}/>
               )}
             </FormItem>
-            {this.state.is_ssl ? (<FormItem label="kubeconfig"  labelCol={{span: 5}}  wrapperCol={{ span: 19  }}>
-              {getFieldDecorator('kubeconfigfile', {
-                  getValueFromEvent: this.normFile
+            
+            {this.state.is_ssl ? (
+              <div>
+              <FormItem label="ca根证书"  labelCol={{span: 5}}  wrapperCol={{ span: 19  }}>
+              {getFieldDecorator('cafile', {
+                  getValueFromEvent: this.normFile, rules: [{ required: true, message: "cafile文件不能为空"}]
               })(
-                <Upload {...props}>
+                <Upload {...caprops}>
                   <Button>
                     <Icon type="upload" /> Click to upload
                   </Button>
                 </Upload>
               )}
-            </FormItem>) : null}
+              </FormItem>
+              <FormItem label="客户密钥"  labelCol={{span: 5}}  wrapperCol={{ span: 19  }}>
+              {getFieldDecorator('keyfile', {
+                  getValueFromEvent: this.normFile, rules: [{ required: true, message: "keyfile文件不能为空"}]
+              })(
+                <Upload {...keyprops}>
+                  <Button>
+                    <Icon type="upload" /> Click to upload
+                  </Button>
+                </Upload>
+              )}
+              </FormItem>
+              <FormItem label="客户证书"  labelCol={{span: 5}}  wrapperCol={{ span: 19  }}>
+              {getFieldDecorator('certfile', {
+                  getValueFromEvent: this.normFile, rules: [{ required: true, message: "certfile文件不能为空"}]
+              })(
+                <Upload {...certprops}>
+                  <Button>
+                    <Icon type="upload" /> Click to upload
+                  </Button>
+                </Upload>
+              )}
+              </FormItem>
+            </div>
+            ) : null}
           </Form>
         </Modal>
       );

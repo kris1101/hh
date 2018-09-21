@@ -37,9 +37,6 @@ import {
 import {
     daasGroups
 } from '../containers/Daas/groups.redux'
-// import {
-//     daasSlowQuery
-// } from '../containers/Daas/reducers/index.redux';
 import {
     daasSlowQueryUser
 } from '../containers/Daas/reducers/slow_query_user';
@@ -47,7 +44,12 @@ import {
 import {
     daasSlowQueryInstance
 } from '../containers/Daas/reducers/slow_query_instance';
-
+import {
+    helmRepo
+} from '../containers/Paas/k8s/k8shelmrepo.redux'
+import {
+    helmChart
+} from '../containers/Paas/k8s/k8shelmchart.redux'
 import {
     daasSlowQueryEmail
 } from '../containers/Daas/reducers/slow_query_email';
@@ -62,6 +64,8 @@ const App = combineReducers({
     harborLogs,
     daasGroups,
     k8sTiller,
+    helmRepo,
+    helmChart,
     PaasCommon,
     harborUser,
     harborConfigurations,
