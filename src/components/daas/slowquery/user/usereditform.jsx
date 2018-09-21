@@ -44,6 +44,10 @@ class SlowQueryUserEditManager extends Component {
       _that.setState({
         userObj: response.data.data[0],
       });
+      let resDat=response.data.data[0].fields;
+      delete resDat.create_time;
+      delete resDat.update_time;
+      _that.props.form.setFieldsValue(resDat);
     });
     // axios.get(BASE_URL + '/v1/api/slow/query/users' + "/" + userId )
     //   .then(function (response) {

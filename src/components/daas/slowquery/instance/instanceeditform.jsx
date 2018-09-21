@@ -44,7 +44,11 @@ class SlowQueryInstanceEditManager extends Component {
       _that.setState({
         instanceObj: response.data.data[0],
       });
-      console.log(response);
+      // _that.props.form.setFieldsValue(response.data.data[0].fields);
+      let resDat=response.data.data[0].fields
+      delete resDat.create_time;
+      delete resDat.update_time;
+      _that.props.form.setFieldsValue(resDat);
     });
     // axios.get(BASE_URL + '/v1/api/slow/query/users' + "/" + userId )
     //   .then(function (response) {
