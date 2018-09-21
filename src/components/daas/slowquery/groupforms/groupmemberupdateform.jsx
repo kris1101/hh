@@ -1,6 +1,10 @@
 import React from 'react'
 import { Icon, Button, Upload, message, Modal, Form, Input, Radio, Transfer } from 'antd';
 import axios from 'axios'
+import { connect } from 'react-redux';
+
+import { getgroups } from '../TableTpl/group';
+import { getGroupMembersList } from '../../../../containers/Daas/groupmembers.redux'
 
 const FormItem = Form.Item;
 const baseUrl = 'http://127.0.0.1:8000';
@@ -13,17 +17,21 @@ instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlenco
 
 const GroupMemberUpdateForm = Form.create()(
   class extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+
       state = {
         userData: [],
         groupMembers: [],
+        group_id: '', 
       }
 
       componentDidMount() {
-        this.getUsers();
-        console.log(this.props.pk);
+        // this.props.getGroupMembersList({})
       }
 
-      getUsers = () => {
+      getUsers = (group_id) => {
         const groupMembers = [];
         const userData = [];
         instance.get('/v1/api/slow/query/users')
@@ -39,6 +47,7 @@ const GroupMemberUpdateForm = Form.create()(
                    //groupMembers.push(data.key);
                  //}
                  userData.push(data);
+                 console.log(userData)
                }
                  //this.setState({ userData, groupMembers });
             }else{
@@ -49,7 +58,26 @@ const GroupMemberUpdateForm = Form.create()(
                 })
             }
           })
+
+          instance.get('/v1/api/slow/query/group/user/relationships', {params: {group: group_id}})
+          .then(function(res){
+            if(res.data.code == 0){
+              for (let i = 0; i < res.data.data.length; i++) {
+                const data = {
+                  key: i.toString(),
+                  title: res.data.data[i]["fields"]["user"],
+                  chosen: Math.random() * 2 > 1,
+                };
+                 groupMembers.push(data);
+                 console.log(groupMembers)
+               }
+                 //this.setState({ userData, groupMembers });
+            }else{
+                message.error(res.data.message) 
+            }
+          })
              this.setState({ userData, groupMembers });
+             console.log(this.setState.userData)
       }
 
       filterOption = (inputValue, option) => {
@@ -90,3 +118,8 @@ const GroupMemberUpdateForm = Form.create()(
 );
 
 export { GroupMemberUpdateForm }
+
+// const DaasGroupMembersManage = Form.create()(DaasGroupMembersManageForm) 
+export default connect(
+ state => state.daasGroupMembers,
+ { getGroupMembersList })(GroupMemberUpdateForm)
