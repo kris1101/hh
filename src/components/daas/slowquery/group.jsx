@@ -6,9 +6,11 @@ import axios from 'axios';
 
 import Daassider from '../../../components/common/LeftSider/daassider';
 import { getGroupsList } from '../../../containers/Daas/groups.redux'
+import { getGroupMembersList } from '../../../containers/Daas/groupmembers.redux'
 
 import { GroupCreateForm } from './groupforms/groupcreateform'
 import {GroupUpdateForm} from './groupforms/groupupdateform'
+import {GroupMemberUpdateForm} from './groupforms/groupmemberupdateform'
 
 import { postAjax } from '../../../utils/axios'
 import BreadcrumbCustom from '../../BreadcrumbCustom';
@@ -53,9 +55,15 @@ class DaasGroupManageForm extends Component {
     }
     
     showGroupUpdateModel = (record) => {
-        this.setState({GroupUpdateVisible: true}) 
         this.setState({updateRecord: record})
+        this.setState({GroupUpdateVisible: true}) 
 
+    }
+    showGroupMemberUpdateModel = (record) => {
+        this.setState({updateRecord: record})
+        this.setState({GroupMemberUpdateVisible: true}) 
+        this.GroupMemberUpdateFormRef.getUsers(record.pk)
+        console.log(record.pk)
     }
 
     handleGroupCreateCancel = () => {
@@ -69,6 +77,13 @@ class DaasGroupManageForm extends Component {
         this.setState({GroupUpdateVisible: false}) 
         this.setState({GroupUpdateConfirmLoading: false})
         const form = this.GroupUpdateFormRef.props.form;
+        form.resetFields();
+    }
+
+    handleGroupMemberUpdateCancel = () => {
+        this.setState({GroupMemberUpdateVisible: false}) 
+        this.setState({GroupMemberUpdateConfirmLoading: false})
+        const form = this.GroupMemberUpdateFormRef.props.form;
         form.resetFields();
     }
 
@@ -108,7 +123,7 @@ class DaasGroupManageForm extends Component {
       });
     }
 
-    handleGroupUpdate = (group_id) => {
+    handleGroupUpdate = (group_obj) => {
       const form = this.GroupUpdateFormRef.props.form;
       form.validateFields((err, values) => {
         if (err) {
@@ -118,7 +133,7 @@ class DaasGroupManageForm extends Component {
         const _that = this;
         console.log(values);
         // values.pk = group_id
-        instance.put('/v1/api/slow/query/groups/' +  group_id.pk, qs.stringify(values))
+        instance.put('/v1/api/slow/query/groups/' +  group_obj.pk, qs.stringify(values))
           .then(function(res){
             if(res.data.code == 0){
                 console.log(values)
@@ -136,6 +151,33 @@ class DaasGroupManageForm extends Component {
       });
     }
 
+    handleGroupMemberUpdate = (group_obj) => {
+      console.log(group_obj)
+      const form = this.GroupMemberUpdateFormRef.props.form;
+      form.validateFields((err, values) => {
+        if (err) {
+          return;
+        }
+        this.setState({GroupMemberUpdateConfirmLoading: true})
+        const _that = this;
+        console.log(values);
+        instance.put('/v1/api/slow/query/group/user/relationships/' +  group_obj.pk, qs.stringify(values))
+          .then(function(res){
+            if(res.data.code == 0){
+                console.log(values)
+                message.success("更新成功") 
+                _that.setState({GroupMemberUpdateConfirmLoading: false})
+                form.resetFields();
+                _that.setState({ GroupMemberUpdateVisible: false });
+                _that.handleGroupListWithArgs(1, 10);
+            }else{
+                message.error(res.data.message) 
+                _that.setState({GroupMemberUpdateConfirmLoading: false})
+            }
+        })
+      });
+    }
+
 
     saveGroupCreateFormRef = (formRef) => {
       this.GroupCreateFormRef = formRef;
@@ -144,6 +186,10 @@ class DaasGroupManageForm extends Component {
     saveGroupUpdateFormRef = (formRef) => {
       this.GroupUpdateFormRef = formRef;
     } 
+
+    saveGroupMemberUpdateFormRef = (formRef) => {
+      this.GroupMemberUpdateFormRef = formRef;
+    }
 
     handleGroupsQuery = () => {
         let value = this.props.form.getFieldsValue()
@@ -217,7 +263,14 @@ class DaasGroupManageForm extends Component {
                           onCancel={this.handleGroupUpdateCancel}
                           onCreate={() => this.handleGroupUpdate(this.state.updateRecord)}
                         />       
-                 
+                        <GroupMemberUpdateForm
+                          wrappedComponentRef={this.saveGroupMemberUpdateFormRef}
+                          visible={this.state.GroupMemberUpdateVisible}
+                          groupinfo={this.state.updateRecord}
+                          confirmLoading={this.state.GroupMemberUpdateConfirmLoading}
+                          onCancel={this.handleGroupMemberUpdateCancel}
+                          onCreate={() => this.handleGroupMemberUpdate(this.state.updateRecord)}
+                        />
                     </FormItem>
                     <div style={{ float:'right'}}>
 
@@ -238,7 +291,7 @@ class DaasGroupManageForm extends Component {
                 <Table bordered loading={this.props.loading} rowKey={record => record.pk} columns={this.columns} dataSource={this.props.groupsList} pagination={pagination} />
             </div>
             <div style={{margin: 20}}>
-                <span className='num'>共找到 { this.state.total }条结果， 每页显示10条</span>
+                <span className='num'>共找到 { this.props.total }条结果， 每页显示10条</span>
             </div>
         </Content>
       </Layout>

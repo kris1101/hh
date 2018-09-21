@@ -6,15 +6,15 @@ import { connect } from 'react-redux';
 
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
-import { getColumes } from './TableTpl/roleTabletpl';
+import { getColumes } from './TableTpl/groupTabletpl';
 import { fetchData, receiveData } from '../../../services/vm';
 
-import RoleCreate from './RoleCreate';
+import GroupCreate from './GroupCreate';
 
 const { Sider, Content } = Layout;
 
 
-class RoleList extends Component {
+class GroupList extends Component {
   constructor(props) {
       super(props);
       this.columns = getColumes.call(this);
@@ -35,7 +35,7 @@ class RoleList extends Component {
   }
   getList = (page=1) => {
     const { fetchData } = this.props;
-    fetchData({funcName: 'roleList', stateName: 'roleList', params: {page: page}});
+    fetchData({funcName: 'groupList', stateName: 'groupList', params: {page: page}});
   };
   refresh = () => {
     this.getList(this.state.pagination.current);
@@ -43,21 +43,21 @@ class RoleList extends Component {
 
   render() {
     const httpData = this.props.httpData;
-    const dataList = (httpData.hasOwnProperty('roleList')) ? httpData['roleList']['data']['data'] : [];
-    const loading = (httpData.hasOwnProperty('roleList')) ? httpData['roleList']['isFetching'] : true;
+    const dataList = (httpData.hasOwnProperty('groupList')) ? httpData['groupList']['data']['data'] : [];
+    const loading = (httpData.hasOwnProperty('groupList')) ? httpData['groupList']['isFetching'] : true;
     const pager = { ...this.state.pagination };
-    pager.total = (httpData.hasOwnProperty('roleList')) ? httpData['roleList']['data']['count'] : 0;
+    pager.total = (httpData.hasOwnProperty('groupList')) ? httpData['groupList']['data']['count'] : 0;
     return (
       <Layout className="config">
         <Sider>
             <VMSider/>
         </Sider>
         <Content style={{ padding: 0, margin:10,  marginBottom: 0, minHeight: window.innerHeight-84 }}>
-          <BreadcrumbCustom first="用户管理" second="角色列表" />
+          <BreadcrumbCustom first="用户管理" second="用户组列表" />
           <Row gutter={16}>
             <Col className="gutter-row" md={24}>
-              <Card title="角色列表" bordered={false}>
-                <RoleCreate refresh={this.refresh} />
+              <Card title="用户组列表" bordered={false}>
+                <GroupCreate refresh={this.refresh} />
                 <Table bordered columns={this.columns} onChange={this.handleTableChange} loading={loading}
                        dataSource={dataList} rowKey="id" pagination={pager} />
               </Card>
@@ -79,4 +79,4 @@ const mapDispatchToProps = dispatch => ({
     receiveData: bindActionCreators(receiveData, dispatch)
 });
 
-export default connect(mapStateToPorps, mapDispatchToProps)(RoleList);
+export default connect(mapStateToPorps, mapDispatchToProps)(GroupList);

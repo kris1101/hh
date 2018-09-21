@@ -1,20 +1,58 @@
-import { combineReducers } from 'redux';
+import {
+    combineReducers
+} from 'redux';
 
 import todos from '../containers/Todo/_reducer';
-import { setCounter, test } from '../containers/Index/_reducer';
-import { httpData } from '../services/vm';
-import { harborProject } from '../containers/Paas/harbor/project.redux'
-import { harborProjectDetails } from '../containers/Paas/harbor/projectdetails.redux'
-import { harborLogs } from '../containers/Paas/harbor/logs.redux'
-import { k8sCluster } from '../containers/Paas/k8s/k8scluster.redux'
-import { k8sTiller } from '../containers/Paas/k8s/k8stiller.redux'
-import { helmRepo } from '../containers/Paas/k8s/k8shelmrepo.redux'
-import { helmChart } from '../containers/Paas/k8s/k8shelmchart.redux'
-import { PaasCommon } from '../containers/Paas/common/paascommon.redux'
-import { harborConfigurations } from '../containers/Paas/harbor/configurations.redux'
-import { harborUser } from '../containers/Paas/harbor/user.redux'
-import { daasGroups } from '../containers/Daas/groups.redux'
+import {
+    setCounter,
+    test
+} from '../containers/Index/_reducer';
+import {
+    httpData
+} from '../services/vm';
+import {
+    harborProject
+} from '../containers/Paas/harbor/project.redux'
+import {
+    harborProjectDetails
+} from '../containers/Paas/harbor/projectdetails.redux'
+import {
+    harborLogs
+} from '../containers/Paas/harbor/logs.redux'
+import {
+    k8sCluster
+} from '../containers/Paas/k8s/k8scluster.redux'
+import {
+    k8sTiller
+} from '../containers/Paas/k8s/k8stiller.redux'
+import {
+    PaasCommon
+} from '../containers/Paas/common/paascommon.redux'
+import {
+    harborConfigurations
+} from '../containers/Paas/harbor/configurations.redux'
+import {
+    harborUser
+} from '../containers/Paas/harbor/user.redux'
+import {
+    daasGroups
+} from '../containers/Daas/groups.redux'
+import {
+    daasSlowQueryUser
+} from '../containers/Daas/reducers/slow_query_user';
 
+import {
+    daasSlowQueryInstance
+} from '../containers/Daas/reducers/slow_query_instance';
+import {
+    helmRepo
+} from '../containers/Paas/k8s/k8shelmrepo.redux'
+import {
+    helmChart
+} from '../containers/Paas/k8s/k8shelmchart.redux'
+import {
+    daasSlowQueryEmail
+} from '../containers/Daas/reducers/slow_query_email';
 
 const App = combineReducers({
     todos,
@@ -32,6 +70,9 @@ const App = combineReducers({
     harborUser,
     harborConfigurations,
     harborProjectDetails,
+    daasSlowQueryUser,
+    daasSlowQueryInstance,
+    daasSlowQueryEmail,
 });
 
 export default App

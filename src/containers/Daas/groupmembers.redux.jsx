@@ -1,16 +1,16 @@
 import axios from 'axios'
 import { notification  } from 'antd';
 
-const LOAD_DATA = 'LOAD_GROUPS_DATA'
-const START_LOADING = 'START_GROUPS_LOADING' 
-const END_LOADING = 'END_GROUPS_LOADING' 
+const LOAD_DATA = 'LOAD_GROUPMEMEBERS_DATA'
+const START_LOADING = 'START_GROUPMEMBERS_LOADING' 
+const END_LOADING = 'END_GROUPMEMBERS_LOADING' 
 
 const initState={
 	redirectTo:'',
 	msg:'',
     total: 0,
     loading: false,
-	groupsList:[]
+	groupmembersList:[]
 }
 const axios_instance = axios.create({
     baseURL: 'http://127.0.0.1:8000',
@@ -18,10 +18,10 @@ const axios_instance = axios.create({
 })
 
 // reducer
-export function daasGroups(state=initState, action){
+export function daasGroupMembers(state=initState, action){
 	switch(action.type){
 		case LOAD_DATA:
-			return {...state, groupsList: action.payload.data, total: action.payload.data.length}
+			return {...state, groupmembersList: action.payload.data, total: action.payload.data.length}
 		case START_LOADING:
 			return {...state, loading: true}
 		case END_LOADING:
@@ -31,8 +31,8 @@ export function daasGroups(state=initState, action){
 	}
 } 
 
-export function loadData(groupslistinfo){
-	return { type:LOAD_DATA, payload:groupslistinfo}
+export function loadData(groupmemberslistinfo){
+	return { type:LOAD_DATA, payload:groupmemberslistinfo}
 }
 
 export function startLoading(){
@@ -43,10 +43,11 @@ export function endLoading(){
 	return { type:END_LOADING}
 }
 
-export function getGroupsList(params){
+export function getGroupMembersList(group_id){
 	return dispatch=>{
       dispatch(startLoading());
-      axios_instance.get('/v1/api/slow/query/groups',{params: params})
+      // {params: params} == {params: {group: group_id}}
+      axios_instance.get('/v1/api/slow/query/group/user/relationships',{params: {group: group_id}})
 			.then(res=>{
                 dispatch(endLoading());
                 console.log(res.data)
