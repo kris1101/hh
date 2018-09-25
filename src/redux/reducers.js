@@ -54,6 +54,9 @@ import {
     daasSlowQueryEmail
 } from '../containers/Daas/reducers/slow_query_email';
 
+import {
+   helmRelease 
+} from '../containers/Paas/k8s/k8shelmrelease.redux';
 const App = combineReducers({
     todos,
     setCounter,
@@ -66,6 +69,7 @@ const App = combineReducers({
     k8sTiller,
     helmRepo,
     helmChart,
+    helmRelease,
     PaasCommon,
     harborUser,
     harborConfigurations,
