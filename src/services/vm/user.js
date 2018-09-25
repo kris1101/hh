@@ -36,3 +36,7 @@ export const roleUpdate = (id, data) => axios.put(`accounts/roles/${id}/`, data)
 export const groupList = (params) => axios.get('accounts/groups/', {params: params}).then(res => res.data).catch(err => console.log(err));
 export const groupCreate = (data) => axios.post('accounts/groups/create/', data).then(res => res.data).catch(err => console.log(err));
 export const groupUpdate = (id, data) => axios.put(`accounts/groups/${id}/`, data).then(res => res.data).catch(err => console.log(err));
+export const groupMemberList = (params) => axios.get(`accounts/groups/${params.group_id}/members/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const groupMemberAdd = (group_id, data) => axios.post(`accounts/groups/${group_id}/members/add/`, data).then(res => res.data).catch(err => console.log(err));
+export const groupMembers = (group_id) => axios.get(`accounts/groups/${group_id}/members/add/`).then(res => res.data).catch(err => console.log(err));
+export const groupMemberDel = (group_id, params) => axios.delete(`accounts/groups/${group_id}/members/del/`, {params: params}).then(res => res.data).catch(err => console.log(err));
