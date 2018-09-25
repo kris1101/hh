@@ -52,6 +52,8 @@ class VMSider extends Component{
           current = "/vm/key";
       }else if(pathName.startsWith('/vm/accounts/projects')){
           current = "/vm/accounts/projects";
+      }else if(pathName.startsWith('/vm/accounts/groups')){
+          current = "/vm/accounts/groups";
       }
 
       this.setState({current: current, openKeys: openKey});
