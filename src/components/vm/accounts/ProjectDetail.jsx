@@ -3,9 +3,10 @@ import { notification, Layout, message, Tooltip, Icon, Form, Modal, Button, Tabl
 
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
-import { projectDetail } from '../../../services/vm/user';
+import { projectDetail, projectMemberList } from '../../../services/vm/user';
 import { getDetailColumes, getDetailMemeberColumes } from './TableTpl/projectTabletpl';
 import { humansize } from '../../../utils/vm'
+import ProjectMemberCreate from './ProjectMemberCreate';
 
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
@@ -17,17 +18,17 @@ class ProjectDetail extends React.Component {
   constructor(props) {
     super(props);
     this.columns = getDetailColumes.call(this);
-    this.log_columns = getDetailMemeberColumes.call(this);
+    this.member_columns = getDetailMemeberColumes.call(this);
   }
   state = {
     loading: false,
     activeKey: "1",
     base_data: [],
     quota_data: [],
-    build_data: [],
+    member_data: [],
+    member_pagination: {total: 0, defaultPageSize: 20, defaultCurrent: 1, pageSize: 20},
 
-    build_log_data: [],
-    log_pagination: {total: 0, defaultPageSize: 20, defaultCurrent: 1, pageSize: 20},
+    build_data: [],
   };
   componentDidMount() {
     this.start();
@@ -38,6 +39,10 @@ class ProjectDetail extends React.Component {
     if (activeKey === '4'){
       // console.log(activeKey);
       this.quota_request();
+    } else if (activeKey === '2'){
+      this.project_member_request();
+    } else if (activeKey === '3'){
+      this.project_member_request();
     }
   }
 
@@ -101,10 +106,13 @@ class ProjectDetail extends React.Component {
     });
 
   };
-  build_log_request = (page=1) => {
-    const { log_pagination } = this.state;
+  refresh_member = () => {
+    this.project_member_request();
+  };
+  project_member_request = (page=1) => {
+    const { member_pagination } = this.state;
     this.setState({ loading: true });
-    getProjectDetail(this.props.params.id, page, log_pagination.pageSize).then(res => {
+    projectMemberList(this.props.match.params.id, {page: page}).then(res => {
       if(res.code === -2){
         notification['warning']({message: res.msg});
         this.setState({loading: false});
@@ -114,26 +122,26 @@ class ProjectDetail extends React.Component {
         this.setState({loading: false});
         return
       }
-      const pagination_ = { ...this.state.log_pagination };
+      const pagination_ = { ...this.state.member_pagination };
       pagination_.total = res.count;
       this.setState({
-        build_log_data: [...res.data.map(val => {
+        member_data: [...res.data.map(val => {
           val.key = val.id;
           return val;
         })],
         loading: false,
-        log_pagination: pagination_,
+        member_pagination: pagination_,
       });
     });
 
   };
   handleTableChange = (pagination, filters, sorter) => {
-    const pager = { ...this.state.log_pagination };
+    const pager = { ...this.state.member_pagination };
     pager.current = pagination.current;
     this.setState({
-      log_pagination: pager,
+      member_pagination: pager,
     });
-    this.user_request(pagination.current);
+    this.project_member_request(pagination.current);
   }
 
   render() {
@@ -161,10 +169,11 @@ class ProjectDetail extends React.Component {
                   </TabPane>
 
                   <TabPane tab={<span>项目成员</span>} key="2">
-                    <Table columns={this.columns} dataSource={this.state.quota_data}
+                    <ProjectMemberCreate refresh={this.refresh_member} project_id={this.props.match.params.id} />
+                    <Table columns={this.member_columns} dataSource={this.state.member_data}
                       loading={this.state.loading}
-                      pagination={false}
-                      showHeader={false}
+                      pagination={this.state.member_pagination}
+                      onChange={this.handleTableChange}
                       bordered={true}
                     />
                   </TabPane>
@@ -181,7 +190,9 @@ class ProjectDetail extends React.Component {
                   <TabPane tab={<span>配额</span>} key="4">
                     <Table columns={this.columns} dataSource={this.state.quota_data}
                       loading={this.state.loading}
-                      onChange={this.handleTableChange}
+                      pagination={false}
+                      showHeader={false}
+                      bordered={true}
                     />
                   </TabPane>
                 </Tabs>
