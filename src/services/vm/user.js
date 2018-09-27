@@ -33,7 +33,13 @@ export const projectMemberData = (project_id) => axios.get(`accounts/projects/${
 export const projectMemberUpdate = (project_id, pa_id, data) => axios.put(`accounts/projects/${project_id}/member/${pa_id}/`, data).then(res => res.data).catch(err => console.log(err));
 export const projectMemberDelete = (project_id, pa_id, params) => axios.delete(`accounts/projects/${project_id}/member/${pa_id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
 // project group
+export const projectGroupList = (project_id, params) => axios.get(`accounts/projects/${project_id}/group/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const projectGroupCreate = (project_id, data) => axios.post(`accounts/projects/${project_id}/group/add/`, data).then(res => res.data).catch(err => console.log(err));
+export const projectGroupData = (project_id) => axios.get(`accounts/projects/${project_id}/group/add/`).then(res => res.data).catch(err => console.log(err));
+export const projectGroupUpdate = (project_id, pa_id, data) => axios.put(`accounts/projects/${project_id}/group/${pa_id}/`, data).then(res => res.data).catch(err => console.log(err));
+export const projectGroupDelete = (project_id, pa_id, params) => axios.delete(`accounts/projects/${project_id}/group/${pa_id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
 
+// role
 export const roleList = (params) => axios.get('accounts/roles/', {params: params}).then(res => res.data).catch(err => console.log(err));
 export const roleCreate = (data) => axios.post('accounts/roles/create/', data).then(res => res.data).catch(err => console.log(err));
 export const roleUpdate = (id, data) => axios.put(`accounts/roles/${id}/`, data).then(res => res.data).catch(err => console.log(err));

@@ -6,6 +6,8 @@ import ProjectUpdate from '../ProjectUpdate';
 import ProjectQuotaUpdate from '../ProjectQuotaUpdate';
 import ProjectMemberUpdate from '../ProjectMemberUpdate';
 import ProjectMemberDelete from '../ProjectMemberDelete';
+import ProjectGroupUpdate from '../ProjectGroupUpdate';
+import ProjectGroupDelete from '../ProjectGroupDelete';
 
 
 export function getColumes() {
@@ -59,15 +61,7 @@ export function getDetailColumes() {
     render: (text, record) => <span className="display-linebreak"> {text} </span>
   }];
 }
-export function getDetailGroupColumes() {
-  return [{
-    dataIndex: 'title',
-    width: '10%',
-  }, {
-    dataIndex: 'value',
-    render: (text, record) => <span className="display-linebreak"> {text} </span>
-  }];
-}
+
 export function getDetailQuotaColumes() {
   return [{
     dataIndex: 'title',
@@ -97,6 +91,30 @@ export function getDetailMemeberColumes() {
         <ProjectMemberUpdate record={ record } project_id={this.props.match.params.id} refresh={this.refresh_member} />
         <Divider type="vertical" />
         <ProjectMemberDelete record={ record } project_id={this.props.match.params.id} refresh={this.refresh_member} />
+      </span>
+    ),
+  }];
+}
+
+export function getDetailGroupColumes() {
+  return [{
+    title: '组名',
+    dataIndex: 'group_name',
+  }, {
+    title: '角色',
+    dataIndex: 'role_name',
+  }, {
+    title: '添加时间',
+    dataIndex: 'create_time',
+  }, {
+    title: '操作',
+    key: 'action',
+    width: 120,
+    render: (text, record) => (
+      <span>
+        <ProjectGroupUpdate record={ record } project_id={this.props.match.params.id} refresh={this.refresh_group} />
+        <Divider type="vertical" />
+        <ProjectGroupDelete record={ record } project_id={this.props.match.params.id} refresh={this.refresh_group} />
       </span>
     ),
   }];

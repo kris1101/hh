@@ -3,10 +3,11 @@ import { notification, Layout, message, Tooltip, Icon, Form, Modal, Button, Tabl
 
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
-import { projectDetail, projectMemberList } from '../../../services/vm/user';
-import { getDetailColumes, getDetailMemeberColumes } from './TableTpl/projectTabletpl';
+import { projectDetail, projectMemberList, projectGroupList } from '../../../services/vm/user';
+import { getDetailColumes, getDetailGroupColumes, getDetailMemeberColumes } from './TableTpl/projectTabletpl';
 import { humansize } from '../../../utils/vm'
 import ProjectMemberCreate from './ProjectMemberCreate';
+import ProjectGroupCreate from './ProjectGroupCreate';
 
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
@@ -19,6 +20,7 @@ class ProjectDetail extends React.Component {
     super(props);
     this.columns = getDetailColumes.call(this);
     this.member_columns = getDetailMemeberColumes.call(this);
+    this.group_columns = getDetailGroupColumes.call(this);
   }
   state = {
     loading: false,
@@ -28,7 +30,8 @@ class ProjectDetail extends React.Component {
     member_data: [],
     member_pagination: {total: 0, defaultPageSize: 20, defaultCurrent: 1, pageSize: 20},
 
-    build_data: [],
+    group_data: [],
+    group_pagination: {total: 0, defaultPageSize: 20, defaultCurrent: 1, pageSize: 20},
   };
   componentDidMount() {
     this.start();
@@ -42,7 +45,7 @@ class ProjectDetail extends React.Component {
     } else if (activeKey === '2'){
       this.project_member_request();
     } else if (activeKey === '3'){
-      this.project_member_request();
+      this.project_group_request();
     }
   }
 
@@ -142,7 +145,46 @@ class ProjectDetail extends React.Component {
       member_pagination: pager,
     });
     this.project_member_request(pagination.current);
-  }
+  };
+  refresh_group = () => {
+    this.project_group_request();
+  };
+  project_group_request = (page=1) => {
+    const { group_pagination } = this.state;
+    this.setState({ loading: true });
+    projectGroupList(this.props.match.params.id, {page: page}).then(res => {
+      if(res.code === -2){
+        notification['warning']({message: res.msg});
+        this.setState({loading: false});
+        return
+      } else if(res.code === -1){
+        notification['warning']({message: res.msg});
+        this.setState({loading: false});
+        return
+      }
+      const pagination_ = { ...this.state.group_pagination };
+      pagination_.total = res.count;
+      this.setState({
+        group_data: [...res.data.map(val => {
+          val.key = val.id;
+          return val;
+        })],
+        loading: false,
+        group_pagination: pagination_,
+      });
+    });
+
+  };
+
+  handleGroupTableChange = (pagination, filters, sorter) => {
+    const pager = { ...this.state.group_pagination };
+    pager.current = pagination.current;
+    this.setState({
+      group_pagination: pager,
+    });
+    this.project_member_request(pagination.current);
+  };
+
 
   render() {
     return (
@@ -179,10 +221,11 @@ class ProjectDetail extends React.Component {
                   </TabPane>
 
                   <TabPane tab={<span>项目组</span>} key="3">
-                    <Table columns={this.columns} dataSource={this.state.build_data}
+                    <ProjectGroupCreate refresh={this.refresh_group} project_id={this.props.match.params.id} />
+                    <Table columns={this.group_columns} dataSource={this.state.group_data}
                       loading={this.state.loading}
-                      pagination={false}
-                      showHeader={false}
+                      pagination={this.state.group_pagination}
+                      onChange={this.handleGroupTableChange}
                       bordered={true}
                     />
                   </TabPane>
