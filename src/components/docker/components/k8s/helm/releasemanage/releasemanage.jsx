@@ -5,13 +5,15 @@ import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../BreadcrumbCustom';
 import { getHelmRelease } from './TableTpl/tabletpl';
 import './releasemanage.less';
-import { postAjax } from '../../../../utils/axios'
+import { putAjax, postAjax, deleteAjax } from '../../../../utils/axios'
 import { generateformdata  } from '../../../../utils/tools_helper'
-import { clearData, getClusterNamespaceList } from '../../../../../../containers/Paas/common/paascommon.redux'
-import { getHelmReleaseList, getlocalsearch } from '../../../../../../containers/Paas/k8s/k8shelmrelease.redux'
+import { clearPaasCommonData, getClusterNamespaceList } from '../../../../../../containers/Paas/common/paascommon.redux'
+import { getHelmReleaseList, getlocalsearch, getHelmReleaseVersionList, clearReleaseData } from '../../../../../../containers/Paas/k8s/k8shelmrelease.redux'
+import { getHelmRepoOptionList } from '../../../../../../containers/Paas/k8s/k8shelmchart.redux'
 import { combinekeyvalue } from '../../../../utils/tools_helper'
 import K8sClusterSelectForm from '../../../common/k8sclusterselect'
 import HelmReleaseUpdateForm from './helmreleaseforms/releaseupdateform'
+import HelmReleaseRollBackForm from './helmreleaseforms/releaserollbackform'
 import HelmReleaseDeleteForm from './helmreleaseforms/releasedeleteform'
 
 const { Sider, Content } = Layout;
@@ -27,13 +29,16 @@ class HelmReleaseForm extends Component {
     state = {
         HelmReleaseUpdateVisible: false,
         HelmReleaseUpdateConfirmLoading: false,
+        HelmReleaseRollBackVisible: false,
+        HelmReleaseRollBackConfirmLoading: false,
         HelmReleaseDeleteVisible: false,
         HelmReleaseDeleteConfirmLoading: false,
         clusterId: ""
     }
 
     componentDidMount () {
-        this.props.clearData();
+        this.props.clearPaasCommonData();
+        this.props.clearReleaseData();
         message.info("请在右上角选择集群查看");
     }
 
@@ -45,34 +50,50 @@ class HelmReleaseForm extends Component {
     showHelmReleaseUpdateModel = (releaseinfo) => {
         console.log(releaseinfo);
         this.setState({HelmReleaseUpdateVisible: true}) 
-        this.props.getUserClusterList();
-        this.helmchartDeployFormRef.setState({releaseinfo})
+        this.props.getHelmRepoOptionList();        
+        this.helmReleaseUpdateFormRef.setState({chartinfo: releaseinfo.chart, releasename: releaseinfo.name})
+    }
+
+    showHelmReleaseRollBackModel = (releaseinfo) => {
+        this.setState({HelmReleaseRollBackVisible: true}) 
+        this.props.getHelmReleaseVersionList({release_name: releaseinfo.name}, {'Cluster-Id': this.state.clusterId});        
+        this.helmReleaseRollBackFormRef.setState({releasename: releaseinfo.name, releaseversion: releaseinfo.revision})
     }
 
     showHelmReleaseDeleteModel = (releaseinfo) => {
         console.log(releaseinfo);
         this.setState({HelmReleaseDeleteVisible: true}) 
-        this.helmchartDeleteFormRef.setState({releasename: releaseinfo.name})
+        this.helmReleaseDeleteFormRef.setState({releasename: releaseinfo.name})
     }
 
     handleHelmReleaseUpdateCancel = () => {
         this.setState({HelmReleaseUpdateVisible: false}) 
         this.setState({HelmReleaseUpdateConfirmLoading: false})
-        const form = this.helmchartUpdateFormRef.props.form;
-        this.helmchartDeployFormRef.setState({values: false, valuesfile:false})
+        const form = this.helmReleaseUpdateFormRef.props.form;
+        this.helmReleaseUpdateFormRef.setState({values: false, valuesfile:false})
         form.resetFields();
-        this.props.clearData();
+    }
+
+    handleHelmReleaseRollBackCancel = () => {
+        this.setState({HelmReleaseRollBackVisible: false}) 
+        this.setState({HelmReleaseRollBackConfirmLoading: false})
+        const form = this.helmReleaseRollBackFormRef.props.form;
+        form.resetFields();
     }
 
     handleHelmReleaseDeleteCancel = () => {
         this.setState({HelmReleaseDeleteVisible: false}) 
         this.setState({HelmReleaseDeleteConfirmLoading: false})
-        const form = this.helmchartDeleteFormRef.props.form;
-        console.log(this.helmchartDeleteFormRef.state)
+        const form = this.helmReleaseDeleteFormRef.props.form;
+        console.log(this.helmReleaseDeleteFormRef.state)
         form.resetFields();
     }
 
     handleHelmReleaseListWithArgs = () => {
+       if(!this.state.clusterId){
+         message.info("请在右上角选择集群查看");
+         return;   
+       }
        let value = this.props.form.getFieldsValue()
        let query_args ={}
        query_args.namespace = value.namespace !== undefined ? value.namespace : "";
@@ -82,25 +103,118 @@ class HelmReleaseForm extends Component {
     }
 
     handleHelmReleaseUpdate = () => {
-      const form = this.helmchartUpdateFormRef.props.form;
+      const form = this.helmReleaseUpdateFormRef.props.form;
       form.validateFields((err, formvalues) => {
         if (err) {
           return;
+        }   
+        let update_args = {}; 
+        update_args.values = JSON.stringify({});
+        if (this.helmReleaseUpdateFormRef.state.values){
+            let values_result = combinekeyvalue(formvalues.chartkeys, formvalues.chartvalues)
+            if (values_result[0] == 1){ 
+              message.error("values生成错误")
+              return
+            }   
+            update_args.values = JSON.stringify(values_result[1])
+        }   
+        update_args.valuesfile = ''; 
+        if (this.helmReleaseUpdateFormRef.state.valuesfile){
+            update_args.valuesfile = this.helmReleaseUpdateFormRef.editor.getValue();
+        }   
+        if(formvalues.chartname != this.helmReleaseUpdateFormRef.state.chartinfo.split(" ")[0]){
+                message.error("chart名称不匹配"); 
+                return;
         }
-      });
+        update_args.dry_run = formvalues.dry_run;
+        update_args.releasename = this.helmReleaseUpdateFormRef.state.releasename;
+        update_args.force = formvalues.force; 
+        update_args.recreate = formvalues.recreate; 
+        update_args.reset_values = formvalues.reset_values; 
+        update_args.reuse_values = formvalues.reuse_values; 
+        update_args.repo_id = formvalues.repo_id; 
+        update_args.chartname = formvalues.chartname; 
+        update_args.chartversions = formvalues.chartversions; 
+        const _that = this; 
+        this.setState({HelmReleaseUpdateConfirmLoading: true})
+        postAjax('/helm/helmrelease/', generateformdata(update_args), function(res){
+            if(res.data.code == 0){ 
+                message.success(res.data.msg); 
+                _that.setState({HelmReleaseUpdateConfirmLoading: false})
+                form.resetFields();
+                _that.setState({ HelmReleaseUpdateVisible: false }); 
+                _that.handleHelmReleaseListWithArgs();
+            }else{
+                message.error(res.data.msg) 
+                _that.setState({HelmReleaseUpdateConfirmLoading: false})
+            }   
+        }, {'Cluster-Id': _that.ClusterSelectFormRef.props.form.getFieldsValue().clustername})  
+      }); 
+    }
+
+    handleHelmReleaseRollBack = () => {
+      const form = this.helmReleaseRollBackFormRef.props.form;
+      form.validateFields((err, formvalues) => {
+        if (err) {
+          return;
+        }   
+        let rollback_args = {}; 
+        if(formvalues.version == this.helmReleaseRollBackFormRef.state.releaseversion){
+                message.error("版本未发生变化"); 
+                return;
+        }
+        rollback_args.dry_run = formvalues.dry_run;
+        rollback_args.release_name = this.helmReleaseRollBackFormRef.state.releasename;
+        rollback_args.force = formvalues.force; 
+        rollback_args.recreate = formvalues.recreate; 
+        rollback_args.disable_hooks = formvalues.disable_hooks; 
+        rollback_args.version = formvalues.version; 
+        const _that = this; 
+        this.setState({HelmReleaseRollBackConfirmLoading: true})
+        putAjax('/helm/helmrelease/', generateformdata(rollback_args), function(res){
+            if(res.data.code == 0){ 
+                message.success(res.data.msg); 
+                _that.setState({HelmReleaseRollBackConfirmLoading: false})
+                form.resetFields();
+                _that.setState({ HelmReleaseRollBackVisible: false }); 
+                _that.handleHelmReleaseListWithArgs();
+            }else{
+                message.error(res.data.msg) 
+                _that.setState({HelmReleaseRollBackConfirmLoading: false})
+            }   
+        }, {'Cluster-Id': _that.ClusterSelectFormRef.props.form.getFieldsValue().clustername})  
+      }); 
     }
 
     handleHelmReleaseDelete = () => {
-      const form = this.helmchartDeleteFormRef.props.form;
-      console.log(form.getFieldsValue())
+      const form = this.helmReleaseDeleteFormRef.props.form;
+      let purge = form.getFieldsValue().purge;
+      let name = this.helmReleaseDeleteFormRef.state.releasename; 
+      this.setState({HelmReleaseDeleteConfirmLoading: true})
+      const _that = this;
+      deleteAjax('/helm/helmrelease/', "name=" + name +"&purge=" + purge, function(res){
+          if(res.data.code == 0){ 
+              _that.setState({HelmReleaseDeleteConfirmLoading: false})
+              form.resetFields();
+              _that.setState({ HelmReleaseDeleteVisible: false }); 
+              _that.handleHelmReleaseListWithArgs();
+          }else{
+              message.error(res.data.msg) 
+              _that.setState({HelmReleaseDeleteConfirmLoading: false})
+          }   
+      }, {'Cluster-Id': _that.ClusterSelectFormRef.props.form.getFieldsValue().clustername})
     }
 
     saveHelmReleaseUpdateFormRef = (formRef) => {
-      this.helmchartDeployFormRef = formRef;
+      this.helmReleaseUpdateFormRef = formRef;
+    } 
+
+    saveHelmReleaseRollBackFormRef = (formRef) => {
+      this.helmReleaseRollBackFormRef = formRef;
     } 
 
     saveHelmReleaseDeleteFormRef = (formRef) => {
-      this.helmchartDeleteFormRef = formRef;
+      this.helmReleaseDeleteFormRef = formRef;
     } 
 
     saveclusterselectFormRef = (formRef) => {
@@ -168,6 +282,13 @@ class HelmReleaseForm extends Component {
         				  onCancel={this.handleHelmReleaseDeleteCancel}
         				  onCreate={this.handleHelmReleaseDelete}
         				/>
+        				<HelmReleaseRollBackForm
+        				  wrappedComponentRef={this.saveHelmReleaseRollBackFormRef}
+        				  visible={this.state.HelmReleaseRollBackVisible}
+                          confirmLoading={this.state.HelmReleaseRollBackConfirmLoading}
+        				  onCancel={this.handleHelmReleaseRollBackCancel}
+        				  onCreate={this.handleHelmReleaseRollBack}
+        				/>
                     </FormItem>
                     <div style={{ float:'right'}}>
                         <FormItem label="">
@@ -219,4 +340,4 @@ class HelmReleaseForm extends Component {
 const HelmReleaseManage = Form.create()(HelmReleaseForm);
 export default connect(
   state => {return {...state.helmRelease, ...state.PaasCommon}},
-  {getlocalsearch, getClusterNamespaceList, getHelmReleaseList, clearData })(HelmReleaseManage);
+  {clearReleaseData, getHelmReleaseVersionList, getHelmRepoOptionList, getlocalsearch, getClusterNamespaceList, getHelmReleaseList, clearPaasCommonData })(HelmReleaseManage);

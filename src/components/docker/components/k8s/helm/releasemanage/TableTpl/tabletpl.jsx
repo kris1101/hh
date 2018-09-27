@@ -30,10 +30,10 @@ export function getHelmRelease() {
                   <Button size="small" icon="delete" onClick={() => this.showHelmReleaseDeleteModel(record)}>删除</Button>
                 </Col>
                 <Col span={8}>
-                    <Button size="small" icon="rollback">回滚</Button>
+                  <Button size="small" icon="rollback" onClick={() => this.showHelmReleaseRollBackModel(record)}>回滚</Button>
                 </Col>
                 <Col span={8}>
-                    <Button size="small" icon="up-square">升级</Button>
+                  <Button size="small" icon="up-square" onClick={() => this.showHelmReleaseUpdateModel(record)}>升级</Button>
                 </Col>
               </Row>
             </div>

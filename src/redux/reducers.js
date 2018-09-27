@@ -51,6 +51,9 @@ import {
     helmChart
 } from '../containers/Paas/k8s/k8shelmchart.redux'
 import {
+  helmTaskState
+} from '../containers/Paas/k8s/k8shelmtaskstate'
+import {
     daasSlowQueryEmail
 } from '../containers/Daas/reducers/slow_query_email';
 
@@ -71,6 +74,7 @@ const App = combineReducers({
     helmChart,
     helmRelease,
     PaasCommon,
+    helmTaskState,
     harborUser,
     harborConfigurations,
     harborProjectDetails,

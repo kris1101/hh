@@ -32,7 +32,7 @@ export function loadData(clusterlistinfo){
 	return { type:LOAD_DATA, payload:clusterlistinfo}
 }
 
-export function clearData(){
+export function clearPaasCommonData(){
 	return { type:CLEAR_DATA}
 }
 

@@ -9,7 +9,7 @@ import HelmChartDeployForm from './helmchartforms/chartdeployform'
 import { postAjax } from '../../../../utils/axios'
 import { generateformdata  } from '../../../../utils/tools_helper'
 import { getHelmChartList, getHelmRepoOptionList, getlocalsearch } from '../../../../../../containers/Paas/k8s/k8shelmchart.redux'
-import { clearData, getUserClusterList } from '../../../../../../containers/Paas/common/paascommon.redux'
+import { clearPaasCommonData, getUserClusterList } from '../../../../../../containers/Paas/common/paascommon.redux'
 import { combinekeyvalue } from '../../../../utils/tools_helper.jsx'
 
 const { Sider, Content } = Layout;
@@ -49,7 +49,7 @@ class HelmChartForm extends Component {
         const form = this.helmchartDeployFormRef.props.form;
         this.helmchartDeployFormRef.setState({values: false, valuesfile:false})
         form.resetFields();
-        this.props.clearData();
+        this.props.clearPaasCommonData();
     }
 
     handleHelmChartListWithArgs = () => {
@@ -187,4 +187,4 @@ class HelmChartForm extends Component {
 const HelmChartManage = Form.create()(HelmChartForm);
 export default connect(
   state => state.helmChart,
-  { getHelmChartList, getUserClusterList, getHelmRepoOptionList, getlocalsearch, clearData })(HelmChartManage);
+  { getHelmChartList, getUserClusterList, getHelmRepoOptionList, getlocalsearch, clearPaasCommonData })(HelmChartManage);

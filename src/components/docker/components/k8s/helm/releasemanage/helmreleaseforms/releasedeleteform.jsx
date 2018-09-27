@@ -20,6 +20,8 @@ const HelmReleaseDeleteForm = Form.create()(
                     visible={visible}
                     onOk={onCreate}
                     onCancel={onCancel}
+                    confirmLoading={confirmLoading}
+                    destroyOnClose={true}
                     okText="确认"
                     cancelText="取消"
                   >
@@ -34,7 +36,9 @@ const HelmReleaseDeleteForm = Form.create()(
                            </FormItem>
                             <FormItem label="彻底删除" className="formitem" labelCol={{ span: 4}} wrapperCol={{span: 20}}>
                               {getFieldDecorator('purge',{initialValue: "false"})(
-                                                 <Radio.Group>
+                              <Radio.Group
+                                disabled={confirmLoading}
+                              >
                                                   <Radio value="true">是</Radio>
                                                   <Radio value="false">否</Radio>
                                                 </Radio.Group> 

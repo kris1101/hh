@@ -34,7 +34,7 @@ export function loadData(tillerconfiginfo){
 	return { type:LOAD_DATA, payload:tillerconfiginfo}
 }
 
-export function clearData(){
+export function clearTillerData(){
 	return { type:CLEAR_DATA}
 }
 
