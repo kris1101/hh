@@ -6,7 +6,7 @@ import BreadcrumbCustom from '../../../../../../components/BreadcrumbCustom';
 import { getTillerConfig } from './TableTpl/tabletpl';
 import './tillerconfig.less';
 import { getK8sTillerList } from '../../../../../../containers/Paas/k8s/k8stiller.redux'
-import { clearData } from '../../../../../../containers/Paas/k8s/k8stiller.redux'
+import { clearTillerData } from '../../../../../../containers/Paas/k8s/k8stiller.redux'
 import { TillerCreateForm } from './tillerconfigforms/tillerconfigcreate'
 import { TillerUpdateForm } from './tillerconfigforms/tillerconfigupdate'
 import { postAjax } from '../../../../utils/axios'
@@ -33,7 +33,7 @@ class K8sTillerForm extends Component {
 
     componentDidMount () {
         this.showinitmessage();
-        this.props.clearData(); 
+        this.props.clearTillerData(); 
         
     }
 
@@ -211,4 +211,4 @@ class K8sTillerForm extends Component {
 const K8sTillerManage = Form.create()(K8sTillerForm);
 export default connect(
   state => state.k8sTiller,
-  { getK8sTillerList, clearData})(K8sTillerManage);
+  { getK8sTillerList, clearTillerData})(K8sTillerManage);

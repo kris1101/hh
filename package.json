@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@uiw/react-codemirror": "^1.0.14",
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",
     "babel-core": "6.26.0",
@@ -36,7 +37,7 @@
     "promise": "8.0.1",
     "raf": "3.4.0",
     "react": "^16.3.1",
-    "react-dev-utils": "^5.0.1",
+    "react-dev-utils": "^5.0.2",
     "react-dom": "^16.3.1",
     "react-fontawesome": "^1.6.1",
     "react-html5video": "^2.5.1",
@@ -100,7 +101,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "antd": "^3.4.0",
+    "antd": "^3.9.3",
     "babel-plugin-import": "^1.7.0",
     "less-loader": "^4.1.0",
     "webpack": "^3.8.1"

@@ -8,6 +8,8 @@ import {
 
 const LOAD_DATA = 'LOAD_HELMCHART_DATA'
 const LOAD_REPOOPTION_DATA = 'LOAD_REPOOPTION_DATA'
+const LOAD_CHARTOPTION_DATA = 'LOAD_CHARTOPTION_DATA'
+const LOAD_CHARTVERSION_DATA = 'LOAD_CHARTVERSION_DATA'
 const LOCAL_SEARCH_DATA = 'LOCAL_SEARCH_DATA'
 const START_LOADING = 'START_HELMCHART_LOADING'
 const END_LOADING = 'END_HELMCHART_LOADING'
@@ -20,6 +22,8 @@ const initState = {
     helmchartList: [],
     helmchartListorigin: [],
     helmrepooptionList: [],
+    helmchartoptionList: [],
+    helmchartversionList: [],
 }
 
 // reducer
@@ -33,6 +37,14 @@ export function helmChart(state = initState, action) {
         case LOAD_REPOOPTION_DATA:
             return { ...state,
                 helmrepooptionList: action.payload
+            }
+        case LOAD_CHARTOPTION_DATA:
+            return { ...state,
+                helmchartoptionList: action.payload
+            }
+        case LOAD_CHARTVERSION_DATA:
+            return { ...state,
+                helmchartversionList: action.payload
             }
         case START_LOADING:
             return { ...state,
@@ -64,6 +76,20 @@ export function loadRepoOptionData(helmrepooptionlistinfo) {
     return {
         type: LOAD_REPOOPTION_DATA,
         payload: helmrepooptionlistinfo
+    }
+}
+
+export function loadChartOptionData(helmchartoptionlistinfo) {
+    return {
+        type: LOAD_CHARTOPTION_DATA,
+        payload: helmchartoptionlistinfo
+    }
+}
+
+export function loadChartVersionData(helmchartversionlistinfo) {
+    return {
+        type: LOAD_CHARTVERSION_DATA,
+        payload: helmchartversionlistinfo
     }
 }
 
@@ -120,7 +146,37 @@ export function getHelmRepoOptionList() {
             } else {
                 notification.error({
                     description: res.data.msg,
-                    message: "获取repo选项异常"
+                    message: "获取repo_option选项异常"
+                })
+            }
+        })
+    }
+}
+
+export function getHelmChartOptionList(params) {
+    return dispatch => {
+        getAjax('/helm/helmchartoptionlist/', params, function(res) {
+            if (res.data.code == 0) {
+                dispatch(loadChartOptionData(res.data.data))
+            } else {
+                notification.error({
+                    description: res.data.msg,
+                    message: "获取chart_option选项异常"
+                })
+            }
+        })
+    }
+}
+
+export function getHelmChartVersionList(params) {
+    return dispatch => {
+        getAjax('/helm/helmchartversionlist/', params, function(res) {
+            if (res.data.code == 0) {
+                dispatch(loadChartVersionData(res.data.data))
+            } else {
+                notification.error({
+                    description: res.data.msg,
+                    message: "获取chart_version选项异常"
                 })
             }
         })

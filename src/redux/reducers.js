@@ -51,6 +51,9 @@ import {
     helmChart
 } from '../containers/Paas/k8s/k8shelmchart.redux'
 import {
+    helmTaskState
+} from '../containers/Paas/k8s/k8shelmtaskstate'
+import {
     daasSlowQueryEmail
 } from '../containers/Daas/reducers/slow_query_email';
 import {
@@ -62,6 +65,9 @@ import {
 import {
     daasSlowQueryInstanceGroupRelationship
 } from '../containers/Daas/reducers/slow_query_instance_group_relationship';
+import {
+    helmRelease
+} from '../containers/Paas/k8s/k8shelmrelease.redux';
 const App = combineReducers({
     todos,
     setCounter,
@@ -74,7 +80,9 @@ const App = combineReducers({
     k8sTiller,
     helmRepo,
     helmChart,
+    helmRelease,
     PaasCommon,
+    helmTaskState,
     harborUser,
     harborConfigurations,
     harborProjectDetails,

@@ -1,9 +1,9 @@
 import React from 'react'
 import {Switch, message, Form, Input, Drawer, Row, Col, Select, Button, Checkbox, Divider, Icon } from 'antd';
 import { connect  } from 'react-redux';
-import './chartdeployform.less'
+import './releaseform.less'
 import { getAjax  } from '../../../../../utils/axios'
-import { getClusterNamespaceList } from '../../../../../../../containers/Paas/common/paascommon.redux'
+import { getHelmRepoOptionList, getHelmChartOptionList, getHelmChartVersionList } from '../../../../../../../containers/Paas/k8s/k8shelmchart.redux'
 import CodeMirror from '@uiw/react-codemirror';
 import 'codemirror/addon/display/autorefresh';
 import 'codemirror/addon/comment/comment';
@@ -14,18 +14,26 @@ import 'codemirror/theme/night.css';
 const FormItem = Form.Item;
 
 let uuid = 1;
-const HelmChartDeployForm = Form.create()(
+const HelmReleaseUpdateForm = Form.create()(
   class extends React.Component {
     state = { 
-      chartinfo:{versions:[]},
+      chartinfo:"",
+      releasename:"",
       values: false,
       valuesfile:false,
+      repo_id:"",
     }   
 
 
-    handleClusterSelect = (value) => {
+    handleRepoSelect = (value) => {
       console.log(value);
-      this.props.getClusterNamespaceList({"Cluster-Id": value});
+      this.props.getHelmChartOptionList({"repo_id": value});
+      this.setState({repo_id: value})
+    }
+
+    handleChartSelect = (value) => {
+      console.log(value);
+      this.props.getHelmChartVersionList({"chartname": value, "repo_id": this.state.repo_id});
     }
 
     handlevalueschange = (e) => {
@@ -137,7 +145,7 @@ const HelmChartDeployForm = Form.create()(
       return (
                 <div>
                 <Drawer
-                  title="部署chart"
+                  title="升级release"
                   width="800px"
                   placement="right"
                   onClose={onCancel}
@@ -151,8 +159,11 @@ const HelmChartDeployForm = Form.create()(
                   }}
                 >
                   <Form  layout="horizontal" hideRequiredMark id="deployform">
-                        <Form.Item className="formitem" label="chart名称" labelCol={{ span: 4}} wrapperCol={{span: 20}}>
-                              <span style={{fontSize: 15}}>{this.state.chartinfo.chart_name}</span>
+                        <Form.Item className="formitem" label="chart信息" labelCol={{ span: 4}} wrapperCol={{span: 20}}>
+                              <span style={{fontSize: 15}}>{this.state.chartinfo}</span>
+                        </Form.Item>
+                        <Form.Item className="formitem" label="release名称" labelCol={{ span: 4}} wrapperCol={{span: 20}}>
+                              <span style={{fontSize: 15}}>{this.state.releasename}</span>
                         </Form.Item>
                         <Form.Item className="formitem" label="部署选项" labelCol={{ span: 4}} wrapperCol={{span: 20}}>
                                  <Row>
@@ -160,74 +171,66 @@ const HelmChartDeployForm = Form.create()(
                                    <Col span={12}><Checkbox onChange={this.handlevaluesfilechange} disabled={confirmLoading} value="valuesfile">valuesfile替换</Checkbox></Col>
                                  </Row>
                         </Form.Item>
+                        <Form.Item className="formitem" label="force" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
+							{getFieldDecorator('force',{initialValue: false})(
+                                   <Switch />
+                             )}
+                        </Form.Item>
                         <Form.Item className="formitem" label="dry_run" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
 							{getFieldDecorator('dry_run',{initialValue: false})(
                                    <Switch />
                              )}
                         </Form.Item>
-                        <Form.Item className="formitem" label="disable_hooks" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
-							{getFieldDecorator('disable_hooks',{initialValue: false})(
+                        <Form.Item className="formitem" label="recreate" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
+							{getFieldDecorator('recreate',{initialValue: false})(
                                    <Switch />
                              )}
                         </Form.Item>
-                        <Form.Item className="formitem" label="reuse_name" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
-							{getFieldDecorator('reuse_name',{initialValue: false})(
+                        <Form.Item className="formitem" label="reset_values" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
+							{getFieldDecorator('reset_values',{initialValue: false})(
                                    <Switch />
                              )}
                         </Form.Item>
-                        <Form.Item className="formitem" label="disable_crd_hook" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
-							{getFieldDecorator('disable_crd_hook',{initialValue: false})(
+                        <Form.Item className="formitem" label="reuse_values" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
+							{getFieldDecorator('reuse_values',{initialValue: false})(
                                    <Switch />
-                             )}
-                        </Form.Item>
-                        <Form.Item className="formitem" label="release名称" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
-							{getFieldDecorator('release_name')(
-									<Input placeholder="留空为随机名称"/>
                              )}
                         </Form.Item>
                         <Form.Item className="formitem" label="repo名称" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
-							{getFieldDecorator('repo_id',{initialValue: this.state.chartinfo.repo_id, rules: [{required: true, message:"该项不能为空"}]})(
-									<Select style={{ width: "100%" }}>
-										 <Option value={this.state.chartinfo.repo_id}>{this.state.chartinfo.repo_name}</Option>
+							{getFieldDecorator('repo_id',{rules: [{required: true, message:"该项不能为空"}]})(
+                                     <Select 
+                                        style={{ width: "100%" }} 
+                                        onSelect={this.handleRepoSelect}
+                                        filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                                        getPopupContainer={() => document.getElementById("deployform")}
+                                        showSearch
+                                      >
+										{this.props.helmrepooptionList.map(function(value){return (<Option key={value.id} value={value.id}>{value.name}</Option>)})}
                                     </Select>
                              )}
                         </Form.Item>
                         <Form.Item className="formitem" label="chart名称" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
-							{getFieldDecorator('chart_name',{initialValue: this.state.chartinfo.chart_name, rules: [{required: true, message:"该项不能为空"}]})(
-									<Select style={{ width: "100%" }}>
-										 <Option value={this.state.chartinfo.chart_name}>{this.state.chartinfo.chart_name}</Option>
+							{getFieldDecorator('chartname',{rules: [{required: true, message:"该项不能为空"}]})(
+									<Select
+                                       style={{ width: "100%" }} 
+                                       onSelect={this.handleChartSelect}
+                                       filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                                       getPopupContainer={() => document.getElementById("deployform")}
+                                       showSearch
+                                     >
+										{this.props.helmchartoptionList.map(function(value){return (<Option key={value} value={value}>{value}</Option>)})}
                                     </Select>
                              )}
                         </Form.Item>
                         <Form.Item className="formitem" label="chart版本" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
-							{getFieldDecorator('version',{initialValue: this.state.chartinfo.versions[0], rules: [{required: true, message:"该项不能为空"}]})(
-									<Select style={{ width: "100%" }}>
-										{this.state.chartinfo.versions.map(function(value){return (<Option key={value} value={value}>{value}</Option>)})}
-                                    </Select>
-                             )}
-                        </Form.Item>
-                        <Form.Item className="formitem" label="集群名称" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
-							{getFieldDecorator('cluster', {rules: [{required: true, message:"该项不能为空"}]})(
-                            <Select 
-                              style={{ width: "100%" }} 
-                              onSelect={this.handleClusterSelect}
-                              filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                              getPopupContainer={() => document.getElementById("deployform")}
-                              showSearch
-                            >
-										{this.props.clusterList.map(function(value){return (<Option key={value.id} value={value.id}>{value.name}</Option>)})}
-                                    </Select>
-                             )}
-                        </Form.Item>
-                        <Form.Item className="formitem" label="命名空间" labelCol={{ span: 4}} disabled={confirmLoading} wrapperCol={{span: 20}}>
-							{getFieldDecorator('namespace',{rules: [{required: true, message:"该项不能为空"}]})(
-                            <Select 
-                              style={{ width: "100%" }}
-                              filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                              getPopupContainer={() => document.getElementById("deployform")}
-                              showSearch
-                            >
-										{this.props.namespaceList.map(function(value){return (<Option key={value.id} value={value.text}>{value.text}</Option>)})}
+							{getFieldDecorator('chartversions',{rules: [{required: true, message:"该项不能为空"}]})(
+									<Select
+                                       style={{ width: "100%" }} 
+                                       filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                                       getPopupContainer={() => document.getElementById("deployform")}
+                                       showSearch
+                                    >
+										{this.props.helmchartversionList.map(function(value){return (<Option key={value} value={value}>{value}</Option>)})}
                                     </Select>
                              )}
                         </Form.Item>
@@ -282,6 +285,6 @@ const HelmChartDeployForm = Form.create()(
 );
 
 export default  connect(
-  state => state.PaasCommon,
-  {getClusterNamespaceList}
-)(HelmChartDeployForm)
+  state => state.helmChart,
+  {getHelmRepoOptionList, getHelmChartOptionList, getHelmChartVersionList}
+)(HelmReleaseUpdateForm)

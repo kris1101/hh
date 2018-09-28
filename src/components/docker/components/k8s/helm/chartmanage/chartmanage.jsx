@@ -5,10 +5,12 @@ import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../BreadcrumbCustom';
 import { getHelmChart } from './TableTpl/tabletpl';
 import './chartmanage.less';
-import { HelmChartDeployForm } from './helmchartforms/chartdeployform'
+import HelmChartDeployForm from './helmchartforms/chartdeployform'
 import { postAjax } from '../../../../utils/axios'
 import { generateformdata  } from '../../../../utils/tools_helper'
 import { getHelmChartList, getHelmRepoOptionList, getlocalsearch } from '../../../../../../containers/Paas/k8s/k8shelmchart.redux'
+import { clearPaasCommonData, getUserClusterList } from '../../../../../../containers/Paas/common/paascommon.redux'
+import { combinekeyvalue } from '../../../../utils/tools_helper.jsx'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -34,15 +36,20 @@ class HelmChartForm extends Component {
         this.props.form.resetFields();
     }
 
-    showHelmChartDeployModel = () => {
+    showHelmChartDeployModel = (chartinfo) => {
+        console.log(chartinfo);
         this.setState({HelmChartDeployVisible: true}) 
+        this.props.getUserClusterList();
+        this.helmchartDeployFormRef.setState({chartinfo})
     }
 
     handleHelmChartDeployCancel = () => {
         this.setState({HelmChartDeployVisible: false}) 
         this.setState({HelmChartDeployConfirmLoading: false})
-        const form = this.helmchartCreateFormRef.props.form;
+        const form = this.helmchartDeployFormRef.props.form;
+        this.helmchartDeployFormRef.setState({values: false, valuesfile:false})
         form.resetFields();
+        this.props.clearPaasCommonData();
     }
 
     handleHelmChartListWithArgs = () => {
@@ -57,16 +64,40 @@ class HelmChartForm extends Component {
     }
 
     handleHelmChartDeploy = () => {
-      const form = this.helmchartCreateFormRef.props.form;
-      form.validateFields((err, values) => {
+      const form = this.helmchartDeployFormRef.props.form;
+      form.validateFields((err, formvalues) => {
         if (err) {
           return;
         }
+        let deploy_args = {};
+        deploy_args.values = JSON.stringify({});
+        if (this.helmchartDeployFormRef.state.values){
+            let values_result = combinekeyvalue(formvalues.chartkeys, formvalues.chartvalues)
+            if (values_result[0] == 1){
+              message.error("values生成错误")
+              return
+            }
+            deploy_args.values = JSON.stringify(values_result[1])
+        }
+        deploy_args.valuesfile = '';
+        if (this.helmchartDeployFormRef.state.valuesfile){
+            deploy_args.valuesfile = this.helmchartDeployFormRef.editor.getValue();
+        }
+        deploy_args.dry_run = formvalues.dry_run;
+        deploy_args.disable_crd_hook = formvalues.disable_crd_hook; 
+        deploy_args.disable_hooks = formvalues.disable_hooks; 
+        deploy_args.reuse_name = formvalues.reuse_name; 
+        deploy_args.repo_id = formvalues.repo_id; 
+        deploy_args.chart_name = formvalues.chart_name; 
+        deploy_args.version = formvalues.version; 
+        deploy_args.release_name = formvalues.release_name; 
+        deploy_args.namespace = formvalues.namespace; 
+        deploy_args.cluster = formvalues.cluster; 
+        const _that = this; 
         this.setState({HelmChartDeployConfirmLoading: true})
-        const _that = this;
-        postAjax('/helm/helmchart/', generateformdata(values), function(res){
+        postAjax('/helm/helmchart/', generateformdata(deploy_args), function(res){
             if(res.data.code == 0){
-                message.success("部署成功") 
+                message.success(res.data.msg); 
                 _that.setState({HelmChartDeployConfirmLoading: false})
                 form.resetFields();
                 _that.setState({ HelmChartDeployVisible: false });
@@ -79,7 +110,7 @@ class HelmChartForm extends Component {
     }
 
     saveHelmChartDeployFormRef = (formRef) => {
-      this.helmchartCreateFormRef = formRef;
+      this.helmchartDeployFormRef = formRef;
     } 
 
     handlereposelect = (value) => {
@@ -156,4 +187,4 @@ class HelmChartForm extends Component {
 const HelmChartManage = Form.create()(HelmChartForm);
 export default connect(
   state => state.helmChart,
-  { getHelmChartList, getHelmRepoOptionList, getlocalsearch })(HelmChartManage);
+  { getHelmChartList, getUserClusterList, getHelmRepoOptionList, getlocalsearch, clearPaasCommonData })(HelmChartManage);

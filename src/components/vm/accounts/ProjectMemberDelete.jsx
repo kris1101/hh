@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Icon, Tooltip, notification, Modal } from 'antd';
 
-import { keypairDelete } from '../../../services/vm/user';
+import { projectMemberDelete } from '../../../services/vm/user';
 
 
-class KeyDelete extends Component {
+class ProjectMemberDelete extends Component {
   state = {
     visible: false,
     confirmLoading: false,
@@ -18,7 +18,9 @@ class KeyDelete extends Component {
 
   handleOk = () => {
     this.setState({ confirmLoading: true, });
-    keypairDelete(this.props.id).then(res => {
+    projectMemberDelete(
+      this.props.project_id, this.props.record.id, {id: this.props.record.id}
+    ).then(res => {
       if (res.code === 0) {
         notification['success']({message: res.msg});
       }else{
@@ -38,7 +40,7 @@ class KeyDelete extends Component {
   render() {
     return (
       <span>
-        <Tooltip  title="删除密钥">
+        <Tooltip title="删除项目成员">
           <a onClick={this.showModal}><Icon type="delete" style={{ color: '#bb0606' }} /></a>
         </Tooltip>
         <Modal title="确认删除"
@@ -55,4 +57,4 @@ class KeyDelete extends Component {
 }
 
 
-export default KeyDelete;
+export default ProjectMemberDelete;

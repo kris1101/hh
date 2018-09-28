@@ -21,7 +21,7 @@ export function getHelmChart() {
         render: (data, record, index) => {
             return (
             <div>
-              <Button size="small" icon="cloud-upload" onClick={() => this.handleChartDeploy(record)}>部署</Button>
+              <Button size="small" icon="cloud-upload" onClick={() => this.showHelmChartDeployModel(record)}>部署</Button>
             </div>
         )}
     }];
