@@ -53,7 +53,15 @@ import {
 import {
     daasSlowQueryEmail
 } from '../containers/Daas/reducers/slow_query_email';
-
+import {
+    daasSlowQueryGroup
+} from '../containers/Daas/reducers/slow_query_group';
+import {
+    daasSlowQueryGroupUserRelationship
+} from '../containers/Daas/reducers/slow_query_group_user_relationship';
+import {
+    daasSlowQueryInstanceGroupRelationship
+} from '../containers/Daas/reducers/slow_query_instance_group_relationship';
 const App = combineReducers({
     todos,
     setCounter,
@@ -73,6 +81,9 @@ const App = combineReducers({
     daasSlowQueryUser,
     daasSlowQueryInstance,
     daasSlowQueryEmail,
+    daasSlowQueryGroup,
+    daasSlowQueryGroupUserRelationship,
+    daasSlowQueryInstanceGroupRelationship,
 });
 
 export default App
