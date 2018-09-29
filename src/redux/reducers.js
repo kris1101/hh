@@ -52,7 +52,7 @@ import {
 } from '../containers/Paas/k8s/k8shelmchart.redux'
 import {
   helmTaskState
-} from '../containers/Paas/k8s/k8shelmtaskstate'
+} from '../containers/Paas/k8s/k8shelmtaskstate.redux'
 import {
     daasSlowQueryEmail
 } from '../containers/Daas/reducers/slow_query_email';
@@ -60,6 +60,10 @@ import {
 import {
    helmRelease 
 } from '../containers/Paas/k8s/k8shelmrelease.redux';
+
+import {
+  paasCodeBase
+} from '../containers/Paas/k8s/paascodebase.redux';
 const App = combineReducers({
     todos,
     setCounter,
@@ -70,6 +74,7 @@ const App = combineReducers({
     harborLogs,
     daasGroups,
     k8sTiller,
+    paasCodeBase,
     helmRepo,
     helmChart,
     helmRelease,

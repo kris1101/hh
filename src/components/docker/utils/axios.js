@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { notification } from 'antd';
-
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css'
 
 const baseUrl = 'http://paas.sinochem.cloud/api/paas';
 var instance = axios.create({
@@ -10,6 +11,18 @@ var instance = axios.create({
 
 instance.defaults.headers.post['Content-Type'] = 'multipart/form-data'
 instance.defaults.headers.put['Content-Type'] = 'multipart/form-data'
+
+//拦截请求
+instance.interceptors.request.use(function(config){
+    NProgress.start();
+	return config;
+})
+
+//拦截响应
+instance.interceptors.response.use(function(config){
+    NProgress.done();
+	return config
+})
 
 export function getAjax(url, params, Callback, headers={}) {
     let token = sessionStorage.token;
@@ -22,7 +35,7 @@ export function getAjax(url, params, Callback, headers={}) {
         })
         .catch(function (error,resoponse) {
             /* return Promise.reject(error);*/
-            console.log(error, resoponse);
+            console.log(error);
             notification.error({
                 message: '提示',
                 description: `服务器错误！`,
