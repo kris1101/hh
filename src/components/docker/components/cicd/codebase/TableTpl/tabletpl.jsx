@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Popover, Popconfirm, message } from 'antd';
+import { Icon, Popover, Popconfirm, message, Col, Row } from 'antd';
 import { formatStrDate } from '../../../../utils/time_helper'
 import { deleteAjax } from '../../../../utils/axios'
 
@@ -45,9 +45,16 @@ export function getCodeBase() {
         dataIndex: 'id',
       render: (data, record, index) => {
         return (
-          <Popconfirm placement="leftTop" onConfirm={() => deleterepo(data, this)} title={"确定删除该代码仓库"+ record.name +"吗?"} icon={<Icon type="question-circle-o" style={{ color: 'red'  }} />}>
+          <Row >
+              <Col span={12}>
+              <Popconfirm placement="leftTop" onConfirm={() => deleterepo(data, this)} title={"确定删除该代码仓库"+ record.name +"吗?"} icon={<Icon type="question-circle-o" style={{ color: 'red'  }} />}>
                  <Icon type="delete" style={{ cursor: "pointer" }}/>
               </Popconfirm>
+            </Col>
+              <Col span={12}>
+                 <Icon type="edit" style={{ cursor: "pointer" }}/>
+            </Col>
+          </Row>
           );
       }
     }

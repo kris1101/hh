@@ -117,7 +117,7 @@ const CodeInfoCreateForm = Form.create()(
             </FormItem>
             <FormItem label="公开"  labelCol={{span: 4}}  wrapperCol={{ span: 20  }}>
               {getFieldDecorator('public', {
-                initialValue: 'true', rules: [{required: true}],
+                initialValue: 'false', rules: [{required: true}],
               })(
                 <Radio.Group disabled={confirmLoading}>
                   <Radio value="true">是</Radio>
