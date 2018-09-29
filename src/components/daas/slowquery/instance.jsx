@@ -51,7 +51,7 @@ class SlowQueryInstatnceManager extends Component {
             <Daassider/>
         </Sider>
         <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
-            <BreadcrumbCustom first="首页" second="慢日志查询用户列表" />
+            <BreadcrumbCustom first="首页" second="慢日志查询实例列表" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline">
                     <FormItem>

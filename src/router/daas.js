@@ -16,6 +16,7 @@ import Daas_Machine from '../components/daas/sql/machine';
 import Daas_SlowQuery_User from '../components/daas/slowquery/user';
 import Daas_SlowQuery_Instance from '../components/daas/slowquery/instance';
 import Daas_SlowQuery_Email from '../components/daas/slowquery/email';
+import Daas_SlowQuery_Group from '../components/daas/slowquery/group';
 
 const daas_routes =
     [{
@@ -70,5 +71,9 @@ const daas_routes =
         exact: true,
         path: '/daas/slowquery/email',
         component: Daas_SlowQuery_Email,
+    }, {
+        exact: true,
+        path: '/daas/slowquery/group',
+        component: Daas_SlowQuery_Group,
     }]
 export default daas_routes;

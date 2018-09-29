@@ -3,6 +3,8 @@ import { Row, Col } from 'antd';
 import DaasSlowQueryInstanceDetailModel from '../instance/instancedetailmodel';
 import DaasSlowQueryInstanceEditModel from '../instance/instanceeditmodel';
 import DaasSlowQueryInstanceDeleteModel from '../instance/instancedeletemodel';
+import DaasSlowQueryInstanceGroupRelationshipEditModel from '../instance/instancegrouprelationshipeditmodel';
+
 export function getinstances() {
     return [{
         title: '名称',
@@ -21,9 +23,10 @@ export function getinstances() {
         render: (data) => (
             <div>
                 <Row>
-                    <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryInstanceDetailModel pk={data.pk} /></Col>
-                    <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryInstanceEditModel pk={data.pk} /></Col>
-                    <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryInstanceDeleteModel pk={data.pk} /></Col>
+                    <Col span={6} style={{color:'#0350CF'}}><DaasSlowQueryInstanceDetailModel pk={data.pk} /></Col>
+                    <Col span={6} style={{color:'#0350CF'}}><DaasSlowQueryInstanceEditModel pk={data.pk} /></Col>
+                    <Col span={6} style={{color:'#0350CF'}}><DaasSlowQueryInstanceDeleteModel pk={data.pk} /></Col>
+                    <Col span={6} style={{color:'#0350CF'}}><DaasSlowQueryInstanceGroupRelationshipEditModel pk={data.pk} /></Col>
                 </Row>
             </div>
         )
