@@ -47,12 +47,12 @@ export function getCodeBase() {
         return (
           <Row >
               <Col span={12}>
-              <Popconfirm placement="leftTop" onConfirm={() => deleterepo(data, this)} title={"确定删除该代码仓库"+ record.name +"吗?"} icon={<Icon type="question-circle-o" style={{ color: 'red'  }} />}>
+              <Popconfirm placement="topRight" onConfirm={() => deleterepo(data, this)} title={"确定删除该代码仓库"+ record.name +"吗?"} icon={<Icon type="question-circle-o" style={{ color: 'red'  }} />}>
                  <Icon type="delete" style={{ cursor: "pointer" }}/>
               </Popconfirm>
             </Col>
               <Col span={12}>
-                 <Icon type="edit" style={{ cursor: "pointer" }}/>
+                <Icon onClick={() => this.showCodeInfoUpdateModel(record)}type="edit" style={{ cursor: "pointer" }}/>
             </Col>
           </Row>
           );

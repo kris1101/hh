@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, message, Modal, Form, Radio } from 'antd';
+import {Input, Button, message, Modal, Form, Radio } from 'antd';
 import { connect } from 'react-redux';
 import { getCodeRepoList } from '../../../../../../containers/Paas/k8s/paascodebase.redux'
 import { putAjax  } from '../../../../utils/axios'
@@ -9,11 +9,13 @@ const FormItem = Form.Item;
 const CodeInfoUpdateForm = Form.create()(
   class extends React.Component {
     state ={
-       public: "false"
+       public: "false",
+       id:"",
+       name: "",
     }
 
     render() {
-      const { confirmLoading, visible, onCancel, onUpdate, form } = this.props;
+      const { confirmLoading, visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
       return (
         <Modal
@@ -23,10 +25,13 @@ const CodeInfoUpdateForm = Form.create()(
           centered
           maskClosable={false}
           onCancel={onCancel}
-          onOk={onUpdate}
+          onOk={onCreate}
           confirmLoading={confirmLoading}
         >
           <Form hideRequiredMark={true}>
+            <FormItem label="名称"  labelCol={{span: 4}}  wrapperCol={{ span: 20 }} hasFeedback={true}>
+              <span>{this.state.name}</span>
+            </FormItem>
             <FormItem label="TOKEN"  labelCol={{span: 4}}  wrapperCol={{ span: 20 }} hasFeedback={true}>
                {getFieldDecorator('private_token', {
                rules: [{ required: true, message: "token不能为空"}],

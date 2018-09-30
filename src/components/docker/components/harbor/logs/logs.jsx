@@ -123,28 +123,28 @@ class HarborLogsForm extends Component {
                   <Col span={6} className="col-center">
                         <FormItem label="">
                             {getFieldDecorator('username')(
-                                <Input placeholder="用户名" />
+                                <Input placeholder="用户名" style={{width: 195}}/>
                             )}
                         </FormItem>
                   </Col>
                   <Col span={6} className="col-center">
                         <FormItem label="">
                             {getFieldDecorator('repository')(
-                                <Input placeholder="镜像仓库" />
+                                <Input placeholder="镜像仓库" style={{width: 195}} />
                             )}
                         </FormItem>
                   </Col>
                   <Col span={6} className="col-center">
                         <FormItem label="">
                             {getFieldDecorator('tag')(
-                                <Input placeholder="标签" />
+                                <Input placeholder="标签"  style={{width: 195}}/>
                             )}
                         </FormItem>
                   </Col>
                   <Col span={6} className="col-center">
                         <FormItem label="">
                             {getFieldDecorator('operation')(
-                                <Select style={{ width: 174  }} showSearch placeholder="操作类型">
+                                <Select style={{ width: 195  }} showSearch placeholder="操作类型">
                                   <Option value="delete">delete</Option>
                                   <Option value="pull">pull</Option>
                                   <Option value="push">push</Option>
@@ -171,12 +171,12 @@ class HarborLogsForm extends Component {
                   </Col>
                   <Col span={6} className="col-center">
                     <FormItem>
-                        <Button type="primary"  style={{width: 174}} onClick={this.handleLogsQuery}>查询</Button>
+                        <Button type="primary"  style={{width: 195}} onClick={this.handleLogsQuery}>查询</Button>
                     </FormItem>
                   </Col>
                   <Col span={6} className="col-center">
                     <FormItem>
-                        <Button style={{width: 174}} onClick={this.handleReset}>重置</Button>
+                        <Button style={{width: 195}} onClick={this.handleReset}>重置</Button>
                     </FormItem>
                   </Col>
                 </Row>
@@ -184,7 +184,7 @@ class HarborLogsForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered loading={this.props.loading} rowKey={record => record.log_id} columns={this.columns} dataSource={this.props.logsList} pagination={pagination} />
+                <Table className="table-margin" bordered loading={this.props.loading} rowKey={record => record.log_id} columns={this.columns} dataSource={this.props.logsList} pagination={pagination} />
             </div>
         </Content>
       </Layout>

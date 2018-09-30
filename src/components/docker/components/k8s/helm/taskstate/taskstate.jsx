@@ -120,7 +120,7 @@ class HelmTaskForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered loading={this.props.loading} rowKey={record => record.id} columns={this.columns} dataSource={this.props.helmTaskStateList} pagination={pagination}/>
+                <Table className="table-margin" bordered loading={this.props.loading} rowKey={record => record.id} columns={this.columns} dataSource={this.props.helmTaskStateList} pagination={pagination}/>
             </div>
         </Content>
       </Layout>

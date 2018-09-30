@@ -105,7 +105,7 @@ class HarborMembersForm extends Component {
                     </FormItem>
                     <FormItem>
                         <Button type="primary" className="btn-search" style={{marginRight: 10}} onClick={this.handleProjectMemberQuery}>查询</Button>
-                        <Button className="btn-search" onClick={this.handleReset}>重置</Button>
+                        <Button  style={{marginRight: 0}} onClick={this.handleReset}>重置</Button>
                     </FormItem>
                   </div>
                 </Form>

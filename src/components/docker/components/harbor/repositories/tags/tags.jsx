@@ -49,7 +49,7 @@ class HarborRepositoriesTagsForm extends Component {
 
     return (
             <div style={{ background:'#fff' }}>
-                <Table bordered loading={this.props.repositoriestags_loading} rowKey={record => record.digest} columns={this.columns} dataSource={this.props.repositoriesTagsList} pagination={pagination} />
+                <Table className="table-margin" bordered loading={this.props.repositoriestags_loading} rowKey={record => record.digest} columns={this.columns} dataSource={this.props.repositoriesTagsList} pagination={pagination} />
             </div>
     );
   }

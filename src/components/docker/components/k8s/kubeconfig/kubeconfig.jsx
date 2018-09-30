@@ -202,7 +202,7 @@ class K8sClusterForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered loading={this.props.loading} rowKey={record => record.id} columns={this.columns} dataSource={this.props.clusterList} pagination={pagination} />
+                <Table className="table-margin" bordered loading={this.props.loading} rowKey={record => record.id} columns={this.columns} dataSource={this.props.clusterList} pagination={pagination} />
             </div>
         </Content>
       </Layout>

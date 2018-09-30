@@ -6,9 +6,10 @@ import BreadcrumbCustom from '../../../../BreadcrumbCustom';
 import { getCodeBase } from './TableTpl/tabletpl';
 import { getCodeBaseList, clearCodeBaseData } from '../../../../../containers/Paas/k8s/paascodebase.redux'
 import './codebase.less';
-import {postAjax} from '../../../utils/axios'
+import {postAjax, putAjax} from '../../../utils/axios'
 import {generateformdata} from '../../../utils/tools_helper'
 import CodeInfoCreateForm from './codebaseforms/codebasecreateform'
+import CodeInfoUpdateForm from './codebaseforms/codebaseupdateform'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -24,6 +25,8 @@ class PaasCodeBaseForm extends Component {
         pageSize: 10,
         CodeInfoCreateVisible: false,
         CodeInfoCreateConfirmLoading: false,
+        CodeInfoUpdateVisible: false,
+        CodeInfoUpdateConfirmLoading: false,
     }
 
     componentDidMount () {
@@ -40,10 +43,23 @@ class PaasCodeBaseForm extends Component {
         this.setState({CodeInfoCreateVisible: true}) 
     }
 
+    showCodeInfoUpdateModel = (record) => {
+        this.setState({CodeInfoUpdateVisible: true}) 
+        this.codeInfoUpdateFormRef.setState({public: record.is_public ? "true" : "false", id: record.id, name: record.name});
+        
+    }
+
     handleCodeInfoCreateCancel = () => {
         this.setState({CodeInfoCreateVisible: false}) 
         this.setState({CodeInfoCreateConfirmLoading: false})
         const form = this.codeInfoCreateFormRef.props.form;
+        form.resetFields();
+    }
+
+    handleCodeInfoUpdateCancel = () => {
+        this.setState({CodeInfoUpdateVisible: false}) 
+        this.setState({CodeInfoUpdateConfirmLoading: false})
+        const form = this.codeInfoUpdateFormRef.props.form;
         form.resetFields();
     }
 
@@ -71,8 +87,40 @@ class PaasCodeBaseForm extends Component {
       });
     }
 
+    handleCodeInfoUpdate = () => {
+      const form = this.codeInfoUpdateFormRef.props.form;
+      form.validateFields((err, values) => {
+        if (err) {
+          return;
+        }
+        this.setState({CodeInfoUpdateConfirmLoading: true})
+        const _that = this;
+        values.id = this.codeInfoUpdateFormRef.state.id;
+        if(!values.id){
+           message.error("未获取到id");
+           return;
+        }
+        putAjax('/codeinfo/codeproject/', generateformdata(values), function(res){
+            if(res.data.code == 0){
+                message.success("更新成功") 
+                _that.setState({CodeInfoUpdateConfirmLoading: false})
+                form.resetFields();
+                _that.setState({ CodeInfoUpdateVisible: false });
+                _that.handleCodeBaseQuery();
+            }else{
+                message.error(res.data.msg) 
+                _that.setState({CodeInfoUpdateConfirmLoading: false})
+            }
+        })
+      });
+    }
+
     saveCodeInfoCreateFormRef = (formRef) => {
       this.codeInfoCreateFormRef = formRef;
+    } 
+
+    saveCodeInfoUpdateFormRef = (formRef) => {
+      this.codeInfoUpdateFormRef = formRef;
     } 
 
 
@@ -139,6 +187,13 @@ class PaasCodeBaseForm extends Component {
         				  onCancel={this.handleCodeInfoCreateCancel}
         				  onCreate={this.handleCodeInfoCreate}
         				/>
+        				<CodeInfoUpdateForm
+        				  wrappedComponentRef={this.saveCodeInfoUpdateFormRef}
+        				  visible={this.state.CodeInfoUpdateVisible}
+                          confirmLoading={this.state.CodeInfoUpdateConfirmLoading}
+        				  onCancel={this.handleCodeInfoUpdateCancel}
+        				  onCreate={this.handleCodeInfoUpdate}
+        				/>
                     <div style={{ float:'right'}}>
                         <FormItem label="">
                             {getFieldDecorator('gitlab_project_name')(
@@ -157,7 +212,7 @@ class PaasCodeBaseForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered loading={this.props.loading} rowKey={record => record.id} columns={this.columns} dataSource={this.props.codeBaseList} pagination={pagination}/>
+                <Table className="table-margin" bordered loading={this.props.loading} rowKey={record => record.id} columns={this.columns} dataSource={this.props.codeBaseList} pagination={pagination}/>
             </div>
         </Content>
       </Layout>

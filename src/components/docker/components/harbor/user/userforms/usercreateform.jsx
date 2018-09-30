@@ -7,7 +7,7 @@ const usernamePatten = new RegExp("^[0-9a-z]{1,20}$");
 const emailPatten = new RegExp("^[A-Za-z0-9_-]+@[A-Za-z0-9_-]+\\.[A-Za-z]{2,8}$");
 const defaultMessage = "用户名称不能包含特殊字符且长度不能超过20"
 const defaultPasswordMessage = "密码长度在8-20之间且至少包含一个大写字母、一个小写字母以及一个数字"
-const defaultemailmessage = "请输入正确的邮箱格式1";
+const defaultemailmessage = "请输入正确的邮箱格式";
 const checklengthPatten = new RegExp("^.{8,20}") 
 const checkUpper = new RegExp("[A-Z]")
 const checklowwer = new RegExp("[a-z]")
@@ -26,7 +26,7 @@ const UserCreateForm = Form.create()(
     }
 
     compareToFirstPassword = (rule, value, callback) => {
-      if(!value.length){
+      if(!value){
         callback("确认密码不能为空");
       }
       if(!(checklengthPatten.test(value) && checkUpper.test(value) && checklowwer.test(value) && checknumber.test(value))){
@@ -41,7 +41,7 @@ const UserCreateForm = Form.create()(
     }
 
     validateToNextPassword = (rule, value, callback) => {
-      if(!value.length){
+      if(!value){
         callback("密码不能为空");
       }
       if(!(checklengthPatten.test(value) && checkUpper.test(value) && checklowwer.test(value) && checknumber.test(value))){
@@ -55,6 +55,11 @@ const UserCreateForm = Form.create()(
     }
 
     checkusernameexists = (rule, value, callback) =>{
+        if(!value){
+           callback("用户名不能为空"); 
+           return;
+        }
+        console.log(usernamePatten.test(value));
         if(!usernamePatten.test(value)){
            callback(defaultMessage); 
         }else{
