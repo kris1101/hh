@@ -79,7 +79,7 @@ class VMSider extends Component{
                 <Menu.Item key="/vm/snapshot"><Link to="/vm/snapshot">快照管理</Link></Menu.Item>
                 <Menu.Item key="/vm/backup"><Link to="/vm/backup">快照策略</Link></Menu.Item>
             </SubMenu>
-            <Menu.Item key="/vm/mirror"><Link to="/vm/mirror"><Icon type="switcher" />镜像</Link></Menu.Item>
+            <Menu.Item key="/vm/image"><Link to="/vm/image"><Icon type="switcher" />镜像</Link></Menu.Item>
             <Menu.Item key="/vm/extend"><Link to="/vm/extend"><Icon type="share-alt" />弹性伸缩</Link></Menu.Item>
             <Menu.Item key="/vm/key"><Link to="/vm/key"><Icon type="key" />密钥管理</Link></Menu.Item>
 

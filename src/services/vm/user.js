@@ -52,3 +52,7 @@ export const groupMemberList = (params) => axios.get(`accounts/groups/${params.g
 export const groupMemberAdd = (group_id, data) => axios.post(`accounts/groups/${group_id}/members/add/`, data).then(res => res.data).catch(err => console.log(err));
 export const groupMembers = (group_id) => axios.get(`accounts/groups/${group_id}/members/add/`).then(res => res.data).catch(err => console.log(err));
 export const groupMemberDel = (group_id, params) => axios.delete(`accounts/groups/${group_id}/members/del/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+
+// image
+export const imageList = (params) => axios.get('instances/image/', {params: params}).then(res => res.data).catch(err => console.log(err));
+export const imageDetail = (id, params) => axios.get(`instances/image/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
