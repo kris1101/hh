@@ -8,6 +8,7 @@ import ProjectMemberUpdate from '../ProjectMemberUpdate';
 import ProjectMemberDelete from '../ProjectMemberDelete';
 import ProjectGroupUpdate from '../ProjectGroupUpdate';
 import ProjectGroupDelete from '../ProjectGroupDelete';
+import { timezoneFormat } from '../../../../utils/vm'
 
 
 export function getColumes() {
@@ -82,6 +83,7 @@ export function getDetailMemeberColumes() {
   }, {
     title: '添加时间',
     dataIndex: 'create_time',
+    render: (text, record) => timezoneFormat(record.create_time),
   }, {
     title: '操作',
     key: 'action',
@@ -106,6 +108,7 @@ export function getDetailGroupColumes() {
   }, {
     title: '添加时间',
     dataIndex: 'create_time',
+    render: (text, record) => timezoneFormat(record.create_time),
   }, {
     title: '操作',
     key: 'action',

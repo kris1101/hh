@@ -5,7 +5,7 @@ import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
 import { networkDetail } from '../../../services/vm/user';
 import { getDetailColumes, getDetailDHCPColumes, getDetailPortColumes, getDetailSubnetColumes } from './TableTpl/networkTableTpl';
-import { humansize } from '../../../utils/vm'
+import { humansize, timezoneFormat } from '../../../utils/vm'
 
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
@@ -67,7 +67,7 @@ class NetworkDetail extends React.Component {
           {'title': '外部', 'key': 'router_external', 'value': res.data.router_external ? '是' : '否'},
           {'title': '管理状态', 'key': 'admin_state_up', 'value': res.data.admin_state_up ? 'UP' : 'DOWN'},
           {'title': '状态', 'key': 'status', 'value': res.data.status_display},
-          {'title': '创建时间', 'key': 'create_time', 'value': res.data.create_time},
+          {'title': '创建时间', 'key': 'create_time', 'value': timezoneFormat(res.data.create_time)},
           {'title': 'MTU', 'key': 'mtu', 'value': res.data.mtu},
           {'title': '网络类型', 'key': 'provider_network_type', 'value': res.data.provider_network_type},
           {'title': '物理网络', 'key': 'provider_physical_network', 'value': res.data.provider_physical_network},
@@ -93,7 +93,10 @@ class NetworkDetail extends React.Component {
       }
 
       this.setState({
-        dhcp_data: res.data,
+        dhcp_data: [...res.data.map(val => {
+          val.key = val.id;
+          return val;
+        })],
         loading: false,
       });
     });

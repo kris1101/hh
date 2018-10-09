@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Divider, Tooltip, Icon } from 'antd';
 import { Link } from 'react-router-dom';
-import { humansize } from '../../../../utils/vm'
+import { humansize, timesince } from '../../../../utils/vm'
 
 import NetworkDetail from '../NetworkDetail';
 
@@ -131,6 +131,7 @@ export function getDetailDHCPColumes() {
   },{
     title: '心跳时间',
     dataIndex: 'heartbeat_timestamp',
+    render: (text, record) => timesince(record.heartbeat_timestamp, "YYYY-MM-DD HH:mm:ss"),
   },{
     title: '管理状态',
     dataIndex: 'admin_state_up',
