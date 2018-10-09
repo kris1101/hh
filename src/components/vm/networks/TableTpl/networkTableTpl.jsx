@@ -54,3 +54,93 @@ export function getDetailColumes() {
 }
 
 
+export function getDetailSubnetColumes() {
+  return [{
+    title: '名称',
+    dataIndex: 'name',
+    render: (text, record) => record.name || record.uuid,
+  }, {
+    title: 'CIDR',
+    dataIndex: 'cidr',
+  },{
+    title: '启动DHCP',
+    dataIndex: 'enable_dhcp',
+    render: (text, record) => record.enable_dhcp ? '是' : '否',
+  },{
+    title: '网关',
+    dataIndex: 'gateway_ip',
+  },{
+    title: 'DNS',
+    dataIndex: 'dns_nameservers',
+  },{
+    title: '地址池',
+    dataIndex: 'allocation_pools',
+  },{
+    title: '操作',
+    render: (record) => (
+      <div>
+        <Divider type="vertical" />
+      </div>
+    )
+  }];
+}
+
+
+export function getDetailPortColumes() {
+  return [{
+    title: '名称',
+    dataIndex: 'name',
+    render: (text, record) => record.name || record.id,
+  }, {
+    title: '固定IP',
+    dataIndex: 'fixed_ips',
+    render: (text, record) => record.fixed_ips[0].ip_address,
+  },{
+    title: 'MAC地址',
+    dataIndex: 'mac_address',
+  },{
+    title: '连接设备',
+    dataIndex: 'device_owner',
+  },{
+    title: '状态',
+    dataIndex: 'status',
+  },{
+    title: '管理状态',
+    dataIndex: 'admin_state_up',
+    render: (text, record) => record.admin_state_up ? 'UP' : 'DOWN',
+  },{
+    title: '操作',
+    render: (record) => (
+      <div>
+        <Divider type="vertical" />
+      </div>
+    )
+  }];
+}
+export function getDetailDHCPColumes() {
+  return [{
+    title: 'ID',
+    dataIndex: 'id',
+  }, {
+    title: '主机',
+    dataIndex: 'host',
+  },{
+    title: '状态',
+    dataIndex: 'active',
+    render: (text, record) => record.active ? '激活' : '未激活',
+  },{
+    title: '心跳时间',
+    dataIndex: 'heartbeat_timestamp',
+  },{
+    title: '管理状态',
+    dataIndex: 'admin_state_up',
+    render: (text, record) => record.admin_state_up ? 'UP' : 'DOWN',
+  },{
+    title: '操作',
+    render: (record) => (
+      <div>
+        <Divider type="vertical" />
+      </div>
+    )
+  }];
+}

@@ -4,7 +4,7 @@ import { notification, Layout, message, Tooltip, Icon, Form, Modal, Button, Tabl
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
 import { networkDetail } from '../../../services/vm/user';
-import { getDetailColumes } from './TableTpl/networkTableTpl';
+import { getDetailColumes, getDetailDHCPColumes, getDetailPortColumes, getDetailSubnetColumes } from './TableTpl/networkTableTpl';
 import { humansize } from '../../../utils/vm'
 
 const confirm = Modal.confirm;
@@ -17,14 +17,17 @@ class NetworkDetail extends React.Component {
   constructor(props) {
     super(props);
     this.columns = getDetailColumes.call(this);
+    this.subnetColumns = getDetailSubnetColumes.call(this);
+    this.portColumns = getDetailPortColumes.call(this);
+    this.dhcpColumns = getDetailDHCPColumes.call(this);
   }
   state = {
     loading: false,
     activeKey: "1",
     base_data: [],
-    quota_data: [],
-    member_data: [],
-    group_data: [],
+    subnet_data: [],
+    port_data: [],
+    dhcp_data: [],
   };
   componentDidMount() {
     this.start();
@@ -34,11 +37,11 @@ class NetworkDetail extends React.Component {
     this.setState({ activeKey: activeKey });
     if (activeKey === '4'){
       // console.log(activeKey);
-      this.quota_request();
+      this.dhcp_request();
     } else if (activeKey === '2'){
-      this.project_member_request();
+      this.network_subnet_request();
     } else if (activeKey === '3'){
-      this.project_group_request();
+      this.network_port_request();
     }
   }
 
@@ -76,9 +79,9 @@ class NetworkDetail extends React.Component {
 
   };
 
-  quota_request = () => {
+  dhcp_request = () => {
     this.setState({ loading: true });
-    networkDetail(this.props.match.params.id, {tab: 'quota'}).then(res => {
+    networkDetail(this.props.match.params.id, {tab: 'dhcp'}).then(res => {
       if(res.code === -2){
         notification['warning']({message: res.msg});
         this.setState({loading: false});
@@ -90,29 +93,18 @@ class NetworkDetail extends React.Component {
       }
 
       this.setState({
-        quota_data: [
-          {'title': '实例', 'key': 'instances', 'value': res.data.instances},
-          {'title': 'VCPU数量', 'key': 'cores', 'value': res.data.cores},
-          {'title': '密钥对', 'key': 'key_pairs', 'value': res.data.key_pairs},
-          {'title': '内存', 'key': 'ram', 'value': humansize(res.data.ram, 'MB')},
-          {'title': '主机组', 'key': 'server_groups', 'value': res.data.server_groups},
-          {'title': '主机组成员', 'key': 'server_group_members', 'value': res.data.server_group_members},
-          {'title': '网络数量', 'key': 'network', 'value': res.data.network},
-          {'title': '子网数量', 'key': 'subnet', 'value': res.data.subnet},
-          {'title': '安全组数量', 'key': 'security_groups', 'value': res.data.security_groups},
-          {'title': '安全组规则数量', 'key': 'security_group_rule', 'value': res.data.security_group_rule},
-        ],
+        dhcp_data: res.data,
         loading: false,
       });
     });
 
   };
   refresh_member = () => {
-    this.project_member_request();
+    this.network_subnet_request();
   };
-  project_member_request = (page=1) => {
+  network_subnet_request = (page=1) => {
     this.setState({ loading: true });
-    networkDetail(this.props.match.params.id, {page: page}).then(res => {
+    networkDetail(this.props.match.params.id, {tab: 'subnet'}).then(res => {
       if(res.code === -2){
         notification['warning']({message: res.msg});
         this.setState({loading: false});
@@ -123,7 +115,7 @@ class NetworkDetail extends React.Component {
         return
       }
       this.setState({
-        member_data: [...res.data.map(val => {
+        subnet_data: [...res.data.map(val => {
           val.key = val.id;
           return val;
         })],
@@ -133,11 +125,11 @@ class NetworkDetail extends React.Component {
 
   };
   refresh_group = () => {
-    this.project_group_request();
+    this.network_port_request();
   };
-  project_group_request = (page=1) => {
+  network_port_request = (page=1) => {
     this.setState({ loading: true });
-    networkDetail(this.props.match.params.id, {page: page}).then(res => {
+    networkDetail(this.props.match.params.id, {tab: 'port'}).then(res => {
       if(res.code === -2){
         notification['warning']({message: res.msg});
         this.setState({loading: false});
@@ -148,7 +140,7 @@ class NetworkDetail extends React.Component {
         return
       }
       this.setState({
-        group_data: [...res.data.map(val => {
+        port_data: [...res.data.map(val => {
           val.key = val.id;
           return val;
         })],
@@ -184,28 +176,25 @@ class NetworkDetail extends React.Component {
                   </TabPane>
 
                   <TabPane tab={<span>子网</span>} key="2">
-                    <Table columns={this.columns} dataSource={this.state.member_data}
+                    <Table columns={this.subnetColumns} dataSource={this.state.subnet_data}
                       loading={this.state.loading}
                       pagination={false}
-                      showHeader={false}
                       bordered={true}
                     />
                   </TabPane>
 
                   <TabPane tab={<span>端口</span>} key="3">
-                    <Table columns={this.columns} dataSource={this.state.group_data}
+                    <Table columns={this.portColumns} dataSource={this.state.port_data}
                       loading={this.state.loading}
                       pagination={false}
-                      showHeader={false}
                       bordered={true}
                     />
                   </TabPane>
 
                   <TabPane tab={<span>DHCP Agents</span>} key="4">
-                    <Table columns={this.columns} dataSource={this.state.quota_data}
+                    <Table columns={this.dhcpColumns} dataSource={this.state.dhcp_data}
                       loading={this.state.loading}
                       pagination={false}
-                      showHeader={false}
                       bordered={true}
                     />
                   </TabPane>
