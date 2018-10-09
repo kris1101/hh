@@ -23,10 +23,10 @@ export function getinstances() {
         render: (data) => (
             <div>
                 <Row>
-                    <Col span={6} style={{color:'#0350CF'}}><DaasSlowQueryInstanceDetailModel pk={data.pk} /></Col>
-                    <Col span={6} style={{color:'#0350CF'}}><DaasSlowQueryInstanceEditModel pk={data.pk} /></Col>
-                    <Col span={6} style={{color:'#0350CF'}}><DaasSlowQueryInstanceDeleteModel pk={data.pk} /></Col>
-                    <Col span={6} style={{color:'#0350CF'}}><DaasSlowQueryInstanceGroupRelationshipEditModel pk={data.pk} /></Col>
+                    <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryInstanceDetailModel pk={data.pk} /></Col>
+                    <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryInstanceEditModel pk={data.pk} /></Col>
+                    <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryInstanceDeleteModel pk={data.pk} /></Col>
+                    <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryInstanceGroupRelationshipEditModel pk={data.pk} /></Col>
                 </Row>
             </div>
         )
