@@ -6,10 +6,11 @@ import React, {
     Component
 } from 'react';
 import Qs from 'qs';
+import {
+    BASE_URL
+} from '../../containers/Daas/constants';
 
-
-
-export var baseUrl = 'http://192.168.43.130:80/v1/api';
+export var baseUrl = BASE_URL + '/v1/api';
 var instance = axios.create({
     baseURL: baseUrl, //测试环境
     timeout: 2000,
