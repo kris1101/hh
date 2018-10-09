@@ -54,6 +54,8 @@ class VMSider extends Component{
           current = "/vm/accounts/projects";
       }else if(pathName.startsWith('/vm/accounts/groups')){
           current = "/vm/accounts/groups";
+      }else if(pathName.startsWith('/vm/networks/subnet') || pathName.startsWith('/vm/networks/network')){
+          current = "/vm/networks/network";
       }
 
       this.setState({current: current, openKeys: openKey});
@@ -86,7 +88,7 @@ class VMSider extends Component{
             <SubMenu key="networks" title={<span><Icon type="wifi" /><span>网络</span></span>} >
                 <Menu.Item key="/vm/networks/ip"><Link to="/vm/networks/ip">弹性IP</Link></Menu.Item>
                 <Menu.Item key="/vm/networks/load"><Link to="/vm/networks/load">负载均衡</Link></Menu.Item>
-                <Menu.Item key="/vm/networks/virtual"><Link to="/vm/networks/virtual">虚拟网络</Link></Menu.Item>
+                <Menu.Item key="/vm/networks/network"><Link to="/vm/networks/network">虚拟网络</Link></Menu.Item>
                 <Menu.Item key="/vm/networks/safety"><Link to="/vm/networks/safety">安全组</Link></Menu.Item>
             </SubMenu>
             <SubMenu key="sub8" title={<span><Icon type="hdd" /><span>硬盘</span></span>} >

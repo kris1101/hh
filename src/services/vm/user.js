@@ -56,3 +56,10 @@ export const groupMemberDel = (group_id, params) => axios.delete(`accounts/group
 // image
 export const imageList = (params) => axios.get('instances/image/', {params: params}).then(res => res.data).catch(err => console.log(err));
 export const imageDetail = (id, params) => axios.get(`instances/image/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+
+
+
+// networks
+export const networkList = (params) => axios.get('networks/network/', {params: params}).then(res => res.data).catch(err => console.log(err));
+export const networkDetail = (id, params) => axios.get(`networks/network/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const networkUpdate = (id, data) => axios.put(`networks/network/${id}/`, data).then(res => res.data).catch(err => console.log(err));
