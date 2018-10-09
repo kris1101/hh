@@ -138,7 +138,7 @@ class HarborUserForm extends Component {
                                 <Input placeholder="email" />
                             )}
                         </FormItem>
-                    <FormItem>
+                    <FormItem style={{marginRight:0}}>
                         <Button type="primary" className="btn-search" style={{marginRight: 10}} onClick={this.handleHarborUserQuery}>查询</Button>
                         <Button className="btn-search" onClick={this.handleReset}>重置</Button>
                     </FormItem>
@@ -147,7 +147,7 @@ class HarborUserForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered loading={this.props.loading} rowKey={record => record.user_id} columns={this.columns} dataSource={this.props.userList} pagination={pagination} />
+                <Table className="table-margin" bordered loading={this.props.loading} rowKey={record => record.user_id} columns={this.columns} dataSource={this.props.userList} pagination={pagination} />
             </div>
         </Content>
       </Layout>

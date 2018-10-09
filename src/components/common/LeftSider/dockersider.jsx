@@ -9,7 +9,7 @@ const SubMenu = Menu.SubMenu;
 
 class DockerSider extends Component{
 
-  rootSubmenuKeys = ['dockerregistry'];
+  rootSubmenuKeys = ['dockerregistry', 'paashelmmanage', 'paasworkload', 'paascicd' ];
 
   constructor(props){
       super(props);
@@ -24,6 +24,7 @@ class DockerSider extends Component{
   }
 
   handleOpenChange = (openKeys) => {
+    console.log(openKeys);
     const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
     if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
       this.setState({ openKeys }); 
@@ -42,6 +43,12 @@ class DockerSider extends Component{
             openKeys = ["dockerregistry"]
       }else if(current == "paasregistryuser" || current == "paasregistryconfig"){
             openKeys = ["dockerregistry", "registrysystem"]
+      }
+
+      if (current == "paascodebase" || current == "paascodeimagebuild" || current == "paascodebuildhistory"){
+            openKeys = ["paascicd", "ci"]
+      }else if(current == "paaspipline" || current == "paaspiplinehistory"){
+            openKeys = ["paascicd", "pipline"]
       }
 
       if (current == "paastillerconfig" || current == "paashelmrepomanage" || current == "paashelmchartmanage" || current == "paashelmreleasemanage" || current == "paashelmtaskstate"){
@@ -84,7 +91,7 @@ class DockerSider extends Component{
                 <Menu.Item key="paashelmtaskstate"><Link to="/paas/helmtaskstate">helm任务状态</Link></Menu.Item>
             </SubMenu>
             <SubMenu
-               key="/paas/workload"
+               key="paasworkload"
                title={<span><Icon type="bank" /><span>平台管理</span></span>}
             >
                 <SubMenu
@@ -104,19 +111,38 @@ class DockerSider extends Component{
 
             <SubMenu
                key="dockerregistry"
-               title={<span><Icon type="codepen" /><span>镜像仓库</span></span>}
+               title={<span><Icon type="codepen" /><span>镜像中心</span></span>}
             >
               <Menu.Item key="paasregistryproject"><Link to="/paas/registryproject"><span>项目</span></Link></Menu.Item>
               <Menu.Item key="paasregistrylog"><Link to="/paas/registrylog"><span>日志</span></Link></Menu.Item>
                 <SubMenu
                    key="registrysystem"
-                   title="系统管理"
+                   title={<span><Icon type="setting" /><span>系统管理</span></span>}
                 >
                   <Menu.Item key="paasregistryuser"><Link to="/paas/registryuser"><span>用户管理</span></Link></Menu.Item>
                   <Menu.Item key="paasregistryconfig"><Link to="/paas/registryconfig"><span>配置管理</span></Link></Menu.Item>
                 </SubMenu>
             </SubMenu>
-            <Menu.Item key="paascicd"><Link to="/paas/cicd"><Icon type="dropbox" />CI/CD</Link></Menu.Item>
+            <SubMenu
+               key="paascicd"
+               title={<span><Icon type="dropbox" /><span>CI/CD</span></span>}
+            >
+                <SubMenu
+                   key="ci"
+                   title={<span><Icon type="tool" /><span>持续集成</span></span>}
+                >
+                  <Menu.Item key="paascodebase"><Link to="/paas/codebase"><span>代码仓库</span></Link></Menu.Item>
+                  <Menu.Item key="paascodeimagebuild"><Link to="/paas/codeimagebuild"><span>构建项目</span></Link></Menu.Item>
+                  <Menu.Item key="paascodebuildhistory"><Link to="/paas/codebuildhistory"><span>构建历史</span></Link></Menu.Item>
+                </SubMenu>
+                <SubMenu
+                   key="pipline"
+                   title={<span><Icon type="retweet" /><span>流水线</span></span>}
+                >
+                  <Menu.Item key="paaspipline"><Link to="/paas/pipline"><span>流水线项目</span></Link></Menu.Item>
+                  <Menu.Item key="paaspiplinehistory"><Link to="/paas/piplinehistory"><span>流水线历史</span></Link></Menu.Item>
+                </SubMenu>
+            </SubMenu>
 
         </Menu>
       </div>

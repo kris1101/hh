@@ -9,6 +9,9 @@ const defaultMessage = "项目名称由小写字符、数字和._-组成且至�
 const ProjectCreateForm = Form.create()(
   class extends React.Component {
     checkprojectexists = (rule, value, callback) =>{
+      if(!value.length){
+          callback("项目名称不能为空");
+      }
         if(!projectnamePatten.test(value)){
            callback(defaultMessage); 
         }else{
@@ -40,8 +43,8 @@ const ProjectCreateForm = Form.create()(
         >
           <Form>
             <FormItem label="项目名称"  labelCol={{span: 4}}  wrapperCol={{ span: 20 }} hasFeedback={true}>
-              {getFieldDecorator('project_name', {
-              rules: [{ required: true, validator: this.checkprojectexists}],
+              {getFieldDecorator('project_name', {initialValue:"",
+              rules: [{required: true, validator: this.checkprojectexists}],
               })(
                 <Input disabled={confirmLoading} />
               )}

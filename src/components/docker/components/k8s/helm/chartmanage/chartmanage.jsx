@@ -175,7 +175,7 @@ class HelmChartForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered loading={this.props.loading} rowKey={record => record.id} columns={this.columns} dataSource={this.props.helmchartList} />
+                <Table className="table-margin"  bordered loading={this.props.loading} rowKey={record => record.id} columns={this.columns} dataSource={this.props.helmchartList} />
             </div>
         </Content>
       </Layout>

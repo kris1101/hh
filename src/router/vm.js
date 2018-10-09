@@ -4,7 +4,6 @@ import VM_Machine from '../components/vm/machine/list/machinelist';
 import VM_Recycle from '../components/vm/recycle/list/recyclelist';
 import VM_Snapshot from "../components/vm/snapshot/list/list"
 import VM_Backup from "../components/vm/snapshot/list/backlist"
-import VM_Mirror from "../components/vm/mirror/list/list"
 import VM_Disk from "../components/vm/disk/list/list"
 import VM_Disk_Backup from "../components/vm/disk/list/backlist"
 import VM_Extend from "../components/vm/extend/list/list"
@@ -23,6 +22,8 @@ import VM_LogList from "../components/vm/accounts/LogList"
 
 import VM_Key from "../components/vm/key/KeyList"
 import VM_KeyCreate from "../components/vm/key/KeyCreate"
+
+import VM_ImageList from "../components/vm/images/ImageList"
 
 
 const vm_routes=[{
@@ -54,8 +55,8 @@ const vm_routes=[{
         component: VM_KeyCreate,
     },{
         exact: true,
-        path: '/vm/mirror',
-        component: VM_Mirror,
+        path: '/vm/image',
+        component: VM_ImageList,
     },
     {
         exact: true,

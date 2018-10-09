@@ -158,7 +158,7 @@ class HarborProjectForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered loading={this.props.loading} rowKey={record => record.project_id} columns={this.columns} dataSource={this.props.projectList} pagination={pagination} />
+                <Table className="table-margin" bordered loading={this.props.loading} rowKey={record => record.project_id} columns={this.columns} dataSource={this.props.projectList} pagination={pagination} />
             </div>
         </Content>
       </Layout>

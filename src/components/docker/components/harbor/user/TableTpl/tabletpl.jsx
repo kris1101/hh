@@ -56,7 +56,7 @@ function deleteUser(user_id, _that) {
 }
 
 function changeUserAdmin(user_id, has_admin_role, _that) {
-  const hide = message.loading('Action in progress..', 0);
+  const hide = message.loading('请求处理中', 0);
   putAjax('/harbor/users/sysadmin/', generateformdata({user_id: user_id, has_admin_role: has_admin_role ? 0 : 1}), function (res){
     hide();
     if(res.data.code == 0){

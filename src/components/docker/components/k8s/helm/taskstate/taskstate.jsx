@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Dockersider from '../../../../../common/LeftSider/dockersider';
-import { message, Layout, Form, Input, Button, Table } from 'antd';
+import {Icon, message, Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../BreadcrumbCustom';
 import { clearPaasCommonData, getClusterNamespaceList  } from '../../../../../../containers/Paas/common/paascommon.redux'
-import { getHelmTaskStateList, clearTaskStateData } from '../../../../../../containers/Paas/k8s/k8shelmtaskstate'
+import { getHelmTaskStateList, clearTaskStateData } from '../../../../../../containers/Paas/k8s/k8shelmtaskstate.redux'
 import K8sClusterSelectForm from '../../../common/k8sclusterselect'
 import { getTaskState } from './TableTpl/tabletpl';
 import './taskstate.less';
@@ -113,14 +113,14 @@ class HelmTaskForm extends Component {
                    </FormItem>
                     <div style={{ float:'right'}}>
                         <FormItem label="" style={{ marginRight: 0 }}>
-                           <Button  onClick={this.handleTaskStateQuery} icon="reload">refresh</Button>
+                          <Button  onClick={this.handleTaskStateQuery} type="primary">< Icon type="reload" style={{color: "white"}}/>刷新</Button>
                         </FormItem>
                     </div>
                 </Form>
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered loading={this.props.loading} rowKey={record => record.id} columns={this.columns} dataSource={this.props.helmTaskStateList} pagination={pagination}/>
+                <Table className="table-margin" bordered loading={this.props.loading} rowKey={record => record.id} columns={this.columns} dataSource={this.props.helmTaskStateList} pagination={pagination}/>
             </div>
         </Content>
       </Layout>
