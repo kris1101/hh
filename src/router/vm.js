@@ -7,10 +7,10 @@ import VM_Backup from "../components/vm/snapshot/list/backlist"
 import VM_Disk from "../components/vm/disk/list/list"
 import VM_Disk_Backup from "../components/vm/disk/list/backlist"
 import VM_Extend from "../components/vm/extend/list/list"
-import VM_Network_IP from "../components/vm/network/list/iplist"
-import VM_Network_Load from "../components/vm/network/list/loadlist"
-import VM_Network_Safety from "../components/vm/network/list/safetylist"
-import VM_Network_virtual from "../components/vm/network/list/virtuallist"
+import VM_Network_IP from "../components/vm/networks/list/iplist"
+import VM_Network_Load from "../components/vm/networks/list/loadlist"
+import VM_Network_Safety from "../components/vm/networks/list/safetylist"
+import VM_Network_virtual from "../components/vm/networks/list/virtuallist"
 
 import VM_UserList from "../components/vm/accounts/UserList"
 import VM_ProjectList from "../components/vm/accounts/ProjectList"
@@ -74,22 +74,22 @@ const vm_routes=[{
     },
     {
         exact: true,
-        path: '/vm/network/ip',
+        path: '/vm/networks/ip',
         component: VM_Network_IP,
     },
     {
         exact: true,
-        path: '/vm/network/load',
+        path: '/vm/networks/load',
         component: VM_Network_Load,
     },
     {
         exact: true,
-        path: '/vm/network/safety',
+        path: '/vm/networks/safety',
         component: VM_Network_Safety,
     },
     {
         exact: true,
-        path: '/vm/network/virtual',
+        path: '/vm/networks/virtual',
         component: VM_Network_virtual,
     },
     {
