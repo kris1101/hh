@@ -6,6 +6,7 @@ import VMSider from '../../common/LeftSider/vmsider';
 import { networkDetail } from '../../../services/vm/user';
 import { getDetailColumes, getDetailDHCPColumes, getDetailPortColumes, getDetailSubnetColumes } from './TableTpl/networkTableTpl';
 import { humansize, timezoneFormat } from '../../../utils/vm'
+import SubnetCreate from './SubnetCreate'
 
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
@@ -102,7 +103,7 @@ class NetworkDetail extends React.Component {
     });
 
   };
-  refresh_member = () => {
+  refresh_subnet = () => {
     this.network_subnet_request();
   };
   network_subnet_request = (page=1) => {
@@ -168,6 +169,7 @@ class NetworkDetail extends React.Component {
               <Card bordered={false}>
                 <Tabs defaultActiveKey="1" activeKey={this.state.activeKey} onChange={this.onTabChange}>
                   <TabPane tab={<span>基本信息</span>} key="1">
+                    <SubnetCreate refresh={this.refresh_subnet} network_id={this.props.match.params.id} />
                     <Table
                       columns={this.columns}
                       dataSource={this.state.base_data}
@@ -179,6 +181,7 @@ class NetworkDetail extends React.Component {
                   </TabPane>
 
                   <TabPane tab={<span>子网</span>} key="2">
+                    <SubnetCreate refresh={this.refresh_subnet} network_id={this.props.match.params.id} />
                     <Table columns={this.subnetColumns} dataSource={this.state.subnet_data}
                       loading={this.state.loading}
                       pagination={false}
