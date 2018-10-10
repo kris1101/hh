@@ -63,3 +63,5 @@ export const imageDetail = (id, params) => axios.get(`instances/image/${id}/`, {
 export const networkList = (params) => axios.get('networks/network/', {params: params}).then(res => res.data).catch(err => console.log(err));
 export const networkDetail = (id, params) => axios.get(`networks/network/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
 export const networkUpdate = (id, data) => axios.put(`networks/network/${id}/`, data).then(res => res.data).catch(err => console.log(err));
+// subnet
+export const subnetCreate = (network_id, data) => axios.post(`networks/network/${network_id}/subnet/create/`, data).then(res => res.data).catch(err => console.log(err));
