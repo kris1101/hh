@@ -1,11 +1,15 @@
 
+import { timezoneFormat } from '../../../../utils/vm'
+
+
 export function getColumes() {
   return [{
     title: 'ID',
     dataIndex: 'id',
   }, {
     title: '操作时间',
-    dataIndex: 'create_time'
+    dataIndex: 'create_time',
+    render: (text, record) => timezoneFormat(record.create_time),
   }, {
     title: '操作用户',
     dataIndex: 'username',

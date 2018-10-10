@@ -3,6 +3,7 @@ import { Divider, Tooltip, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 
 import RoleUpdate from '../RoleUpdate';
+import { timezoneFormat } from '../../../../utils/vm'
 
 
 export function getColumes() {
@@ -14,7 +15,8 @@ export function getColumes() {
     dataIndex: 'uuid'
   }, {
     title: '创建时间',
-    dataIndex: 'create_time'
+    dataIndex: 'create_time',
+    render: (text, record) => timezoneFormat(record.create_time),
   },{
     title: '操作',
     render: (record) => (

@@ -7,10 +7,8 @@ import VM_Backup from "../components/vm/snapshot/list/backlist"
 import VM_Disk from "../components/vm/disk/list/list"
 import VM_Disk_Backup from "../components/vm/disk/list/backlist"
 import VM_Extend from "../components/vm/extend/list/list"
-import VM_Network_IP from "../components/vm/network/list/iplist"
-import VM_Network_Load from "../components/vm/network/list/loadlist"
-import VM_Network_Safety from "../components/vm/network/list/safetylist"
-import VM_Network_virtual from "../components/vm/network/list/virtuallist"
+import VM_Network_Load from "../components/vm/networks/list/loadlist"
+import VM_Network_Safety from "../components/vm/networks/list/safetylist"
 
 import VM_UserList from "../components/vm/accounts/UserList"
 import VM_ProjectList from "../components/vm/accounts/ProjectList"
@@ -24,6 +22,9 @@ import VM_Key from "../components/vm/key/KeyList"
 import VM_KeyCreate from "../components/vm/key/KeyCreate"
 
 import VM_ImageList from "../components/vm/images/ImageList"
+
+import VM_NetworkList from "../components/vm/networks/NetworkList"
+import VM_NetworkDetail from "../components/vm/networks/NetworkDetail"
 
 
 const vm_routes=[{
@@ -74,25 +75,27 @@ const vm_routes=[{
     },
     {
         exact: true,
-        path: '/vm/network/ip',
-        component: VM_Network_IP,
+        path: '/vm/networks/ip',
+        component: VM_NetworkList,
     },
     {
         exact: true,
-        path: '/vm/network/load',
+        path: '/vm/networks/load',
         component: VM_Network_Load,
     },
     {
         exact: true,
-        path: '/vm/network/safety',
+        path: '/vm/networks/safety',
         component: VM_Network_Safety,
-    },
-    {
+    }, {
         exact: true,
-        path: '/vm/network/virtual',
-        component: VM_Network_virtual,
-    },
-    {
+        path: '/vm/networks/network',
+        component: VM_NetworkList,
+    }, {
+        exact: true,
+        path: '/vm/networks/network/:id',
+        component: VM_NetworkDetail,
+    }, {
         exact: true,
         path: '/vm/accounts/users',
         component: VM_UserList,

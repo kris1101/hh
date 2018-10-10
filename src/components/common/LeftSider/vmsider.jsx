@@ -8,7 +8,7 @@ const SubMenu = Menu.SubMenu;
 
 class VMSider extends Component{
     // submenu keys of first level
-  rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6','sub7', 'sub8', 'accounts'];
+  rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6','networks', 'sub8', 'accounts'];
   state = {
     openKeys: [],
     current: ''
@@ -38,8 +38,8 @@ class VMSider extends Component{
 
       if(pathName=="/vm/backup"||pathName=="/vm/snapshot"){
           openKey = ["sub4"];
-      }else if(pathName.startsWith('/vm/network')){
-          openKey = ["sub7"];
+      }else if(pathName.startsWith('/vm/networks')){
+          openKey = ["networks"];
       }else if(pathName.startsWith('/vm/disk')){
           openKey = ["sub8"];
       }else if(pathName.startsWith('/vm/accounts')){
@@ -54,6 +54,8 @@ class VMSider extends Component{
           current = "/vm/accounts/projects";
       }else if(pathName.startsWith('/vm/accounts/groups')){
           current = "/vm/accounts/groups";
+      }else if(pathName.startsWith('/vm/networks/subnet') || pathName.startsWith('/vm/networks/network')){
+          current = "/vm/networks/network";
       }
 
       this.setState({current: current, openKeys: openKey});
@@ -83,11 +85,11 @@ class VMSider extends Component{
             <Menu.Item key="/vm/extend"><Link to="/vm/extend"><Icon type="share-alt" />弹性伸缩</Link></Menu.Item>
             <Menu.Item key="/vm/key"><Link to="/vm/key"><Icon type="key" />密钥管理</Link></Menu.Item>
 
-            <SubMenu key="sub7" title={<span><Icon type="wifi" /><span>网络</span></span>} >
-                <Menu.Item key="/vm/network/ip"><Link to="/vm/network/ip">弹性IP</Link></Menu.Item>
-                <Menu.Item key="/vm/network/load"><Link to="/vm/network/load">负载均衡</Link></Menu.Item>
-                <Menu.Item key="/vm/network/virtual"><Link to="/vm/network/virtual">虚拟网络</Link></Menu.Item>
-                <Menu.Item key="/vm/network/safety"><Link to="/vm/network/safety">安全组</Link></Menu.Item>
+            <SubMenu key="networks" title={<span><Icon type="wifi" /><span>网络</span></span>} >
+                <Menu.Item key="/vm/networks/ip"><Link to="/vm/networks/ip">弹性IP</Link></Menu.Item>
+                <Menu.Item key="/vm/networks/load"><Link to="/vm/networks/load">负载均衡</Link></Menu.Item>
+                <Menu.Item key="/vm/networks/network"><Link to="/vm/networks/network">虚拟网络</Link></Menu.Item>
+                <Menu.Item key="/vm/networks/safety"><Link to="/vm/networks/safety">安全组</Link></Menu.Item>
             </SubMenu>
             <SubMenu key="sub8" title={<span><Icon type="hdd" /><span>硬盘</span></span>} >
                 <Menu.Item key="/vm/disk"><Link to="/vm/disk">云硬盘</Link></Menu.Item>
