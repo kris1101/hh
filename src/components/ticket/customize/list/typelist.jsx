@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Ticketsider from '../../../common/LeftSider/ticketsider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Form, Input, Button, Select, Table,notification, message} from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
 import { gettypes } from './TableTpl/type';
 import './list.less';
+import * as Ajax from '../../../../utils/ticket/axios';
+
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -21,19 +23,125 @@ class TypeManageForm extends Component {
         pageSize: 10,
         total: 0
     }
-    componentDidMount () {
-        this.setState({
-            deviceList:[]
+    getTypeList = (currentPage,e) =>  {
+        if(e){
+            e.preventDefault();
+        }
+
+        this.props.form.validateFields((err, values) => {
+            let $this = this;
+            let data = values;
+            data.page = currentPage;
+            data.status=0;
+            data.pageSize = 10;
+            Ajax.getAjax('/tickets',data,function (response) {
+                console.log(data);
+                console.log(response.data);
+                if (response.data.code == 30000) {
+                    let deviceList = response.data.objects;
+                    let total = response.data.total ||0;
+                    for(let key in deviceList){
+                        deviceList[key].key = key-0+1;
+                    }
+                    $this.setState({userList: response.data.objects,total:total,currentPage:currentPage});
+                } else {
+                    notification.error({
+                        message: '提示',
+                        description: response.data.msg,
+                        duration: 2
+                    })
+                }
+            })
+        });
+    }
+
+    changeStatus = (id,status) =>{
+
+        console.log(id);
+        console.log(status);
+
+            let $this = this;
+            let data={id:id,status:status};
+            Ajax.postAjax('/user/updateUserStatus',data,function (response) {
+                console.log(response);
+                if (response.data.code == "0") {
+                   // this.getUserList();
+                    message.success("状态修改成功！")
+                    $this.getUserList();
+                } else {
+                    notification.error({
+                        message: '提示',
+                        description: response.data.msg,
+                        duration: 2
+                    })
+                }
+            })
+
+    }
+
+    deleteTicket = (id) =>{
+        let $this = this;
+        let data={id:id};
+        Ajax.postAjax('/user/deleteUser',data,function (response) {
+            console.log(response);
+            if (response.data.code == "0") {
+                // this.getUserList();
+                message.success("删除成功！")
+                $this.getUserList();
+            } else {
+                notification.error({
+                    message: '提示',
+                    description: response.data.msg,
+                    duration: 2
+                })
+            }
         })
+
+    }
+
+    getOptions = () =>{
+        let $this = this;
+        let data = {};
+        Ajax.getAjax('/tickets',data,function (response) {
+            if (response.data.code == 30000 ) {
+                let options = response.data;
+                $this.setState({options:options});
+            } else {
+                notification.error({
+                    message: '提示',
+                    description: response.data.msg,
+                    duration: 2
+                })
+            }
+        })
+    }
+    componentDidMount () {
+        this.getTypeList(1);
+        // this.getOptions();
     }
     //重置表单
     handleReset = () => {
         this.props.form.resetFields();
     }
 
-    openAddDevicePage = (value) => {
-        this.props.history.push({pathname:'/config/add-device', data:value});
+    openModal = (data) => {
+        console.log(data);
+        if(data === "add"){
+            this.setState({
+                modalType: 'add',
+                isOpen: true,
+                areaData: null
+            })
+        } else {
+            this.setState({
+                modalType: 'edit',
+                isOpen: true,
+                areaData: data
+            })
+        }
+
     }
+
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -64,11 +172,11 @@ class TypeManageForm extends Component {
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline" onSubmit={this.handleSubmit}>
                     <FormItem>
-                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建工单类型</Button>
+                        <Button type="primary" onClick={(e) => this.openModal('add',e)}>新建工单类型</Button>
                     </FormItem>
                     <div style={{ float:'right'}}>
                         <FormItem label="">
-                            {getFieldDecorator('name')(
+                            {getFieldDecorator('name',{initialValue:null})(
                                 <Input placeholder="类型名称" />
                             )}
                         </FormItem>
