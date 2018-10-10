@@ -6,6 +6,8 @@ import BreadcrumbCustom from '../../../BreadcrumbCustom';
 import { getwaits } from '../list/TableTpl/wait';
 import './list.less';
 import * as Ajax from '../../../../utils/ticket/axios';
+import TicketModal from '../create/modal';
+// import ChangeModalForm from'./ChangeModalForm/index';
 
 
 
@@ -145,6 +147,7 @@ class WaitManageForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const option = this.state.options;
     let _that = this;
     const pagination = {
           current: this.state.currentPage,
@@ -194,6 +197,12 @@ class WaitManageForm extends Component {
             <div style={{margin: 20}}>
                 <span className='num'>共找到 { this.state.total }条结果， 每页显示10条</span>
             </div>
+             {
+                this.state.isOpen && <TicketModal hideModal={this.hideModal} modalType={this.state.modalType} isOpen={this.state.isOpen} option={option}  areaData={this.state.areaData} />
+            }
+            {/*{*/}
+                {/*this.state.isPwdOpen && <ChangeModalForm hidePwdModal={this.hidePwdModal}  isPwdOpen={this.state.isPwdOpen} areaData={this.state.areaData} />*/}
+            {/*}*/}
         </Content>
       </Layout>
     );

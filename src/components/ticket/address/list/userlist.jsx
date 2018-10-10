@@ -6,6 +6,8 @@ import BreadcrumbCustom from '../../../BreadcrumbCustom';
 import { getusers } from './TableTpl/user';
 import './list.less';
 import * as Ajax from '../../../../utils/ticket/axios';
+import UserModal from '../create/usermodal';
+
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -33,7 +35,7 @@ class UserManageForm extends Component {
             data.page = currentPage;
             data.status=0;
             data.pageSize = 10;
-            Ajax.getAjax('/tickets',data,function (response) {
+            Ajax.getAjax('/ticket/users',data,function (response) {
                 console.log(data);
                 console.log(response.data);
                 if (response.data.code == 30000) {
@@ -42,7 +44,7 @@ class UserManageForm extends Component {
                     for(let key in deviceList){
                         deviceList[key].key = key-0+1;
                     }
-                    $this.setState({userList: response.data.objects,total:total,currentPage:currentPage});
+                    $this.setState({deviceList: response.data.objects,total:total,currentPage:currentPage});
                 } else {
                     notification.error({
                         message: '提示',
@@ -140,6 +142,7 @@ class UserManageForm extends Component {
         }
 
     }
+
     //重置表单
     handleReset = () => {
         this.props.form.resetFields();
@@ -149,6 +152,7 @@ class UserManageForm extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     let _that = this;
+    const option = this.state.options;
     const pagination = {
           current: this.state.currentPage,
           total: this.state.total,
@@ -197,6 +201,9 @@ class UserManageForm extends Component {
             <div style={{margin: 20}}>
                 <span className='num'>共找到 { this.state.total }条结果， 每页显示10条</span>
             </div>
+            {
+                this.state.isOpen && <UserModal hideModal={this.hideModal} modalType={this.state.modalType} isOpen={this.state.isOpen} option={option}  areaData={this.state.areaData} />
+            }
         </Content>
       </Layout>
     );
