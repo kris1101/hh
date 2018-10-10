@@ -65,3 +65,5 @@ export const networkDetail = (id, params) => axios.get(`networks/network/${id}/`
 export const networkUpdate = (id, data) => axios.put(`networks/network/${id}/`, data).then(res => res.data).catch(err => console.log(err));
 // subnet
 export const subnetCreate = (network_id, data) => axios.post(`networks/network/${network_id}/subnet/create/`, data).then(res => res.data).catch(err => console.log(err));
+export const subnetUpdate = (network_id, id, data) => axios.put(`networks/network/${network_id}/subnet/${id}/`, data).then(res => res.data).catch(err => console.log(err));
+export const subnetDelete = (network_id, id, params) => axios.delete(`networks/network/${network_id}/subnet/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));

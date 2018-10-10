@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { humansize, timesince } from '../../../../utils/vm'
 
 import NetworkDetail from '../NetworkDetail';
+import SubnetUpdate from '../SubnetUpdate';
+import SubnetDelete from '../SubnetDelete';
 
 
 export function getColumes() {
@@ -79,7 +81,9 @@ export function getDetailSubnetColumes() {
     title: '操作',
     render: (record) => (
       <div>
+        <SubnetUpdate record={ record } network_id={this.props.match.params.id} refresh={this.refresh_subnet} />
         <Divider type="vertical" />
+        <SubnetDelete record={ record } network_id={this.props.match.params.id} refresh={this.refresh_subnet} />
       </div>
     )
   }];
