@@ -8,6 +8,7 @@ import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
 import { fetchData, receiveData } from '../../../services/vm';
 import { getColumes } from './TableTpl/networkTableTpl';
+import NetworkCreate from './NetworkCreate'
 
 const { Sider, Content } = Layout;
 
@@ -55,6 +56,7 @@ class NetworkList extends Component {
           <Row gutter={16}>
             <Col className="gutter-row" md={24}>
               <Card title="网络列表" bordered={false}>
+                <NetworkCreate refresh={this.refresh} />
                 <Table bordered columns={this.columns} onChange={this.handleTableChange} loading={loading}
                        dataSource={dataList} rowKey="id" pagination={pager} />
               </Card>
