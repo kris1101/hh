@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Form, Input, Button, Select, Table, Row, Col, Card } from 'antd';
+import { Layout, Form, Tabs, Input, Button, Select, Table, Row, Col, Card } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
@@ -7,9 +7,10 @@ import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
 import { fetchData, receiveData } from '../../../services/vm';
-import { getColumes } from './TableTpl/networkTableTpl';
+import { getColumes, getApprovingColumes } from './TableTpl/networkTableTpl';
 import NetworkCreate from './NetworkCreate'
 
+const TabPane = Tabs.TabPane;
 const { Sider, Content } = Layout;
 
 
@@ -17,12 +18,26 @@ class NetworkList extends Component {
   constructor(props) {
       super(props);
       this.columns = getColumes.call(this);
+      this.approvingColumns = getApprovingColumes.call(this);
   }
   state = {
+    activeKey: "1",
     pagination: {total: 0, defaultPageSize: 10, defaultCurrent: 1, pageSize: 10}
   };
   componentDidMount () {
     this.getList();
+  }
+  onTabChange = (activeKey) => {
+    // console.log(activeKey)
+    this.setState({
+      activeKey: activeKey,
+      pagination: {total: 0, defaultPageSize: 10, defaultCurrent: 1, pageSize: 10},
+    });
+    if (activeKey === '2'){
+      this.refresh_approving();
+    } else {
+      this.refresh();
+    }
   }
   handleTableChange = (pagination, filters, sorter) => {
     const pager = { ...this.state.pagination };
@@ -30,14 +45,18 @@ class NetworkList extends Component {
     this.setState({
       pagination: pager,
     });
-    this.getList(pagination.current);
+    const tab = this.state.activeKey === '2' ? '': 'approving'
+    this.getList(pagination.current, tab);
   }
-  getList = (page=1) => {
+  getList = (page=1, tab='') => {
     const { fetchData } = this.props;
-    fetchData({funcName: 'networkList', stateName: 'networkList', params: {page: page}});
+    fetchData({funcName: 'networkList', stateName: 'networkList', params: {page: page, tab: tab}});
   };
   refresh = () => {
     this.getList(this.state.pagination.current);
+  }
+  refresh_approving = () => {
+    this.getList(this.state.pagination.current, 'approving');
   }
 
   render() {
@@ -55,14 +74,24 @@ class NetworkList extends Component {
           <BreadcrumbCustom first="网络管理" second="网络列表" />
           <Row gutter={16}>
             <Col className="gutter-row" md={24}>
-              <Card title="网络列表" bordered={false}>
-                <NetworkCreate refresh={this.refresh} />
-                <Table bordered columns={this.columns} onChange={this.handleTableChange} loading={loading}
-                       dataSource={dataList} rowKey="id" pagination={pager} />
+              <Card title="网络列表" bordered={false} headStyle={{ borderBottom: 0 }} bodyStyle={{ paddingTop: 0 }}>
+                <Tabs defaultActiveKey="1" activeKey={this.state.activeKey} onChange={this.onTabChange}>
+                  <TabPane tab={<span>网络列表</span>} key="1">
+                    <NetworkCreate refresh={this.refresh} />
+                    <Table bordered columns={this.columns} onChange={this.handleTableChange}
+                           loading={loading}
+                           dataSource={dataList} rowKey="id" pagination={pager} />
+                  </TabPane>
+                  <TabPane tab={<span>审核列表</span>} key="2">
+                    <NetworkCreate refresh={this.refresh_approving} />
+                    <Table bordered columns={this.approvingColumns} onChange={this.handleTableChange}
+                           loading={loading}
+                           dataSource={dataList} rowKey="id" pagination={pager} />
+                  </TabPane>
+                </Tabs>
               </Card>
             </Col>
           </Row>
-
         </Content>
       </Layout>
     );
