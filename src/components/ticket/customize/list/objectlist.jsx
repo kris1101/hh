@@ -134,7 +134,7 @@ class ObjectManageForm extends Component {
                 this.setState({
                     currentPage: 1
                 }, () => {
-                    this.getContentList(values);
+                    this.getObjectList(values);
                 })
             }
         })

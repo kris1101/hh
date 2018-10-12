@@ -39,7 +39,7 @@ class CancelManageForm extends Component {
             let $this = this;
             let data = values;
             data.page = params.page;
-            data.status=0;
+            data.status=2;
             data.pageSize = 10;
             Ajax.getAjax('/ticket/users',data,function (response) {
                 console.log(data);
@@ -131,7 +131,7 @@ class CancelManageForm extends Component {
                 this.setState({
                     currentPage: 1
                 }, () => {
-                    this.getContentList(values);
+                    this.getCancelList(values);
                 })
             }
         })

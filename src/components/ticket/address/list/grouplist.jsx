@@ -132,7 +132,7 @@ class GroupManageForm extends Component {
                 this.setState({
                     currentPage: 1
                 }, () => {
-                    this.getContentList(values);
+                    this.getGroupList(values);
                 })
             }
         })
