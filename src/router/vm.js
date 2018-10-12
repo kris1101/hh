@@ -25,6 +25,7 @@ import VM_ImageList from "../components/vm/images/ImageList"
 
 import VM_NetworkList from "../components/vm/networks/NetworkList"
 import VM_NetworkDetail from "../components/vm/networks/NetworkDetail"
+import VM_NetworkApprovalDetail from "../components/vm/networks/NetworkApprovalDetail"
 
 
 const vm_routes=[{
@@ -95,6 +96,10 @@ const vm_routes=[{
         exact: true,
         path: '/vm/networks/network/:id',
         component: VM_NetworkDetail,
+    }, {
+        exact: true,
+        path: '/vm/networks/network/:id/approval',
+        component: VM_NetworkApprovalDetail,
     }, {
         exact: true,
         path: '/vm/accounts/users',

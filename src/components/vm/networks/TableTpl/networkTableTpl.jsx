@@ -157,7 +157,7 @@ export function getApprovingColumes() {
   return [{
     title: '网络名',
     dataIndex: 'name',
-    render: (text, record) => <Link to={`/vm/networks/network/${record.id}`} className="href-class">{text}</Link>
+    render: (text, record) => <Link to={`/vm/networks/network/${record.id}/approval`} className="href-class">{text}</Link>
   }, {
     title: '子网',
     dataIndex: 'subnet',
@@ -182,8 +182,8 @@ export function getApprovingColumes() {
     title: '操作',
     render: (record) => (
       <div>
-        <Tooltip  title="网络详情">
-          <Link to={`/vm/networks/network/${record.id}`} className="href-class"><Icon type="bars" /></Link>
+        <Tooltip  title="审核详情">
+          <Link to={`/vm/networks/network/${record.id}/approval`} className="href-class"><Icon type="bars" /></Link>
         </Tooltip>
         <Divider type="vertical" />
       </div>
@@ -191,3 +191,32 @@ export function getApprovingColumes() {
   }];
 }
 
+
+export function getApprovalListColumes() {
+  return [{
+    title: '创建人',
+    dataIndex: 'create_user',
+  }, {
+    title: '审批人',
+    dataIndex: 'censor_user',
+    render: (text, record) => record.censor_user || '-',
+  },{
+    title: '审批时间',
+    dataIndex: 'censor_time',
+    render: (text, record) => record.censor_time || '-',
+  },{
+    title: '审批备注',
+    dataIndex: 'remark',
+    render: (text, record) => record.remark || '-',
+  },{
+    title: '状态',
+    dataIndex: 'status_display',
+  },{
+    title: '操作',
+    render: (record) => (
+      <div>
+        <Divider type="vertical" />
+      </div>
+    )
+  }];
+}

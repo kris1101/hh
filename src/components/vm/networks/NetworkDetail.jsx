@@ -162,7 +162,7 @@ class NetworkDetail extends React.Component {
             <VMSider/>
         </Sider>
         <Content style={{ padding: 0, margin:10,  marginBottom: 0, minHeight: window.innerHeight-84 }}>
-          <BreadcrumbCustom first="用户管理" second="项目列表" three="项目详情" />
+          <BreadcrumbCustom first="网络管理" second="网络列表" three="网络详情" />
           <Row gutter={16}>
             <Col className="gutter-row" md={24}>
 
