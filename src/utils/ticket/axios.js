@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Qs from 'qs';
 // import { BASE_URL } from '../../containers/Daas/constants';
 
-export const baseUrl = "http://10.26.17.80:8080";
+export const baseUrl = "http://10.26.17.40:8080";
 
 // export var baseUrl = BASE_URL + '/v1/api';
 var instance = axios.create({

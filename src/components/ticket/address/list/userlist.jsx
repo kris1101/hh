@@ -22,18 +22,25 @@ class UserManageForm extends Component {
         deviceList: [],
         currentPage: 1,
         pageSize: 10,
-        total: 0
+        total: 0,
+        isOpen: false,
+        currentData: [],
     }
-    getUserList = (currentPage,e) =>  {
-        if(e){
-            e.preventDefault();
+    getUserList = (value) =>  {
+        let params = {
+            "page": this.state.currentPage,
+            "pageSize": this.state.pageSize,
+        }
+        let _this = this;
+
+        if(value){
+            params.displayName = value && value.name ? value.name : '';
         }
 
         this.props.form.validateFields((err, values) => {
             let $this = this;
             let data = values;
-            data.page = currentPage;
-            data.status=0;
+            data.page = params.page;
             data.pageSize = 10;
             Ajax.getAjax('/ticket/users',data,function (response) {
                 console.log(data);
@@ -44,7 +51,7 @@ class UserManageForm extends Component {
                     for(let key in deviceList){
                         deviceList[key].key = key-0+1;
                     }
-                    $this.setState({deviceList: response.data.objects,total:total,currentPage:currentPage});
+                    $this.setState({deviceList: response.data.objects,total:total,currentPage:params.page});
                 } else {
                     notification.error({
                         message: '提示',
@@ -56,103 +63,84 @@ class UserManageForm extends Component {
         });
     }
 
-    changeStatus = (id,status) =>{
-
-        console.log(id);
-        console.log(status);
-
-            let $this = this;
-            let data={id:id,status:status};
-            Ajax.postAjax('/user/updateUserStatus',data,function (response) {
-                console.log(response);
-                if (response.data.code == "0") {
-                   // this.getUserList();
-                    message.success("状态修改成功！")
-                    $this.getUserList();
-                } else {
-                    notification.error({
-                        message: '提示',
-                        description: response.data.msg,
-                        duration: 2
-                    })
-                }
-            })
-
-    }
-
-    deleteTicket = (id) =>{
-        let $this = this;
-        let data={id:id};
-        Ajax.postAjax('/user/deleteUser',data,function (response) {
-            console.log(response);
-            if (response.data.code == "0") {
-                // this.getUserList();
-                message.success("删除成功！")
-                $this.getUserList();
-            } else {
-                notification.error({
-                    message: '提示',
-                    description: response.data.msg,
-                    duration: 2
+    deleteData = (value) => {
+        let id = value.id;
+        console.log(id)
+        let _this = this;
+        confirm({
+            title:'确认删除?',
+            okText:'确认',
+            okType: 'danger',
+            cancelText: '取消',
+            onOk(){
+                Ajax.postAjax('/manager/bom/'+id, {}, (res) => {
+                    if(!res.data.errorCode){
+                        message.success(res.data.msg, 3);
+                        _this.getContentList();
+                    } else {
+                        message.error(res.data.msg, 3)
+                    }
                 })
             }
         })
-
-    }
-
-    getOptions = () =>{
-        let $this = this;
-        let data = {};
-        Ajax.getAjax('/tickets',data,function (response) {
-            if (response.data.code == 30000 ) {
-                let options = response.data;
-                $this.setState({options:options});
-            } else {
-                notification.error({
-                    message: '提示',
-                    description: response.data.msg,
-                    duration: 2
-                })
-            }
-        })
-    }
-    componentDidMount () {
-        this.getUserList(1);
-        // this.getOptions();
-    }
-    //重置表单
-    handleReset = () => {
-        this.props.form.resetFields();
     }
 
     openModal = (data) => {
-        console.log(data);
         if(data === "add"){
             this.setState({
-                modalType: 'add',
+                modalType: data,
                 isOpen: true,
-                areaData: null
+                currentData: null
             })
         } else {
             this.setState({
                 modalType: 'edit',
                 isOpen: true,
-                areaData: data
+                currentData: data
             })
         }
-
     }
 
+    componentDidMount () {
+        this.getUserList();
+    }
     //重置表单
     handleReset = () => {
         this.props.form.resetFields();
     }
 
+    hideModal = (str) => {
+        let _this = this;
+        if(str === 'ok') {
+            _this.setState({
+                isOpen: false
+            }, () => {
+                this.getUserList(1)
+            })
+        } else {
+            this.setState({
+                isOpen: false
+            })
+        }
+    }
+    handleSubmit = (e) => {
+        if(e){
+            e.preventDefault()
+        }
+        this.props.form.validateFields((err, values) => {
+            if(!err) {
+                this.setState({
+                    currentPage: 1
+                }, () => {
+                    this.getUserList(values);
+                })
+            }
+        })
+    }
 
   render() {
     const { getFieldDecorator } = this.props.form;
     let _that = this;
-    const option = this.state.options;
     const pagination = {
           current: this.state.currentPage,
           total: this.state.total,
@@ -183,7 +171,7 @@ class UserManageForm extends Component {
                     </FormItem>
                     <div style={{ float:'right'}}>
                         <FormItem label="">
-                            {getFieldDecorator('name',{initialValue:null})(
+                            {getFieldDecorator('user_name',{initialValue:null})(
                                 <Input placeholder="姓名" />
                             )}
                         </FormItem>
@@ -202,7 +190,7 @@ class UserManageForm extends Component {
                 <span className='num'>共找到 { this.state.total }条结果， 每页显示10条</span>
             </div>
             {
-                this.state.isOpen && <UserModal hideModal={this.hideModal} modalType={this.state.modalType} isOpen={this.state.isOpen} option={option}  areaData={this.state.areaData} />
+                this.state.isOpen && <UserModal hideModal={this.hideModal} modalType={this.state.modalType} isOpen={this.state.isOpen} areaData={this.state.areaData} />
             }
         </Content>
       </Layout>

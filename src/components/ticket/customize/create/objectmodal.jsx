@@ -202,5 +202,5 @@ class ModalForm extends Component {
     }
 }
 
-const UserModal = Form.create()(ModalForm);
-export default UserModal;
+const ObjectModal = Form.create()(ModalForm);
+export default ObjectModal;
