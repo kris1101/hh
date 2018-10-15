@@ -72,3 +72,8 @@ export const subnetDelete = (network_id, id, params) => axios.delete(`networks/n
 export const networkApprovalDetail = (id, params) => axios.get(`networks/network/${id}/approval/`, {params: params}).then(res => res.data).catch(err => console.log(err));
 export const networkApprovalGroupAdmin = (id, params, data) => axios.post(`networks/network/${id}/approval/group_admin/`, data, {params: params}).then(res => res.data).catch(err => console.log(err));
 export const networkApprovalAdmin = (id, params, data) => axios.post(`networks/network/${id}/approval/admin/`, data, {params: params}).then(res => res.data).catch(err => console.log(err));
+
+// security group
+export const sgList = (params) => axios.get('networks/security_groups/', {params: params}).then(res => res.data).catch(err => console.log(err));
+export const sgCreate = (data) => axios.post('networks/security_groups/create/', data).then(res => res.data).catch(err => console.log(err));
+export const sgDetail = (id, params) => axios.get(`networks/security_groups/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));

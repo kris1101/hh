@@ -89,7 +89,7 @@ class VMSider extends Component{
                 <Menu.Item key="/vm/networks/ip"><Link to="/vm/networks/ip">弹性IP</Link></Menu.Item>
                 <Menu.Item key="/vm/networks/load"><Link to="/vm/networks/load">负载均衡</Link></Menu.Item>
                 <Menu.Item key="/vm/networks/network"><Link to="/vm/networks/network">虚拟网络</Link></Menu.Item>
-                <Menu.Item key="/vm/networks/safety"><Link to="/vm/networks/safety">安全组</Link></Menu.Item>
+                <Menu.Item key="/vm/networks/security_groups"><Link to="/vm/networks/security_groups">安全组</Link></Menu.Item>
             </SubMenu>
             <SubMenu key="sub8" title={<span><Icon type="hdd" /><span>硬盘</span></span>} >
                 <Menu.Item key="/vm/disk"><Link to="/vm/disk">云硬盘</Link></Menu.Item>
