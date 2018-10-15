@@ -45,6 +45,9 @@ import {
     daasSlowQueryInstance
 } from '../containers/Daas/reducers/slow_query_instance';
 import {
+    RDBInstanceBackup
+} from '../containers/Daas/reducers/rdb_backup_info';
+import {
     helmRepo
 } from '../containers/Paas/k8s/k8shelmrepo.redux'
 import {
@@ -97,6 +100,7 @@ const App = combineReducers({
     daasSlowQueryGroup,
     daasSlowQueryGroupUserRelationship,
     daasSlowQueryInstanceGroupRelationship,
+    RDBInstanceBackup,
 });
 
 export default App
