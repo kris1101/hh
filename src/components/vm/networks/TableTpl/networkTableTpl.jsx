@@ -6,6 +6,7 @@ import { humansize, timesince } from '../../../../utils/vm'
 import NetworkDetail from '../NetworkDetail';
 import SubnetUpdate from '../SubnetUpdate';
 import SubnetDelete from '../SubnetDelete';
+import ApprovalBox from '../ApprovalBox';
 
 
 export function getColumes() {
@@ -213,10 +214,10 @@ export function getApprovalListColumes() {
     dataIndex: 'status_display',
   },{
     title: '操作',
-    render: (record) => (
-      <div>
-        <Divider type="vertical" />
-      </div>
+    render: (record) => record.level === 1 ? (
+      <ApprovalBox t="group_admin" record={ record } network_id={this.props.match.params.id} refresh={this.start} />
+    ) : (
+      <ApprovalBox t="admin" record={ record } network_id={this.props.match.params.id} refresh={this.start} />
     )
   }];
 }

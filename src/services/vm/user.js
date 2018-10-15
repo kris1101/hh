@@ -70,3 +70,5 @@ export const subnetUpdate = (network_id, id, data) => axios.put(`networks/networ
 export const subnetDelete = (network_id, id, params) => axios.delete(`networks/network/${network_id}/subnet/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
 // networks approval
 export const networkApprovalDetail = (id, params) => axios.get(`networks/network/${id}/approval/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const networkApprovalGroupAdmin = (id, params, data) => axios.post(`networks/network/${id}/approval/group_admin/`, data, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const networkApprovalAdmin = (id, params, data) => axios.post(`networks/network/${id}/approval/admin/`, data, {params: params}).then(res => res.data).catch(err => console.log(err));
