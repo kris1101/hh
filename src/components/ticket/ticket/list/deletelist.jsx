@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import Ticketsider from '../../../common/LeftSider/ticketsider';
-import { Layout, Form, Input, Button, Select, Table,notification, message } from 'antd';
+import { Layout, Form, Input, Button, Select, Table,notification, message,Modal } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
 import { getdeletes } from '../list/TableTpl/delete';
 import './list.less';
 import * as Ajax from '../../../../utils/ticket/axios';
+import TicketModal from '../create/modal';
 
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
+const confirm = Modal.confirm;
+
 
 class DeleteManageForm extends Component {
     constructor(props) {
@@ -187,6 +190,9 @@ class DeleteManageForm extends Component {
             <div style={{margin: 20}}>
                 <span className='num'>共找到 { this.state.total }条结果， 每页显示10条</span>
             </div>
+            {
+                this.state.isOpen && <TicketModal hideModal={this.hideModal} isOpen={this.state.isOpen} modalType={this.state.modalType} currentData={this.state.currentData} />
+            }
         </Content>
       </Layout>
     );

@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import Ticketsider from '../../../common/LeftSider/ticketsider';
-import { Layout, Form, Input, Button, Select, Table,notification, message } from 'antd';
+import { Layout, Form, Input, Button, Select, Table,notification, message,Modal } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
 import { getwaits } from '../list/TableTpl/wait';
 import './list.less';
 import * as Ajax from '../../../../utils/ticket/axios';
 import TicketModal from '../create/modal';
-// import ChangeModalForm from'./ChangeModalForm/index';
-
 
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
+const confirm = Modal.confirm;
+
 
 class WaitManageForm extends Component {
     constructor(props) {
@@ -193,7 +193,7 @@ class WaitManageForm extends Component {
                 <span className='num'>共找到 { this.state.total }条结果， 每页显示10条</span>
             </div>
              {
-                this.state.isOpen && <TicketModal hideModal={this.hideModal} modalType={this.state.modalType} isOpen={this.state.isOpen} areaData={this.state.areaData} />
+                this.state.isOpen && <TicketModal hideModal={this.hideModal} isOpen={this.state.isOpen} modalType={this.state.modalType} currentData={this.state.currentData} />
             }
 
         </Content>
