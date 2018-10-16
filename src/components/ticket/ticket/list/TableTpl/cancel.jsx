@@ -27,10 +27,10 @@ export function getcancels() {
         dataIndex: 'status',
     },{
         title: '操作',
-        render: (data) => (
+        render: (data,record) => (
             <div>
-                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>详情</span>
-                <span style={{cursor: 'pointer',color:'#0350CF'}}>删除</span>
+                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}onClick={(e) => this.openModal(record, e)}>详情</span>
+                <span style={{cursor: 'pointer',color:'#0350CF'}}onClick={(e) => this.deleteData(data,e)}>删除</span>
             </div>
         )
     }];

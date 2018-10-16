@@ -43,16 +43,6 @@ class ModalForm extends Component {
         this.setState({ confirmDirty: this.state.confirmDirty || !!value });
     }
 
-    handleWebsiteChange = (value) => {
-        let autoCompleteResult;
-        if (!value) {
-          autoCompleteResult = [];
-        } else {
-          autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
-        }
-        this.setState({ autoCompleteResult });
-    }
-
     handleCancel = () => {
         this.setState({
           visible: false,
@@ -132,7 +122,7 @@ class ModalForm extends Component {
         ));
         return (
             <Modal
-                title={this.props.modalType === 'add' ? '添加用户' : '编辑用户'}
+                title={this.props.modalType === 'add' ? '添加用户组' : '编辑用户组'}
                 visible={this.props.isOpen}
                 onOk={this.commitInfo}
                 onCancel={this.props.hideModal}
@@ -146,58 +136,24 @@ class ModalForm extends Component {
                   {...formItemLayout}
                   label={(
                     <span>
-                      姓名&nbsp;
+                      名称&nbsp;
                     </span>
                   )}
                 >
                   {getFieldDecorator('user_name', {
-                    rules: [{ required: true, message: '请输入姓名！', whitespace: true }]
+                    rules: [{ required: true, message: '请输入名称！', whitespace: true }]
                   })(
                     <Input />
                   )}
                 </FormItem>
                 <FormItem
                   {...formItemLayout}
-                  label={(<span>部门&nbsp;</span>)}
+                  label={(<span>成员&nbsp;</span>)}
                 >
                   {getFieldDecorator('department', {
                     rules: [{ required: false,}],initialValue:null
                   })(
                     <Input />
-                  )}
-                </FormItem>
-                <FormItem
-                  {...formItemLayout}
-                  label={(<span>职位&nbsp;</span>)}
-                >
-                  {getFieldDecorator('duty', {
-                    rules: [{ required: false,}],initialValue:null
-                  })(
-                    <Input />
-                  )}
-                </FormItem>
-                <FormItem
-                  {...formItemLayout}
-                  label="邮箱"
-                >
-                  {getFieldDecorator('email', {
-                    rules: [{
-                      type: 'email', message: '请输入正确的邮箱地址!',
-                    }, {
-                      required: true, message: '请输入邮箱地址!',
-                    }],
-                  })(
-                    <Input />
-                  )}
-                </FormItem>
-                <FormItem
-                  {...formItemLayout}
-                  label="手机"
-                >
-                  {getFieldDecorator('telephone', {
-                    rules: [{ required: false, message: '请输入正确的手机号码!' }],initialValue:null
-                  })(
-                    <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
                   )}
                 </FormItem>
                 <FormItem

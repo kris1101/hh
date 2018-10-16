@@ -27,10 +27,10 @@ export function getcompletes() {
         dataIndex: 'status',
     },{
         title: '操作',
-        render: (data) => (
+        render: (data,record) => (
             <div>
-                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>详情</span>
-                <span style={{cursor: 'pointer',color:'#0350CF'}}>销毁</span>
+                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}onClick={(e) => this.openModal(record, e)}>详情</span>
+                <span style={{cursor: 'pointer',color:'#0350CF'}}onClick={(e) => this.deleteData(data,e)}>销毁</span>
             </div>
         )
     }];
