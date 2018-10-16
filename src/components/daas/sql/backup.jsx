@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getbackups } from './TableTpl/backup';
 import './list.less';
+import { rdbInstanceBackupFetch } from '../../../containers/Daas/actions/rdb_backup_info';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -22,17 +23,16 @@ class DaasBackupManageForm extends Component {
         total: 0
     }
     componentDidMount () {
-        this.setState({
-            deviceList:[]
-        })
+        this.props.rdbInstanceBackupFetch();
     }
     //重置表单
     handleReset = () => {
         this.props.form.resetFields();
+        this.props.rdbInstanceBackupFetch();
     }
-
-    openAddDevicePage = (value) => {
-        this.props.history.push({pathname:'/config/add-device', data:value});
+    
+    handleSubmit = (value) => {
+        this.props.rdbInstanceBackupFetch(this.props.form.getFieldsValue());
     }
 
   render() {
@@ -69,8 +69,13 @@ class DaasBackupManageForm extends Component {
                     <div style={{ float:'right'}}>
 
                         <FormItem label="">
-                            {getFieldDecorator('name')(
-                                <Input placeholder="实例名称或者端口号" />
+                            {getFieldDecorator('host')(
+                                <Input placeholder="宿主机" />
+                            )}
+                        </FormItem>
+                        <FormItem label="">
+                            {getFieldDecorator('port')(
+                                <Input placeholder="端口号" />
                             )}
                         </FormItem>
                     <FormItem>
@@ -82,10 +87,10 @@ class DaasBackupManageForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered rowKey={record => record.key} columns={this.columns} dataSource={this.state.deviceList} pagination={pagination} />
+                <Table bordered rowKey={record => record.pk} columns={this.columns} dataSource={this.props.backupsList.data} pagination={pagination} />
             </div>
             <div style={{margin: 20}}>
-                <span className='num'>共找到 { this.state.total }条结果， 每页显示10条</span>
+                <span className='num'>共找到 { this.props.total }条结果， 每页显示10条</span>
             </div>
         </Content>
       </Layout>
@@ -94,6 +99,4 @@ class DaasBackupManageForm extends Component {
 }
 
 const DaasBackupManage = Form.create()(DaasBackupManageForm);
-export default connect((state) => {
-    return { ...state };
-})(DaasBackupManage);
+export default connect((state) => state.RDBInstanceBackup, {rdbInstanceBackupFetch})(DaasBackupManage);

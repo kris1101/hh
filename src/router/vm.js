@@ -8,7 +8,6 @@ import VM_Disk from "../components/vm/disk/list/list"
 import VM_Disk_Backup from "../components/vm/disk/list/backlist"
 import VM_Extend from "../components/vm/extend/list/list"
 import VM_Network_Load from "../components/vm/networks/list/loadlist"
-import VM_Network_Safety from "../components/vm/networks/list/safetylist"
 
 import VM_UserList from "../components/vm/accounts/UserList"
 import VM_ProjectList from "../components/vm/accounts/ProjectList"
@@ -26,7 +25,7 @@ import VM_ImageList from "../components/vm/images/ImageList"
 import VM_NetworkList from "../components/vm/networks/NetworkList"
 import VM_NetworkDetail from "../components/vm/networks/NetworkDetail"
 import VM_NetworkApprovalDetail from "../components/vm/networks/NetworkApprovalDetail"
-
+import VM_SGList from "../components/vm/networks/SGList"
 
 const vm_routes=[{
         exact: true,
@@ -86,8 +85,8 @@ const vm_routes=[{
     },
     {
         exact: true,
-        path: '/vm/networks/safety',
-        component: VM_Network_Safety,
+        path: '/vm/networks/security_groups',
+        component: VM_SGList,
     }, {
         exact: true,
         path: '/vm/networks/network',
