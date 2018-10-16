@@ -11,7 +11,7 @@ export function getColumes() {
   return [{
     title: '名称',
     dataIndex: 'name',
-    render: (text, record) => <Link to={`/vm/networks/network/${record.id}`} className="href-class">{text}</Link>
+    render: (text, record) => <Link to={`/vm/networks/security_groups/${record.id}/rules`} className="href-class">{text}</Link>
   }, {
     title: 'ID',
     dataIndex: 'uuid',
@@ -23,7 +23,7 @@ export function getColumes() {
     render: (record) => (
       <div>
         <Tooltip  title="详情">
-          <Link to={`/vm/networks/network/${record.id}`} className="href-class"><Icon type="bars" /></Link>
+          <Link to={`/vm/networks/security_groups/${record.id}/rules`} className="href-class"><Icon type="bars" /></Link>
         </Tooltip>
         <Divider type="vertical" />
         <SGUpdate record={ record } refresh={this.refresh} />
@@ -32,12 +32,41 @@ export function getColumes() {
   }];
 }
 
+export function getRuleColumes() {
+  return [{
+    title: '方向',
+    dataIndex: 'direction_display',
+  }, {
+    title: '以太网类型',
+    dataIndex: 'ethertype_display',
+  },{
+    title: 'IP协议',
+    dataIndex: 'protocol_display',
+  },{
+    title: '端口范围',
+    dataIndex: 'port_range_display',
+  },{
+    title: '远端IP前缀',
+    dataIndex: 'remote_ip_prefix_display',
+  },{
+    title: '远端安全组',
+    dataIndex: 'remote_group_name',
+  },{
+    title: '操作',
+    render: (record) => (
+      <div>
+        <SGUpdate record={ record } refresh={this.refresh} />
+        <Divider type="vertical" />
+      </div>
+    )
+  }];
+}
 
 export function getApprovingColumes() {
   return [{
     title: '网络名',
     dataIndex: 'name',
-    render: (text, record) => <Link to={`/vm/networks/network/${record.id}/approval`} className="href-class">{text}</Link>
+    render: (text, record) => <Link to={`/vm/networks/security_groups/${record.id}/approval`} className="href-class">{text}</Link>
   }, {
     title: '子网',
     dataIndex: 'subnet',
@@ -63,7 +92,7 @@ export function getApprovingColumes() {
     render: (record) => (
       <div>
         <Tooltip  title="审核详情">
-          <Link to={`/vm/networks/network/${record.id}/approval`} className="href-class"><Icon type="bars" /></Link>
+          <Link to={`/vm/networks/security_groups/${record.id}/approval`} className="href-class"><Icon type="bars" /></Link>
         </Tooltip>
         <Divider type="vertical" />
       </div>

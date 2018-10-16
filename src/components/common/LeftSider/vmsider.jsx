@@ -56,6 +56,8 @@ class VMSider extends Component{
           current = "/vm/accounts/groups";
       }else if(pathName.startsWith('/vm/networks/subnet') || pathName.startsWith('/vm/networks/network')){
           current = "/vm/networks/network";
+      }else if(pathName.startsWith('/vm/networks/security_groups')){
+          current = "/vm/networks/security_groups";
       }
 
       this.setState({current: current, openKeys: openKey});

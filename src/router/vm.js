@@ -26,6 +26,7 @@ import VM_NetworkList from "../components/vm/networks/NetworkList"
 import VM_NetworkDetail from "../components/vm/networks/NetworkDetail"
 import VM_NetworkApprovalDetail from "../components/vm/networks/NetworkApprovalDetail"
 import VM_SGList from "../components/vm/networks/SGList"
+import VM_SGRuleList from "../components/vm/networks/SGRuleList"
 
 const vm_routes=[{
         exact: true,
@@ -82,11 +83,14 @@ const vm_routes=[{
         exact: true,
         path: '/vm/networks/load',
         component: VM_Network_Load,
-    },
-    {
+    }, {
         exact: true,
         path: '/vm/networks/security_groups',
         component: VM_SGList,
+    }, {
+        exact: true,
+        path: '/vm/networks/security_groups/:id/rules',
+        component: VM_SGRuleList,
     }, {
         exact: true,
         path: '/vm/networks/network',
