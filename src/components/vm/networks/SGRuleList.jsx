@@ -8,7 +8,7 @@ import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
 import { fetchData, receiveData } from '../../../services/vm';
 import { getRuleColumes, getApprovingColumes } from './TableTpl/sgTableTpl';
-import SGCreate from './SGCreate'
+import SGRuleCreate from './SGRuleCreate'
 
 const TabPane = Tabs.TabPane;
 const { Sider, Content } = Layout;
@@ -78,13 +78,13 @@ class SGList extends Component {
               <Card title="安全组规则列表" bordered={false} headStyle={{ borderBottom: 0 }} bodyStyle={{ paddingTop: 0 }}>
                 <Tabs defaultActiveKey="1" activeKey={this.state.activeKey} onChange={this.onTabChange}>
                   <TabPane tab={<span>规则列表</span>} key="1">
-                    <SGCreate refresh={this.refresh} />
+                    <SGRuleCreate sg_id={this.props.match.params.id} refresh={this.refresh} />
                     <Table bordered columns={this.columns} onChange={this.handleTableChange}
                            loading={loading}
                            dataSource={dataList} rowKey="id" pagination={pager} />
                   </TabPane>
                   <TabPane tab={<span>审核列表</span>} key="2">
-                    <SGCreate refresh={this.refresh_approving} />
+                    <SGRuleCreate sg_id={this.props.match.params.id} refresh={this.refresh_approving} />
                     <Table bordered columns={this.approvingColumns} onChange={this.handleTableChange}
                            loading={loading}
                            dataSource={dataList} rowKey="id" pagination={pager} />
