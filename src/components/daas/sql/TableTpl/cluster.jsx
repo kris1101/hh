@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-import chart from '../../../../static/icons/area_chart.png'
+// import chart from '../../../../static/icons/area_chart.png'
 
 export function getclusters() {
     return [{
-        title: '组名',
-        dataIndex: 'name',
+        title: '集群码',
+        dataIndex: 'fields.uuid',
     }, {
-        title: '组编号',
-        dataIndex: 'number'
+        title: '名称',
+        dataIndex: 'fields.name'
     }, {
         title: '端口',
-        dataIndex: 'port',
+        dataIndex: 'fields.port',
     },{
         title: '创建时间',
-        dataIndex: 'date',
-    },{
-        title: '更新时间',
-        dataIndex: 'update',
+        dataIndex: 'fields.create_time',
     },{
         title: '操作',
         render: (data) => (
