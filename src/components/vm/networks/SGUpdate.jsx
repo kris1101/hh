@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { notification, InputNumber, Checkbox, Button, Modal, Form, Input, Radio } from 'antd';
+import { notification, Select, Tooltip, Icon, Button, Modal, Form, Input } from 'antd';
 
-import { sgCreate } from '../../../services/vm/user';
+import { sgUpdate } from '../../../services/vm/user';
 
+const Option = Select.Option;
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -21,30 +22,35 @@ const formItemLayout = {
 
 class CreateForm extends React.Component {
   state = {
-    data: [],
+    group_data: [],
+    role_data: [],
   };
   componentWillReceiveProps(nextProps) {
-    if (nextProps.visible === false || this.state.data.length !== 0){
+    if (nextProps.visible === false){
       return;
     }
+
   }
+
   render() {
-    const { visible, onCancel, onCreate, form, confirmLoading } = this.props;
-    const { getFieldDecorator } = form;
+    const { visible, onCancel, onCreate, record, form, confirmLoading } = this.props;
+    const { getFieldDecorator, getFieldValue } = form;
+    const group_children = [];
+    for (var u of this.state.group_data) {
+      group_children.push(<Option key={u.id}>{u.name}</Option>);
+    }
+    const role_children = [];
+    for (var u of this.state.role_data) {
+      role_children.push(<Option key={u.id}>{u.name}</Option>);
+    }
 
     return (
-      <Modal
-          visible={visible}
-          title="新增网络"
-          okText="创建"
-          onCancel={onCancel}
-          onOk={onCreate}
-          confirmLoading={confirmLoading}
-      >
+      <Modal visible={visible} title="编辑子网" okText="编辑" onCancel={onCancel} onOk={onCreate} confirmLoading={confirmLoading} >
         <Form>
           <FormItem {...formItemLayout} label="名称">
             {getFieldDecorator('name', {
               rules: [{ required: true, message: '请输入名称!' }],
+              initialValue: record.name,
             })(
               <Input placeholder="名称" />
             )}
@@ -53,11 +59,11 @@ class CreateForm extends React.Component {
             {getFieldDecorator('description', {
               validateTrigger: ['onChange', 'onBlur'],
               rules: [{ required: false, message: '请输入描述!' }, ],
+              initialValue: record.description,
             })(
               <TextArea placeholder="描述" autosize={{ minRows: 4, }} />
             )}
           </FormItem>
-
         </Form>
       </Modal>
     );
@@ -65,8 +71,7 @@ class CreateForm extends React.Component {
 }
 const CollectionCreateForm = Form.create()(CreateForm);
 
-
-class SGCreate extends Component {
+class SGUpdate extends Component {
   state = {
     visible: false,
     confirmLoading: false,
@@ -82,12 +87,14 @@ class SGCreate extends Component {
     const form = this.form;
     form.validateFields((err, values) => {
       if (err) {
-        return;
+          return;
       }
 
       console.log('Received values of form: ', values);
       this.setState({ confirmLoading: true });
-      sgCreate({ name: values.name, description: values.description}).then(res => {
+      sgUpdate(this.props.record.id, {
+        name: values.name, description: values.description,
+      }).then(res => {
         if (res.code === 0) {
           notification['success']({message: res.msg});
           form.resetFields();
@@ -109,13 +116,17 @@ class SGCreate extends Component {
   render() {
     return (
       <span>
-        <Button type="primary" onClick={this.showModal} style={{ marginBottom: 16 }}>新增安全组</Button>
+        <Tooltip title="编辑安全组">
+          <a onClick={this.showModal} ><Icon type="edit" /></a>
+        </Tooltip>
         <CollectionCreateForm
-            ref={this.saveFormRef}
-            visible={this.state.visible}
-            onCancel={this.handleCancel}
-            onCreate={this.handleCreate}
-            confirmLoading={this.state.confirmLoading}
+          ref={this.saveFormRef}
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onCreate={this.handleCreate}
+          record={this.props.record}
+          project_id={this.props.project_id}
+          confirmLoading={this.state.confirmLoading}
         />
       </span>
     );
@@ -123,4 +134,4 @@ class SGCreate extends Component {
 }
 
 
-export default SGCreate;
+export default SGUpdate;
