@@ -12,6 +12,24 @@ class ModalForm extends Component {
         confirmLoading: false,
         visible:false,
         autoCompleteResult: [],
+        currentId: this.props.currentData && this.props.currentData.id ? this.props.currentData.id : "",
+        uuid:''
+
+    }
+    componentDidMount () {
+        const data = this.props.currentData;
+
+        if(data) {
+            this.setState({uuid: data.uuid});
+            this.props.form.setFieldsValue({
+                user_name: data.user_name,
+                department: data.department,
+                duty: data.duty,
+                email: data.email,
+                telephone: data.telephone,
+                comments: data.comments
+            })
+        }
     }
 
     handleSubmit = (e) => {
@@ -44,36 +62,49 @@ class ModalForm extends Component {
         });
       }
     commitInfo = () =>{
-        const data = this.props.areaData;
-
         this.props.form.validateFields((err, values) => {
             let url = '';
+            const data = this.props.currentData;
             if(data){//编辑
-                values.id = data.uuid;
-                url = '/ticket/user/'+values.id;
+                url = '/ticket/user/'+this.state.uuid;
+                let $this = this;
+                this.setState({
+                  confirmLoading: false,
+                });
+                Ajax.putAjax(url,values,function (response) {
+                    console.log(response);
+                    if (response.data.code == 30000) {
+                        $this.props.hideModal('ok');
+
+                    } else {
+                        notification.error({
+                            message: '提示',
+                            description: response.data.msg,
+                            duration: 2
+                        })
+                    }
+                })
             }else {
                 url = '/ticket/users';
-            }
-            let $this = this;
-            let data = values;
-            console.log(data)
-            console.log(url)
-            this.setState({
-              confirmLoading: false,
-            });
-            Ajax.postAjax(url,data,function (response) {
-                console.log(response);
-                if (response.data.code == 30000) {
-                    $this.props.hideModal('ok');
+                let $this = this;
+                let data = values;
+                this.setState({
+                  confirmLoading: false,
+                });
+                Ajax.postAjax(url,data,function (response) {
+                    console.log(response);
+                    if (response.data.code == 30000) {
+                        $this.props.hideModal('ok');
 
-                } else {
-                    notification.error({
-                        message: '提示',
-                        description: response.data.msg,
-                        duration: 2
-                    })
-                }
-            })
+                    } else {
+                        notification.error({
+                            message: '提示',
+                            description: response.data.msg,
+                            duration: 2
+                        })
+                    }
+                })
+            }
         });
     }
 

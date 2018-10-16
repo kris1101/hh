@@ -44,8 +44,8 @@ class GroupManageForm extends Component {
             data.page = params.page;
             data.status=0;
             data.pageSize = 10;
-            Ajax.getAjax('/ticket/users',data,function (response) {
-                console.log(data);
+
+            Ajax.getAjax('/ticket/groups',data,function (response) {
                 console.log(response.data);
                 if (response.data.code == 30000) {
                     let deviceList = response.data.objects;

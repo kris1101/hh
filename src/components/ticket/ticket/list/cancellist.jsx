@@ -27,6 +27,7 @@ class CancelManageForm extends Component {
         total: 0,
         isOpen: false,
         currentData: [],
+        modalType:''
     }
     getCancelList = (value) =>  {
         let params = {

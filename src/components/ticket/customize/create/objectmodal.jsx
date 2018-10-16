@@ -12,8 +12,22 @@ class ModalForm extends Component {
         confirmLoading: false,
         visible:false,
         autoCompleteResult: [],
-    }
+        currentId: this.props.currentData && this.props.currentData.id ? this.props.currentData.id : "",
 
+    }
+    componentDidMount () {
+        const data = this.props.currentData;
+        if(data) {
+            this.props.form.setFieldsValue({
+                user_name: data.user_name,
+                department: data.department,
+                duty: data.duty,
+                email: data.email,
+                telephone: data.telephone,
+                comments: data.comments,
+            })
+        }
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {

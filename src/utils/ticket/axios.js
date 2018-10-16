@@ -59,7 +59,7 @@ export function putAjax(url, params, Callback) {
     if (token) {
         instance.defaults.headers.common['Authorization'] = token;
     }
-    instance.put(url, Qs.stringify(params))
+    instance.put(url, params)
         .then(function(response) {
 
             Callback(response);
@@ -105,12 +105,12 @@ export function deleteAjax(url, Callback) {
 
             Callback(response);
         })
-        .catch(function(error) {
-            console.log(error);
-            notification.error({
-                message: '提示',
-                description: `登录超时，请重新登录`,
-                duration: 2,
-            });
-        });
+        // .catch(function(error) {
+        //     console.log(error);
+        //     notification.error({
+        //         message: '提示',
+        //         description: `登录超时，请重新登录`,
+        //         duration: 2,
+        //     });
+        // });
 }
