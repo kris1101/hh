@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import GroupUpdate from '../GroupUpdate';
 import GroupMemberDelete from '../GroupMemberDelete';
+import { timezoneFormat } from '../../../../utils/vm'
 
 
 export function getColumes() {
@@ -19,7 +20,8 @@ export function getColumes() {
     dataIndex: 'domain_id'
   }, {
     title: '创建时间',
-    dataIndex: 'create_time'
+    dataIndex: 'create_time',
+    render: (text, record) => timezoneFormat(record.create_time),
   }, {
     title: '描述',
     dataIndex: 'description'

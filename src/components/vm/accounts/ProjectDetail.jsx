@@ -5,7 +5,7 @@ import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
 import { projectDetail, projectMemberList, projectGroupList } from '../../../services/vm/user';
 import { getDetailColumes, getDetailGroupColumes, getDetailMemeberColumes } from './TableTpl/projectTabletpl';
-import { humansize } from '../../../utils/vm'
+import { humansize, timezoneFormat } from '../../../utils/vm'
 import ProjectMemberCreate from './ProjectMemberCreate';
 import ProjectGroupCreate from './ProjectGroupCreate';
 
@@ -70,7 +70,7 @@ class ProjectDetail extends React.Component {
           {'title': '父项目', 'key': 'parent_name', 'value': res.data.parent_name || '无'},
           {'title': '是否是域', 'key': 'is_domain', 'value': res.data.is_domain ? '是' : '否'},
           {'title': '状态', 'key': 'status', 'value': res.data.status === 1 ? <span className="mygreen">正常</span> : <span className="myred">禁用</span>},
-          {'title': '创建时间', 'key': 'create_time', 'value': res.data.create_time},
+          {'title': '创建时间', 'key': 'create_time', 'value': timezoneFormat(res.data.create_time)},
         ],
         loading: false,
       });
