@@ -2,8 +2,9 @@ import React, {
     Component
 } from 'react';
 
-import Daas_Instance from '../components/daas/sql/Instance';
-import Daas_Cluster from '../components/daas/sql/cluster';
+import Daas_RDB_Instance from '../components/daas/sql/instance/instance';
+import Daas_RDB_Project from '../components/daas/sql/project/project';
+import Daas_RDB_Cluster from '../components/daas/sql/cluster/cluster';
 import Daas_Backup from '../components/daas/sql/backup';
 import Daas_Binlog from '../components/daas/sql/binlog';
 import Daas_Verify from '../components/daas/sql/verify';
@@ -21,12 +22,16 @@ import Daas_SlowQuery_Group from '../components/daas/slowquery/group';
 const daas_routes =
     [{
         exact: true,
-        path: '/daas/instance',
-        component: Daas_Instance,
+        path: '/daas/rdb/instance',
+        component: Daas_RDB_Instance,
     }, {
         exact: true,
-        path: '/daas/cluster',
-        component: Daas_Cluster,
+        path: '/daas/rdb/project',
+        component: Daas_RDB_Project,
+    }, {
+        exact: true,
+        path: '/daas/rdb/cluster',
+        component: Daas_RDB_Cluster,
     }, {
         exact: true,
         path: '/daas/backup',
