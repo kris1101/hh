@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import Daassider from '../../../components/common/LeftSider/daassider';
+import Daassider from '../../../../components/common/LeftSider/daassider';
 import { Layout, Form, Input, Button, Select, Table } from 'antd';
 import { connect } from 'react-redux';
-import BreadcrumbCustom from '../../BreadcrumbCustom';
-import { getinstances } from './TableTpl/instance';
-import './list.less';
+import BreadcrumbCustom from '../../../BreadcrumbCustom';
+import { getinstances } from '.././TableTpl/instance';
+import '.././list.less';
+import { rdbInstanceFetch } from '../../../../containers/Daas/actions/rdb_instance';
+import DaasRdbInstanceCreateModel from './instancecreatemodel';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -14,23 +16,29 @@ class DaasInstanceManageForm extends Component {
     constructor(props) {
         super(props);
         this.columns = getinstances.call(this);
+        this.state = {
+            deviceList: [],
+            currentPage: 1,
+            pageSize: 10,
+            total: 0
+        }
     }
-    state = {
-        deviceList: [],
-        currentPage: 1,
-        pageSize: 10,
-        total: 0
-    }
+    
     componentDidMount () {
+        this.props.rdbInstanceFetch();
         this.setState({
-            deviceList:[
-                {'name':'yest'},
-                ]
+            deviceList: this.props.instancesList,
         })
+    }
+
+    handleSubmit(){
+        const instanceObj = this.props.form.getFieldsValue();
+        this.props.rdbInstanceFetch(instanceObj)
     }
     //重置表单
     handleReset = () => {
         this.props.form.resetFields();
+        this.props.rdbInstanceFetch();
     }
 
     openAddDevicePage = (value) => {
@@ -39,22 +47,6 @@ class DaasInstanceManageForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    let _that = this;
-    const pagination = {
-          current: this.state.currentPage,
-          total: this.state.total,
-          pageSize: this.state.pageSize,
-          showQuickJumper: true,
-          //当表格有变化时，如：点击分页  current是当前页面页码
-          onChange() {
-              let value = _that.props.form.getFieldsValue()
-              _that.setState({
-                  currentPage: this.current,
-              }, () => {
-                  _that.getDeviceList(value)
-              })
-          }
-    };
 
     return (
       <Layout className="config">
@@ -64,9 +56,9 @@ class DaasInstanceManageForm extends Component {
         <Content style={{ padding: 0, margin:10, marginBottom: 0, minHeight: window.innerHeight-84 }}>
             <BreadcrumbCustom first="关系型数据库" second="实例" />
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
-                <Form layout="inline" onSubmit={this.handleSubmit}>
+                <Form layout="inline">
                     <FormItem>
-                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新增实例</Button>
+                        <DaasRdbInstanceCreateModel instancelist={this.props.instancesList} />
                     </FormItem>
                     <FormItem>
                         <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建主从</Button>
@@ -78,7 +70,7 @@ class DaasInstanceManageForm extends Component {
                             )}
                         </FormItem>
                     <FormItem>
-                        <Button type="primary" className="btn-search" htmlType="submit" style={{marginRight: 10}}>查询</Button>
+                        <Button type="primary" className="btn-search" onClick={this.handleSubmit.bind(this)} style={{marginRight: 10}}>查询</Button>
                         <Button className="btn-search" onClick={this.handleReset}>重置</Button>
                     </FormItem>
                     </div>
@@ -86,10 +78,10 @@ class DaasInstanceManageForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered rowKey={record => record.key} columns={this.columns} dataSource={this.state.deviceList} pagination={pagination} />
+                <Table bordered rowKey={record => record.pk} columns={this.columns} dataSource={this.props.instancesList} />
             </div>
             <div style={{margin: 20}}>
-                <span className='num'>共找到 { this.state.total }条结果， 每页显示10条</span>
+                <span className='num'>共找到 { this.props.total }条结果， 每页显示10条</span>
             </div>
         </Content>
       </Layout>
@@ -98,6 +90,4 @@ class DaasInstanceManageForm extends Component {
 }
 
 const DaasInstanceManage = Form.create()(DaasInstanceManageForm);
-export default connect((state) => {
-    return { ...state };
-})(DaasInstanceManage);
+export default connect(state=>state.daasRdbInstance,{rdbInstanceFetch})(DaasInstanceManage);
