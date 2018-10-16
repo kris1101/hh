@@ -42,72 +42,19 @@ class CreateForm extends React.Component {
           confirmLoading={confirmLoading}
       >
         <Form>
-          <FormItem {...formItemLayout} label="网络名">
+          <FormItem {...formItemLayout} label="名称">
             {getFieldDecorator('name', {
-              rules: [{ required: true, message: '请输入网络名!' }],
+              rules: [{ required: true, message: '请输入名称!' }],
             })(
-              <Input placeholder="网络名" />
+              <Input placeholder="名称" />
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="段ID" extra="VLAN网络的ID，取值范围: 1-4094">
-            {getFieldDecorator('provider_segmentation_id', {
-              rules: [{ required: true, message: '请输入段ID!' }],
-            })(
-              <InputNumber min={1} max={4094} placeholder="段ID" />
-            )}
-          </FormItem>
-          <FormItem {...formItemLayout} label="启用管理员状态" extra="不启用将不启动agent">
-            {getFieldDecorator('admin_state_up', {
-              rules: [{ required: false, message: '请输入!' }],
-              initialValue: true,
-              valuePropName: 'checked',
-            })(
-              <Checkbox></Checkbox>
-            )}
-          </FormItem>
-          <FormItem {...formItemLayout} label="共享的" extra="共享的网络可以被别的组使用">
-            {getFieldDecorator('shared', {
-              rules: [{ required: false, message: '请输入!' }],
-            })(
-              <Checkbox></Checkbox>
-            )}
-          </FormItem>
-          <FormItem {...formItemLayout} label="子网名">
-            {getFieldDecorator('subnet_name', {
-              rules: [{ required: true, message: '请输入子网名!' }],
-            })(
-              <Input placeholder="子网名" />
-            )}
-          </FormItem>
-          <FormItem {...formItemLayout} label="CIDR" extra="格式：192.168.0.0/24, 2001:DB8::/48">
-            {getFieldDecorator('cidr', {
-              rules: [{ required: true, message: '请输入CIDR!' }],
-            })(
-              <Input placeholder="CIDR" />
-            )}
-          </FormItem>
-          <FormItem {...formItemLayout} label="网关" extra="默认值为网络地址第一个IP">
-            {getFieldDecorator('gateway_ip', {
-              rules: [{ required: false, message: '请输入网关!' }],
-            })(
-              <Input placeholder="网关" />
-            )}
-          </FormItem>
-          <FormItem {...formItemLayout} label="DNS" extra="一行一条">
-            {getFieldDecorator('dns_nameservers', {
+          <FormItem {...formItemLayout} label="描述">
+            {getFieldDecorator('description', {
               validateTrigger: ['onChange', 'onBlur'],
-              rules: [{ required: false, message: '请输入DNS!' }, ],
+              rules: [{ required: false, message: '请输入描述!' }, ],
             })(
-              <TextArea placeholder="DNS" autosize={{ minRows: 6, }} />
-            )}
-          </FormItem>
-          <FormItem {...formItemLayout} label="允许DHCP">
-            {getFieldDecorator('enable_dhcp', {
-              rules: [{ required: false, message: '请输入允许DHCP!' }],
-              initialValue: true,
-              valuePropName: 'checked',
-            })(
-              <Checkbox></Checkbox>
+              <TextArea placeholder="描述" autosize={{ minRows: 4, }} />
             )}
           </FormItem>
 
@@ -140,13 +87,7 @@ class SGCreate extends Component {
 
       console.log('Received values of form: ', values);
       this.setState({ confirmLoading: true });
-      sgCreate({
-        name: values.name, provider_segmentation_id: values.provider_segmentation_id,
-        admin_state_up: values.admin_state_up, shared: values.shared,
-        subnet_name: values.subnet_name, cidr: values.cidr,
-        gateway_ip: values.gateway_ip, dns_nameservers: values.dns_nameservers,
-        enable_dhcp: values.enable_dhcp,
-      }).then(res => {
+      sgCreate({ name: values.name, description: values.description}).then(res => {
         if (res.code === 0) {
           notification['success']({message: res.msg});
           form.resetFields();
