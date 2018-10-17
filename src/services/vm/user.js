@@ -80,3 +80,5 @@ export const sgDetail = (id, params) => axios.get(`networks/security_groups/${id
 export const sgUpdate = (id, data) => axios.put(`networks/security_groups/${id}/`, data).then(res => res.data).catch(err => console.log(err));
 // sg rules
 export const sgRuleList = (params) => axios.get(`networks/security_groups/${params.id}/rules/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const sgRuleCreate = (sg_id, data) => axios.post(`networks/security_groups/${sg_id}/rules/add/`, data).then(res => res.data).catch(err => console.log(err));
+export const getSGRuleRemoteGroup = (sg_id) => axios.get(`networks/security_groups/${sg_id}/rules/add/`).then(res => res.data).catch(err => console.log(err));
