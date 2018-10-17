@@ -25,14 +25,14 @@ export function getAjax(url, params, Callback) {
         .then(function(response) {
             Callback(response);
         })
-        .catch(function(error, resoponse) {
-            /* return Promise.reject(error);*/
-            notification.error({
-                message: '提示',
-                description: `服务器错误！`,
-                duration: 2,
-            });
-        });
+        // .catch(function(error, resoponse) {
+        //     /* return Promise.reject(error);*/
+        //     notification.error({
+        //         message: '提示',
+        //         description: `服务器错误！`,
+        //         duration: 2,
+        //     });
+        // });
 }
 
 export function postAjax(url, params, Callback) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, AutoComplete,notification,Modal } from 'antd';
+import { Form, Input, Select, AutoComplete,notification,Modal,Checkbox,message } from 'antd';
 import * as Ajax from '../../../../utils/ticket/axios';
 
 const FormItem = Form.Item;
@@ -7,28 +7,49 @@ const Option = Select.Option;
 const { TextArea } = Input;
 const AutoCompleteOption = AutoComplete.Option;
 
+const options=[];
 class ModalForm extends Component {
     state = {
         confirmLoading: false,
         visible:false,
         autoCompleteResult: [],
         currentId: this.props.currentData && this.props.currentData.id ? this.props.currentData.id : "",
+        children:[],
+        uuid:''
 
     }
     componentDidMount () {
+        this.loadData();
+
         const data = this.props.currentData;
+        // console.log('是' ? data.is_private: '否')//?
         if(data) {
+            this.setState({uuid: data.uuid});
             this.props.form.setFieldsValue({
-                user_name: data.user_name,
-                department: data.department,
-                duty: data.duty,
-                email: data.email,
-                telephone: data.telephone,
+                name: data.name,
+                users:data.user,
                 comments: data.comments,
+                is_private: data.is_private
             })
         }
-    }
 
+    }
+    loadData = () => {
+        let _this = this;
+        Ajax.getAjax('/ticket/users',{},function (response) {
+            console.log(response.data.objects);
+                    if (response.data.code == 30000) {
+                        let data = response.data.objects;
+                        console.log(data);
+                        _this.setState({
+                            children:data
+                        });
+                        _this.state.children.map((item,index) => {
+                            options.push(<Option key={item.uuid} value={item.user_name}>{item.user_name}</Option>)
+                        })
+                    }
+                })
+    };
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -49,45 +70,55 @@ class ModalForm extends Component {
         });
       }
     commitInfo = () =>{
-        const data = this.props.areaData;
-
         this.props.form.validateFields((err, values) => {
             let url = '';
+            const data = this.props.currentData;
             if(data){//编辑
-                values.id = data.uuid;
-                url = '/ticket/user/'+values.id;
+                url = '/ticket/group/'+this.state.uuid;
+                let $this = this;
+                this.setState({
+                  confirmLoading: false,
+                });
+                Ajax.putAjax(url,values,function (response) {
+                    console.log(response);
+                    if (response.data.code == 30000) {
+                        message.success(response.data.message, 3)
+                        $this.props.hideModal('ok');
+
+                    } else {
+                        notification.error({
+                            message: '提示',
+                            description: response.data.message,
+                            duration: 2
+                        })
+                    }
+                })
             }else {
                 url = '/ticket/users';
+                let $this = this;
+                let data = values;
+                this.setState({
+                  confirmLoading: false,
+                });
+                Ajax.postAjax(url,data,function (response) {
+                    console.log(response);
+                    if (response.data.code == 30000) {
+                        message.success(response.data.message, 3)
+                        $this.props.hideModal('ok');
+                    } else {
+                        notification.error({
+                            message: '提示',
+                            description: response.data.message,
+                            duration: 2
+                        })
+                    }
+                })
             }
-            let $this = this;
-            let data = values;
-            console.log(data)
-            console.log(url)
-            this.setState({
-              confirmLoading: false,
-            });
-            Ajax.postAjax(url,data,function (response) {
-                console.log(response);
-                if (response.data.code == 30000) {
-                    $this.props.hideModal('ok');
-
-                } else {
-                    notification.error({
-                        message: '提示',
-                        description: response.data.msg,
-                        duration: 2
-                    })
-                }
-            })
         });
     }
 
-
     render() {
         const { getFieldDecorator } = this.props.form;
-        const { autoCompleteResult } = this.state;
-        const { option } = this.props;
-        const roleOptions = option?option.map(element => <Option key={element.id} value={element.id}> {element.roleName}</Option>):'';
         const formItemLayout = {
               labelCol: {
                 xs: { span: 12 },
@@ -98,28 +129,10 @@ class ModalForm extends Component {
                 sm: { span: 16 },
               },
             };
-            const tailFormItemLayout = {
-              wrapperCol: {
-                xs: {
-                  span: 24,
-                  offset: 0,
-                },
-                sm: {
-                  span: 16,
-                  offset: 8,
-                },
-              },
-            };
-            const prefixSelector = getFieldDecorator('prefix', {
-              initialValue: '86',
-            })(
-              <Select style={{ width: 70 }}>
-                <Option value="86">+86</Option>
-              </Select>
-            );
-         const websiteOptions = autoCompleteResult.map(website => (
-            <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-        ));
+
+
+
+
         return (
             <Modal
                 title={this.props.modalType === 'add' ? '添加用户组' : '编辑用户组'}
@@ -140,7 +153,7 @@ class ModalForm extends Component {
                     </span>
                   )}
                 >
-                  {getFieldDecorator('user_name', {
+                  {getFieldDecorator('name', {
                     rules: [{ required: true, message: '请输入名称！', whitespace: true }]
                   })(
                     <Input />
@@ -150,11 +163,14 @@ class ModalForm extends Component {
                   {...formItemLayout}
                   label={(<span>成员&nbsp;</span>)}
                 >
-                  {getFieldDecorator('department', {
-                    rules: [{ required: false,}],initialValue:null
-                  })(
-                    <Input />
-                  )}
+
+                    <Select
+                        mode="tags"
+                        style={{ width: '100%' }}
+                        placeholder="选择成员"
+                      >
+                        {options}
+                      </Select>
                 </FormItem>
                 <FormItem
                   {...formItemLayout}
@@ -165,6 +181,17 @@ class ModalForm extends Component {
                   })(
                     <Input />
                   )}
+                </FormItem>
+                <FormItem
+                 {...formItemLayout}
+                   label={(<span>是否共享&nbsp;</span>)}
+                >
+                    {getFieldDecorator('is_private')(
+                        <Select style={{width: 174}}>
+                            <Option key='0' value="0">是</Option>
+                            <Option key='1' value="1">否</Option>
+                        </Select>
+                    )}
                 </FormItem>
             </Form>
             </div>
