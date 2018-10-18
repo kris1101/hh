@@ -62,6 +62,7 @@ export function rdbClusterFetch(params={}){
 export function rdbClusterCreate(clusterObj){
     return dispatch=>{
         postAjax('/v1/api/rdb/clusters', clusterObj, function(response){
+            console.log(clusterObj);
             dispatch(rdb_cluster_create(response.data));
             if (response.data.code) {
                 message.error('集群创建失败: ' + response.data.message);
