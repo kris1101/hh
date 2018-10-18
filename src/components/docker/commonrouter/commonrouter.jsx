@@ -14,6 +14,7 @@ import k8sHelmReleaseComponent from '../components/k8s/helm/releasemanage/releas
 import k8sHelmTaskStateComponent from '../components/k8s/helm/taskstate/taskstate'
 import k8sWorkloadPodsComponent from '../components/k8s/workload/pods'
 import PaasCodeBaseComponent from '../components/cicd/codebase/codebase'
+import PaasCodeBuildTaskComponent from '../components/cicd/codebuild/codebuild'
 import notFoundPage from '../components/404/404page'
 
 class PaasChildRouter extends Component {
@@ -36,6 +37,7 @@ class PaasChildRouter extends Component {
                   <Route path={`${this.props.match.path}helmreleasemanage`} exact component={k8sHelmReleaseComponent}></Route>
                   <Route path={`${this.props.match.path}helmtaskstate`} exact component={k8sHelmTaskStateComponent}></Route>
                   <Route path={`${this.props.match.path}codebase`} exact component={PaasCodeBaseComponent}></Route>
+                  <Route path={`${this.props.match.path}codeimagebuild`} exact component={PaasCodeBuildTaskComponent}></Route>
 
                   <Route path={`${this.props.match.path}workload/podlist`} exact component={k8sWorkloadPodsComponent}></Route>
                   <Route component={notFoundPage}></Route>

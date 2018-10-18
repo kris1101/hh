@@ -12,6 +12,7 @@ var instance = axios.create({
 instance.defaults.headers.post['Content-Type'] = 'multipart/form-data'
 instance.defaults.headers.put['Content-Type'] = 'multipart/form-data'
 
+NProgress.configure({ showSpinner: false  });
 //拦截请求
 instance.interceptors.request.use(function(config){
     NProgress.start();
