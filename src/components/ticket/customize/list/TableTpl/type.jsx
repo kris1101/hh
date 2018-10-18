@@ -9,16 +9,16 @@ export function gettypes() {
         dataIndex: 'name'
     },{
         title: '类型',
-        dataIndex: 'type'
+        dataIndex: 't_type'
     }, {
         title: '创建人',
         dataIndex: 'create_user',
     }, {
-        title: '创建人',
-        dataIndex: 'create_time',
+        title:  '处理组',
+        dataIndex: 'recipient',
     },{
         title: '备注',
-        dataIndex: 'ps',
+        dataIndex: 'comments',
     },{
         title: '操作',
         render: (data,record) => (

@@ -10,7 +10,6 @@ import TypeModal from '../create/typemodal'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 const confirm = Modal.confirm;
 
 
@@ -67,8 +66,7 @@ class TypeManageForm extends Component {
     }
 
     deleteData = (value) => {
-        let id = value.id;
-        console.log(id)
+        let id = value.uuid;
         let _this = this;
         confirm({
             title:'确认删除?',
@@ -76,12 +74,12 @@ class TypeManageForm extends Component {
             okType: 'danger',
             cancelText: '取消',
             onOk(){
-                Ajax.postAjax('/manager/bom/'+id, {}, (res) => {
-                    if(!res.data.errorCode){
-                        message.success(res.data.msg, 3);
-                        _this.getContentList();
+                Ajax.deleteAjax('/ticket/type/'+id, (res) => {
+                    if(res.data.code=30000){
+                        message.success(res.data.message, 3);
+                        _this.getTypeList();
                     } else {
-                        message.error(res.data.msg, 3)
+                        message.error(res.data.message, 3)
                     }
                 })
             }

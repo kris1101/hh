@@ -68,7 +68,7 @@ class ObjectManageForm extends Component {
     }
 
     deleteData = (value) => {
-        let id = value.id;
+        let id = value.uuid;
         console.log(id)
         let _this = this;
         confirm({
@@ -77,12 +77,12 @@ class ObjectManageForm extends Component {
             okType: 'danger',
             cancelText: '取消',
             onOk(){
-                Ajax.postAjax('/manager/bom/'+id, {}, (res) => {
-                    if(!res.data.errorCode){
-                        message.success(res.data.msg, 3);
-                        _this.getContentList();
+                Ajax.deleteAjax('/ticket/object/'+id, (res) => {
+                    if(res.data.code=30000){
+                        message.success(res.data.message, 3);
+                        _this.getObjectList();
                     } else {
-                        message.error(res.data.msg, 3)
+                        message.error(res.data.message, 3)
                     }
                 })
             }
