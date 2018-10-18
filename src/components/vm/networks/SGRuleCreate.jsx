@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { notification, Select, InputNumber, Checkbox, Button, Modal, Form, Input, Radio } from 'antd';
+import { notification, Select, InputNumber, Button, Modal, Form, Input } from 'antd';
 
 import { sgRuleCreate, getSGRuleRemoteGroup } from '../../../services/vm/user';
 

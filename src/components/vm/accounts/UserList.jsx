@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Table } from 'antd';
 
 import { getColumes } from './TableTpl/userTabletpl';
 // import './list.less';

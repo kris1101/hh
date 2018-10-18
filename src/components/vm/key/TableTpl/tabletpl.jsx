@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Divider } from 'antd';
 
 import KeyDetail from '../KeyDetail'

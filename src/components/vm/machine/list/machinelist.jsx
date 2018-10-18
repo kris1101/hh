@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import VMSider from '../../../common/LeftSider/vmsider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
 import { getmachines } from './TableTpl/tabletpl';
@@ -8,7 +8,6 @@ import './machinelist.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class VMManageForm extends Component {
     constructor(props) {

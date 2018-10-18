@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-import * as config from './config';
+// import * as config from './config';
 
 
-var ins = axios.create({
-    baseURL: config.baseUrl,
-    headers: {
-        'content-type': 'application/json',
-    }
-});
+// var ins = axios.create({
+//     baseURL: config.baseUrl,
+//     headers: {
+//         'content-type': 'application/json',
+//     }
+// });
 
 
 

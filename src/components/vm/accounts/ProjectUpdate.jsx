@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { notification, Select, Tooltip, Icon, Button, Modal, Form, Input } from 'antd';
+import { notification, Select, Tooltip, Icon, Modal, Form, Input } from 'antd';
 
 import { projectUpdate } from '../../../services/vm/user';
 
@@ -32,7 +32,7 @@ class CreateForm extends React.Component {
 
   render() {
     const { visible, onCancel, onCreate, record, form, confirmLoading } = this.props;
-    const { getFieldDecorator, getFieldValue } = form;
+    const { getFieldDecorator } = form;
 
     return (
       <Modal visible={visible} title="编辑项目" okText="编辑" onCancel={onCancel} onOk={onCreate} confirmLoading={confirmLoading} >

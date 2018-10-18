@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Divider, Tooltip, Icon } from 'antd';
 import { Link } from 'react-router-dom';
-import { humansize, timesince } from '../../../../utils/vm'
 
 import SGUpdate from '../SGUpdate';
 import ApprovalBox from '../SGRuleApprovalBox';

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { notification, Select, Tooltip, Icon, Button, Modal, Form, Input } from 'antd';
+import { notification, Select, Tooltip, Icon, Modal, Form } from 'antd';
 
 import { projectGroupUpdate, projectGroupData } from '../../../services/vm/user';
 
 const Option = Select.Option;
 const FormItem = Form.Item;
-const { TextArea } = Input;
 
 
 const formItemLayout = {
@@ -49,14 +48,14 @@ class CreateForm extends React.Component {
 
   render() {
     const { visible, onCancel, onCreate, record, form, confirmLoading } = this.props;
-    const { getFieldDecorator, getFieldValue } = form;
+    const { getFieldDecorator } = form;
     const group_children = [];
     for (var u of this.state.group_data) {
       group_children.push(<Option key={u.id}>{u.name}</Option>);
     }
     const role_children = [];
-    for (var u of this.state.role_data) {
-      role_children.push(<Option key={u.id}>{u.name}</Option>);
+    for (var p of this.state.role_data) {
+      role_children.push(<Option key={p.id}>{p.name}</Option>);
     }
 
     return (
