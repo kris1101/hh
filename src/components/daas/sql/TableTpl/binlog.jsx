@@ -1,30 +1,34 @@
 import React, { Component } from 'react';
 import chart from '../../../../static/icons/area_chart.png'
+import { Row, Col } from 'antd'
+import RDBInstanceBinlogDetailModel from '../binlog/binlogdetailmodel'
 
 export function getbinlogs() {
     return [{
         title: '备份主机',
-        dataIndex: 'host',
+        dataIndex: 'fields.binlog_host',
     },{
         title: '宿主机',
-        dataIndex: 'machine',
+        dataIndex: 'fields.host',
     }, {
         title: '实例端口',
-        dataIndex: 'port'
+        dataIndex: 'fields.port'
     }, {
         title: '实例id',
-        dataIndex: 'id',
+        dataIndex: 'fields.instance_id',
     },{
-        title: '上传状态',
-        dataIndex: 'status',
+        title: '进程状态',
+        dataIndex: 'fields.binlog_status',
     },{
-        title: '更新时间',
-        dataIndex: 'update',
+        title: '创建时间',
+        dataIndex: 'fields.create_time',
     },{
         title: '操作',
-        render: (data) => (
+        render: (data, record, index) => (
             <div>
-                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>详情</span>
+                <Row>
+                    <Col span={5} style={{color:'#0350CF'}}><RDBInstanceBinlogDetailModel pk={ data.pk } /></Col>
+                </Row>
             </div>
         )
     }];
