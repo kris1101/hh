@@ -6,19 +6,19 @@ export function getcompletes() {
         dataIndex: 'id',
     }, {
         title: '名称',
-        dataIndex: 'name'
+        dataIndex: 'title'
     },{
         title: '类型',
-        dataIndex: 'type'
+        dataIndex: 'ticket_type'
     }, {
         title: '优先级',
         dataIndex: 'priority',
     },{
         title: '申请日期',
-        dataIndex: 'date',
+        dataIndex: 'create_time',
     },{
         title: '发起人',
-        dataIndex: 'sponsor',
+        dataIndex: 'create_user',
     },{
         title: '受理人',
         dataIndex: 'assignee',
@@ -27,10 +27,10 @@ export function getcompletes() {
         dataIndex: 'status',
     },{
         title: '操作',
-        render: (data) => (
+        render: (data,record) => (
             <div>
-                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>详情</span>
-                <span style={{cursor: 'pointer',color:'#0350CF'}}>销毁</span>
+                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}onClick={(e) => this.openModal(record, e)}>详情</span>
+                <span style={{cursor: 'pointer',color:'#0350CF'}}onClick={(e) => this.deleteData(data,e)}>销毁</span>
             </div>
         )
     }];

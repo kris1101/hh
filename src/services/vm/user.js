@@ -56,3 +56,33 @@ export const groupMemberDel = (group_id, params) => axios.delete(`accounts/group
 // image
 export const imageList = (params) => axios.get('instances/image/', {params: params}).then(res => res.data).catch(err => console.log(err));
 export const imageDetail = (id, params) => axios.get(`instances/image/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+
+
+
+// networks
+export const networkList = (params) => axios.get('networks/network/', {params: params}).then(res => res.data).catch(err => console.log(err));
+export const networkCreate = (data) => axios.post('networks/network/create/', data).then(res => res.data).catch(err => console.log(err));
+export const networkDetail = (id, params) => axios.get(`networks/network/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const networkUpdate = (id, data) => axios.put(`networks/network/${id}/`, data).then(res => res.data).catch(err => console.log(err));
+// subnet
+export const subnetCreate = (network_id, data) => axios.post(`networks/network/${network_id}/subnet/create/`, data).then(res => res.data).catch(err => console.log(err));
+export const subnetUpdate = (network_id, id, data) => axios.put(`networks/network/${network_id}/subnet/${id}/`, data).then(res => res.data).catch(err => console.log(err));
+export const subnetDelete = (network_id, id, params) => axios.delete(`networks/network/${network_id}/subnet/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+// networks approval
+export const networkApprovalDetail = (id, params) => axios.get(`networks/network/${id}/approval/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const networkApprovalGroupAdmin = (id, params, data) => axios.post(`networks/network/${id}/approval/group_admin/`, data, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const networkApprovalAdmin = (id, params, data) => axios.post(`networks/network/${id}/approval/admin/`, data, {params: params}).then(res => res.data).catch(err => console.log(err));
+
+// security group
+export const sgList = (params) => axios.get('networks/security_groups/', {params: params}).then(res => res.data).catch(err => console.log(err));
+export const sgCreate = (data) => axios.post('networks/security_groups/create/', data).then(res => res.data).catch(err => console.log(err));
+export const sgDetail = (id, params) => axios.get(`networks/security_groups/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const sgUpdate = (id, data) => axios.put(`networks/security_groups/${id}/`, data).then(res => res.data).catch(err => console.log(err));
+// sg rules
+export const sgRuleList = (params) => axios.get(`networks/security_groups/${params.id}/rules/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const sgRuleCreate = (sg_id, data) => axios.post(`networks/security_groups/${sg_id}/rules/add/`, data).then(res => res.data).catch(err => console.log(err));
+export const getSGRuleRemoteGroup = (sg_id) => axios.get(`networks/security_groups/${sg_id}/rules/add/`).then(res => res.data).catch(err => console.log(err));
+// sg rules approval
+export const sgRuleApprovalDetail = (id, params) => axios.get(`networks/security_groups/rules/${id}/approval/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const sgRuleApprovalGroupAdmin = (id, params, data) => axios.post(`networks/security_groups/rules/${id}/approval/group_admin/`, data, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const sgRuleApprovalAdmin = (id, params, data) => axios.post(`networks/security_groups/rules/${id}/approval/admin/`, data, {params: params}).then(res => res.data).catch(err => console.log(err));
