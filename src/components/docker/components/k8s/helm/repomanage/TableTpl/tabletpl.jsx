@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Popconfirm, message, Row, Col } from 'antd';
 
-import { Link  } from 'react-router-dom';
 import { deleteAjax  } from '../../../../../utils/axios'
 import { putAjax  } from '../../../../../utils/axios'
 import { generateformdata   } from '../../../../../utils/tools_helper'
@@ -10,7 +9,7 @@ function confirm(repo_id, _that) {
   const hide = message.loading('Action in progress..', 0);
   deleteAjax('/helm/helmrepo/', "id=" + repo_id, function (res){
     hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         message.success(res.data.msg);
         _that.handleHelmRepoQuery(1, 10);
     }else{
@@ -24,7 +23,7 @@ function handleRepoUpdate(repo_id, _that) {
   const hide = message.loading('Action in progress..', 0);
   putAjax('/helm/helmrepo/', generateformdata({id: repo_id}), function (res){
     hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         message.success(res.data.msg);
         _that.handleHelmRepoQuery(1, 10);
     }else{

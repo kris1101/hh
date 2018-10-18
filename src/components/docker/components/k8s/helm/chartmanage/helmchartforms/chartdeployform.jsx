@@ -1,8 +1,7 @@
 import React from 'react'
-import {Switch, message, Form, Input, Drawer, Row, Col, Select, Button, Checkbox, Divider, Icon } from 'antd';
+import {Switch, Form, Input, Drawer, Row, Col, Select, Button, Checkbox, Divider, Icon } from 'antd';
 import { connect  } from 'react-redux';
 import './chartdeployform.less'
-import { getAjax  } from '../../../../../utils/axios'
 import { getClusterNamespaceList } from '../../../../../../../containers/Paas/common/paascommon.redux'
 import CodeMirror from '@uiw/react-codemirror';
 import 'codemirror/addon/display/autorefresh';

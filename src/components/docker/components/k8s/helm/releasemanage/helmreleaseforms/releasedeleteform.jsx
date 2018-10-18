@@ -1,5 +1,5 @@
 import React from 'react'
-import {Switch, Form, Modal, Radio	 } from 'antd';
+import {Form, Modal, Radio	 } from 'antd';
 import './releaseform.less'
 
 const FormItem = Form.Item;

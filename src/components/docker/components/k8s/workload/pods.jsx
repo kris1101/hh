@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dockersider from '../../../../common/LeftSider/dockersider';
-import { message, Layout, Form, Input, Button, Select, Table } from 'antd';
+import { message, Layout, Form, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../components/BreadcrumbCustom';
 import { getk8spods } from './TableTpl/tabletpl';
@@ -14,7 +14,6 @@ import K8sClusterSelectForm from '../../common/k8sclusterselect'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class K8sPodsForm extends Component {
     constructor(props) {
@@ -88,7 +87,7 @@ class K8sPodsForm extends Component {
         this.setState({PodCreateConfirmLoading: true})
         const _that = this;
         postAjax('/workload/pod/', generateformdata(values), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("创建成功")
                 message.success(res.data.data)
                 _that.setState({PodCreateConfirmLoading: false})
@@ -115,7 +114,7 @@ class K8sPodsForm extends Component {
         const _that = this;
         values.pod_id = pod_id;
         putAjax('/workload/pod/', generateformdata(values), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("更新成功")
                 _that.setState({PodUpdateConfirmLoading: false})
                 form.resetFields();
@@ -152,7 +151,6 @@ class K8sPodsForm extends Component {
     }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
     let _that = this;
     const pagination = {
           current: this.state.currentPage,

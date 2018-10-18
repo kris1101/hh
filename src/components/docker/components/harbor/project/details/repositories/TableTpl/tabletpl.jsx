@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Popconfirm, message } from 'antd';
 
 import { Link  } from 'react-router-dom';
@@ -10,7 +10,7 @@ function confirm(repo_name, _that) {
   const hide = message.loading('Action in progress..', 0);
   deleteAjax('/harbor/repositories/', "repo_name=" + repo_name, function (res){
     hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         message.success(res.data.msg);
         _that.handleRepositoriesQuery();
     }else{

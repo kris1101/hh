@@ -1,9 +1,8 @@
 import React from 'react'
-import { Card, Switch, message, Form, Input, Drawer, Row, Col, Select, Button, Checkbox, Divider, Icon, Radio } from 'antd';
+import { Card, Switch, message, Form, Input, Drawer, Col, Select, Button, Divider, Icon, Radio } from 'antd';
 import { connect  } from 'react-redux';
 import './codebuildcreate.less'
 import { getCodeBranchTagList, getBaseRepoList, getBaseRepoTagList, getCompileRepoList, getCompileRepoTagList} from '../../../../../../containers/Paas/k8s/paascodebuild.redux'
-import { getAjax  } from '../../../../utils/axios'
 import CodeMirror from '@uiw/react-codemirror';
 import 'codemirror/addon/display/autorefresh';
 import 'codemirror/addon/comment/comment';
@@ -52,7 +51,7 @@ const CodeBuildCreateForm = Form.create()(
     }
 
     handleDockerFileTypeChange = (e) => {
-      if (e.target.value == "custom"){
+      if (e.target.value === "custom"){
           this.props.getBaseRepoList();
       }
       this.setState({dockerfile_type: e.target.value})
@@ -267,7 +266,7 @@ const CodeBuildCreateForm = Form.create()(
                                    </RadioGroup>
                              </Form.Item>
                             </Col>
-                          {this.state.image_tag_type == "custom" ?
+                          {this.state.image_tag_type === "custom" ?
                            <Col span={13}>
                              <Form.Item>
 							      {getFieldDecorator('customimagetag', {rules: [{required: true, message:"该项不能为空"}]})(
@@ -290,7 +289,7 @@ const CodeBuildCreateForm = Form.create()(
                                    </RadioGroup>
                              </Form.Item>
                             </Col>
-                          {this.state.dockerfile_type == "incode" ?
+                          {this.state.dockerfile_type === "incode" ?
                            <Col span={17}>
                              <Form.Item>
 							      {getFieldDecorator('dokerfile_path', {rules: [{required: true, message:"该项不能为空"}]})(
@@ -366,7 +365,7 @@ const CodeBuildCreateForm = Form.create()(
                        </Card>
                    </div>
                        : null}
-                   {this.state.dockerfile_type == "custom" ?
+                   {this.state.dockerfile_type === "custom" ?
                    <div>
                        <Divider />
                     <Card 

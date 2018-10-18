@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Icon, Popconfirm, message, Row, Col } from 'antd';
 import { PodUpdateForm  } from '../podsforms/podsupdateform'
 
-import { Link  } from 'react-router-dom';
 import { deleteAjax  } from '../../../../utils/axios'
-
-import { formatStrDate } from '../../../../utils/time_helper'
 
 function confirm(name, _that) {
   const hide = message.loading('Action in progress..', 0);
   deleteAjax('/workload/pod/', "name=" + name, function (res){
     hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         message.success(res.data.msg);
         _that.handlePodQuery();
     }else{

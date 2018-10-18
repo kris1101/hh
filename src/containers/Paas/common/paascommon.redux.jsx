@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { notification  } from 'antd';
 import { getAjax } from '../../../components/docker/utils/axios'
 
@@ -43,7 +42,7 @@ export function loadNamespaceData(namespacelistinfo){
 export function getUserClusterList(params={}){
 	return dispatch=>{
       getAjax('/common/userclusterlist/', params, function(res){
-          if (res.data.code == 0){
+          if (res.data.code === 0){
             dispatch(loadData(res.data))
           }else{
             notification.error({
@@ -58,7 +57,7 @@ export function getUserClusterList(params={}){
 export function getClusterNamespaceList(header={}){
 	return dispatch=>{
       getAjax('/common/k8snamespacelist/', {}, function(res){
-          if (res.data.code == 0){
+          if (res.data.code === 0){
             dispatch(loadNamespaceData(res.data))
           }else{
             notification.error({

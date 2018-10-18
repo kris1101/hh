@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { notification } from 'antd';
 import { getAjax } from '../../../components/docker/utils/axios'
 
@@ -44,7 +43,7 @@ export function helmRelease(state = initState, action) {
         case LOCAL_SEARCH_DATA:
             return { ...state,
                 helmReleaseList: state.helmReleaseListOrigin.filter(function(currentValue) {
-                    return currentValue.name.toLowerCase().indexOf(action.payload.toLowerCase()) != -1
+                    return currentValue.name.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1
                 })
             }
         default:
@@ -105,7 +104,7 @@ export function getHelmReleaseList(params, header={}) {
         console.log(params);
         getAjax('/helm/helmrelease/', params, function(res) {
             dispatch(endLoading());
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadData(res.data.data))
             } else {
                 notification.error({
@@ -120,7 +119,7 @@ export function getHelmReleaseList(params, header={}) {
 export function getHelmReleaseVersionList(params, header={}) {
     return dispatch => {
         getAjax('/helm/helmreleasehistorylist/', params, function(res) {
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadReleaseversionData(res.data.data))
             } else {
                 notification.error({

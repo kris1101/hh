@@ -1,8 +1,9 @@
 import React from 'react'
-import { message, Modal, Form, Input, Radio } from 'antd';
+import { Modal, Form, Input, Radio } from 'antd';
 import { getAjax  } from '../../../../utils/axios'
 
 const FormItem = Form.Item;
+// eslint-disable-next-line
 const projectnamePatten = new RegExp("^[0-9a-z][0-9a-z\._-]{1,}$"); 
 const defaultMessage = "项目名称由小写字符、数字和._-组成且至少两个字符并以小写字符或者数字开头"
 
@@ -16,7 +17,7 @@ const ProjectCreateForm = Form.create()(
            callback(defaultMessage); 
         }else{
           getAjax('/harbor/checkproject/', {project_name: value}, function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 if(res.data.data){
                     callback("项目名称已经存在");
                 }else{

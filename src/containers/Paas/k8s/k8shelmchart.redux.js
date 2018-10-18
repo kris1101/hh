@@ -1,4 +1,3 @@
-import axios from 'axios'
 import {
     notification
 } from 'antd';
@@ -57,7 +56,7 @@ export function helmChart(state = initState, action) {
         case LOCAL_SEARCH_DATA:
             return { ...state,
                 helmchartList: state.helmchartListorigin.filter(function(currentValue) {
-                    return currentValue.chart_name.toLowerCase().indexOf(action.payload.toLowerCase()) != -1
+                    return currentValue.chart_name.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1
                 })
             }
         default:
@@ -126,7 +125,7 @@ export function getHelmChartList(params) {
         console.log(params);
         getAjax('/helm/helmchart/', params, function(res) {
             dispatch(endLoading());
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadData(res.data.data))
             } else {
                 notification.error({
@@ -141,7 +140,7 @@ export function getHelmChartList(params) {
 export function getHelmRepoOptionList() {
     return dispatch => {
         getAjax('/helm/helmrepooptionlist/', {}, function(res) {
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadRepoOptionData(res.data.data))
             } else {
                 notification.error({
@@ -156,7 +155,7 @@ export function getHelmRepoOptionList() {
 export function getHelmChartOptionList(params) {
     return dispatch => {
         getAjax('/helm/helmchartoptionlist/', params, function(res) {
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadChartOptionData(res.data.data))
             } else {
                 notification.error({
@@ -171,7 +170,7 @@ export function getHelmChartOptionList(params) {
 export function getHelmChartVersionList(params) {
     return dispatch => {
         getAjax('/helm/helmchartversionlist/', params, function(res) {
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadChartVersionData(res.data.data))
             } else {
                 notification.error({

@@ -18,9 +18,6 @@ import PaasCodeBuildTaskComponent from '../components/cicd/codebuild/codebuild'
 import notFoundPage from '../components/404/404page'
 
 class PaasChildRouter extends Component {
-    constructor(props) {
-        super(props);
-    }
   render () {
     return (
 	     		<Switch>

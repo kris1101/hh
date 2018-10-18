@@ -1,9 +1,7 @@
 import React from 'react'
 import { Form, Modal, Row, Col, Steps, Divider} from 'antd';
-import { connect } from 'react-redux';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { arta } from 'react-syntax-highlighter/styles/hljs';
-import { getAjax  } from '../../../../utils/axios'
 
 const Step = Steps.Step;
 
@@ -19,14 +17,14 @@ const CodeBuildImageForm = Form.create()(
     componentDidMount() {
       console.log(this.state);
       let i = 0;
-      this.state.timer = setInterval(()=>{
+      this.setState({timer : setInterval(()=>{
         this.setState({current: i % 5});
         i +=1;
-      }, 1000)
+      }, 1000)})
     }
   
     render() {
-      const { visible, onCancel, form } = this.props;
+      const { visible, onCancel } = this.props;
       return (
         <Modal
           visible={visible}
@@ -41,7 +39,7 @@ const CodeBuildImageForm = Form.create()(
             <Steps  size="small" progressDot  current={this.state.current}>
                 <Step title="开始" description="开始处理,请等待..." />
                 <Step title="clone代码" description="开始clone,请等待..." />
-                {this.state.is_compile == "true" ?
+                {this.state.is_compile === "true" ?
                 <Step title="编译" description="开始编译,请等待..." />
                 :null}
                 <Step title="构建" description="开始构建,请等待..." />

@@ -80,15 +80,16 @@ class PaasCodeBuildForm extends Component {
           let values = form.getFieldsValue();
           let dockerfile_list=[];
           let commanddict = {"installCmd":"RUN","codeStoragePath":"COPY .","compileCmd":"RUN","workDir":"WORKDIR","startCmd":"CMD","dockerUser":"USER"}
-          if (this.codeBuildTaskCreateFormRef.state.dockerfile_type == "custom"){
+          if (this.codeBuildTaskCreateFormRef.state.dockerfile_type === "custom"){
             task_create_args.iscreatedockerfile = true;
-            dockerfile_list.push("FROM" + " " + values.baseimagename + ":" + values.baseimagetag);
+            dockerfile_list.push(`FROM ${values.baseimagename}:${values.baseimagetag}`);
             for (let item in commanddict){
               if(values[item]){
                 dockerfile_list.push(commanddict[item] + " " + values[item]);
               } 
             }
             let env_list = this.build_env(combinekeyvalue(values.envkeys, values.envvalues)[1]);
+            dockerfile_list = dockerfile_list.concat(env_list)
           }else{
             task_create_args.iscreatedockerfile = false;
           }
@@ -141,7 +142,7 @@ class PaasCodeBuildForm extends Component {
         task_create_args.branch = values.branch_value;
         task_create_args.tag = values.branch_value;
         task_create_args.codeinfo_id = values.codeinfo_id;
-        task_create_args.dokerfile_path = this.codeBuildTaskCreateFormRef.state.dockerfile_type =="incode" ? "/" + values.dokerfile_path : "/"; 
+        task_create_args.dokerfile_path = this.codeBuildTaskCreateFormRef.state.dockerfile_type ==="incode" ? "/" + values.dokerfile_path : "/"; 
         task_create_args.imagename = values.imagename;
         switch (this.codeBuildTaskCreateFormRef.state.image_tag_type){
           case "codebranch":
@@ -153,12 +154,14 @@ class PaasCodeBuildForm extends Component {
           case "custom":
             task_create_args.imagetag = values.customimagetag;
             break;
+          default:
+            task_create_args.imagetag = "";
         }
         task_create_args.is_compile = values.is_compile;
         task_create_args = this.build_dockerfile(task_create_args);
         task_create_args = this.build_compile_config(task_create_args);
         postAjax('/codebuild/task/', generateformdata(task_create_args), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("创建成功") 
                 _that.setState({CodeBuildCreateConfirmLoading: false})
                 form.resetFields();
@@ -186,7 +189,7 @@ class PaasCodeBuildForm extends Component {
            return;
         }
         putAjax('/codeinfo/codeproject/', generateformdata(values), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("更新成功") 
                 _that.setState({CodeBuildUpdateConfirmLoading: false})
                 form.resetFields();

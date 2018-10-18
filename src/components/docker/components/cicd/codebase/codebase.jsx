@@ -73,7 +73,7 @@ class PaasCodeBaseForm extends Component {
         const _that = this;
         console.log(values);
         postAjax('/codebase/repositories/', generateformdata(values), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("创建成功") 
                 _that.setState({CodeInfoCreateConfirmLoading: false})
                 form.resetFields();
@@ -101,7 +101,7 @@ class PaasCodeBaseForm extends Component {
            return;
         }
         putAjax('/codeinfo/codeproject/', generateformdata(values), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("更新成功") 
                 _that.setState({CodeInfoUpdateConfirmLoading: false})
                 form.resetFields();
