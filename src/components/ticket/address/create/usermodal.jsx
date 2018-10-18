@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, AutoComplete,notification,Modal } from 'antd';
+import { Form, Input, Select, AutoComplete,notification,Modal,message } from 'antd';
 import * as Ajax from '../../../../utils/ticket/axios';
 
 const FormItem = Form.Item;
@@ -46,16 +46,6 @@ class ModalForm extends Component {
         this.setState({ confirmDirty: this.state.confirmDirty || !!value });
     }
 
-    handleWebsiteChange = (value) => {
-        let autoCompleteResult;
-        if (!value) {
-          autoCompleteResult = [];
-        } else {
-          autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
-        }
-        this.setState({ autoCompleteResult });
-    }
-
     handleCancel = () => {
         this.setState({
           visible: false,
@@ -74,12 +64,13 @@ class ModalForm extends Component {
                 Ajax.putAjax(url,values,function (response) {
                     console.log(response);
                     if (response.data.code == 30000) {
+                        message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
 
                     } else {
                         notification.error({
                             message: '提示',
-                            description: response.data.msg,
+                            description: response.data.message,
                             duration: 2
                         })
                     }
@@ -94,12 +85,12 @@ class ModalForm extends Component {
                 Ajax.postAjax(url,data,function (response) {
                     console.log(response);
                     if (response.data.code == 30000) {
+                        message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
-
                     } else {
                         notification.error({
                             message: '提示',
-                            description: response.data.msg,
+                            description: response.data.message,
                             duration: 2
                         })
                     }
@@ -112,8 +103,6 @@ class ModalForm extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         const { autoCompleteResult } = this.state;
-        const { option } = this.props;
-        const roleOptions = option?option.map(element => <Option key={element.id} value={element.id}> {element.roleName}</Option>):'';
         const formItemLayout = {
               labelCol: {
                 xs: { span: 12 },
@@ -122,18 +111,6 @@ class ModalForm extends Component {
               wrapperCol: {
                 xs: { span: 24 },
                 sm: { span: 16 },
-              },
-            };
-            const tailFormItemLayout = {
-              wrapperCol: {
-                xs: {
-                  span: 24,
-                  offset: 0,
-                },
-                sm: {
-                  span: 16,
-                  offset: 8,
-                },
               },
             };
             const prefixSelector = getFieldDecorator('prefix', {

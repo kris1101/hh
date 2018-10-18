@@ -6,31 +6,31 @@ export function getcancels() {
         dataIndex: 'id',
     }, {
         title: '名称',
-        dataIndex: 'name'
+        dataIndex: 'title'
     },{
         title: '类型',
-        dataIndex: 'type'
+        dataIndex: 'ticket_type'
     }, {
         title: '优先级',
         dataIndex: 'priority',
     },{
         title: '申请日期',
-        dataIndex: 'date',
+        dataIndex: 'create_time',
     },{
         title: '发起人',
-        dataIndex: 'sponsor',
+        dataIndex: 'create_user',
     },{
         title: '原因',
-        dataIndex: 'cause',
+        dataIndex: 'content',
     },{
         title: '状态',
         dataIndex: 'status',
     },{
         title: '操作',
-        render: (data) => (
+        render: (data,record) => (
             <div>
-                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>详情</span>
-                <span style={{cursor: 'pointer',color:'#0350CF'}}>删除</span>
+                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}onClick={(e) => this.openModal(record, e)}>详情</span>
+                <span style={{cursor: 'pointer',color:'#0350CF'}}onClick={(e) => this.deleteData(data,e)}>删除</span>
             </div>
         )
     }];

@@ -29,22 +29,22 @@ export function getwaits() {
         dataIndex: 'id',
     }, {
         title: '名称',
-        dataIndex: 'name'
+        dataIndex: 'title'
     },{
         title: '类型',
-        dataIndex: 'type'
+        dataIndex: 'ticket_type'
     }, {
         title: '优先级',
         dataIndex: 'priority',
     },{
         title: '申请日期',
-        dataIndex: 'date',
+        dataIndex: 'create_time',
     },{
         title: '发起人',
-        dataIndex: 'sponsor',
+        dataIndex: 'create_user',
     },{
         title: '受理人',
-        dataIndex: 'assignee',
+        dataIndex: 'handler_user',
     },{
         title: '状态',
         dataIndex: 'status',

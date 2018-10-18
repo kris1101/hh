@@ -46,7 +46,7 @@ class ObjectManageForm extends Component {
             data.page = params.page;
             data.status=0;
             data.pageSize = 10;
-            Ajax.getAjax('/ticket/users',data,function (response) {
+            Ajax.getAjax('/ticket/objects',data,function (response) {
                 console.log(data);
                 console.log(response.data);
                 if (response.data.code == 30000) {
@@ -68,7 +68,7 @@ class ObjectManageForm extends Component {
     }
 
     deleteData = (value) => {
-        let id = value.id;
+        let id = value.uuid;
         console.log(id)
         let _this = this;
         confirm({
@@ -77,12 +77,12 @@ class ObjectManageForm extends Component {
             okType: 'danger',
             cancelText: '取消',
             onOk(){
-                Ajax.postAjax('/manager/bom/'+id, {}, (res) => {
-                    if(!res.data.errorCode){
-                        message.success(res.data.msg, 3);
-                        _this.getContentList();
+                Ajax.deleteAjax('/ticket/object/'+id, (res) => {
+                    if(res.data.code=30000){
+                        message.success(res.data.message, 3);
+                        _this.getObjectList();
                     } else {
-                        message.error(res.data.msg, 3)
+                        message.error(res.data.message, 3)
                     }
                 })
             }
@@ -119,7 +119,7 @@ class ObjectManageForm extends Component {
             _this.setState({
                 isOpen: false
             }, () => {
-                this.getUserList(1)
+                this.getObjectList()
             })
         } else {
             this.setState({
@@ -136,7 +136,7 @@ class ObjectManageForm extends Component {
                 this.setState({
                     currentPage: 1
                 }, () => {
-                    this.getObjectList(values);
+                    this.getObjectList();
                 })
             }
         })

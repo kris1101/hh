@@ -79,6 +79,9 @@ import {
     paasCodeBase
 } from '../containers/Paas/k8s/paascodebase.redux';
 import {
+  paasCodeBuild
+} from '../containers/Paas/k8s/paascodebuild.redux';
+import {
     daasRdbInstance
 } from '../containers/Daas/reducers/rdb_instance';
 import {
@@ -87,6 +90,7 @@ import {
 import {
     daasRdbCluster
 } from '../containers/Daas/reducers/rdb_cluster';
+
 const App = combineReducers({
     todos,
     setCounter,
@@ -98,6 +102,7 @@ const App = combineReducers({
     daasGroups,
     k8sTiller,
     paasCodeBase,
+    paasCodeBuild,
     helmRepo,
     helmChart,
     helmRelease,
