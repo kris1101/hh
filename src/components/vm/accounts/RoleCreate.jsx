@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { notification, Button, Modal, Form, Input, Radio } from 'antd';
+import { notification, Button, Modal, Form, Input } from 'antd';
 
 import { roleCreate } from '../../../services/vm/user';
 
 const FormItem = Form.Item;
-const { TextArea } = Input;
 
 
 const formItemLayout = {

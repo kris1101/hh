@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Divider, Tooltip, Icon } from 'antd';
 import { Link } from 'react-router-dom';
-import { humansize, timesince } from '../../../../utils/vm'
+import { timesince } from '../../../../utils/vm'
 
-import NetworkDetail from '../NetworkDetail';
 import SubnetUpdate from '../SubnetUpdate';
 import SubnetDelete from '../SubnetDelete';
 import ApprovalBox from '../ApprovalBox';

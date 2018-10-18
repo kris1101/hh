@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { notification, Select, Button, Modal, Form, Input, Radio } from 'antd';
+import { notification, Select, Button, Modal, Form } from 'antd';
 
 import { projectMemberCreate, projectMemberData } from '../../../services/vm/user';
 
 const FormItem = Form.Item;
-const { TextArea } = Input;
 const Option = Select.Option;
 
 
@@ -54,8 +53,8 @@ class CreateForm extends React.Component {
       users_children.push(<Option key={u.id}>{u.name}</Option>);
     }
     const role_children = [];
-    for (var u of this.state.role_data) {
-      role_children.push(<Option key={u.id}>{u.name}</Option>);
+    for (var p of this.state.role_data) {
+      role_children.push(<Option key={p.id}>{p.name}</Option>);
     }
 
     return (

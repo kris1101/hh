@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { notification, Select, Tooltip, Icon, Button, Modal, Form, Input } from 'antd';
+import { notification, Tooltip, Icon, Modal, Form, Input } from 'antd';
 
 import { groupUpdate } from '../../../services/vm/user';
 
-const Option = Select.Option;
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -32,7 +31,7 @@ class CreateForm extends React.Component {
 
   render() {
     const { visible, onCancel, onCreate, record, form, confirmLoading } = this.props;
-    const { getFieldDecorator, getFieldValue } = form;
+    const { getFieldDecorator } = form;
 
     return (
       <Modal visible={visible} title="编辑组" okText="编辑" onCancel={onCancel} onOk={onCreate} confirmLoading={confirmLoading} >
