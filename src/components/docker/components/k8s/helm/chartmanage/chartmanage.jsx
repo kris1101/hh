@@ -52,17 +52,6 @@ class HelmChartForm extends Component {
         this.props.clearPaasCommonData();
     }
 
-    handleHelmChartListWithArgs = () => {
-       let value = this.props.form.getFieldsValue()
-       this.setState({
-           currentPage: page,
-           pageSize: pageSize 
-       })
-       let query_args ={}
-       query_args.repo_id = value.repo_id !== undefined ? value.repo_id : "ALL";
-       this.props.getHelmChartList(query_args);
-    }
-
     handleHelmChartDeploy = () => {
       const form = this.helmchartDeployFormRef.props.form;
       form.validateFields((err, formvalues) => {
