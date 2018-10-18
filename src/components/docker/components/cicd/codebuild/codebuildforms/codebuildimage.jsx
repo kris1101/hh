@@ -6,14 +6,23 @@ import { arta } from 'react-syntax-highlighter/styles/hljs';
 import { getAjax  } from '../../../../utils/axios'
 
 const Step = Steps.Step;
-const codeString = '';
 
 const CodeBuildImageForm = Form.create()(
   class extends React.Component {
     state ={
         current: 0,
         is_compile: "false",
-        id:""
+        id: null,
+        timer: null,
+        codeString: "" 
+    }
+    componentDidMount() {
+      console.log(this.state);
+      let i = 0;
+      this.state.timer = setInterval(()=>{
+        this.setState({current: i % 5});
+        i +=1;
+      }, 1000)
     }
   
     render() {
@@ -47,7 +56,7 @@ const CodeBuildImageForm = Form.create()(
 
           <Row>
             <Col span={24}>
-                <SyntaxHighlighter language='shell' customStyle={{height: 200}} showLineNumbers style={arta}>{codeString}</SyntaxHighlighter>
+                <SyntaxHighlighter language='shell' customStyle={{height: 200}} showLineNumbers style={arta}>{this.state.codeString}</SyntaxHighlighter>
             </Col>
           </Row>
         </Modal>
