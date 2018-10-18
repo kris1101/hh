@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'antd';
 import { connect } from 'react-redux';
-import RDBInstanceBackupDetail  from './backupdetail';
+import RDBInstanceBinlogDetail  from './binlogdetail';
 // import { slowQueryGroupFetch } from '../../../../containers/Daas/actions/slow_query_group';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
 
-class RDBInstanceBackupDetailManager extends Component {
+class RDBInstanceBinlogDetailManager extends Component {
   state = {
     ModalText: 'Content of the modal',
     visible: false,
@@ -31,7 +31,7 @@ class RDBInstanceBackupDetailManager extends Component {
         visible: false,
         confirmLoading: false,
       });
-    }, 2000);
+    }, 20);
   }
 
   handleCancel = () => {
@@ -53,12 +53,12 @@ class RDBInstanceBackupDetailManager extends Component {
           confirmLoading={confirmLoading}
           onCancel={this.handleCancel}
         >
-          <RDBInstanceBackupDetail backupId={this.props.pk} />
+          <RDBInstanceBinlogDetail binlogId={this.props.pk} />
         </Modal>
       </div>
     );
   }
 }
 
-const RDBInstanceBackupDetailModel = Form.create()(RDBInstanceBackupDetailManager);
-export default connect(state => state.RDBInstanceBackup) (RDBInstanceBackupDetailModel);
+const RDBInstanceBinlogDetailModel = Form.create()(RDBInstanceBinlogDetailManager);
+export default connect(state => state.RDBInstanceBinlog) (RDBInstanceBinlogDetailModel);

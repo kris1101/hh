@@ -11,7 +11,7 @@
 */
 import { BASE_URL } from '../constants';
 import { message } from 'antd';
-import { SLOWQUERYGROUPFETCH, SLOWQUERYGROUPCREATE } from '../constants';
+import { SLOWQUERYGROUPFETCH, SLOWQUERYGROUPCREATE, SLOWQUERYGROUPDETAIL, SLOWQUERYGROUPUPDATE} from '../constants';
 import axios from 'axios';
 import { getAjax, postAjax, putAjax } from '../../../utils/daas/axios'
 import qs from 'qs';
@@ -30,6 +30,19 @@ export function slow_query_group_create(groups) {
     }
 };
 
+export function slow_query_group_detail(group) {
+    return {
+        type: SLOWQUERYGROUPDETAIL,
+        group
+    }
+};
+
+export function slow_query_group_update(group) {
+    return {
+        type: SLOWQUERYGROUPUPDATE,
+        group
+    }
+};
 
 export function slowQueryGroupFetch(params={}){
     return dispatch=>{
@@ -49,7 +62,6 @@ export function slowQueryGroupFetch(params={}){
         // });
     }
 }
-
 
 export function slowQueryGroupCreate(group_obj){
     return dispatch=>{
@@ -72,22 +84,43 @@ export function slowQueryGroupCreate(group_obj){
     }
 }
 
+export function getSlowQueryGroupDetail(pk){
+    return dispatch=>{
+        getAjax('/slow/query/groups',{},function(response){
+            dispatch(slow_query_group_detail(response.data));
+        });
+        // axios.get(BASE_URL + '/v1/api/slow/query/users' + "/" + pk )
+        // .then(function (response) {
+        //     // console.log(response);
+        //     dispatch(slow_query_user_detail(response.data));
+        // })
+        // .catch(function (error) {
+        //     console.log(error);
+        // });
+    }
+}
 export function slowQueryGroupUpdate(pk, groupObj){
     return dispatch=>{
-        // putAjax('/slow/query/users',userObj, function(response){
-        //     dispatch(slow_query_user_update(response.data));
-        // });
-        axios.put(BASE_URL + '/v1/api/slow/query/groups' + '/' + pk, groupObj)
-        .then(function (response) {
-            // dispatch(slow_query_user_update(response.data));
-            if (response.data.code) {
+         putAjax('/slow/query/groups', groupObj, function(response){
+             dispatch(slow_query_group_update(response.data));
+             if (response.data.code) {
                 message.error('组更新失败: ' + response.data.message);
             } else {
                 message.success('组更新成功...');
             }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+         });
+
+      // axios.put(BASE_URL + '/v1/api/slow/query/groups' + '/' + pk, groupObj)
+      //  .then(function (response) {
+             // dispatch(slow_query_user_update(response.data));
+      //      if (response.data.code) {
+      //         message.error('组更新失败: ' + response.data.message);
+      //    } else {
+      //         message.success('组更新成功...');
+      //     }
+      // })
+      // .catch(function (error) {
+      //     console.log(error);
+      // });
     }
 }

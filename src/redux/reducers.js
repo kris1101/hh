@@ -48,6 +48,9 @@ import {
     RDBInstanceBackup
 } from '../containers/Daas/reducers/rdb_backup_info';
 import {
+    RDBInstanceBinlog
+} from '../containers/Daas/reducers/rdb_binlog_info';
+import {
     helmRepo
 } from '../containers/Paas/k8s/k8shelmrepo.redux'
 import {
@@ -118,6 +121,7 @@ const App = combineReducers({
     daasRdbProject,
     daasRdbCluster,
     RDBInstanceBackup,
+    RDBInstanceBinlog,
 });
 
 export default App

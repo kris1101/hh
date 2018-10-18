@@ -38,7 +38,7 @@ class SlowQueryGroupManager extends Component {
     handleSubmit = (value) => {
         // this.props.history.push({pathname:'/slowquery/add-user', data:value});
         // console.log(this.props.form.getFieldsValue());
-        // this.props.slowQueryInstatncesFetch(this.props.form.getFieldsValue());
+        this.props.slowQueryGroupFetch(this.props.form.getFieldsValue());
         console.log(this.props);
     }
 
@@ -60,7 +60,7 @@ class SlowQueryGroupManager extends Component {
                     <div style={{ float:'right'}}>
                         <FormItem label="">
                             {getFieldDecorator('name')(
-                                <Input placeholder="用户名" />
+                                <Input placeholder="组名" />
                             )}
                         </FormItem>
                         <FormItem>
