@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { humansize, timesince } from '../../../../utils/vm'
 
 import SGUpdate from '../SGUpdate';
-import ApprovalBox from '../ApprovalBox';
+import ApprovalBox from '../SGRuleApprovalBox';
 
 
 export function getColumes() {
