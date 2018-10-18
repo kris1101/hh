@@ -90,7 +90,7 @@ export function getApprovingColumes() {
     render: (record) => (
       <div>
         <Tooltip  title="审核详情">
-          <Link to={`/vm/networks/security_groups/${record.id}/approval`} className="href-class"><Icon type="bars" /></Link>
+          <Link to={`/vm/networks/security_groups/rules/${record.id}/approval`} className="href-class"><Icon type="bars" /></Link>
         </Tooltip>
         <Divider type="vertical" />
       </div>
@@ -98,6 +98,15 @@ export function getApprovingColumes() {
   }];
 }
 
+export function getDetailColumes() {
+  return [{
+    dataIndex: 'title',
+    width: '30%',
+  }, {
+    dataIndex: 'value',
+    render: (text, record) => <span className="display-linebreak"> {text} </span>
+  }];
+}
 
 export function getApprovalListColumes() {
   return [{

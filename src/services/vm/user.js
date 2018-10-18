@@ -82,3 +82,7 @@ export const sgUpdate = (id, data) => axios.put(`networks/security_groups/${id}/
 export const sgRuleList = (params) => axios.get(`networks/security_groups/${params.id}/rules/`, {params: params}).then(res => res.data).catch(err => console.log(err));
 export const sgRuleCreate = (sg_id, data) => axios.post(`networks/security_groups/${sg_id}/rules/add/`, data).then(res => res.data).catch(err => console.log(err));
 export const getSGRuleRemoteGroup = (sg_id) => axios.get(`networks/security_groups/${sg_id}/rules/add/`).then(res => res.data).catch(err => console.log(err));
+// sg rules approval
+export const sgRuleApprovalDetail = (id, params) => axios.get(`networks/security_groups/rules/${id}/approval/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const sgRuleApprovalGroupAdmin = (id, params, data) => axios.post(`networks/security_groups/rules/${id}/approval/group_admin/`, data, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const sgRuleApprovalAdmin = (id, params, data) => axios.post(`networks/security_groups/rules/${id}/approval/admin/`, data, {params: params}).then(res => res.data).catch(err => console.log(err));
