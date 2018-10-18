@@ -45,7 +45,7 @@ class WaitManageForm extends Component {
             data.page = params.page;
             data.status=0;
             data.pageSize = 10;
-            Ajax.getAjax('/ticket/users',data,function (response) {
+            Ajax.getAjax('/tickets',data,function (response) {
                 console.log(data);
                 console.log(response.data);
                 if (response.data.code == 30000) {
@@ -118,7 +118,7 @@ class WaitManageForm extends Component {
             _this.setState({
                 isOpen: false
             }, () => {
-                this.getUserList(1)
+                this.getWaitList()
             })
         } else {
             this.setState({

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export function gettypes() {
     return [{
         title: '编号',
-        dataIndex: 'id',
+        dataIndex: 'key',
     }, {
         title: '名称',
         dataIndex: 'name'
@@ -12,7 +12,10 @@ export function gettypes() {
         dataIndex: 'type'
     }, {
         title: '创建人',
-        dataIndex: 'create',
+        dataIndex: 'create_user',
+    }, {
+        title: '创建人',
+        dataIndex: 'create_time',
     },{
         title: '备注',
         dataIndex: 'ps',

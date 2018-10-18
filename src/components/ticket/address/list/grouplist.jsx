@@ -116,7 +116,7 @@ class GroupManageForm extends Component {
             _this.setState({
                 isOpen: false
             }, () => {
-                this.getUserList(1)
+                _this.getGroupList()
             })
         } else {
             this.setState({

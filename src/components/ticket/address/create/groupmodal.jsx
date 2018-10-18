@@ -7,7 +7,8 @@ const Option = Select.Option;
 const { TextArea } = Input;
 const AutoCompleteOption = AutoComplete.Option;
 
-const options=[];
+let options=[];
+
 class ModalForm extends Component {
     state = {
         confirmLoading: false,
@@ -15,26 +16,29 @@ class ModalForm extends Component {
         autoCompleteResult: [],
         currentId: this.props.currentData && this.props.currentData.id ? this.props.currentData.id : "",
         children:[],
-        uuid:''
-
+        uuid:'',
+        defaultUsers:[],
+        is_private:''
     }
+    componentWillMount(){
+        let _this = this;
+        Ajax.getAjax('/ticket/users',{},function (response) {
+            console.log(response.data.objects);
+            if (response.data.code == 30000) {
+                let data = response.data.objects;
+                console.log(data);
+                _this.setState({
+                    children:data
+                });
+                options=[];
+                _this.state.children.map((item,index) => {
+                    options.push(<Option key={item.uuid} value={item.uuid}>{item.user_name}</Option>)
+                })
+            }
+        })
+    }
+
     componentDidMount () {
-        this.loadData();
-
-        const data = this.props.currentData;
-        // console.log('是' ? data.is_private: '否')//?
-        if(data) {
-            this.setState({uuid: data.uuid});
-            this.props.form.setFieldsValue({
-                name: data.name,
-                users:data.user,
-                comments: data.comments,
-                is_private: data.is_private
-            })
-        }
-
-    }
-    loadData = () => {
         let _this = this;
         Ajax.getAjax('/ticket/users',{},function (response) {
             console.log(response.data.objects);
@@ -44,12 +48,33 @@ class ModalForm extends Component {
                         _this.setState({
                             children:data
                         });
+                        options=[];
                         _this.state.children.map((item,index) => {
-                            options.push(<Option key={item.uuid} value={item.user_name}>{item.user_name}</Option>)
+                            options.push(<Option key={item.uuid} value={item.uuid}>{item.user_name}</Option>)
                         })
                     }
                 })
-    };
+        const data = this.props.currentData;
+        if(data) {
+            this.setState({uuid: data.uuid});
+            if(data.is_private==0){
+                this.setState({ is_private: "1"})
+            }else {
+                this.setState({ is_private: "0"})
+            }
+            let usersList = [];
+            data.users.map((item,index) => {
+               usersList.push(item.uuid);
+            });
+            this.setState({ defaultUsers:usersList });
+            this.props.form.setFieldsValue({
+                name: data.name,
+                comments: data.comments,
+            })
+            console.log(this.state.is_private)
+        }
+
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -80,7 +105,6 @@ class ModalForm extends Component {
                   confirmLoading: false,
                 });
                 Ajax.putAjax(url,values,function (response) {
-                    console.log(response);
                     if (response.data.code == 30000) {
                         message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
@@ -94,14 +118,13 @@ class ModalForm extends Component {
                     }
                 })
             }else {
-                url = '/ticket/users';
+                url = '/ticket/groups';
                 let $this = this;
                 let data = values;
                 this.setState({
                   confirmLoading: false,
                 });
                 Ajax.postAjax(url,data,function (response) {
-                    console.log(response);
                     if (response.data.code == 30000) {
                         message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
@@ -163,14 +186,16 @@ class ModalForm extends Component {
                   {...formItemLayout}
                   label={(<span>成员&nbsp;</span>)}
                 >
-
-                    <Select
+                    {getFieldDecorator('users',{initialValue:this.state.defaultUsers})(
+                        <Select
                         mode="tags"
                         style={{ width: '100%' }}
                         placeholder="选择成员"
                       >
                         {options}
                       </Select>
+                    )}
+
                 </FormItem>
                 <FormItem
                   {...formItemLayout}
@@ -186,10 +211,10 @@ class ModalForm extends Component {
                  {...formItemLayout}
                    label={(<span>是否共享&nbsp;</span>)}
                 >
-                    {getFieldDecorator('is_private')(
+                    {getFieldDecorator('is_private',{initialValue:this.state.is_private})(
                         <Select style={{width: 174}}>
-                            <Option key='0' value="0">是</Option>
-                            <Option key='1' value="1">否</Option>
+                            <Option key='是' value="0">是</Option>
+                            <Option key='否' value="1">否</Option>
                         </Select>
                     )}
                 </FormItem>

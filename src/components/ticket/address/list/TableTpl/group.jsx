@@ -12,7 +12,7 @@ export function getgroups() {
         dataIndex: 'create_user'
     }, {
         title: '成员',
-        dataIndex: 'users.user_name',
+        dataIndex: 'array'
     },{
         title: '备注',
         dataIndex: 'comments',

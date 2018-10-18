@@ -46,7 +46,7 @@ class ObjectManageForm extends Component {
             data.page = params.page;
             data.status=0;
             data.pageSize = 10;
-            Ajax.getAjax('/ticket/users',data,function (response) {
+            Ajax.getAjax('/ticket/objects',data,function (response) {
                 console.log(data);
                 console.log(response.data);
                 if (response.data.code == 30000) {
@@ -119,7 +119,7 @@ class ObjectManageForm extends Component {
             _this.setState({
                 isOpen: false
             }, () => {
-                this.getUserList(1)
+                this.getObjectList()
             })
         } else {
             this.setState({
@@ -136,7 +136,7 @@ class ObjectManageForm extends Component {
                 this.setState({
                     currentPage: 1
                 }, () => {
-                    this.getObjectList(values);
+                    this.getObjectList();
                 })
             }
         })

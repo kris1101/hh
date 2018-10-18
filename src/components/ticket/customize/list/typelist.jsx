@@ -118,7 +118,7 @@ class TypeManageForm extends Component {
             _this.setState({
                 isOpen: false
             }, () => {
-                this.getUserList(1)
+                this.getTypeList()
             })
         } else {
             this.setState({
