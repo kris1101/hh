@@ -48,6 +48,9 @@ import {
     RDBInstanceBackup
 } from '../containers/Daas/reducers/rdb_backup_info';
 import {
+    RDBInstanceBinlog
+} from '../containers/Daas/reducers/rdb_binlog_info';
+import {
     helmRepo
 } from '../containers/Paas/k8s/k8shelmrepo.redux'
 import {
@@ -76,6 +79,9 @@ import {
     paasCodeBase
 } from '../containers/Paas/k8s/paascodebase.redux';
 import {
+  paasCodeBuild
+} from '../containers/Paas/k8s/paascodebuild.redux';
+import {
     daasRdbInstance
 } from '../containers/Daas/reducers/rdb_instance';
 import {
@@ -84,6 +90,7 @@ import {
 import {
     daasRdbCluster
 } from '../containers/Daas/reducers/rdb_cluster';
+
 const App = combineReducers({
     todos,
     setCounter,
@@ -95,6 +102,7 @@ const App = combineReducers({
     daasGroups,
     k8sTiller,
     paasCodeBase,
+    paasCodeBuild,
     helmRepo,
     helmChart,
     helmRelease,
@@ -113,6 +121,7 @@ const App = combineReducers({
     daasRdbProject,
     daasRdbCluster,
     RDBInstanceBackup,
+    RDBInstanceBinlog,
 });
 
 export default App

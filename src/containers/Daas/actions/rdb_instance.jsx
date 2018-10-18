@@ -17,6 +17,13 @@ import axios from 'axios';
 import { getAjax, postAjax, putAjax, deleteAjax} from '../../../utils/daas/newaxios'
 import qs from 'qs';
 
+const axios_instance = axios.create({
+    baseURL: 'http://127.0.0.1:8000',
+    timeout: 2000,
+})
+
+axios_instance.defaults.headers.post['Content-Type'] = 'multipart/form-data'
+
 export function rdb_instance_fetch(instances) {
     return {
         type: RDBINSTANCEFETCH,
@@ -56,14 +63,23 @@ export function rdbInstanceFetch(params={}){
 
 export function rdbInstanceCreate(instance_obj){
     return dispatch=>{
+      // axios_instance.post('/v1/api/rdb/instances', qs.stringify(instance_obj))
+      //   .then(function(response){
+      //       dispatch(rdb_instance_create(response.data));
+      //       if (response.data.code) {
+      //           message.error('实例创建失败: ' + response.data.message);
+      //       } else {
+      //           message.success('实例创建成功...');
+      //       }
+      //   })
         postAjax('/v1/api/rdb/instances', instance_obj, function(response){
-            dispatch(rdb_instance_create(response.data));
-            if (response.data.code) {
-                message.error('组创建失败: ' + response.data.message);
-            } else {
-                message.success('组创建成功...');
-            }
-        })
+             dispatch(rdb_instance_create(response.data));
+             if (response.data.code) {
+                 message.error('实例创建失败: ' + response.data.message);
+             } else {
+                 message.success('实例创建成功...');
+             }
+         })
     }
 }
 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { humansize, timesince } from '../../../../utils/vm'
 
 import SGUpdate from '../SGUpdate';
-import ApprovalBox from '../ApprovalBox';
+import ApprovalBox from '../SGRuleApprovalBox';
 
 
 export function getColumes() {
@@ -64,25 +64,23 @@ export function getRuleColumes() {
 
 export function getApprovingColumes() {
   return [{
-    title: '网络名',
-    dataIndex: 'name',
-    render: (text, record) => <Link to={`/vm/networks/security_groups/${record.id}/approval`} className="href-class">{text}</Link>
+    title: '方向',
+    dataIndex: 'direction_display',
   }, {
-    title: '子网',
-    dataIndex: 'subnet',
-    render: (text, record) => [record.subnet.map(val => {return val.cidr})].join("\n"),
+    title: '以太网类型',
+    dataIndex: 'ethertype_display',
   },{
-    title: '共享',
-    dataIndex: 'shared',
-    render: (text, record) => record.shared ? '是' : '否',
+    title: 'IP协议',
+    dataIndex: 'protocol_display',
   },{
-    title: '外部',
-    dataIndex: 'router_external',
-    render: (text, record) => record.router_external ? '是' : '否',
+    title: '端口范围',
+    dataIndex: 'port_range_display',
   },{
-    title: '管理状态',
-    dataIndex: 'admin_state_up',
-    render: (text, record) => record.admin_state_up ? 'UP' : 'DOWN',
+    title: '远端IP前缀',
+    dataIndex: 'remote_ip_prefix_display',
+  },{
+    title: '远端安全组',
+    dataIndex: 'remote_group_name',
   },{
     title: '审批状态',
     dataIndex: 'status',
@@ -92,7 +90,7 @@ export function getApprovingColumes() {
     render: (record) => (
       <div>
         <Tooltip  title="审核详情">
-          <Link to={`/vm/networks/security_groups/${record.id}/approval`} className="href-class"><Icon type="bars" /></Link>
+          <Link to={`/vm/networks/security_groups/rules/${record.id}/approval`} className="href-class"><Icon type="bars" /></Link>
         </Tooltip>
         <Divider type="vertical" />
       </div>
@@ -100,6 +98,15 @@ export function getApprovingColumes() {
   }];
 }
 
+export function getDetailColumes() {
+  return [{
+    dataIndex: 'title',
+    width: '30%',
+  }, {
+    dataIndex: 'value',
+    render: (text, record) => <span className="display-linebreak"> {text} </span>
+  }];
+}
 
 export function getApprovalListColumes() {
   return [{

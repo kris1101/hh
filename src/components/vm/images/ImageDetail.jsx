@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Table, Tooltip, Modal } from 'antd';
+import { Icon, notification, Table, Tooltip, Modal } from 'antd';
 
 
 import { getDetailColumes } from './TableTpl/imageTableTpl';
