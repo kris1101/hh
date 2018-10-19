@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, AutoComplete,notification,Modal,Checkbox,message } from 'antd';
+import { Form, Input, notification,Modal,message } from 'antd';
 import * as Ajax from '../../../../utils/ticket/axios';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
-const { TextArea } = Input;
-const AutoCompleteOption = AutoComplete.Option;
 
-let options=[];
 
 class ModalForm extends Component {
     state = {
@@ -61,7 +57,7 @@ class ModalForm extends Component {
                 });
                 Ajax.putAjax(url,values,function (response) {
                     console.log(response);
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
 
@@ -83,7 +79,7 @@ class ModalForm extends Component {
                 console.log(data)
                 Ajax.postAjax(url,data,function (response) {
                     console.log(response);
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
                     } else {

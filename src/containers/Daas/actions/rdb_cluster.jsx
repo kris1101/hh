@@ -75,7 +75,7 @@ export function rdbClusterCreate(clusterObj){
 export function rdbClusterUpdate(pk, clusterObj){
     return dispatch=>{
         putAjax('/v1/api/rdb/clusters/' + pk, clusterObj, function(response){
-            console.log(projectObj);
+            // console.log(projectObj);
             dispatch(rdb_cluster_update(response.data));
             if (response.data.code) {
                 message.error('集群更新失败: ' + response.data.message);
