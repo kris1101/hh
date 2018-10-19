@@ -1,5 +1,3 @@
-import React, { Component } from 'react';
-
 import vm_routes from './vm.js';
 import machine_routes from './machine.js';
 import daas_routes from './daas';

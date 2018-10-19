@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Form, Input, Button, Select, Table, Row, Col, Card } from 'antd';
+import { Layout, Table, Row, Col, Card } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';

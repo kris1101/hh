@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { Modal, Icon, Button, Popconfirm, message } from 'antd';
+import React from 'react';
+import { Modal, Icon, Button, message } from 'antd';
 
-import { Link  } from 'react-router-dom';
 import { deleteAjax, putAjax  } from '../../../../utils/axios'
 
 import { formatStrDate } from '../../../../utils/time_helper'
@@ -46,7 +45,7 @@ function deleteUser(user_id, _that) {
   const hide = message.loading('Action in progress..', 0);
   deleteAjax('/harbor/user/', "user_id=" + user_id, function (res){
     hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         message.success(res.data.msg);
         _that.handleHarborUserListWithArgs(1, 10);
     }else{
@@ -59,7 +58,7 @@ function changeUserAdmin(user_id, has_admin_role, _that) {
   const hide = message.loading('请求处理中', 0);
   putAjax('/harbor/users/sysadmin/', generateformdata({user_id: user_id, has_admin_role: has_admin_role ? 0 : 1}), function (res){
     hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         message.success(res.data.msg);
         _that.handleHarborUserListWithArgs(1, 10);
     }else{

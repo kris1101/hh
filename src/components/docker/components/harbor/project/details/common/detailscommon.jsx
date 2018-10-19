@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Dockersider from '../../../../../../common/LeftSider/dockersider';
 import { connect  } from 'react-redux';
 import {Redirect} from 'react-router-dom'
-import { Tabs, Icon, message, Layout} from 'antd';
+import { Tabs, Icon, Layout} from 'antd';
 import BreadcrumbCustom from '../../../../../../BreadcrumbCustom';
 import {getQueryString} from '../../../../../utils/searchparse_helper'
 import './detailscommon.less';
@@ -30,11 +30,15 @@ class projectDetailsCommon extends Component {
 
       switch (activekey){
           case "members":
-              this.memberform ? this.memberform.handleReset() : null;
+              if(this.memberform){
+                  this.memberform.handleReset();
+              };
               this.props.getProjectMemberList({project_id: getQueryString(this.props.location.search).project_id});
               break;
           case "logging":
-              this.logsform ? this.logsform.handleReset() : null;
+              if(this.logsform){
+                  this.logsform.handleReset()
+              }
               this.props.getProjectLogsList({project_id: getQueryString(this.props.location.search).project_id});
               break;
           case "settings":

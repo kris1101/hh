@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { notification  } from 'antd';
 import { getAjax } from '../../../components/docker/utils/axios'
 
@@ -39,7 +38,7 @@ export function loadSysteminfoData(systemInfo){
 export function getHarborConfigurations(params){
 	return dispatch=>{
       getAjax('/harbor/configurations/', params, function(res){
-          if (res.data.code == 0){
+          if (res.data.code === 0){
             dispatch(loadConfigurationsData(res.data.data))
           }else{
             notification.error({
@@ -54,7 +53,7 @@ export function getHarborConfigurations(params){
 export function getHarborSysteminfo(params){
 	return dispatch=>{
       getAjax('/harbor/systeminfo/', params, function(res){
-          if (res.data.code == 0){
+          if (res.data.code === 0){
             dispatch(loadSysteminfoData(res.data.data))
           }else{
             notification.error({

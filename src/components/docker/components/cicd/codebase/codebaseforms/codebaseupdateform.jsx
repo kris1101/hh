@@ -1,8 +1,7 @@
 import React from 'react'
-import {Input, Button, message, Modal, Form, Radio } from 'antd';
+import {Input, Modal, Form, Radio } from 'antd';
 import { connect } from 'react-redux';
 import { getCodeRepoList } from '../../../../../../containers/Paas/k8s/paascodebase.redux'
-import { putAjax  } from '../../../../utils/axios'
 
 const FormItem = Form.Item;
 

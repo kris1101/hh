@@ -1,7 +1,3 @@
-import {
-  increaseAction,decreaseAction,testaAAction
-} from './_action'
-
 export function setCounter (state = {count: 0} , action){  
     switch (action.type) {  
         case 'increase':  

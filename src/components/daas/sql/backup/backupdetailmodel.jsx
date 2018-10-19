@@ -23,6 +23,8 @@ class RDBInstanceBackupDetailManager extends Component {
   handleOk = () => {
     this.setState({
       confirmLoading: true,
+      visible: false,
+      confirmLoading: false,
     });
     setTimeout(() => {
       this.setState({

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Button, Upload, message, Modal, Form, Input, Radio } from 'antd';
+import { Icon, Button, Upload,  Modal, Form, Input, Radio } from 'antd';
 import { getAjax  } from '../../../../utils/axios'
 
 const FormItem = Form.Item;
@@ -13,11 +13,11 @@ const PodUpdateForm = Form.create()(
          if(!value){
                  callback("集群名称不能为空");
 
-         }else if(value == initialValue){
+         }else if(value === initialValue){
                 callback();
          }else{
              getAjax('/workload/pod/', {podname: value}, function(res){
-               if(res.data.code == 0){
+               if(res.data.code === 0){
                    if(res.data.data){
                        callback("集群名称已经存在");
                    }else{
@@ -34,7 +34,6 @@ const PodUpdateForm = Form.create()(
       console.log('Upload event:', e);
       if (Array.isArray(e)) {
         return e.slice(-1);
-        console.log("array");
       }
       return e.file;
     }

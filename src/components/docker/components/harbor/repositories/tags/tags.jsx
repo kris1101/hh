@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { message, Form, Input, Button, Table, Row, Col } from 'antd';
+import { Form, Table } from 'antd';
 import { connect } from 'react-redux';
 import { getrepositoriestags } from './TableTpl/tabletpl';
 import './tags.less';

@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { notification  } from 'antd';
 import { getAjax } from '../../../components/docker/utils/axios'
 
@@ -46,7 +45,7 @@ export function getHarborUserList(params){
       console.log(params);
       getAjax('/harbor/user/', params, function(res){
           dispatch(endLoading());
-          if (res.data.code == 0){
+          if (res.data.code === 0){
             dispatch(loadData(res.data.data))
           }else{
             notification.error({

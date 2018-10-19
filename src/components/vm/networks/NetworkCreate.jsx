@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { notification, InputNumber, Checkbox, Button, Modal, Form, Input, Radio } from 'antd';
+import { notification, InputNumber, Checkbox, Button, Modal, Form, Input } from 'antd';
 
 import { networkCreate } from '../../../services/vm/user';
 

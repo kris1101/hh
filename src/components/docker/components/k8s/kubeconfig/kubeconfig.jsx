@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dockersider from '../../../../common/LeftSider/dockersider';
-import { message, Layout, Form, Input, Button, Select, Table } from 'antd';
+import { message, Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../components/BreadcrumbCustom';
 import { getk8sclusters } from './TableTpl/tabletpl';
@@ -14,7 +14,6 @@ import { generateformdata  } from '../../../utils/tools_helper'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class K8sClusterForm extends Component {
     constructor(props) {
@@ -86,7 +85,7 @@ class K8sClusterForm extends Component {
         this.setState({ClusterCreateConfirmLoading: true})
         const _that = this;
         postAjax('/k8s/kubeconfig/', generateformdata(values), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("创建成功") 
                 message.success(res.data.data) 
                 _that.setState({ClusterCreateConfirmLoading: false})
@@ -113,7 +112,7 @@ class K8sClusterForm extends Component {
         const _that = this;
         values.cluster_id = cluster_id;
         putAjax('/k8s/kubeconfig/', generateformdata(values), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("更新成功") 
                 _that.setState({ClusterUpdateConfirmLoading: false})
                 form.resetFields();

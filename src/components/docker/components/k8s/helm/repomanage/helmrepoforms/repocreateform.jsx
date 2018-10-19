@@ -1,5 +1,5 @@
 import React from 'react'
-import { message, Modal, Form, Input } from 'antd';
+import {Modal, Form, Input } from 'antd';
 import { getAjax  } from '../../../../../utils/axios'
 
 const FormItem = Form.Item;
@@ -11,7 +11,7 @@ const HelmRepoCreateForm = Form.create()(
            callback("repo名称不能为空"); 
         }else{
           getAjax('/helm/checkrepoexist/', {name: value}, function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 if(res.data.data){
                     callback("Repo名称已经存在");
                 }else{

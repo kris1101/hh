@@ -18,7 +18,7 @@ export function omitstring(originstr, n){
 
 export function combinekeyvalue(keylist, valuelist){
   let result ={};
-  if (keylist.length != valuelist.length){
+  if (keylist.length !== valuelist.length){
         return [1, result] 
   }else{
     for (var item in keylist){
@@ -29,3 +29,4 @@ export function combinekeyvalue(keylist, valuelist){
         return [0, result] 
   }
 }
+

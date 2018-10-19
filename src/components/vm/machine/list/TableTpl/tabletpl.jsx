@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Menu,Dropdown,Icon } from 'antd';
+import React from 'react';
+import { Menu,Dropdown } from 'antd';
 import chart from '../../../../../static/icons/area_chart.png'
 import '../machinelist.less';
 
@@ -80,10 +80,7 @@ export function getmachines() {
             <div>
                 <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>连接实例</span>
                 <span style={{cursor: 'pointer',color:'#0350CF'}}>
-                <Dropdown overlay={menu}>
-                    <a className="ant-dropdown-link" href="#">
-                      更多 <Icon type="down" />
-                    </a>
+                  <Dropdown overlay={menu}>
                   </Dropdown>
                 </span>
             </div>

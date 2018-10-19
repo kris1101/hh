@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { notification, Select, Button, Modal, Form, Input, Radio } from 'antd';
+import { notification, Select, Button, Modal, Form } from 'antd';
 
 import { groupMemberAdd, groupMembers } from '../../../services/vm/user';
 
 const FormItem = Form.Item;
-const { TextArea } = Input;
 const Option = Select.Option;
 
 

@@ -8,9 +8,7 @@ import { generateformdata } from '../../../../utils/tools_helper'
 const FormItem = Form.Item;
 
 class  HarborPermissionForm extends React.Component {
-  constructor(props){
-    super(props)
-  }
+
   state = {
     submit_isloading : false 
   }
@@ -20,7 +18,7 @@ class  HarborPermissionForm extends React.Component {
     let value = this.props.form.getFieldsValue()
     putAjax('/harbor/configurations/', generateformdata({config_data: JSON.stringify(value)}), function(res){
       _that.setState({submit_isloading: false})
-      if(res.data.code == 0){                                                                                     
+      if(res.data.code === 0){                                                                                     
           message.success("更新成功");
           _that.props.getHarborConfigurations();
       }else{
@@ -32,7 +30,7 @@ class  HarborPermissionForm extends React.Component {
   }
   
   render() {
-    const { form, project_id } = this.props;
+    const { form } = this.props;
     const { getFieldDecorator } = form;
     return (
         <Form >
@@ -57,7 +55,7 @@ class  HarborPermissionForm extends React.Component {
             )}
           </FormItem>
       <FormItem wrapperCol={{ span: 14 , offset:2  }}>
-        <Button type="primary" disabled={this.props.self_registration == this.props.form.getFieldsValue().self_registration && this.props.project_creation_restriction == this.props.form.getFieldsValue().project_creation_restriction} loading={this.state.submit_isloading} onClick={this.handleSubmit}>更新</Button>
+        <Button type="primary" disabled={this.props.self_registration === this.props.form.getFieldsValue().self_registration && this.props.project_creation_restriction === this.props.form.getFieldsValue().project_creation_restriction} loading={this.state.submit_isloading} onClick={this.handleSubmit}>更新</Button>
       </FormItem>
         </Form>
     );

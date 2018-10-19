@@ -50,7 +50,7 @@ export function getGroupsList(params){
 			.then(res=>{
                 dispatch(endLoading());
                 console.log(res.data)
-                if (res.data.code == 0){
+                if (res.data.code === 0){
                   dispatch(loadData(res.data))
                 }else{
                   notification.error({

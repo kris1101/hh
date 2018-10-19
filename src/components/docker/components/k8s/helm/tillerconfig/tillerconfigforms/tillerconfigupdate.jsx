@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Button, Upload, message, Modal, Form, Switch, Radio } from 'antd';
+import { Icon, Button, Upload, Modal, Form, Switch} from 'antd';
 
 const FormItem = Form.Item;
 
@@ -38,7 +38,7 @@ const TillerUpdateForm = Form.create()(
     }
 
     render() {
-      const { confirmLoading, visible, onCancel, onCreate, tillerinfo,  form } = this.props;
+      const { confirmLoading, visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
       const _that = this;
       const caprops = {

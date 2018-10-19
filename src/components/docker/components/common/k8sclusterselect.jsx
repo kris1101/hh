@@ -9,9 +9,6 @@ const FormItem = Form.Item;
 
 class K8sClusterSelectForm extends Component {
 
-  constructor(props) {
-     super(props)
-  }
   componentDidMount () {
       this.props.getUserClusterList();
   }

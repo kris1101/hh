@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Icon, Popover, Popconfirm, message, Col, Row } from 'antd';
+import React from 'react';
+import { Icon, Popconfirm, message, Col, Row } from 'antd';
 import { formatStrDate } from '../../../../utils/time_helper'
 import { deleteAjax } from '../../../../utils/axios'
 
@@ -7,7 +7,7 @@ function deleterepo(id, _that) {
   const hide = message.loading('请求处理中...', 0);
   deleteAjax('/codeinfo/codeproject/', "id=" + id, function (res){
     hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         message.success(res.data.msg);
         _that.handleCodeBaseQuery();
     }else{

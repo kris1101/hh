@@ -1,14 +1,12 @@
 import React from 'react';
-import { notification, Layout, message, Tooltip, Icon, Form, Modal, Button, Table, Row, Col, Card, Input } from 'antd';
+import { notification, Layout, Table, Row, Col, Card } from 'antd';
 
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
 import { sgRuleApprovalDetail } from '../../../services/vm/user';
 import { getDetailColumes, getApprovalListColumes } from './TableTpl/sgTableTpl';
-import { humansize, timezoneFormat } from '../../../utils/vm'
+import { timezoneFormat } from '../../../utils/vm'
 
-const confirm = Modal.confirm;
-const FormItem = Form.Item;
 const { Sider, Content } = Layout;
 
 

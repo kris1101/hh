@@ -79,7 +79,7 @@ class DaasBackupManageForm extends Component {
                             )}
                         </FormItem>
                     <FormItem>
-                        <Button type="primary" className="btn-search" htmlType="submit" style={{marginRight: 10}}>查询</Button>
+                        <Button type="primary" className="btn-search" onClick={this.handleSubmit} style={{marginRight: 10}}>查询</Button>
                         <Button className="btn-search" onClick={this.handleReset}>重置</Button>
                     </FormItem>
                     </div>

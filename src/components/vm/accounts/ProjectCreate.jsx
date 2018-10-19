@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { notification, Button, Modal, Form, Input, Radio } from 'antd';
+import { notification, Button, Modal, Form, Input } from 'antd';
 
 import { projectCreate } from '../../../services/vm/user';
 

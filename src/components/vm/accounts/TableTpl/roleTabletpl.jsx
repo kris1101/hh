@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { Divider, Tooltip, Icon } from 'antd';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Divider } from 'antd';
 
 import RoleUpdate from '../RoleUpdate';
 import { timezoneFormat } from '../../../../utils/vm'

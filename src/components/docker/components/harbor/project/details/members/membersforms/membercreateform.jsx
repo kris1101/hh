@@ -1,5 +1,5 @@
 import React from 'react'
-import { message, Modal, Form, Input, Radio } from 'antd';
+import { Modal, Form, Input, Radio } from 'antd';
 import { getAjax  } from '../../../../../../utils/axios'
 
 const FormItem = Form.Item;
@@ -11,7 +11,7 @@ const MemberCreateForm = Form.create()(
            callback("成员名称不能为空"); 
         }else{
           getAjax('/harbor/projectvalidmember/', {username: value, project_id: project_id}, function(res){
-            if(res.data.code == 0){ 
+            if(res.data.code === 0){ 
                 if(res.data.data !== true){
                     callback(res.data.data);
                 }else{

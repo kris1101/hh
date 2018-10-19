@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { notification } from 'antd';
 import { getAjax } from '../../../components/docker/utils/axios'
 
@@ -82,7 +81,7 @@ export function getCodeBaseList(params={}) {
         console.log(params);
       getAjax('/codeinfo/codeproject/', params, function(res) {
             dispatch(endLoading());
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadData(res.data.data))
             } else {
                 notification.error({
@@ -97,7 +96,7 @@ export function getCodeBaseList(params={}) {
 export function getCodeRepoList(params={}) {
     return dispatch => {
       getAjax('/codebase/repositories/', params, function(res) {
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadCodeRepoData(res.data.data))
             } else {
                 notification.error({

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getbinlogs } from './TableTpl/binlog';
 import './list.less';
+import { rdbInstanceBinlogFetch } from '../../../containers/Daas/actions/rdb_binlog_info';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -22,17 +23,20 @@ class DaasBinlogManageForm extends Component {
         total: 0
     }
     componentDidMount () {
-        this.setState({
-            deviceList:[]
-        })
+        this.props.rdbInstanceBinlogFetch();
     }
     //重置表单
     handleReset = () => {
         this.props.form.resetFields();
+        this.props.rdbInstanceBinlogFetch();
     }
 
     openAddDevicePage = (value) => {
         this.props.history.push({pathname:'/config/add-device', data:value});
+    }
+
+    handleSubmit = (value) => {
+        this.props.rdbInstanceBinlogFetch(this.props.form.getFieldsValue());
     }
 
   render() {
@@ -69,12 +73,17 @@ class DaasBinlogManageForm extends Component {
                     <div style={{ float:'right'}}>
 
                         <FormItem label="">
-                            {getFieldDecorator('name')(
-                                <Input placeholder="实例名称或者端口号" />
+                            {getFieldDecorator('host')(
+                                <Input placeholder="宿主机ip" />
+                            )}
+                        </FormItem>
+                        <FormItem label="">
+                            {getFieldDecorator('port')(
+                                <Input placeholder="端口号" />
                             )}
                         </FormItem>
                     <FormItem>
-                        <Button type="primary" className="btn-search" htmlType="submit" style={{marginRight: 10}}>查询</Button>
+                        <Button type="primary" className="btn-search" onClick={this.handleSubmit} style={{marginRight: 10}}>查询</Button>
                         <Button className="btn-search" onClick={this.handleReset}>重置</Button>
                     </FormItem>
                     </div>
@@ -82,10 +91,10 @@ class DaasBinlogManageForm extends Component {
             </div>
 
             <div style={{ background:'#fff' }}>
-                <Table bordered rowKey={record => record.key} columns={this.columns} dataSource={this.state.deviceList} pagination={pagination} />
+                <Table bordered rowKey={record => record.pk} columns={this.columns} dataSource={this.props.binlogsList.data} pagination={pagination} />
             </div>
             <div style={{margin: 20}}>
-                <span className='num'>共找到 { this.state.total }条结果， 每页显示10条</span>
+                <span className='num'>共找到 { this.props.total }条结果， 每页显示10条</span>
             </div>
         </Content>
       </Layout>
@@ -94,6 +103,4 @@ class DaasBinlogManageForm extends Component {
 }
 
 const DaasBinlogManage = Form.create()(DaasBinlogManageForm);
-export default connect((state) => {
-    return { ...state };
-})(DaasBinlogManage);
+export default connect((state) => state.RDBInstanceBinlog, {rdbInstanceBinlogFetch})(DaasBinlogManage);
