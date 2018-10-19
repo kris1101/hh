@@ -25,7 +25,7 @@ instance.interceptors.response.use(function(config){
 	return config
 })
 
-export function getAjax(url, params, Callback, headers={}) {
+export function getAjax(url, params={}, Callback, headers={}) {
     let token = sessionStorage.token;
     if(token){
         instance.defaults.headers.common['Authorization'] = token;

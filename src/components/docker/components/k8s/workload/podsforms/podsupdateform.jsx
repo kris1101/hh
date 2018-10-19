@@ -67,8 +67,7 @@ const PodUpdateForm = Form.create()(
             fileList: [file],
           }));
           return false;
-        },
-        fileList: this.state.fileList,
+        }
       };
       return (
         <Modal

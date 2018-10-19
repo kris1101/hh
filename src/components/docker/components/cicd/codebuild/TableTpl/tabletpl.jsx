@@ -51,7 +51,7 @@ export function getCodeBuildTask() {
     }, {
         title: '是否编译',
         dataIndex: 'is_compile',
-        render: (data) => (data === "false" ? "否" : "是")
+        render: (data) => (data ? "是" : "否")
 
     }, {
         title: '代码地址',

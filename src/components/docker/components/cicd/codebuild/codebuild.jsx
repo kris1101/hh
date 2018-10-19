@@ -47,8 +47,8 @@ class PaasCodeBuildForm extends Component {
 
     showCodeBuildImageModel = (record) => {
         this.setState({CodeBuildImageVisible: true}); 
-        this.codeBuildImageFormRef.setState({is_compile: record.is_compile, id: record.id}); 
-        console.log(record);
+        this.codeBuildImageFormRef.setState({is_compile: record.is_compile}); 
+        this.codeBuildImageFormRef.handleImgeaBuild(record.id);
     }
 
     showCodeBuildUpdateModel = (record) => {
@@ -73,6 +73,9 @@ class PaasCodeBuildForm extends Component {
     handleCodeBuildImageCancel = () => {
         this.setState({CodeBuildImageVisible: false}); 
         this.codeBuildImageFormRef.setState({current: 0});
+        if(this.codeBuildImageFormRef.state.timer !== null){
+            clearInterval(this.codeBuildImageFormRef.state.timer);
+        }
     }
 
     build_dockerfile = (task_create_args) => {
@@ -81,7 +84,7 @@ class PaasCodeBuildForm extends Component {
           let dockerfile_list=[];
           let commanddict = {"installCmd":"RUN","codeStoragePath":"COPY .","compileCmd":"RUN","workDir":"WORKDIR","startCmd":"CMD","dockerUser":"USER"}
           if (this.codeBuildTaskCreateFormRef.state.dockerfile_type === "custom"){
-            task_create_args.iscreatedockerfile = true;
+            task_create_args.is_createdockerfile = true;
             dockerfile_list.push(`FROM ${values.baseimagename}:${values.baseimagetag}`);
             for (let item in commanddict){
               if(values[item]){
@@ -91,7 +94,7 @@ class PaasCodeBuildForm extends Component {
             let env_list = this.build_env(combinekeyvalue(values.envkeys, values.envvalues)[1]);
             dockerfile_list = dockerfile_list.concat(env_list)
           }else{
-            task_create_args.iscreatedockerfile = false;
+            task_create_args.is_createdockerfile = false;
           }
           task_create_args.dockerfilecontent = JSON.stringify(dockerfile_list);
           return task_create_args; 
