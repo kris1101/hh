@@ -12,7 +12,8 @@ export function getgroups() {
         dataIndex: 'create_user'
     }, {
         title: '成员',
-        dataIndex: 'array'
+        dataIndex: 'user_names'
+
     },{
         title: '备注',
         dataIndex: 'comments',

@@ -46,13 +46,19 @@ class GroupManageForm extends Component {
             data.pageSize = 10;
 
             Ajax.getAjax('/ticket/groups',data,function (response) {
-                console.log(response.data);
                 if (response.data.code == 30000) {
                     let deviceList = response.data.objects;
                     let total = response.data.total ||0;
                     for(let key in deviceList){
                         deviceList[key].key = key-0+1;
+                        let user_names='';
+                        let users=deviceList[key].users;
+                        for (let name in users){
+                            user_names = user_names+users[name].user_name+ ','
+                        }
+                        deviceList[key].user_names=user_names
                     }
+
                     $this.setState({deviceList: response.data.objects,total:total,currentPage:params.page});
                 } else {
                     notification.error({
