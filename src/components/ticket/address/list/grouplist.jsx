@@ -46,7 +46,6 @@ class GroupManageForm extends Component {
             data.pageSize = 10;
 
             Ajax.getAjax('/ticket/groups',data,function (response) {
-                console.log(response.data);
                 if (response.data.code == 30000) {
                     let deviceList = response.data.objects;
                     let total = response.data.total ||0;
