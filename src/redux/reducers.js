@@ -1,6 +1,4 @@
-import {
-    combineReducers
-} from 'redux';
+import { combineReducers } from 'redux';
 
 import todos from '../containers/Todo/_reducer';
 import {
@@ -91,6 +89,10 @@ import {
     daasRdbCluster
 } from '../containers/Daas/reducers/rdb_cluster';
 
+import {
+  paasBuildHistory
+} from '../containers/Paas/k8s/paasbuildhistory';
+
 const App = combineReducers({
     todos,
     setCounter,
@@ -107,6 +109,7 @@ const App = combineReducers({
     helmChart,
     helmRelease,
     PaasCommon,
+    paasBuildHistory,
     helmTaskState,
     harborUser,
     harborConfigurations,
