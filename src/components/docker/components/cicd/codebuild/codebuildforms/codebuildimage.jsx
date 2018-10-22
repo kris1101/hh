@@ -47,7 +47,7 @@ const CodeBuildImageForm = Form.create()(
                       }
                     console.log(res.data);
                   })
-                }, 1000)})
+                }, 2000)})
             }else{
                 message.error(res.data.msg) 
             }
