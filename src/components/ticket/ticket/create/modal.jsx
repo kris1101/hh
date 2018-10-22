@@ -18,7 +18,7 @@ class ModalForm extends Component {
         groups:[],
         uuid:'',
         defaultObject:[],
-    }
+    };
 
     componentWillMount(){
         let _this = this;
@@ -35,7 +35,7 @@ class ModalForm extends Component {
                     return options.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
                 })
             }
-        })
+        });
         Ajax.getAjax('/ticket/groups',{},function (response) {
             console.log(response.data.objects);
             if (response.data.code === 30000) {
@@ -85,13 +85,13 @@ class ModalForm extends Component {
             this.setState({uuid: data.uuid});
             let objectList = [];
             data.objects.map((item,index) => {
-               objectList.push(item.uuid);
+               return objectList.push(item.uuid);
             });
             this.setState({ defaultObject:objectList });
 
             let groupList = [];
             data.groups.map((item,index) => {
-               groupList.push(item.uuid);
+               return groupList.push(item.uuid);
             });
             this.setState({ defaultGroup:groupList });
             console.log(this.state.groups)

@@ -51,18 +51,18 @@ class ModalForm extends Component {
                            return options.push(<Option key={item.uuid} value={item.uuid}>{item.user_name}</Option>)
                         })
                     }
-                })
+                });
         const data = this.props.currentData;
         if(data) {
             this.setState({uuid: data.uuid});
-            if(data.is_private==0){
+            if(data.is_private === 0){
                 this.setState({ is_private: "1"})
             }else {
                 this.setState({ is_private: "0"})
             }
             let usersList = [];
             data.users.map((item,index) => {
-               usersList.push(item.uuid);
+               return usersList.push(item.uuid);
             });
             this.setState({ defaultUsers:usersList });
             this.props.form.setFieldsValue({

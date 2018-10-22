@@ -36,11 +36,11 @@ class SettingSider extends Component{
       let openKey = [];
       let current = pathName;
 
-      if(pathName=="/vm/backup"||pathName=="/vm/snapshot"){
+      if(pathName==="/vm/backup"||pathName==="/vm/snapshot"){
           openKey = ["sub4"];
-      }else if(pathName=="/vm/network/ip"||pathName=="/vm/network/load"||pathName=="/vm/network/safety"||pathName=="/vm/network/virtual"){
+      }else if(pathName==="/vm/network/ip"||pathName==="/vm/network/load"||pathName==="/vm/network/safety"||pathName==="/vm/network/virtual"){
           openKey = ["sub7"];
-      }else if(pathName=="/vm/disk"||pathName=="/vm/disk/backup"){
+      }else if(pathName==="/vm/disk"||pathName==="/vm/disk/backup"){
           openKey = ["sub8"];
       }else{
           openKey = [];

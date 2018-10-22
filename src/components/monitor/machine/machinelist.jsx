@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Monitorsider from '../../../components/common/LeftSider/monitorsider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getmachines } from './TableTpl/tabletpl';

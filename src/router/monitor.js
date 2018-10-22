@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 
 import Monitor_Machine from '../components/monitor/machine/machinelist';
 

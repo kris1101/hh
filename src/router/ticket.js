@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-//
+
 import Ticket_Wait from '../components/ticket/ticket/list/waitlist'
 import Ticket_Delete from '../components/ticket/ticket/list/deletelist'
 import Ticket_Complete from '../components/ticket/ticket/list/completelist'

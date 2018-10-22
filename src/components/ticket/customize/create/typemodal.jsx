@@ -32,7 +32,7 @@ class ModalForm extends Component {
                 });
                 options=[];
                 _this.state.children.map((item,index) => {
-                    options.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
+                   return options.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
                 })
             }
         })
@@ -46,7 +46,7 @@ class ModalForm extends Component {
                 });
                 groups=[];
                 _this.state.groups.map((item,index) => {
-                    groups.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
+                  return groups.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
                 })
             }
         })
@@ -63,7 +63,7 @@ class ModalForm extends Component {
                         });
                         options=[];
                         _this.state.children.map((item,index) => {
-                            options.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
+                           return options.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
                         })
                     }
                 })
@@ -76,7 +76,7 @@ class ModalForm extends Component {
                 });
                 groups=[];
                 _this.state.groups.map((item,index) => {
-                    groups.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
+                    return groups.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
                 })
             }
         })
@@ -85,13 +85,13 @@ class ModalForm extends Component {
             this.setState({uuid: data.uuid});
             let objectList = [];
             data.objects.map((item,index) => {
-               objectList.push(item.uuid);
+               return objectList.push(item.uuid);
             });
             this.setState({ defaultObject:objectList });
 
             let groupList = [];
             data.groups.map((item,index) => {
-               groupList.push(item.uuid);
+               return groupList.push(item.uuid);
             });
             this.setState({ defaultGroup:groupList });
             console.log(this.state.groups)
