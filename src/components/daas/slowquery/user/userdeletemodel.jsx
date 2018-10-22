@@ -12,7 +12,7 @@ class DaasSlowQueryUserDeleteManager extends Component {
   slowQueryUserDelete(){
     const _that = this;
     const pk = _that.props.pk.toString();
-    axios.delete(BASE_URL+'/v1/api/slow/query/users'+'/'+pk)
+    axios.delete(BASE_URL+'/v1/api/slow/query/users/'+pk)
         .then(function (response) {
             _that.props.getSlowQueryUsersList();
             message.success('删除成功');

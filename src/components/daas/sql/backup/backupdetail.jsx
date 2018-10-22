@@ -56,8 +56,7 @@ class RDBInstanceBackupDetail extends Component {
     const _that = this;
     const pk = this.props.backupId;
     console.log(pk)
-    //axios_instance.get('/v1/api/rdb/instance/backups' + '/' + pk)
-    axios.get(BASE_URL + '/v1/api/rdb/instance/backups' + '/' + pk)
+    axios.get(BASE_URL + '/v1/api/rdb/instance/backups/' + pk)
     .then(function (response) {
       const backupobj = response.data.data[0]
       console.log(response.data)

@@ -11,11 +11,10 @@
 */
 
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Icon, Select, AutoComplete } from 'antd';
+import { Form, Input, Tooltip, Icon, Select } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
-const AutoCompleteOption = AutoComplete.Option;
 
 
 class SlowQueryUserCreateManager extends Component {
@@ -67,7 +66,6 @@ class SlowQueryUserCreateManager extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {

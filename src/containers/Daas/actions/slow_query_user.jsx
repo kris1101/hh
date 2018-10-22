@@ -48,16 +48,6 @@ export function getSlowQueryUsersList(params={}){
         getAjax('/slow/query/users', params, function(response){
             dispatch(slowquery_user(response.data));
         });
-        // axios.get(BASE_URL + '/v1/api/slow/query/users', {
-        //     params:params
-        // })
-        // .then(function (response) {
-        //     // console.log(response);
-        //     dispatch(slowquery_user(response.data));
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });
     }
 }
 
@@ -72,14 +62,6 @@ export function slowQueryUsersCreate(user_obj){
                 message.success('用户创建成功...');
             }
         })
-        //  axios.post(BASE_URL + '/v1/api/slow/query/users', user_obj)
-        // .then(function (response) {
-        //     console.log(response);
-        //     dispatch(slow_query_user_create(response.data));
-        //  })
-        //  .catch(function (error) {
-        //      console.log(error);
-        //  });
     }
 }
 
@@ -88,24 +70,13 @@ export function getSlowQueryUserDetail(pk){
         getAjax('/slow/query/users',{},function(response){
             dispatch(slow_query_user_detail(response.data));
         });
-        // axios.get(BASE_URL + '/v1/api/slow/query/users' + "/" + pk )
-        // .then(function (response) {
-        //     // console.log(response);
-        //     dispatch(slow_query_user_detail(response.data));
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });
     }
 }
 
 
 export function slowQueryUsersUpdate(pk, userObj){
     return dispatch=>{
-        // putAjax('/slow/query/users',userObj, function(response){
-        //     dispatch(slow_query_user_update(response.data));
-        // });
-        axios.put(BASE_URL + '/v1/api/slow/query/users' + '/' + pk, userObj)
+        axios.put(BASE_URL + '/v1/api/slow/query/users/' + pk, userObj)
         .then(function (response) {
             dispatch(slow_query_user_update(response.data));
             if (response.data.code) {

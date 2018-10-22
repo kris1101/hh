@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import qs from 'qs'
-import { message, Layout, Form, Input, Button, Select, Table } from 'antd';
+import { message, Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import axios from 'axios';
 

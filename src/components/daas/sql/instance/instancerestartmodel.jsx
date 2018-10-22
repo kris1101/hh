@@ -12,7 +12,7 @@ class DaasRdbInstanceRestartModelManager extends Component {
   rdbInstanceRestart(){
     const _that = this;
     const pk = _that.props.pk;
-    const base_url = BASE_URL + '/v1/api/rdb/instances' + '/' + pk;
+    const base_url = BASE_URL + '/v1/api/rdb/instances/' + pk;
     putAjax(base_url, {'operate': 'restart'}, function(response){
       if (response.data.code) {
         message.error('实例重启失败: ' + response.data.message);

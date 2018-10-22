@@ -85,7 +85,7 @@ export function rdbProjectUpdate(pk, projectObj){
 
 export function rdbProjectDelete(pk){
     return dispatch=>{
-        deleteAjax('/v1/api/rdb/projects' + '/' + pk, function(response){
+        deleteAjax('/v1/api/rdb/projects/' + pk, function(response){
             dispatch(rdb_project_delete(response.data));
             if (response.data.code) {
                 message.error('组删除失败: ' + response.data.message);

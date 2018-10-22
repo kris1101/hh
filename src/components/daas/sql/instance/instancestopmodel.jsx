@@ -12,7 +12,7 @@ class DaasRdbInstanceStopModelManager extends Component {
   rdbInstanceStop(){
     const _that = this;
     const pk = _that.props.pk;
-    const base_url = BASE_URL + '/v1/api/rdb/instances' + '/' + pk;
+    const base_url = BASE_URL + '/v1/api/rdb/instances/' + pk;
     putAjax(base_url, {'operate': 'stop'}, function(response){
       if (response.data.code) {
         message.error('实例停止失败: ' + response.data.message);

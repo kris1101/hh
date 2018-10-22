@@ -12,7 +12,7 @@ class DaasSlowQueryInstanceDeleteManager extends Component {
   slowQueryInstanceDelete(){
     const _that = this;
     const pk = _that.props.pk;
-    axios.delete(BASE_URL + '/v1/api/slow/query/instances' + '/' + pk)
+    axios.delete(BASE_URL + '/v1/api/slow/query/instances/' + pk)
         .then(function (response) {
             _that.props.slowQueryInstatncesFetch();
             message.success('删除成功');

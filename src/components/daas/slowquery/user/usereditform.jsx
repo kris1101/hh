@@ -18,7 +18,6 @@ import { getAjax } from '../../../../utils/daas/axios';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
-const AutoCompleteOption = AutoComplete.Option;
 
 
 class SlowQueryUserEditManager extends Component {
@@ -34,7 +33,6 @@ class SlowQueryUserEditManager extends Component {
   componentDidMount(){
     const _that=this;
     const userId=_that.props.userId;
-    console.log(userId);
     getAjax('/slow/query/users' + '/' + userId, {}, function(response){
       _that.setState({
         userObj: response.data.data[0],
@@ -48,7 +46,6 @@ class SlowQueryUserEditManager extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {

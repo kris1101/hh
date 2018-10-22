@@ -33,7 +33,7 @@ class SlowQueryGroupEditManager extends Component {
   componentDidMount(){
     const _that=this;
     const groupId=_that.props.groupId;
-    getAjax('/slow/query/groups' + '/' + groupId, {}, function(response){
+    getAjax('/slow/query/groups/' + groupId, {}, function(response){
       _that.setState({
         groupObj: response.data.data[0],
       });

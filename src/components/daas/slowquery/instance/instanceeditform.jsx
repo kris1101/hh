@@ -11,13 +11,12 @@
 */
 
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Icon, Select, AutoComplete } from 'antd';
+import { Form, Input, Tooltip, Icon } from 'antd';
 import { connect } from 'react-redux';
 import { getAjax } from '../../../../utils/daas/axios';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
-const AutoCompleteOption = AutoComplete.Option;
 
 
 class SlowQueryInstanceEditManager extends Component {
@@ -33,8 +32,7 @@ class SlowQueryInstanceEditManager extends Component {
   componentDidMount(){
     const _that=this;
     const instanceId=_that.props.instanceId;
-    console.log(instanceId);
-    getAjax('/slow/query/instances' + '/' + instanceId, {}, function(response){
+    getAjax('/slow/query/instances/' + instanceId, {}, function(response){
       _that.setState({
         instanceObj: response.data.data[0],
       });
@@ -48,7 +46,6 @@ class SlowQueryInstanceEditManager extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {

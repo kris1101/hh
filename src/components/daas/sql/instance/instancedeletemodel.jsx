@@ -12,7 +12,7 @@ class DaasRdbInstanceDeleteModelManager extends Component {
   rdbInstanceDelete(){
     const _that = this;
     const pk = _that.props.pk;
-    const base_url = BASE_URL + '/v1/api/rdb/instances' + '/' + pk;
+    const base_url = BASE_URL + '/v1/api/rdb/instances/' + pk;
     deleteAjax(base_url, function(response){
       if (response.data.code) {
         message.error('组删除失败: ' + response.data.message);

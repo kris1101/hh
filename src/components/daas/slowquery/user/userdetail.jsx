@@ -40,7 +40,7 @@ class SlowQueryUserDetail extends Component {
   componentDidMount(){
     const _that = this;
     const pk = this.props.userId;
-    axios.get(BASE_URL + '/v1/api/slow/query/users' + '/' + pk)
+    axios.get(BASE_URL + '/v1/api/slow/query/users/' + pk)
     .then(function (response) { 
       const userobj = response.data.data[0]
       _that.setState({

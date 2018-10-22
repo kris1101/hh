@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal, Form, Input, Radio } from 'antd';
 
 const FormItem = Form.Item;
+// eslint-disable-next-line
 const groupnamePatten = new RegExp("^[0-9a-z][0-9a-z\._-]{1,}$");
 const defaultMessage = "项目名称由小写字符、数字和._-组成且至少两个字符并以小写字符或者数字开头";
 

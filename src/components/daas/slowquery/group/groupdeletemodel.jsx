@@ -12,7 +12,7 @@ class DaasSlowQueryGroupDeleteManager extends Component {
   slowQueryGroupDelete(){
     const _that = this;
     const pk = _that.props.pk;
-    axios.delete(BASE_URL + '/v1/api/slow/query/groups' + '/' + pk)
+    axios.delete(BASE_URL + '/v1/api/slow/query/groups/' + pk)
         .then(function (response) {
             _that.props.slowQueryGroupFetch();
             message.success('删除成功');
