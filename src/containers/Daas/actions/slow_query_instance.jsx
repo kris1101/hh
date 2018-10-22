@@ -9,10 +9,8 @@
 # 备注：无
 #=========================================================
 */
-import { BASE_URL } from '../constants';
 import { SLOWQUERYINSTATNCESFETCH, SLOWQUERYINSTANCEUPDATE, SLOWQUERYINSTANCEDELETE } from '../constants';
-import { getAjax, deleteAjax } from '../../../utils/daas/axios';
-import axios from 'axios';
+import { getAjax, deleteAjax, putAjax } from '../../../utils/daas/axios';
 import { message } from 'antd';
 
 export function slow_query_instance_fetch(instances) {

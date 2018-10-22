@@ -9,11 +9,9 @@
 # 备注：无
 #=========================================================
 */
-import { BASE_URL } from '../constants';
 import { message } from 'antd';
 import { FETCHSLOWQUERYUSERS, SLOWQUERYUSERCREATE, SLOWQUERYUSERDETAIL, SLOWQUERYUSERUPDATE } from '../constants';
-import axios from 'axios';
-import { getAjax, postAjax } from '../../../utils/daas/axios'
+import { getAjax, postAjax, putAjax } from '../../../utils/daas/axios'
 
 export function slowquery_user(users) {
     return {
