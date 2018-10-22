@@ -58,22 +58,27 @@ export function slowQueryInstatncesFetch(params={}){
 
 export function slowQueryInstanceUpdate(pk, instanceObj){
     return dispatch=>{
-        // putAjax('/slow/query/users',userObj, function(response){
-        //     dispatch(slow_query_user_update(response.data));
-        // });
-        axios.put(BASE_URL + '/v1/api/slow/query/instances' + '/' + pk, instanceObj)
-        .then(function (response) {
-            console.log(response);
+      putAjax(`/slow/query/instances/${pk}`, instanceObj, function(response){
             dispatch(slow_query_instance_update(response.data));
             if (response.data.code) {
                 message.error('实例更新失败: ' + response.data.message);
             } else {
                 message.success('实例更新成功...');
             }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+         });
+      //axios.put(BASE_URL + '/v1/api/slow/query/instances' + '/' + pk, instanceObj)
+      // .then(function (response) {
+      //    console.log(response);
+      //    dispatch(slow_query_instance_update(response.data));
+      //    if (response.data.code) {
+      //        message.error('实例更新失败: ' + response.data.message);
+      //    } else {
+      //        message.success('实例更新成功...');
+      //    }
+      //})
+      //.catch(function (error) {
+      //    console.log(error);
+      //});
     }
 }
 
