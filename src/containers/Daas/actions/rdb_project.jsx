@@ -9,12 +9,9 @@
 # 备注：无
 #=========================================================
 */
-import { BASE_URL } from '../constants';
 import { message } from 'antd';
 import { RDBPROJECTFETCH, RDBPROJECTCREATE, RDBPROJECTUPDATE, RDBPROJECTDELETE } from '../constants';
-import axios from 'axios';
 import { getAjax, postAjax, putAjax, deleteAjax } from '../../../utils/daas/newaxios'
-import qs from 'qs';
 
 export function rdb_project_fetch(projects) {
     return {
@@ -88,7 +85,7 @@ export function rdbProjectUpdate(pk, projectObj){
 
 export function rdbProjectDelete(pk){
     return dispatch=>{
-        deleteAjax('/v1/api/rdb/projects' + '/' + pk, function(response){
+        deleteAjax('/v1/api/rdb/projects/' + pk, function(response){
             dispatch(rdb_project_delete(response.data));
             if (response.data.code) {
                 message.error('组删除失败: ' + response.data.message);

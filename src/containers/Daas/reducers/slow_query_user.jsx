@@ -1,4 +1,4 @@
-import { FETCHSLOWQUERYUSERS, SLOWQUERYUSERDETAIL, SLOWQUERYUSERUPDATE } from '../constants';
+import { FETCHSLOWQUERYUSERS, SLOWQUERYUSERDETAIL } from '../constants';
 
 const initState={
     redirectTo:'',

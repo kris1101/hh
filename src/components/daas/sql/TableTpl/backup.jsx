@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import chart from '../../../../static/icons/area_chart.png'
+import React from 'react';
 import { Row, Col } from 'antd'
 import RDBInstanceBackupDetailModel from '../backup/backupdetailmodel'
 

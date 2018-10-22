@@ -10,7 +10,7 @@
 #=========================================================
 */
 import React, { Component } from 'react';
-import { Modal, Button, Form, message } from 'antd';
+import { Modal, Button, Form } from 'antd';
 import { connect } from 'react-redux';
 import DaasRdbInstanceUpdateForm from './instanceupdateform';
 import { rdbInstanceFetch, rdbInstanceUpdate } from '../../../../containers/Daas/actions/rdb_instance';

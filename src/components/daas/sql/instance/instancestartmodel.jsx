@@ -16,7 +16,7 @@ class DaasRdbInstanceStartModelManager extends Component {
   rdbInstanceStart(){
     const _that = this;
     const pk = _that.props.pk;
-    const base_url = BASE_URL + '/v1/api/rdb/instances' + '/' + pk;
+    const base_url = BASE_URL + '/v1/api/rdb/instances/' + pk;
     putAjax(base_url, {'operate': 'start'}, function(response){
       if (response.data.code) {
         message.error('实例启动失败: ' + response.data.message);

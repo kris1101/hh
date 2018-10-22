@@ -1,7 +1,3 @@
-import React, {
-    Component
-} from 'react';
-
 import Daas_RDB_Instance from '../components/daas/sql/instance/instance';
 import Daas_RDB_Project from '../components/daas/sql/project/project';
 import Daas_RDB_Cluster from '../components/daas/sql/cluster/cluster';

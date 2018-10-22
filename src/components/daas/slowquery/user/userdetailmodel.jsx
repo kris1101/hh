@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Modal, Button, Form } from 'antd';
 import { connect } from 'react-redux';
 import SlowQueryUserDetail  from './userdetail';
-import { getSlowQueryUsersList } from '../../../../containers/Daas/actions/slow_query_user';
-import { BASE_URL } from '../../../../containers/Daas/constants';
-import axios from 'axios';
 
 class DaasSlowQueryUserDetailManager extends Component {
   state = {

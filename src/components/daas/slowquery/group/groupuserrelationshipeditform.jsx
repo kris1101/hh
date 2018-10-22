@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Transfer, Form, Button } from 'antd';
+import { Transfer, Form } from 'antd';
 import { connect } from 'react-redux';
 import { getAjax } from '../../../../utils/daas/axios';
-import { BASE_URL } from '../../../../containers/Daas/constants';
 import { slowQueryGroupUserRelationshipFetch,slowQueryGroupUserRelationshipUpdate } from '../../../../containers/Daas/actions/slow_query_group_user_relationship';
 
 class DaasSlowQueryGroupUserRelationshipManager extends Component {

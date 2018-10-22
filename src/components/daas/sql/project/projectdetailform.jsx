@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { List, Avatar } from 'antd';
+import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
-import axios from 'axios';
 import { getAjax } from '../../../../utils/daas/newaxios';
 
 
@@ -41,7 +40,7 @@ class DaasRdbProjectDetailForm extends Component {
     componentDidMount(){
         const _that = this;
         const pk = this.props.projectId;
-        getAjax(BASE_URL + '/v1/api/rdb/projects' + '/' + pk, {}, function(response){
+        getAjax(BASE_URL + '/v1/api/rdb/projects/' + pk, {}, function(response){
             const projectObj = response.data.data[0]
             _that.setState({
                 data: [

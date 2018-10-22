@@ -11,19 +11,13 @@
 */
 
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+import { Form, Input, Tooltip, Icon, Select } from 'antd';
 import { connect } from 'react-redux';
-import { createForm } from 'rc-form';
-// import { getSlowQueryUserDetail } from '../../../../containers/Daas/actions/slow_qyery_user';
-import { BASE_URL } from '../../../../containers/Daas/constants';
-// import { slowQueryUsersUpdate, getSlowQueryUsersList } from '../../../../containers/Daas/actions/slow_qyery_user';
-import axios from 'axios';
 import { getAjax } from '../../../../utils/daas/axios';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
-const AutoCompleteOption = AutoComplete.Option;
 
 
 class SlowQueryGroupEditManager extends Component {
@@ -39,8 +33,7 @@ class SlowQueryGroupEditManager extends Component {
   componentDidMount(){
     const _that=this;
     const groupId=_that.props.groupId;
-    console.log(groupId);
-    getAjax('/slow/query/groups' + '/' + groupId, {}, function(response){
+    getAjax('/slow/query/groups/' + groupId, {}, function(response){
       _that.setState({
         groupObj: response.data.data[0],
       });
@@ -49,62 +42,11 @@ class SlowQueryGroupEditManager extends Component {
       delete resDat.update_time;
       _that.props.form.setFieldsValue(resDat);
     });
-    // axios.get(BASE_URL + '/v1/api/slow/query/users' + "/" + userId )
-    //   .then(function (response) {
-    //       console.log(response.data.data);
-    //       _that.setState({
-    //         userObj: response.data.data[0],
-    //       });
-    //   })
-    //   .catch(function (error) {
-    //       console.log(error);
-    // });
   }
 
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   this.props.form.validateFieldsAndScroll((err, values) => {
-  //     if (!err) {
-  //       console.log('Received values of form: ', values);
-  //     }
-  //   });
-  // }
-
-  // handleConfirmBlur = (e) => {
-  //   const value = e.target.value;
-  //   this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  // }
-
-  // compareToFirstPassword = (rule, value, callback) => {
-  //   const form = this.props.form;
-  //   if (value && value !== form.getFieldValue('password')) {
-  //     callback('Two passwords that you enter is inconsistent!');
-  //   } else {
-  //     callback();
-  //   }
-  // }
-
-  // validateToNextPassword = (rule, value, callback) => {
-  //   const form = this.props.form;
-  //   if (value && this.state.confirmDirty) {
-  //     form.validateFields(['confirm'], { force: true });
-  //   }
-  //   callback();
-  // }
-
-  // handleWebsiteChange = (value) => {
-  //   let autoCompleteResult;
-  //   if (!value) {
-  //     autoCompleteResult = [];
-  //   } else {
-  //     autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
-  //   }
-  //   this.setState({ autoCompleteResult });
-  // }
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {
@@ -116,18 +58,6 @@ class SlowQueryGroupEditManager extends Component {
         sm: { span: 20 },
       },
     };
-
-    // const prefixSelector = getFieldDecorator('prefix', {
-    //   initialValue: '86',
-    // })(
-    //   <Select style={{ width: 70 }}>
-    //     <Option value="86">+86</Option>
-    //   </Select>
-    // );
-
-    // const websiteOptions = autoCompleteResult.map(website => (
-    //   <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-    // ));
 
     return (
       <Form>

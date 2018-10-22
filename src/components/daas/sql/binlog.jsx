@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Daassider from '../../../components/common/LeftSider/daassider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getbinlogs } from './TableTpl/binlog';
@@ -9,7 +9,6 @@ import { rdbInstanceBinlogFetch } from '../../../containers/Daas/actions/rdb_bin
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class DaasBinlogManageForm extends Component {
     constructor(props) {

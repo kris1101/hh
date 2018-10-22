@@ -11,7 +11,7 @@
 */
 import { BASE_URL } from '../constants';
 import { SLOWQUERYINSTATNCESFETCH, SLOWQUERYINSTANCEUPDATE, SLOWQUERYINSTANCEDELETE } from '../constants';
-import { getAjax, putAjax, deleteAjax } from '../../../utils/daas/axios';
+import { getAjax, deleteAjax } from '../../../utils/daas/axios';
 import axios from 'axios';
 import { message } from 'antd';
 
@@ -42,26 +42,13 @@ export function slowQueryInstatncesFetch(params={}){
             dispatch(slow_query_instance_fetch(response.data));
             console.log(response);
         });
-        // axios.get(BASE_URL + '/v1/api/slow/query/instances', {
-        //     params:params
-        // })
-        // .then(function (response) {
-        //     console.log(response);
-        //     dispatch(slow_query_instance_fetch(response.data));
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });
     }
 }
 
 
 export function slowQueryInstanceUpdate(pk, instanceObj){
     return dispatch=>{
-        // putAjax('/slow/query/users',userObj, function(response){
-        //     dispatch(slow_query_user_update(response.data));
-        // });
-        axios.put(BASE_URL + '/v1/api/slow/query/instances' + '/' + pk, instanceObj)
+        axios.put(BASE_URL + '/v1/api/slow/query/instances/'+ pk, instanceObj)
         .then(function (response) {
             console.log(response);
             dispatch(slow_query_instance_update(response.data));
@@ -80,7 +67,7 @@ export function slowQueryInstanceUpdate(pk, instanceObj){
 
 export function slowQueryInstatncesDelete(instance_id){
     return dispatch=>{
-        deleteAjax('/slow/query/instances' + '/' + instance_id, function(response){
+        deleteAjax('/slow/query/instances/' + instance_id, function(response){
             dispatch(slow_query_instance_delete(instance_id));
             if (response.data.code) {
                 message.error('实例删除失败: ' + response.data.message);
@@ -88,15 +75,5 @@ export function slowQueryInstatncesDelete(instance_id){
                 message.success('实例删除成功...');
             }
         });
-        // axios.get(BASE_URL + '/v1/api/slow/query/instances', {
-        //     params:params
-        // })
-        // .then(function (response) {
-        //     console.log(response);
-        //     dispatch(slow_query_instance_fetch(response.data));
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });
     }
 }

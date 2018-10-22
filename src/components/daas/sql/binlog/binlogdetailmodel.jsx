@@ -3,8 +3,6 @@ import { Modal, Button, Form } from 'antd';
 import { connect } from 'react-redux';
 import RDBInstanceBinlogDetail  from './binlogdetail';
 // import { slowQueryGroupFetch } from '../../../../containers/Daas/actions/slow_query_group';
-import { BASE_URL } from '../../../../containers/Daas/constants';
-import axios from 'axios';
 
 class RDBInstanceBinlogDetailManager extends Component {
   state = {
@@ -24,7 +22,6 @@ class RDBInstanceBinlogDetailManager extends Component {
     this.setState({
       confirmLoading: true,
       visible: false,
-      confirmLoading: false,
     });
     setTimeout(() => {
       this.setState({

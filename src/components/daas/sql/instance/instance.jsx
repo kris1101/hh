@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Daassider from '../../../../components/common/LeftSider/daassider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
 import { getinstances } from '.././TableTpl/instance';
@@ -10,7 +10,6 @@ import DaasRdbInstanceCreateModel from './instancecreatemodel';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class DaasInstanceManageForm extends Component {
     constructor(props) {

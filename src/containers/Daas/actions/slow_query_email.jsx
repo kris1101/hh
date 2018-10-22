@@ -1,8 +1,5 @@
-import { BASE_URL } from '../constants';
 import { SLOWQEURYEMAILFETCH} from '../constants';
-import { getAjax, putAjax, deleteAjax } from '../../../utils/daas/axios';
-import axios from 'axios';
-import { message } from 'antd';
+import { getAjax } from '../../../utils/daas/axios';
 
 export function slow_query_email_fetch(emails) {
     return {
