@@ -8,7 +8,6 @@ import './serverlist.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class StorageManageForm extends Component {
     constructor(props) {

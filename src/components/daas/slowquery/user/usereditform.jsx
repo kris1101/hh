@@ -11,7 +11,7 @@
 */
 
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Icon, Select, AutoComplete } from 'antd';
+import { Form, Input, Tooltip, Icon, Select } from 'antd';
 import { connect } from 'react-redux';
 import { getAjax } from '../../../../utils/daas/axios';
 
@@ -33,7 +33,7 @@ class SlowQueryUserEditManager extends Component {
   componentDidMount(){
     const _that=this;
     const userId=_that.props.userId;
-    getAjax('/slow/query/users' + '/' + userId, {}, function(response){
+    getAjax('/slow/query/users/' + userId, {}, function(response){
       _that.setState({
         userObj: response.data.data[0],
       });

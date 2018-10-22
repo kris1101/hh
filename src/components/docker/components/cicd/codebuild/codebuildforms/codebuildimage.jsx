@@ -44,6 +44,8 @@ const CodeBuildImageForm = Form.create()(
                            clearInterval(_that.state.timer);
                            _that.setState({timer: null});
                            break;
+                         default:
+                          console.log("未知状态");
                       }
                     console.log(res.data);
                   })

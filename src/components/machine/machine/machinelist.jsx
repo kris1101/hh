@@ -8,7 +8,6 @@ import './machinelist.less';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class MachineManageForm extends Component {
     constructor(props) {
