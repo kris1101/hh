@@ -9,11 +9,9 @@
 # 备注：无
 #=========================================================
 */
-import { BASE_URL } from '../constants';
 import { message } from 'antd';
 import { FETCHSLOWQUERYUSERS, SLOWQUERYUSERCREATE, SLOWQUERYUSERDETAIL, SLOWQUERYUSERUPDATE } from '../constants';
-import axios from 'axios';
-import { getAjax, postAjax } from '../../../utils/daas/axios'
+import { getAjax, postAjax, putAjax } from '../../../utils/daas/axios'
 
 export function slowquery_user(users) {
     return {
@@ -76,17 +74,13 @@ export function getSlowQueryUserDetail(pk){
 
 export function slowQueryUsersUpdate(pk, userObj){
     return dispatch=>{
-        axios.put(BASE_URL + '/v1/api/slow/query/users/' + pk, userObj)
-        .then(function (response) {
-            dispatch(slow_query_user_update(response.data));
-            if (response.data.code) {
+      putAjax(`/slow/query/users/${pk}`,userObj, function(response){
+             dispatch(slow_query_user_update(response.data));
+             if (response.data.code) {
                 message.error('用户更新失败: ' + response.data.message);
             } else {
                 message.success('用户更新成功...');
             }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+         });
     }
 }
