@@ -2,10 +2,6 @@ import axios from 'axios';
 import {
     notification
 } from 'antd';
-import React, {
-    Component
-} from 'react';
-import Qs from 'qs';
 import qs from 'qs';
 import {
     BASE_URL

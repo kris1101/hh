@@ -55,7 +55,7 @@ export function getwaits() {
                 <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>指派</span>
                 <span style={{cursor: 'pointer',color:'#0350CF'}}>
                 <Dropdown overlay={menu}>
-                    <a className="ant-dropdown-link" href="#">
+                    <a className="ant-dropdown-link" href="">
                       更多 <Icon type="down" />
                     </a>
                   </Dropdown>
