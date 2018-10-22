@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Modal, Button, Form } from 'antd';
 import { connect } from 'react-redux';
 import DaasRdbProjectDetailForm  from './projectdetailform';
-import { BASE_URL } from '../../../../containers/Daas/constants';
-import axios from 'axios';
 
 class DaasRdbProjectDetailModleManager extends Component {
   state = {

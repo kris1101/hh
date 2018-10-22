@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import Daassider from '../../../components/common/LeftSider/daassider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getgroups } from './TableTpl/group';
 import DaasSlowQueryGroupCreateModel from './group/groupcreatemodel';
-import PropTypes from 'prop-types';
+
 import { slowQueryGroupFetch } from '../../../containers/Daas/actions/slow_query_group';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
+
 
 class SlowQueryGroupManager extends Component {
 

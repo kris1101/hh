@@ -1,8 +1,5 @@
-import { BASE_URL } from '../constants';
 import { SLOWQUERYINSTANCEGROUPRELATIONSHIPUPDATE, SLOWQUERYINSTANCEGROUPRELATIONSHIPFETCH } from '../constants';
-import { getAjax, putAjax, deleteAjax } from '../../../utils/daas/axios';
-import axios from 'axios';
-import { message } from 'antd';
+import { putAjax } from '../../../utils/daas/axios';
 
 export function slow_query_instance_group_update(groupsList) {
     return {

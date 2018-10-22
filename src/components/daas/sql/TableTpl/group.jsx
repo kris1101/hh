@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import { Button, Popconfirm, message } from 'antd';
+import React from 'react';
+import { Popconfirm, message } from 'antd';
 import axios from 'axios';
-import chart from '../../../../static/icons/area_chart.png'
 import {groupdetail} from '../groupforms/groupdetailform'
-import {GroupUpdateForm} from '../groupforms/groupupdateform'
 
 const baseUrl = 'http://127.0.0.1:8000';
 var instance = axios.create({
@@ -16,7 +14,7 @@ function confirm(pk, _that) {
   instance.delete('/v1/api/slow/query/groups/' + pk)
     .then(function(res){
     hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         message.success(res.data.message);
         _that.handleGroupListWithArgs(1, 10);
     }else{

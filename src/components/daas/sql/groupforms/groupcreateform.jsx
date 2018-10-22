@@ -1,11 +1,10 @@
 import React from 'react'
-import { message, Modal, Form, Input, Radio } from 'antd';
-import { getAjax  } from '../../../../utils/axios'
-import axios from 'axios';
+import { Modal, Form, Input, Radio } from 'antd';
 
 const FormItem = Form.Item;
-const groupnamePatten = new RegExp("^[0-9a-z][0-9a-z\._-]{1,}$"); 
-const defaultMessage = "项目名称由小写字符、数字和._-组成且至少两个字符并以小写字符或者数字开头"
+// eslint-disable-next-line
+const groupnamePatten = new RegExp("^[0-9a-z][0-9a-z\._-]{1,}$");
+const defaultMessage = "项目名称由小写字符、数字和._-组成且至少两个字符并以小写字符或者数字开头";
 
 const GroupCreateForm = Form.create()(
   class extends React.Component {
@@ -13,19 +12,6 @@ const GroupCreateForm = Form.create()(
       if(!groupnamePatten.test(value)){
            callback(defaultMessage); 
       }
-      {/*else{
-          getAjax('/harbor/checkproject/', {group_name: value}, function(res){
-            if(res.data.code == 0){
-                if(res.data){
-                    callback("组名称已经存在");
-                }else{
-                    callback();
-                }
-            }else{
-                callback("未知错误,无法判断组是否存在,请查看后端日志");
-            }
-          })
-          }*/}
     }
 
     render() {

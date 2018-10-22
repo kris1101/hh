@@ -9,12 +9,9 @@
 # 备注：无
 #=========================================================
 */
-import { BASE_URL } from '../constants';
 import { message } from 'antd';
 import { RDBCLUSTERFETCH, RDBCLUSTERCREATE, RDBCLUSTERUPDATE, RDBCLUSTERDELETE } from '../constants';
-import axios from 'axios';
 import { getAjax, postAjax, putAjax, deleteAjax } from '../../../utils/daas/newaxios'
-import qs from 'qs';
 
 export function rdb_cluster_fetch(clusters) {
     return {
@@ -62,6 +59,7 @@ export function rdbClusterFetch(params={}){
 export function rdbClusterCreate(clusterObj){
     return dispatch=>{
         postAjax('/v1/api/rdb/clusters', clusterObj, function(response){
+            console.log(clusterObj);
             dispatch(rdb_cluster_create(response.data));
             if (response.data.code) {
                 message.error('集群创建失败: ' + response.data.message);
@@ -75,7 +73,6 @@ export function rdbClusterCreate(clusterObj){
 export function rdbClusterUpdate(pk, clusterObj){
     return dispatch=>{
         putAjax('/v1/api/rdb/clusters/' + pk, clusterObj, function(response){
-            // console.log(projectObj);
             dispatch(rdb_cluster_update(response.data));
             if (response.data.code) {
                 message.error('集群更新失败: ' + response.data.message);
@@ -88,7 +85,7 @@ export function rdbClusterUpdate(pk, clusterObj){
 
 export function rdbProjectDelete(pk){
     return dispatch=>{
-        deleteAjax('/v1/api/rdb/clusters' + '/' + pk, function(response){
+        deleteAjax('/v1/api/rdb/clusters/' + pk, function(response){
             dispatch(rdb_cluster_delete(response.data));
             if (response.data.code) {
                 message.error('集群删除失败: ' + response.data.message);

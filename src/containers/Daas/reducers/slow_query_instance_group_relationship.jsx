@@ -9,7 +9,7 @@
 # 备注：无
 #=========================================================
 */
-import { SLOWQUERYINSTANCEGROUPRELATIONSHIPUPDATE, SLOWQUERYINSTANCEGROUPRELATIONSHIPFETCH } from '../constants';
+import { SLOWQUERYINSTANCEGROUPRELATIONSHIPFETCH } from '../constants';
 
 const initState={
     redirectTo:'',

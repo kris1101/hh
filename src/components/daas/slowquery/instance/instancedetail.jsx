@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Avatar } from 'antd';
+import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
 
@@ -41,7 +41,7 @@ class SlowQueryInstanceDetail extends Component {
     const _that = this;
     const pk = this.props.instanceId;
     console.log(pk);
-    axios.get(BASE_URL + '/v1/api/slow/query/instances' + '/' + pk)
+    axios.get(BASE_URL + '/v1/api/slow/query/instances/' + pk)
     .then(function (response) { 
       const instanceobj = response.data.data[0]
       _that.setState({

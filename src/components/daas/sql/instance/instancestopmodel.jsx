@@ -3,20 +3,16 @@ import { Modal, Button, Form, message } from 'antd';
 import { connect } from 'react-redux';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import { rdbInstanceFetch } from '../../../../containers/Daas/actions/rdb_instance';
-import axios from 'axios';
 import { putAjax } from '../../../../utils/daas/newaxios';
 
 const confirm = Modal.confirm;
 
 class DaasRdbInstanceStopModelManager extends Component {
-  constructor(props){
-    super(props);
-  }
   
   rdbInstanceStop(){
     const _that = this;
     const pk = _that.props.pk;
-    const base_url = BASE_URL + '/v1/api/rdb/instances' + '/' + pk;
+    const base_url = BASE_URL + '/v1/api/rdb/instances/' + pk;
     putAjax(base_url, {'operate': 'stop'}, function(response){
       if (response.data.code) {
         message.error('实例停止失败: ' + response.data.message);
@@ -29,7 +25,6 @@ class DaasRdbInstanceStopModelManager extends Component {
 
   showStopConfirm() {
     const _that = this;
-    const pk = _that.props.pk;
     confirm({
       title: '确定要停止此实例?',
       content: '停止后可以进行再次启动,两次操作建议间隔时间180s以上......',

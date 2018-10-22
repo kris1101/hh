@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import Daassider from '../../../components/common/LeftSider/daassider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getemails } from './TableTpl/email';
 // import './user.less';
-import PropTypes from 'prop-types';
 // import { slowquery_user, getSlowQueryUsersList } from '../../../containers/Daas/actions/slow_query_user';
 // import DaasSlowQueryUserCreateModel from './user/usercreate';
 import { slowQueryEmailsFetch } from '../../../containers/Daas/actions/slow_query_email';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class SlowQueryEmailManager extends Component {
     

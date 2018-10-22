@@ -3,20 +3,16 @@ import { Modal, Button, Form, message } from 'antd';
 import { connect } from 'react-redux';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import { rdbInstanceDelete, rdbInstanceFetch } from '../../../../containers/Daas/actions/rdb_instance';
-import axios from 'axios';
 import { deleteAjax } from '../../../../utils/daas/newaxios';
 
 const confirm = Modal.confirm;
 
 class DaasRdbInstanceDeleteModelManager extends Component {
-  constructor(props){
-    super(props);
-  }
   
   rdbInstanceDelete(){
     const _that = this;
     const pk = _that.props.pk;
-    const base_url = BASE_URL + '/v1/api/rdb/instances' + '/' + pk;
+    const base_url = BASE_URL + '/v1/api/rdb/instances/' + pk;
     deleteAjax(base_url, function(response){
       if (response.data.code) {
         message.error('组删除失败: ' + response.data.message);
@@ -29,7 +25,6 @@ class DaasRdbInstanceDeleteModelManager extends Component {
 
   showDeleteConfirm() {
     const _that = this;
-    const pk = _that.props.pk;
     confirm({
       title: '确定要删除此实例?',
       content: '删除实例后不可恢复',

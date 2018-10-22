@@ -1,8 +1,6 @@
-import { BASE_URL } from '../constants';
 import { RDBINSTANCEBACKUPFETCH} from '../constants';
-import { getAjax, putAjax, deleteAjax } from '../../../utils/daas/axios';
-import axios from 'axios';
-import { message } from 'antd';
+import { getAjax } from '../../../utils/daas/axios';
+
 
 //const axios_instance = axios.create({
 //    baseURL: 'http://127.0.0.1:8000',

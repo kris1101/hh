@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { List, Avatar } from 'antd';
+import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
-import { formatStrDate } from '../../../docker/utils/time_helper';
-
-const axios_instance = axios.create({
-    baseURL: 'http://127.0.0.1:8000',
-    timeout: 2000
-})
 
 class RDBInstanceBinlogDetail extends Component {
   constructor(props) {
@@ -48,7 +42,7 @@ class RDBInstanceBinlogDetail extends Component {
     const pk = this.props.binlogId;
     console.log(pk)
     //axios_instance.get('/v1/api/rdb/instance/backups' + '/' + pk)
-    axios.get(BASE_URL + '/v1/api/rdb/instance/binlogs' + '/' + pk)
+    axios.get(BASE_URL + '/v1/api/rdb/instance/binlogs/' + pk)
     .then(function (response) {
       const binlogobj = response.data.data[0]
       console.log(response.data)

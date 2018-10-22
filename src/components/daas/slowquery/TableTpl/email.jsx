@@ -1,5 +1,3 @@
-import React, { Component } from 'react';
-import { Row, Col } from 'antd';
 export function getemails() {
     return [{
         title: '组名',

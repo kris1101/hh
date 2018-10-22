@@ -1,8 +1,5 @@
-import { BASE_URL } from '../constants';
 import { SLOWQUERYGROUPUSERRELATIONSHIPUPDATE, SLOWQUERYGROUPUSERRELATIONSHIPFETCH } from '../constants';
-import { getAjax, putAjax, deleteAjax } from '../../../utils/daas/axios';
-import axios from 'axios';
-import { message } from 'antd';
+import { putAjax } from '../../../utils/daas/axios';
 
 export function slow_query_group_user_update(usersList) {
     return {

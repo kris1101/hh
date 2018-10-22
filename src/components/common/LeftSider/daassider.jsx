@@ -38,11 +38,11 @@ class DassSider extends Component{
       let openKey = [];
       let current = pathName;
 
-      if(pathName=="/daas/destop"){
+      if(pathName==="/daas/destop"){
           openKey = [];
-      }else if(pathName=="/daas/slowquery/group"||pathName=="/daas/slowquery/user"||pathName=="/daas/slowquery/instance"||pathName=="/daas/slowquery/email"){
+      }else if(pathName==="/daas/slowquery/group"||pathName==="/daas/slowquery/user"||pathName==="/daas/slowquery/instance"||pathName==="/daas/slowquery/email"){
           openKey = ["slowquery"];
-      }else if(pathName=="/daas/rdb/instance"||pathName=="/daas/rdb/project"||pathName=="/daas/rdb/cluster"){
+      }else if(pathName==="/daas/rdb/instance"||pathName==="/daas/rdb/project"||pathName==="/daas/rdb/cluster"){
           openKey = ["rdb"];
       }else {
           openKey = ["rdb"];
