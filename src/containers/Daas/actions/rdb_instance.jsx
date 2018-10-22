@@ -9,13 +9,11 @@
 # 备注：无
 #=========================================================
 */
-import { BASE_URL } from '../constants';
 import { message } from 'antd';
 import { RDBINSTANCEFETCH, RDBINSTANCECREATE, RDBINSTANCEUPDATE, RDBINSTANCEDELETE
  } from '../constants';
 import axios from 'axios';
 import { getAjax, postAjax, putAjax, deleteAjax} from '../../../utils/daas/newaxios'
-import qs from 'qs';
 
 const axios_instance = axios.create({
     baseURL: 'http://127.0.0.1:8000',

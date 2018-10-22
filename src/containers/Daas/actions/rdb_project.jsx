@@ -9,12 +9,9 @@
 # 备注：无
 #=========================================================
 */
-import { BASE_URL } from '../constants';
 import { message } from 'antd';
 import { RDBPROJECTFETCH, RDBPROJECTCREATE, RDBPROJECTUPDATE, RDBPROJECTDELETE } from '../constants';
-import axios from 'axios';
 import { getAjax, postAjax, putAjax, deleteAjax } from '../../../utils/daas/newaxios'
-import qs from 'qs';
 
 export function rdb_project_fetch(projects) {
     return {

@@ -8,10 +8,7 @@ import axios from 'axios';
 const confirm = Modal.confirm;
 
 class DaasSlowQueryInstanceDeleteManager extends Component {
-  constructor(props){
-    super(props);
-  }
-  
+
   slowQueryInstanceDelete(){
     const _that = this;
     const pk = _that.props.pk;
@@ -27,7 +24,6 @@ class DaasSlowQueryInstanceDeleteManager extends Component {
 
   showDeleteConfirm() {
     const _that = this;
-    const pk = _that.props.pk;
     confirm({
       title: '确定要删除此实例?',
       content: '删除实例后不可恢复',

@@ -9,7 +9,6 @@ import { rdbInstanceBinlogFetch } from '../../../containers/Daas/actions/rdb_bin
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class DaasBinlogManageForm extends Component {
     constructor(props) {

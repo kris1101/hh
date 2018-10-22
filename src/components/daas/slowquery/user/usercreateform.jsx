@@ -11,10 +11,7 @@
 */
 
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
-import { connect } from 'react-redux';
-import { createForm } from 'rc-form';
-
+import { Form, Input, Tooltip, Icon, Select, AutoComplete } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -90,10 +87,6 @@ class SlowQueryUserCreateManager extends Component {
         <Option value="86">+86</Option>
       </Select>
     );
-
-    const websiteOptions = autoCompleteResult.map(website => (
-      <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-    ));
 
     return (
       <Form onSubmit={this.handleSubmit}>

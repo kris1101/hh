@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import Daassider from '../../../components/common/LeftSider/daassider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getinstances } from './TableTpl/instance';
 // import './user.less';
 import DaasSlowQueryInstanceCreateModel from './instance/instancecreatemodel';
-import PropTypes from 'prop-types';
 import { slowQueryInstatncesFetch } from '../../../containers/Daas/actions/slow_query_instance';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class SlowQueryInstatnceManager extends Component {
     

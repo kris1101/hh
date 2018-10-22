@@ -8,10 +8,7 @@ import axios from 'axios';
 const confirm = Modal.confirm;
 
 class DaasSlowQueryGroupDeleteManager extends Component {
-  constructor(props){
-    super(props);
-  }
-  
+ 
   slowQueryGroupDelete(){
     const _that = this;
     const pk = _that.props.pk;

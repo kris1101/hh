@@ -3,15 +3,11 @@ import { Modal, Button, Form, message } from 'antd';
 import { connect } from 'react-redux';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import { rdbProjectDelete, rdbProjectFetch } from '../../../../containers/Daas/actions/rdb_project';
-import axios from 'axios';
 import { deleteAjax } from '../../../../utils/daas/newaxios';
 
 const confirm = Modal.confirm;
 
 class DaasRdbProjectDeleteModelManager extends Component {
-  constructor(props){
-    super(props);
-  }
   
   rdbProjectDelete(){
     const _that = this;
@@ -20,7 +16,7 @@ class DaasRdbProjectDeleteModelManager extends Component {
     deleteAjax(base_url, function(response){
       if (response.data.code) {
         message.error('组删除失败: ' + response.data.message);
-      } else {
+      }else {
         message.success('组删除成功...');
       }
       _that.props.rdbProjectFetch();
@@ -29,7 +25,6 @@ class DaasRdbProjectDeleteModelManager extends Component {
 
   showDeleteConfirm() {
     const _that = this;
-    const pk = _that.props.pk;
     confirm({
       title: '确定要删除此项目?',
       content: '删除项目后不可恢复',

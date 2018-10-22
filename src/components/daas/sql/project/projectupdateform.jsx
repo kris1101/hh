@@ -11,18 +11,13 @@
 */
 
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+import { Form, Input, Tooltip, Icon, Select,  } from 'antd';
 import { connect } from 'react-redux';
-import { createForm } from 'rc-form';
-// import { getSlowQueryUserDetail } from '../../../../containers/Daas/actions/slow_qyery_user';
-import { BASE_URL } from '../../../../containers/Daas/constants';
-// import { slowQueryUsersUpdate, getSlowQueryUsersList } from '../../../../containers/Daas/actions/slow_qyery_user';
 import { getAjax } from '../../../../utils/daas/newaxios';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
-const AutoCompleteOption = AutoComplete.Option;
 
 
 class DaasRdbProjectUpdateFormManager extends Component {
@@ -55,7 +50,6 @@ class DaasRdbProjectUpdateFormManager extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {

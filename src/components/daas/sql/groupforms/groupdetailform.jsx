@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Button, Form, message, List, Avatar } from 'antd';
+import { Modal, message, List } from 'antd';
 import axios from 'axios';
 
 const baseUrl = 'http://127.0.0.1:8000';
@@ -13,7 +13,7 @@ export function groupdetail(pk, _that) {
  instance.get('/v1/api/slow/query/groups/' + pk)
     .then(function(res){
     // hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         console.log(res.data)
         const ret = res.data.data[0].fields;
         const groupdetaillist = [{

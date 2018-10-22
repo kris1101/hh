@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { List, Avatar } from 'antd';
+import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
-import { formatStrDate } from '../../../docker/utils/time_helper';
 
 
 class SlowQueryGroupDetail extends Component {

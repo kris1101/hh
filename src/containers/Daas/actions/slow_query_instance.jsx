@@ -11,7 +11,7 @@
 */
 import { BASE_URL } from '../constants';
 import { SLOWQUERYINSTATNCESFETCH, SLOWQUERYINSTANCEUPDATE, SLOWQUERYINSTANCEDELETE } from '../constants';
-import { getAjax, putAjax, deleteAjax } from '../../../utils/daas/axios';
+import { getAjax, deleteAjax } from '../../../utils/daas/axios';
 import axios from 'axios';
 import { message } from 'antd';
 

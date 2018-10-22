@@ -3,15 +3,11 @@ import { Modal, Button, Form, message } from 'antd';
 import { connect } from 'react-redux';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import { rdbInstanceFetch } from '../../../../containers/Daas/actions/rdb_instance';
-import axios from 'axios';
 import { putAjax } from '../../../../utils/daas/newaxios';
 
 const confirm = Modal.confirm;
 
 class DaasRdbInstanceStopModelManager extends Component {
-  constructor(props){
-    super(props);
-  }
   
   rdbInstanceStop(){
     const _that = this;
@@ -29,7 +25,6 @@ class DaasRdbInstanceStopModelManager extends Component {
 
   showStopConfirm() {
     const _that = this;
-    const pk = _that.props.pk;
     confirm({
       title: '确定要停止此实例?',
       content: '停止后可以进行再次启动,两次操作建议间隔时间180s以上......',

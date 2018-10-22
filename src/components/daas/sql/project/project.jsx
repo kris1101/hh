@@ -10,7 +10,6 @@ import DaasRdbProjectCreateModel from './projectcreatemodel';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class DaasProjectManageForm extends Component {
     constructor(props) {

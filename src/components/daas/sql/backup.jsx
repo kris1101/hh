@@ -9,7 +9,6 @@ import { rdbInstanceBackupFetch } from '../../../containers/Daas/actions/rdb_bac
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class DaasBackupManageForm extends Component {
     constructor(props) {

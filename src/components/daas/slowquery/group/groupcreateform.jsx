@@ -11,14 +11,11 @@
 */
 
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
-import { connect } from 'react-redux';
-import { createForm } from 'rc-form';
+import { Form, Input, Tooltip, Icon, Select } from 'antd';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
-const AutoCompleteOption = AutoComplete.Option;
 
 
 class SlowQueryGroupCreateManager extends Component {
@@ -70,7 +67,6 @@ class SlowQueryGroupCreateManager extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {

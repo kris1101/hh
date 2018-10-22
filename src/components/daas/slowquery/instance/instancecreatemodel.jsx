@@ -3,9 +3,6 @@ import { Modal, Button, Form, message } from 'antd';
 import { connect } from 'react-redux';
 import { slowQueryInstatncesFetch } from '../../../../containers/Daas/actions/slow_query_instance';
 import DaasSlowQueryInstanceCreateForm from './instancecreateform';
-import { BASE_URL } from '../../../../containers/Daas/constants';
-import axios from 'axios';
-import Qs from 'qs';
 import { postAjax } from '../../../../utils/daas/axios';
 
 class DaasSlowQueryInstanceCreateManager extends Component {

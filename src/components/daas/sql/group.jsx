@@ -10,7 +10,6 @@ import { getGroupsList } from '../../../containers/Daas/groups.redux'
 import { GroupCreateForm } from './groupforms/groupcreateform'
 import {GroupUpdateForm} from './groupforms/groupupdateform'
 
-import { postAjax } from '../../../utils/axios'
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getgroups } from './TableTpl/group';
 import './list.less';
@@ -24,7 +23,6 @@ instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlenco
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class DaasGroupManageForm extends Component {
     constructor(props) {
@@ -94,7 +92,7 @@ class DaasGroupManageForm extends Component {
         console.log(values);
         instance.post('/v1/api/slow/query/groups', qs.stringify(values))
           .then(function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("创建成功") 
                 _that.setState({GroupCreateConfirmLoading: false})
                 form.resetFields();
@@ -120,7 +118,7 @@ class DaasGroupManageForm extends Component {
         // values.pk = group_id
         instance.put('/v1/api/slow/query/groups/' +  group_id.pk, qs.stringify(values))
           .then(function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 console.log(values)
                 message.success("更新成功") 
                 _that.setState({GroupUpdateConfirmLoading: false})

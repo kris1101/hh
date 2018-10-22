@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { List, Avatar } from 'antd';
+import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
-import axios from 'axios';
 import { getAjax } from '../../../../utils/daas/newaxios';
 
 

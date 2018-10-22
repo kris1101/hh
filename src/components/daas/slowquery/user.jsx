@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import Daassider from '../../../components/common/LeftSider/daassider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getusers } from './TableTpl/user';
 import './user.less';
-import PropTypes from 'prop-types';
-import { slowquery_user, getSlowQueryUsersList } from '../../../containers/Daas/actions/slow_query_user';
+import { getSlowQueryUsersList } from '../../../containers/Daas/actions/slow_query_user';
 import DaasSlowQueryUserCreateModel from './user/usercreate';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
+
 
 class SlowQueryUserManager extends Component {
     
@@ -43,8 +42,6 @@ class SlowQueryUserManager extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    let _that = this;
-    const { slowquery_user } = this.props;
 
     return (
       <Layout className="config">

@@ -9,12 +9,9 @@
 # 备注：无
 #=========================================================
 */
-import { BASE_URL } from '../constants';
 import { message } from 'antd';
 import { SLOWQUERYGROUPFETCH, SLOWQUERYGROUPCREATE, SLOWQUERYGROUPDETAIL, SLOWQUERYGROUPUPDATE} from '../constants';
-import axios from 'axios';
 import { getAjax, postAjax, putAjax } from '../../../utils/daas/axios'
-import qs from 'qs';
 
 export function slow_query_group_fetch(groups) {
     return {

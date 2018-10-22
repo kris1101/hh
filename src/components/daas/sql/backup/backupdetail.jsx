@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { List, Avatar } from 'antd';
+import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
-import { formatStrDate } from '../../../docker/utils/time_helper';
-
-const axios_instance = axios.create({
-    baseURL: 'http://127.0.0.1:8000',
-    timeout: 2000
-})
 
 class RDBInstanceBackupDetail extends Component {
   constructor(props) {

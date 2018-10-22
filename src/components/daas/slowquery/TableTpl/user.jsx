@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import DaasSlowQueryUserDetailModel from '../user/userdetailmodel';
 import DaasSlowQueryUserEditModel from '../user/usereditmodel';
 import DaasSlowQueryUserDeleteModel from '../user/userdeletemodel';
