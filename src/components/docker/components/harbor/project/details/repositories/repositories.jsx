@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { message, Form, Input, Button, Table, Row, Col } from 'antd';
+import { Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
-import BreadcrumbCustom from '../../../../../../BreadcrumbCustom';
 import { getrepositories } from './TableTpl/tabletpl';
 import './repositories.less';
 import { getRepositoriesList } from '../../../../../../../containers/Paas/harbor/projectdetails.redux'

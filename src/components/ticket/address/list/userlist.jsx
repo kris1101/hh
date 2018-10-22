@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Ticketsider from '../../../common/LeftSider/ticketsider';
-import { Layout, Form, Input, Button, Select, Table,notification, message,Modal } from 'antd';
+import { Layout, Form, Input, Button,  Table,notification, message,Modal } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
 import { getusers } from './TableTpl/user';
@@ -11,7 +11,6 @@ import UserModal from '../create/usermodal';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 const confirm = Modal.confirm;
 
 
@@ -33,7 +32,6 @@ class UserManageForm extends Component {
             "page": this.state.currentPage,
             "pageSize": this.state.pageSize,
         }
-        let _this = this;
 
         if(value){
             params.displayName = value && value.name ? value.name : '';
@@ -46,7 +44,7 @@ class UserManageForm extends Component {
             data.pageSize = 10;
             Ajax.getAjax('/ticket/users',data,function (response) {
                 console.log(response.data);
-                if (response.data.code == 30000) {
+                if (response.data.code === 30000) {
                     let deviceList = response.data.objects;
                     let total = response.data.total ||0;
                     for(let key in deviceList){

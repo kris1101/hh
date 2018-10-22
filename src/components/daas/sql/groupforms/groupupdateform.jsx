@@ -1,6 +1,5 @@
 import React from 'react'
-import { Icon, Button, Upload, message, Modal, Form, Input, Radio } from 'antd';
-import axios from 'axios'
+import { Modal, Form, Input, Radio } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -9,7 +8,6 @@ const GroupUpdateForm = Form.create()(
     render() {
       const { confirmLoading, visible, onCancel, onCreate, groupinfo, form } = this.props;
       const { getFieldDecorator } = form;
-      const _that = this;
       console.log(confirmLoading, visible, onCancel, onCreate, groupinfo)
       return (
         <Modal

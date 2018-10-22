@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Divider, Tooltip, Icon } from 'antd';
 import { Link } from 'react-router-dom';
-import { humansize, timesince } from '../../../../utils/vm'
 
 import SGUpdate from '../SGUpdate';
-import ApprovalBox from '../ApprovalBox';
+import ApprovalBox from '../SGRuleApprovalBox';
+import SGRuleDelete from '../SGRuleDelete';
 
 
 export function getColumes() {
@@ -26,7 +26,7 @@ export function getColumes() {
           <Link to={`/vm/networks/security_groups/${record.id}/rules`} className="href-class"><Icon type="bars" /></Link>
         </Tooltip>
         <Divider type="vertical" />
-        <SGUpdate record={ record } refresh={this.refresh} />
+        {record.name === 'default' ? '' : <SGUpdate record={ record } refresh={this.refresh} />}
       </div>
     )
   }];
@@ -55,7 +55,7 @@ export function getRuleColumes() {
     title: '操作',
     render: (record) => (
       <div>
-        <SGUpdate record={ record } refresh={this.refresh} />
+        <SGRuleDelete record={ record } refresh={this.refresh} />
         <Divider type="vertical" />
       </div>
     )

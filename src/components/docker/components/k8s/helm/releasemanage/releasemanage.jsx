@@ -112,7 +112,7 @@ class HelmReleaseForm extends Component {
         update_args.values = JSON.stringify({});
         if (this.helmReleaseUpdateFormRef.state.values){
             let values_result = combinekeyvalue(formvalues.chartkeys, formvalues.chartvalues)
-            if (values_result[0] == 1){ 
+            if (values_result[0] === 1){ 
               message.error("values生成错误")
               return
             }   
@@ -122,7 +122,7 @@ class HelmReleaseForm extends Component {
         if (this.helmReleaseUpdateFormRef.state.valuesfile){
             update_args.valuesfile = this.helmReleaseUpdateFormRef.editor.getValue();
         }   
-        if(formvalues.chartname != this.helmReleaseUpdateFormRef.state.chartinfo.split(" ")[0]){
+        if(formvalues.chartname !== this.helmReleaseUpdateFormRef.state.chartinfo.split(" ")[0]){
                 message.error("chart名称不匹配"); 
                 return;
         }
@@ -138,7 +138,7 @@ class HelmReleaseForm extends Component {
         const _that = this; 
         this.setState({HelmReleaseUpdateConfirmLoading: true})
         postAjax('/helm/helmrelease/', generateformdata(update_args), function(res){
-            if(res.data.code == 0){ 
+            if(res.data.code === 0){ 
                 message.success(res.data.msg); 
                 _that.setState({HelmReleaseUpdateConfirmLoading: false})
                 form.resetFields();
@@ -159,7 +159,7 @@ class HelmReleaseForm extends Component {
           return;
         }   
         let rollback_args = {}; 
-        if(formvalues.version == this.helmReleaseRollBackFormRef.state.releaseversion){
+        if(formvalues.version === this.helmReleaseRollBackFormRef.state.releaseversion){
                 message.error("版本未发生变化"); 
                 return;
         }
@@ -172,7 +172,7 @@ class HelmReleaseForm extends Component {
         const _that = this; 
         this.setState({HelmReleaseRollBackConfirmLoading: true})
         putAjax('/helm/helmrelease/', generateformdata(rollback_args), function(res){
-            if(res.data.code == 0){ 
+            if(res.data.code === 0){ 
                 message.success(res.data.msg); 
                 _that.setState({HelmReleaseRollBackConfirmLoading: false})
                 form.resetFields();
@@ -193,7 +193,7 @@ class HelmReleaseForm extends Component {
       this.setState({HelmReleaseDeleteConfirmLoading: true})
       const _that = this;
       deleteAjax('/helm/helmrelease/', "name=" + name +"&purge=" + purge, function(res){
-          if(res.data.code == 0){ 
+          if(res.data.code === 0){ 
               _that.setState({HelmReleaseDeleteConfirmLoading: false})
               form.resetFields();
               _that.setState({ HelmReleaseDeleteVisible: false }); 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Row, Col} from 'antd';
 import DaasSlowQueryGroupDetailModel from '../group/groupdetailmodel';
 import DaasSlowQueryGroupEditModel from '../group/groupeditmodel';

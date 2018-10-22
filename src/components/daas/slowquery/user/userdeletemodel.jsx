@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form, message } from 'antd';
 import { connect } from 'react-redux';
-import DaasSlowQueryUserEditForm  from './usereditform';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import { getSlowQueryUsersList } from '../../../../containers/Daas/actions/slow_query_user';
 import axios from 'axios';
@@ -9,14 +8,11 @@ import axios from 'axios';
 const confirm = Modal.confirm;
 
 class DaasSlowQueryUserDeleteManager extends Component {
-  constructor(props){
-    super(props);
-  }
   
   slowQueryUserDelete(){
     const _that = this;
-    const pk = _that.props.pk;
-    axios.delete(BASE_URL + '/v1/api/slow/query/users' + '/' + pk)
+    const pk = _that.props.pk.toString();
+    axios.delete(BASE_URL+'/v1/api/slow/query/users/'+pk)
         .then(function (response) {
             _that.props.getSlowQueryUsersList();
             message.success('删除成功');

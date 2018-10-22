@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Daassider from '../../../../components/common/LeftSider/daassider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../BreadcrumbCustom';
 import { getclusters } from '../TableTpl/cluster';
@@ -10,7 +10,6 @@ import { rdbClusterFetch } from '../../../../containers/Daas/actions/rdb_cluster
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class DaasRdbClusterManage extends Component {
     constructor(props) {
@@ -44,8 +43,6 @@ class DaasRdbClusterManage extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    let _that = this;
-
     return (
       <Layout className="config">
         <Sider >

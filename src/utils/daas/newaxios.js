@@ -17,11 +17,11 @@ var instance = axios.create({
     timeout: 2000,
 });
 
-function generateformdata(values){
+function generateformdata(values) {
     let params = new FormData();
-    Object.keys(values).forEach(function(key){
-       params.append(key, values[key])
-    })  
+    Object.keys(values).forEach(function(key) {
+        params.append(key, values[key])
+    })
     return params
 }
 //instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';

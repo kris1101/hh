@@ -1,5 +1,5 @@
 import React from 'react'
-import { message, Modal, Form, Input, Radio } from 'antd';
+import { Modal, Form, Input } from 'antd';
 import { getAjax  } from '../../../../utils/axios'
 
 const FormItem = Form.Item;
@@ -64,7 +64,7 @@ const UserCreateForm = Form.create()(
            callback(defaultMessage); 
         }else{
           getAjax('/harbor/checkuserexist/', {check_key: "username", check_value: value}, function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 if(res.data.data){
                     callback("用户名称已经存在");
                 }else{
@@ -82,7 +82,7 @@ const UserCreateForm = Form.create()(
            callback(defaultemailmessage); 
         }else{
           getAjax('/harbor/checkuserexist/', {check_key: "email", check_value: value}, function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 if(res.data.data){
                     callback("邮箱已经存在");
                 }else{

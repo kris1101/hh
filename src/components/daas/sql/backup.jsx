@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Daassider from '../../../components/common/LeftSider/daassider';
-import { Layout, Form, Input, Button, Select, Table } from 'antd';
+import { Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getbackups } from './TableTpl/backup';
@@ -9,7 +9,6 @@ import { rdbInstanceBackupFetch } from '../../../containers/Daas/actions/rdb_bac
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class DaasBackupManageForm extends Component {
     constructor(props) {

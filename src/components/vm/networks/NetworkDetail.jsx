@@ -1,15 +1,13 @@
 import React from 'react';
-import { notification, Layout, message, Tooltip, Icon, Form, Modal, Button, Table, Row, Col, Card, Tabs, Input } from 'antd';
+import { notification, Layout, Table, Row, Col, Card, Tabs } from 'antd';
 
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
 import { networkDetail } from '../../../services/vm/user';
 import { getDetailColumes, getDetailDHCPColumes, getDetailPortColumes, getDetailSubnetColumes } from './TableTpl/networkTableTpl';
-import { humansize, timezoneFormat } from '../../../utils/vm'
+import { timezoneFormat } from '../../../utils/vm'
 import SubnetCreate from './SubnetCreate'
 
-const confirm = Modal.confirm;
-const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
 const { Sider, Content } = Layout;
 

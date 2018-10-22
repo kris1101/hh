@@ -11,16 +11,13 @@
 */
 
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+import { Form, Input, Tooltip, Icon, Select } from 'antd';
 import { connect } from 'react-redux';
-import { createForm } from 'rc-form';
 import { getAjax } from '../../../../utils/daas/newaxios';
-import { BASE_URL } from '../../../../containers/Daas/constants';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
-const AutoCompleteOption = AutoComplete.Option;
 
 
 class RdbInstanceCreateManager extends Component {
@@ -60,7 +57,6 @@ class RdbInstanceCreateManager extends Component {
 
     render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {
@@ -72,9 +68,7 @@ class RdbInstanceCreateManager extends Component {
         sm: { span: 20 },
       },
     };
-    const instacesOption = this.props.instancelist.map((item,index)=>{
-        return <Option key={index} value={item.pk}>{item.fields.name}</Option>
-    })
+
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem

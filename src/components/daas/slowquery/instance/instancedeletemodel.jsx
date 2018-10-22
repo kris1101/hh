@@ -8,14 +8,11 @@ import axios from 'axios';
 const confirm = Modal.confirm;
 
 class DaasSlowQueryInstanceDeleteManager extends Component {
-  constructor(props){
-    super(props);
-  }
-  
+
   slowQueryInstanceDelete(){
     const _that = this;
     const pk = _that.props.pk;
-    axios.delete(BASE_URL + '/v1/api/slow/query/instances' + '/' + pk)
+    axios.delete(BASE_URL + '/v1/api/slow/query/instances/' + pk)
         .then(function (response) {
             _that.props.slowQueryInstatncesFetch();
             message.success('删除成功');
@@ -27,7 +24,6 @@ class DaasSlowQueryInstanceDeleteManager extends Component {
 
   showDeleteConfirm() {
     const _that = this;
-    const pk = _that.props.pk;
     confirm({
       title: '确定要删除此实例?',
       content: '删除实例后不可恢复',

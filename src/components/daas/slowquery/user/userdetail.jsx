@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Avatar } from 'antd';
+import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
 
@@ -40,7 +40,7 @@ class SlowQueryUserDetail extends Component {
   componentDidMount(){
     const _that = this;
     const pk = this.props.userId;
-    axios.get(BASE_URL + '/v1/api/slow/query/users' + '/' + pk)
+    axios.get(BASE_URL + '/v1/api/slow/query/users/' + pk)
     .then(function (response) { 
       const userobj = response.data.data[0]
       _that.setState({

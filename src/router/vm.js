@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 
 import VM_Machine from '../components/vm/machine/list/machinelist';
 import VM_Recycle from '../components/vm/recycle/list/recyclelist';

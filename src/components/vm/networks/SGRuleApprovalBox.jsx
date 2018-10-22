@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { notification, Button, Modal, Form, Input } from 'antd';
 
-import { networkApprovalGroupAdmin, networkApprovalAdmin } from '../../../services/vm/user';
+import { sgRuleApprovalGroupAdmin, sgRuleApprovalAdmin } from '../../../services/vm/user';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -76,7 +76,7 @@ class ApprovalBox extends Component {
 
       console.log('Received values of form: ', values);
       this.setState({ confirmLoading: true });
-      const func = this.props.t === 'group_admin' ? networkApprovalGroupAdmin : networkApprovalAdmin;
+      const func = this.props.t === 'group_admin' ? sgRuleApprovalGroupAdmin : sgRuleApprovalAdmin;
       func(this.props.network_id, {}, {remark: values.remark}).then(res => {
         if (res.code === 0) {
           notification['success']({message: res.msg});
@@ -104,7 +104,7 @@ class ApprovalBox extends Component {
 
       console.log('Received values of form: ', values);
       this.setState({ confirmLoading: true });
-      const func = this.props.t === 'group_admin' ? networkApprovalGroupAdmin : networkApprovalAdmin;
+      const func = this.props.t === 'group_admin' ? sgRuleApprovalGroupAdmin : sgRuleApprovalAdmin;
       func(this.props.network_id, {access: 1}, { remark: values.remark }).then(res => {
         if (res.code === 0) {
           notification['success']({message: res.msg});

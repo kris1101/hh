@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Popconfirm, message } from 'antd';
 
 import { Link  } from 'react-router-dom';
@@ -11,7 +11,7 @@ function confirm(project_id, _that) {
   const hide = message.loading('Action in progress..', 0);
   deleteAjax('/harbor/projects/', "project_id=" + project_id, function (res){
     hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         message.success(res.data.msg);
         _that.handleProjectListWithArgs(1, 10);
     }else{
@@ -36,7 +36,7 @@ export function getprojects() {
         title: '访问级别',
         dataIndex: 'metadata.public',
         render: (data) => {
-          if (data == "true"){
+          if (data === "true"){
             return "公开";
           }else{
             return "私有";
@@ -61,7 +61,7 @@ export function getprojects() {
             return (
               <Popconfirm title={"确定删除" + record.name + "项目?"} onConfirm={() => confirm(record.project_id, this)} okText="是" cancelText="否">
             <div>
-              <Button size="small" icon="delete" disabled={record.repo_count != 0 || record.name == "library"? true : false}>删除</Button>
+              <Button size="small" icon="delete" disabled={record.repo_count !== 0 || record.name === "library"? true : false}>删除</Button>
             </div>
               </Popconfirm>
         )}

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, message, Tooltip } from 'antd';
+import React from 'react';
+import { Button, Tooltip } from 'antd';
 import { omitstring } from '../../../../../utils/tools_helper'
 
 export function getHelmChart() {

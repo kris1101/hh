@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Button, Upload, message, Modal, Form, Input, Radio } from 'antd';
+import { Icon, Button, Upload, Modal, Form, Input, Radio } from 'antd';
 import { getAjax  } from '../../../../utils/axios'
 
 const FormItem = Form.Item;
@@ -14,7 +14,7 @@ const ClusterCreateForm = Form.create()(
                  callback("集群名称不能为空");
          }else{
              getAjax('/k8s/checkclustername/', {clustername: value}, function(res){
-               if(res.data.code == 0){
+               if(res.data.code === 0){
                    if(res.data.data){
                        callback("集群名称已经存在");
                    }else{
@@ -63,8 +63,7 @@ const ClusterCreateForm = Form.create()(
             fileList: [file],
           }));
           return false;
-        },
-        fileList: this.state.fileList,
+        }
       };
       return (
         <Modal

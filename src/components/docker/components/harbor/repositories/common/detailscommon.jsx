@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Dockersider from '../../../../../../components/common/LeftSider/dockersider';
 import { connect  } from 'react-redux';
 import {Redirect} from 'react-router-dom'
-import { Tabs, Icon, message, Layout} from 'antd';
+import { Tabs, Icon, Layout} from 'antd';
 import BreadcrumbCustom from '../../../../../BreadcrumbCustom';
 import {getQueryString} from '../../../../utils/searchparse_helper'
 import './detailscommon.less';
@@ -25,7 +25,9 @@ class repositoriesDetailsCommon extends Component {
 
       switch (activekey){
           case "tags":
-              this.tagsform ? this.tagsform.handleReset() : null;
+              if(this.tagsform){
+                 this.tagsform.handleReset()
+              }
               this.props.getRepositoriesTagsList({repo_name: this.repo_name});
               break;
           default:

@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 
 import Machine from '../components/machine/machine/machinelist';
 

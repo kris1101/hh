@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, AutoComplete,notification,Modal,Checkbox,message } from 'antd';
+import { Form, Input, Select,notification,Modal,message } from 'antd';
 import * as Ajax from '../../../../utils/ticket/axios';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const { TextArea } = Input;
-const AutoCompleteOption = AutoComplete.Option;
 
 let options=[];
 let groups=[];
@@ -20,13 +18,13 @@ class ModalForm extends Component {
         groups:[],
         uuid:'',
         defaultObject:[],
-    }
+    };
 
     componentWillMount(){
         let _this = this;
         Ajax.getAjax('/ticket/objects',{},function (response) {
             console.log(response.data.objects);
-            if (response.data.code == 30000) {
+            if (response.data.code === 30000) {
                 let data = response.data.objects;
                 console.log(data);
                 _this.setState({
@@ -34,13 +32,13 @@ class ModalForm extends Component {
                 });
                 options=[];
                 _this.state.children.map((item,index) => {
-                    options.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
+                    return options.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
                 })
             }
-        })
+        });
         Ajax.getAjax('/ticket/groups',{},function (response) {
             console.log(response.data.objects);
-            if (response.data.code == 30000) {
+            if (response.data.code === 30000) {
                 let data = response.data.objects;
                 console.log(data);
                 _this.setState({
@@ -48,7 +46,7 @@ class ModalForm extends Component {
                 });
                 groups=[];
                 _this.state.groups.map((item,index) => {
-                    groups.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
+                    return groups.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
                 })
             }
         })
@@ -58,27 +56,27 @@ class ModalForm extends Component {
         let _this = this;
         Ajax.getAjax('/ticket/objects',{},function (response) {
             console.log(response.data.objects);
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         let data = response.data.objects;
                         _this.setState({
                             children:data
                         });
                         options=[];
                         _this.state.children.map((item,index) => {
-                            options.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
+                            return options.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
                         })
                     }
                 })
         Ajax.getAjax('/ticket/groups',{},function (response) {
             console.log(response.data.objects);
-            if (response.data.code == 30000) {
+            if (response.data.code === 30000) {
                 let data = response.data.objects;
                 _this.setState({
                     groups:data
                 });
                 groups=[];
                 _this.state.groups.map((item,index) => {
-                    groups.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
+                    return groups.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
                 })
             }
         })
@@ -87,13 +85,13 @@ class ModalForm extends Component {
             this.setState({uuid: data.uuid});
             let objectList = [];
             data.objects.map((item,index) => {
-               objectList.push(item.uuid);
+               return objectList.push(item.uuid);
             });
             this.setState({ defaultObject:objectList });
 
             let groupList = [];
             data.groups.map((item,index) => {
-               groupList.push(item.uuid);
+               return groupList.push(item.uuid);
             });
             this.setState({ defaultGroup:groupList });
             console.log(this.state.groups)
@@ -135,7 +133,7 @@ class ModalForm extends Component {
                 });
                 Ajax.putAjax(url,values,function (response) {
                     console.log(response);
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
 
@@ -156,7 +154,7 @@ class ModalForm extends Component {
                 });
                 Ajax.postAjax(url,data,function (response) {
                     console.log(response);
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
                     } else {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { notification, Checkbox, Button, Modal, Form, Input, Radio } from 'antd';
+import { notification, Checkbox, Button, Modal, Form, Input } from 'antd';
 
 import { subnetCreate } from '../../../services/vm/user';
 

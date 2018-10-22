@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { List, Avatar } from 'antd';
+import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
-import axios from 'axios';
 import { getAjax } from '../../../../utils/daas/newaxios';
 
 
@@ -57,7 +56,7 @@ class DaasRdbInstanceDetailForm extends Component {
     componentDidMount(){
         const _that = this;
         const pk = this.props.instanceId;
-        getAjax(BASE_URL + '/v1/api/rdb/instances' + '/' + pk, {}, function(response){
+        getAjax(BASE_URL + '/v1/api/rdb/instances/' + pk, {}, function(response){
             const instanceObj = response.data.data[0];
             _that.setState({
                 data: [

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, Form, message } from 'antd';
+import { Modal, Button, Form } from 'antd';
 import { connect } from 'react-redux';
 import DaasSlowQueryInstanceGroupRelationshipForm  from './instancegrouprelationshipeditform';
 import { slowQueryInstanceGroupRelationshipUpdate } from '../../../../containers/Daas/actions/slow_query_instance_group_relationship';

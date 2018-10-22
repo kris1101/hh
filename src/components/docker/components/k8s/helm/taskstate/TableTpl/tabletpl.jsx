@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Icon, Popover  } from 'antd';
 import { formatStrDate } from '../../../../../utils/time_helper'
 

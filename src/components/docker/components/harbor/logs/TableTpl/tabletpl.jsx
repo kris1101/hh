@@ -1,6 +1,3 @@
-import React, { Component } from 'react';
-import { Button } from 'antd';
-
 import { formatStrDate } from '../../../../utils/time_helper'
 
 export function getlogs() {

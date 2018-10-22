@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-import * as config from './config';
+// import * as config from './config';
 
 
-var ins = axios.create({
-    baseURL: config.baseUrl,
-    headers: {
-        'content-type': 'application/json',
-    }
-});
+// var ins = axios.create({
+//     baseURL: config.baseUrl,
+//     headers: {
+//         'content-type': 'application/json',
+//     }
+// });
 
 
 
@@ -17,7 +17,7 @@ export const logList = (params) => axios.get('accounts/log/', {params: params}).
 
 export const keypairList = (params) => axios.get('keypairs/', {params: params}).then(res => res.data).catch(err => console.log(err));
 export const keypairCreate = (data) => axios.post('keypairs/create/', data).then(res => res.data).catch(err => console.log(err));
-export const keypairDetail = (params) => axios.get(`keypairs/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
+export const keypairDetail = (id, params) => axios.get(`keypairs/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
 export const keypairDelete = (id) => axios.delete(`keypairs/${id}/`).then(res => res.data).catch(err => console.log(err));
 
 
@@ -82,6 +82,7 @@ export const sgUpdate = (id, data) => axios.put(`networks/security_groups/${id}/
 export const sgRuleList = (params) => axios.get(`networks/security_groups/${params.id}/rules/`, {params: params}).then(res => res.data).catch(err => console.log(err));
 export const sgRuleCreate = (sg_id, data) => axios.post(`networks/security_groups/${sg_id}/rules/add/`, data).then(res => res.data).catch(err => console.log(err));
 export const getSGRuleRemoteGroup = (sg_id) => axios.get(`networks/security_groups/${sg_id}/rules/add/`).then(res => res.data).catch(err => console.log(err));
+export const sgRuleDelete = (id, params) => axios.delete(`networks/security_groups/rules/${id}/`, {params: params}).then(res => res.data).catch(err => console.log(err));
 // sg rules approval
 export const sgRuleApprovalDetail = (id, params) => axios.get(`networks/security_groups/rules/${id}/approval/`, {params: params}).then(res => res.data).catch(err => console.log(err));
 export const sgRuleApprovalGroupAdmin = (id, params, data) => axios.post(`networks/security_groups/rules/${id}/approval/group_admin/`, data, {params: params}).then(res => res.data).catch(err => console.log(err));

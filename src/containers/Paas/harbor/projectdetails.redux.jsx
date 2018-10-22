@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { notification  } from 'antd';
 import { getAjax } from '../../../components/docker/utils/axios'
 
@@ -139,7 +138,7 @@ export function getRepositoriesList(params){
       console.log(params);
       getAjax('/harbor/repositories/', params, function(res){
           dispatch(endRepositoriesLoading());
-          if (res.data.code == 0){
+          if (res.data.code === 0){
             dispatch(loadRepositoriesData(res.data.data))
           }else{
             notification.error({
@@ -157,7 +156,7 @@ export function getRepositoriesTagsList(params){
       console.log(params);
       getAjax('/harbor/repositories/tags/', params, function(res){
           dispatch(endRepositoriesTagsLoading());
-          if (res.data.code == 0){
+          if (res.data.code === 0){
             dispatch(loadRepositoriesTagsData(res.data.data))
           }else{
             notification.error({
@@ -175,7 +174,7 @@ export function getProjectLogsList(params){
       console.log(params);
       getAjax('/harbor/projectlogs/', params, function(res){
           dispatch(endProjectLogsLoading());
-          if (res.data.code == 0){
+          if (res.data.code === 0){
             dispatch(loadProjectLogsData(res.data.data))
           }else{
             notification.error({
@@ -190,7 +189,7 @@ export function getProjectLogsList(params){
 export function getProjectMetadata(params){
 	return dispatch=>{
       getAjax('/harbor/project/metadata/', params, function(res){
-          if (res.data.code == 0){
+          if (res.data.code === 0){
             dispatch(loadProjectMetadataData(res.data.data))
           }else{
             notification.error({
@@ -207,7 +206,7 @@ export function getProjectMemberList(params){
       dispatch(startProjectMemberLoading());
       getAjax('/harbor/projectmember/', params, function(res){
           dispatch(endProjectmemberLoading());
-          if (res.data.code == 0){
+          if (res.data.code === 0){
             dispatch(loadProjectMemberData(res.data.data))
           }else{
             notification.error({

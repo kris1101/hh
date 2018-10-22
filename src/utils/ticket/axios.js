@@ -1,7 +1,5 @@
 import axios from 'axios';
 import { notification } from 'antd';
-import React, { Component } from 'react';
-import Qs from 'qs';
 // import { BASE_URL } from '../../containers/Daas/constants';
 
 export const baseUrl = "http://10.26.17.40:8080";

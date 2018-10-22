@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Button, Form } from 'antd';
 import { connect } from 'react-redux';
 import SlowQueryInstanceDetail  from './instancedetail';
-import { BASE_URL } from '../../../../containers/Daas/constants';
-import axios from 'axios';
+
 
 class DaasSlowQueryInstanceDetailManager extends Component {
   state = {

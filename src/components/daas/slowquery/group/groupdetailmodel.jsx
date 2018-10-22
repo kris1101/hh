@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Modal, Button, Form } from 'antd';
 import { connect } from 'react-redux';
 import SlowQueryGroupDetail  from './groupdetail';
-// import { slowQueryGroupFetch } from '../../../../containers/Daas/actions/slow_query_group';
-import { BASE_URL } from '../../../../containers/Daas/constants';
-import axios from 'axios';
 
 class DaasSlowQueryGroupDetailManager extends Component {
   state = {

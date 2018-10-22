@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, AutoComplete,notification,Modal,message } from 'antd';
+import { Form, Input, Select, notification,Modal,message } from 'antd';
 import * as Ajax from '../../../../utils/ticket/axios';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const { TextArea } = Input;
-const AutoCompleteOption = AutoComplete.Option;
 
 class ModalForm extends Component {
     state = {
@@ -63,7 +61,7 @@ class ModalForm extends Component {
                 });
                 Ajax.putAjax(url,values,function (response) {
                     console.log(response);
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
 
@@ -84,7 +82,7 @@ class ModalForm extends Component {
                 });
                 Ajax.postAjax(url,data,function (response) {
                     console.log(response);
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
                     } else {
@@ -102,7 +100,6 @@ class ModalForm extends Component {
 
     render() {
         const { getFieldDecorator } = this.props.form;
-        const { autoCompleteResult } = this.state;
         const formItemLayout = {
               labelCol: {
                 xs: { span: 12 },
@@ -120,9 +117,6 @@ class ModalForm extends Component {
                 <Option value="86">+86</Option>
               </Select>
             );
-         const websiteOptions = autoCompleteResult.map(website => (
-            <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-        ));
         return (
             <Modal
                 title={this.props.modalType === 'add' ? '添加用户' : '编辑用户'}

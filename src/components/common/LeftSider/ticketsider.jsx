@@ -35,11 +35,11 @@ class TicketSider extends Component{
       let openKey = [];
       let current = pathName;
       
-      if(pathName=="/ticket/wait"||pathName=="/ticket/complete"||pathName=="/ticket/delete"||pathName=="/ticket/cancel"){
+      if(pathName==="/ticket/wait"||pathName==="/ticket/complete"||pathName==="/ticket/delete"||pathName==="/ticket/cancel"){
           openKey = ["sub3"];
-      }else if(pathName=="/ticket/type"||pathName=="/ticket/object"){
+      }else if(pathName==="/ticket/type"||pathName==="/ticket/object"){
           openKey = ["sub4"];
-      }else if(pathName=="/ticket/user"||pathName=="/ticket/group"){
+      }else if(pathName==="/ticket/user"||pathName==="/ticket/group"){
           openKey = ["sub5"];
       }else{
           openKey = [];

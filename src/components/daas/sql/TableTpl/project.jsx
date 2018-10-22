@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Row, Col} from 'antd';
-import chart from '../../../../static/icons/area_chart.png';
 import DaasRdbProjectDetailModle from '../project/projectdetailmodel';
 import DaasRdbProjectUpdateModel from '../project/projectupdatemodel';
 import DaasRdbProjectDeleteModel from '../project/projectdeletemodel';

@@ -3,7 +3,7 @@ import Dockersider from '../../../../../common/LeftSider/dockersider';
 import {Icon, message, Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../BreadcrumbCustom';
-import { clearPaasCommonData, getClusterNamespaceList  } from '../../../../../../containers/Paas/common/paascommon.redux'
+import { clearPaasCommonData } from '../../../../../../containers/Paas/common/paascommon.redux'
 import { getHelmTaskStateList, clearTaskStateData } from '../../../../../../containers/Paas/k8s/k8shelmtaskstate.redux'
 import K8sClusterSelectForm from '../../../common/k8sclusterselect'
 import { getTaskState } from './TableTpl/tabletpl';

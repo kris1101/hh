@@ -4,8 +4,6 @@ import { withRouter } from 'react-router'
 import { Menu,Icon } from 'antd';
 import './index.less';
 
-const SubMenu = Menu.SubMenu;
-
 class MachineSider extends Component{
     // submenu keys of first level
   rootSubmenuKeys = ['sub1', 'sub2', 'sub3', '4', '5', '6'];

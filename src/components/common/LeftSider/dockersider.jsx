@@ -24,7 +24,6 @@ class DockerSider extends Component{
   }
 
   handleOpenChange = (openKeys) => {
-    console.log(openKeys);
     const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
     if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
       this.setState({ openKeys }); 
@@ -39,23 +38,23 @@ class DockerSider extends Component{
       const { location } = this.props;
       let current = location.pathname.replace(/\//g,'');
       let openKeys = []
-      if (current == "paasregistrylog" || current == "paasregistryproject" || current == "paasregistryprojectdetails" || current == "paasregistryprojectrepositories"){
+      if (current === "paasregistrylog" || current === "paasregistryproject" || current === "paasregistryprojectdetails" || current === "paasregistryprojectrepositories"){
             openKeys = ["dockerregistry"]
-      }else if(current == "paasregistryuser" || current == "paasregistryconfig"){
+      }else if(current === "paasregistryuser" || current === "paasregistryconfig"){
             openKeys = ["dockerregistry", "registrysystem"]
       }
 
-      if (current == "paascodebase" || current == "paascodeimagebuild" || current == "paascodebuildhistory"){
+      if (current === "paascodebase" || current === "paascodeimagebuild" || current === "paascodebuildhistory"){
             openKeys = ["paascicd", "ci"]
-      }else if(current == "paaspipline" || current == "paaspiplinehistory"){
+      }else if(current === "paaspipline" || current === "paaspiplinehistory"){
             openKeys = ["paascicd", "pipline"]
       }
 
-      if (current == "paastillerconfig" || current == "paashelmrepomanage" || current == "paashelmchartmanage" || current == "paashelmreleasemanage" || current == "paashelmtaskstate"){
+      if (current === "paastillerconfig" || current === "paashelmrepomanage" || current === "paashelmchartmanage" || current === "paashelmreleasemanage" || current === "paashelmtaskstate"){
             openKeys = ["paashelmmanage"]
       }
 
-    if (current == "paasregistryprojectdetails" || current == "paasregistryprojectrepositories"){
+    if (current === "paasregistryprojectdetails" || current === "paasregistryprojectrepositories"){
           this.setState({ current: "paasregistryproject" , openKeys});
       }else{
           this.setState({ current , openKeys});

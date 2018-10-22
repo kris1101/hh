@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Popconfirm, message, Icon } from 'antd';
 import copy from 'copy-to-clipboard';
 
-import { Link  } from 'react-router-dom';
 import { deleteAjax  } from '../../../../../utils/axios'
 
 import { formatStrDate } from '../../../../../utils/time_helper'
@@ -11,7 +10,7 @@ function confirm(tag, _that) {
   const hide = message.loading('Action in progress..', 0);
   deleteAjax('/harbor/repositories/tags', "repo_name=" + _that.repo_name + "&tag=" + tag, function (res){
     hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         message.success(res.data.msg);
         _that.handleRepositoriesTagsQuery(1, 10);
     }else{

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Button, Upload, message, Modal, Form, Input, Radio } from 'antd';
+import { Modal, Form, Input } from 'antd';
 import { getAjax  } from '../../../../utils/axios'
 
 const FormItem = Form.Item;
@@ -14,7 +14,7 @@ const PodCreateForm = Form.create()(
                  callback("集群名称不能为空");
          }else{
              getAjax('/workload/pod', {podname: value}, function(res){
-               if(res.data.code == 0){
+               if(res.data.code === 0){
                    if(res.data.data){
                        callback("集群名称已经存在");
                    }else{
@@ -31,7 +31,6 @@ const PodCreateForm = Form.create()(
       console.log('Upload event:', e);
       if (Array.isArray(e)) {
         return e.slice(-1);
-        console.log("array");
       }
       return e.file;
     }
@@ -43,30 +42,6 @@ const PodCreateForm = Form.create()(
     render() {
       const { confirmLoading, visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
-      const _that = this;
-      const props = {
-        withCredentials: true,
-        onRemove: (file) => {
-          return false;
-        },
-        disabled:confirmLoading,
-        showUploadList: {
-          showRemoveIcon: false
-        },
-        fileList: _that.state.fileList,
-        onChange: (info) => {
-            let fileList = info.fileList;
-            fileList = fileList.slice(-1);
-            _that.setState({fileList})
-        },
-        beforeUpload: (file) => {
-          this.setState(({ fileList }) => ({
-            fileList: [file],
-          }));
-          return false;
-        },
-        fileList: this.state.fileList,
-      };
       return (
         <Modal
           visible={visible}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Form, Tabs, Input, Button, Select, Table, Row, Col, Card } from 'antd';
+import { Layout, Table, Row, Col, Card } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
@@ -10,7 +10,6 @@ import { fetchData, receiveData } from '../../../services/vm';
 import { getColumes } from './TableTpl/sgTableTpl';
 import SGCreate from './SGCreate'
 
-const TabPane = Tabs.TabPane;
 const { Sider, Content } = Layout;
 
 

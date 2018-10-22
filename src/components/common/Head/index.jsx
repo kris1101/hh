@@ -1,7 +1,7 @@
-import React , {Component} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
-import { Avatar, Menu, Dropdown,Badge,Layout, Icon} from 'antd';
+import { Menu,Badge, Icon} from 'antd';
 import './index.less';
 import avater from '../../../static/img/b1.jpg';
 
@@ -20,7 +20,7 @@ class Head extends React.Component {
     }
 
     componentWillMount (){
-        const { match, location, history } = this.props;
+        const {location} = this.props;
 
 
        let pathName = location.pathname;

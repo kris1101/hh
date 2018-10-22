@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 
 import StorageServer from '../components/storage/server/serverlist';
 

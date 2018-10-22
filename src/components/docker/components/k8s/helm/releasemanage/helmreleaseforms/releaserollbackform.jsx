@@ -1,10 +1,9 @@
 import React from 'react'
-import {Switch, message, Form, Drawer, Row, Col, Select, Button, Icon } from 'antd';
+import {Switch, Form, Drawer, Select, Button} from 'antd';
 import { connect  } from 'react-redux';
 import './releaseform.less'
 import { getHelmReleaseVersionList } from '../../../../../../../containers/Paas/k8s/k8shelmrelease.redux'
 
-const FormItem = Form.Item;
 
 const HelmReleaseRollBackForm = Form.create()(
   class extends React.Component {

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, AutoComplete,notification,Modal,Checkbox,message } from 'antd';
+import { Form, Input, Select,notification,Modal,message } from 'antd';
 import * as Ajax from '../../../../utils/ticket/axios';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const { TextArea } = Input;
-const AutoCompleteOption = AutoComplete.Option;
 
 let options=[];
 
@@ -24,7 +22,7 @@ class ModalForm extends Component {
         let _this = this;
         Ajax.getAjax('/ticket/users',{},function (response) {
             console.log(response.data.objects);
-            if (response.data.code == 30000) {
+            if (response.data.code === 30000) {
                 let data = response.data.objects;
                 console.log(data);
                 _this.setState({
@@ -32,7 +30,7 @@ class ModalForm extends Component {
                 });
                 options=[];
                 _this.state.children.map((item,index) => {
-                    options.push(<Option key={item.uuid} value={item.uuid}>{item.user_name}</Option>)
+                    return options.push(<Option key={item.uuid} value={item.uuid}>{item.user_name}</Option>)
                 })
             }
         })
@@ -42,7 +40,7 @@ class ModalForm extends Component {
         let _this = this;
         Ajax.getAjax('/ticket/users',{},function (response) {
             console.log(response.data.objects);
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         let data = response.data.objects;
                         console.log(data);
                         _this.setState({
@@ -50,21 +48,21 @@ class ModalForm extends Component {
                         });
                         options=[];
                         _this.state.children.map((item,index) => {
-                            options.push(<Option key={item.uuid} value={item.uuid}>{item.user_name}</Option>)
+                           return options.push(<Option key={item.uuid} value={item.uuid}>{item.user_name}</Option>)
                         })
                     }
-                })
+                });
         const data = this.props.currentData;
         if(data) {
             this.setState({uuid: data.uuid});
-            if(data.is_private==0){
+            if(data.is_private === 0){
                 this.setState({ is_private: "1"})
             }else {
                 this.setState({ is_private: "0"})
             }
             let usersList = [];
             data.users.map((item,index) => {
-               usersList.push(item.uuid);
+               return usersList.push(item.uuid);
             });
             this.setState({ defaultUsers:usersList });
             this.props.form.setFieldsValue({
@@ -105,7 +103,7 @@ class ModalForm extends Component {
                   confirmLoading: false,
                 });
                 Ajax.putAjax(url,values,function (response) {
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
 
@@ -125,7 +123,7 @@ class ModalForm extends Component {
                   confirmLoading: false,
                 });
                 Ajax.postAjax(url,data,function (response) {
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
                     } else {

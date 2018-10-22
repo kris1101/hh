@@ -8,9 +8,6 @@ import { generateformdata  } from '../../../../utils/tools_helper'
 const FormItem = Form.Item;
 
 class  HarborSysconfigForm extends React.Component {
-  constructor(props){
-    super(props)
-  }
   state = {
     submit_isloading : false 
   }
@@ -21,7 +18,7 @@ class  HarborSysconfigForm extends React.Component {
     console.log(value)
     putAjax('/harbor/configurations/', generateformdata({config_data: JSON.stringify(value)}), function(res){
       _that.setState({submit_isloading: false})
-      if(res.data.code == 0){                                                                                     
+      if(res.data.code === 0){                                                                                     
           message.success("更新成功");
           _that.props.getHarborConfigurations();
       }else{
@@ -33,7 +30,7 @@ class  HarborSysconfigForm extends React.Component {
   }
   
   render() {
-    const { form, project_id } = this.props;
+    const { form } = this.props;
     const { getFieldDecorator } = form;
     return (
         <Form >
@@ -55,7 +52,7 @@ class  HarborSysconfigForm extends React.Component {
             )}
           </FormItem>
       <FormItem wrapperCol={{ span: 14 , offset:2  }}>
-        <Button type="primary" disabled={this.props.read_only == this.props.form.getFieldsValue().read_only && this.props.token_expiration == this.props.form.getFieldsValue().token_expiration} loading={this.state.submit_isloading} onClick={this.handleSubmit}>更新</Button>
+        <Button type="primary" disabled={this.props.read_only === this.props.form.getFieldsValue().read_only && this.props.token_expiration === this.props.form.getFieldsValue().token_expiration} loading={this.state.submit_isloading} onClick={this.handleSubmit}>更新</Button>
       </FormItem>
         </Form>
     );
