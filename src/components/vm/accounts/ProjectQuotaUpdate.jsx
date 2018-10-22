@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { notification, Spin, Select, Tooltip, Icon, Button, Modal, Form, Input, InputNumber } from 'antd';
+import { notification, Spin, Tooltip, Icon, Modal, Form, InputNumber } from 'antd';
 
 import { projectQuotaUpdate, projectDetail } from '../../../services/vm/user';
 
-const Option = Select.Option;
 const FormItem = Form.Item;
-const { TextArea } = Input;
 
 
 const formItemLayout = {
@@ -47,7 +45,7 @@ class CreateForm extends React.Component {
 
   render() {
     const { visible, onCancel, onCreate, form, confirmLoading } = this.props;
-    const { getFieldDecorator, getFieldValue } = form;
+    const { getFieldDecorator } = form;
     // console.log(record);
 
     return (

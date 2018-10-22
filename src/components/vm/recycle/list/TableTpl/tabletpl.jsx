@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import chart from '../../../../../static/icons/area_chart.png'
 
 export function getrecycles() {

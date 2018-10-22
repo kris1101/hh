@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { notification } from 'antd';
 import { getAjax } from '../../../components/docker/utils/axios'
 
@@ -134,7 +133,7 @@ export function getCodeBuildTaskList(params={}) {
         dispatch(startLoading());
       getAjax('/codebuild/task/', params, function(res) {
             dispatch(endLoading());
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadData(res.data.data))
             } else {
                 notification.error({
@@ -149,7 +148,7 @@ export function getCodeBuildTaskList(params={}) {
 export function getUserCodeProjectList(params={}) {
     return dispatch => {
       getAjax('/codeinfo/usercodeproject/', params, function(res) {
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadCodeProjectData(res.data.data))
             } else {
                 notification.error({
@@ -164,7 +163,7 @@ export function getUserCodeProjectList(params={}) {
 export function getCodeBranchTagList(params={}) {
     return dispatch => {
       getAjax('/codeinfo/branchtag/', params, function(res) {
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadCodeBranchTagData(res.data.data))
             } else {
                 notification.error({
@@ -179,7 +178,7 @@ export function getCodeBranchTagList(params={}) {
 export function getBaseRepoList(params={}) {
     return dispatch => {
       getAjax('/harbor/baserepo/', params, function(res) {
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadBaseRepoData(res.data.data))
             } else {
                 notification.error({
@@ -194,7 +193,7 @@ export function getBaseRepoList(params={}) {
 export function getBaseRepoTagList(params={}) {
     return dispatch => {
       getAjax('/harbor/repositories/tags/', params, function(res) {
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadBaseRepoTagData(res.data.data))
             } else {
                 notification.error({
@@ -209,7 +208,7 @@ export function getBaseRepoTagList(params={}) {
 export function getCompileRepoList(params={}) {
     return dispatch => {
       getAjax('/harbor/compilerepo/', params, function(res) {
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadCompileRepoData(res.data.data))
             } else {
                 notification.error({
@@ -224,7 +223,7 @@ export function getCompileRepoList(params={}) {
 export function getCompileRepoTagList(params={}) {
     return dispatch => {
       getAjax('/harbor/repositories/tags/', params, function(res) {
-            if (res.data.code == 0) {
+            if (res.data.code === 0) {
                 dispatch(loadCompileRepoTagData(res.data.data))
             } else {
                 notification.error({

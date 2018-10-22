@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dockersider from '../../../../../common/LeftSider/dockersider';
-import { message, Layout, Form, Input, Button, Select, Table } from 'antd';
+import { message, Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../BreadcrumbCustom';
 import { getHelmRepo } from './TableTpl/tabletpl';
@@ -12,7 +12,6 @@ import { getHelmRepoList } from '../../../../../../containers/Paas/k8s/k8shelmre
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class HelmRepoForm extends Component {
     constructor(props) {
@@ -66,7 +65,7 @@ class HelmRepoForm extends Component {
         this.setState({HelmRepoCreateConfirmLoading: true})
         const _that = this;
         postAjax('/helm/helmrepo/', generateformdata(values), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("创建成功") 
                 _that.setState({HelmRepoCreateConfirmLoading: false})
                 form.resetFields();

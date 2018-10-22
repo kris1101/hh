@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Icon, Popconfirm, message, Row, Col } from 'antd';
 
-import { Link  } from 'react-router-dom';
 import { deleteAjax  } from '../../../../utils/axios'
 
 import { formatStrDate } from '../../../../utils/time_helper'
@@ -10,7 +9,7 @@ function confirm(cluster_id, _that) {
   const hide = message.loading('Action in progress..', 0);
   deleteAjax('/k8s/kubeconfig/', "cluster_id=" + cluster_id, function (res){
     hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         message.success(res.data.msg);
         _that.handleClusterListWithArgs(1, 10);
     }else{

@@ -1,5 +1,5 @@
 import React from 'react';
-import { notification, Layout, message, Tooltip, Icon, Form, Modal, Button, Table, Row, Col, Card, Tabs, Input } from 'antd';
+import { notification, Layout, Table, Row, Col, Card, Tabs } from 'antd';
 
 import BreadcrumbCustom from '../../BreadcrumbCustom';
 import VMSider from '../../common/LeftSider/vmsider';
@@ -9,8 +9,6 @@ import { humansize, timezoneFormat } from '../../../utils/vm'
 import ProjectMemberCreate from './ProjectMemberCreate';
 import ProjectGroupCreate from './ProjectGroupCreate';
 
-const confirm = Modal.confirm;
-const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
 const { Sider, Content } = Layout;
 
@@ -113,7 +111,7 @@ class ProjectDetail extends React.Component {
     this.project_member_request();
   };
   project_member_request = (page=1) => {
-    const { member_pagination } = this.state;
+    // const { member_pagination } = this.state;
     this.setState({ loading: true });
     projectMemberList(this.props.match.params.id, {page: page}).then(res => {
       if(res.code === -2){
@@ -150,7 +148,7 @@ class ProjectDetail extends React.Component {
     this.project_group_request();
   };
   project_group_request = (page=1) => {
-    const { group_pagination } = this.state;
+    // const { group_pagination } = this.state;
     this.setState({ loading: true });
     projectGroupList(this.props.match.params.id, {page: page}).then(res => {
       if(res.code === -2){

@@ -62,7 +62,7 @@ class HelmChartForm extends Component {
         deploy_args.values = JSON.stringify({});
         if (this.helmchartDeployFormRef.state.values){
             let values_result = combinekeyvalue(formvalues.chartkeys, formvalues.chartvalues)
-            if (values_result[0] == 1){
+            if (values_result[0] === 1){
               message.error("values生成错误")
               return
             }
@@ -85,7 +85,7 @@ class HelmChartForm extends Component {
         const _that = this; 
         this.setState({HelmChartDeployConfirmLoading: true})
         postAjax('/helm/helmchart/', generateformdata(deploy_args), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success(res.data.msg); 
                 _that.setState({HelmChartDeployConfirmLoading: false})
                 form.resetFields();

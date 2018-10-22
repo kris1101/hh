@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, AutoComplete,notification,Modal,Checkbox,message } from 'antd';
+import { Form, Input, Select,notification,Modal,message } from 'antd';
 import * as Ajax from '../../../../utils/ticket/axios';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const { TextArea } = Input;
-const AutoCompleteOption = AutoComplete.Option;
 
 let options=[];
 let groups=[];
@@ -26,7 +24,7 @@ class ModalForm extends Component {
         let _this = this;
         Ajax.getAjax('/ticket/objects',{},function (response) {
             console.log(response.data.objects);
-            if (response.data.code == 30000) {
+            if (response.data.code === 30000) {
                 let data = response.data.objects;
                 console.log(data);
                 _this.setState({
@@ -40,7 +38,7 @@ class ModalForm extends Component {
         })
         Ajax.getAjax('/ticket/groups',{},function (response) {
             console.log(response.data.objects);
-            if (response.data.code == 30000) {
+            if (response.data.code === 30000) {
                 let data = response.data.objects;
                 console.log(data);
                 _this.setState({
@@ -58,7 +56,7 @@ class ModalForm extends Component {
         let _this = this;
         Ajax.getAjax('/ticket/objects',{},function (response) {
             console.log(response.data.objects);
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         let data = response.data.objects;
                         _this.setState({
                             children:data
@@ -71,7 +69,7 @@ class ModalForm extends Component {
                 })
         Ajax.getAjax('/ticket/groups',{},function (response) {
             console.log(response.data.objects);
-            if (response.data.code == 30000) {
+            if (response.data.code === 30000) {
                 let data = response.data.objects;
                 _this.setState({
                     groups:data
@@ -135,7 +133,7 @@ class ModalForm extends Component {
                 });
                 Ajax.putAjax(url,values,function (response) {
                     console.log(response);
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
 
@@ -156,7 +154,7 @@ class ModalForm extends Component {
                 });
                 Ajax.postAjax(url,data,function (response) {
                     console.log(response);
-                    if (response.data.code == 30000) {
+                    if (response.data.code === 30000) {
                         message.success(response.data.message, 3)
                         $this.props.hideModal('ok');
                     } else {

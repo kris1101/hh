@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dockersider from '../../../../../common/LeftSider/dockersider';
-import { message, Layout, Form, Input, Button, Select, Table } from 'antd';
+import { message, Layout, Form, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../../components/BreadcrumbCustom';
 import { getTillerConfig } from './TableTpl/tabletpl';
@@ -16,7 +16,6 @@ import K8sClusterSelectForm from '../../../common/k8sclusterselect'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class K8sTillerForm extends Component {
     constructor(props) {
@@ -92,7 +91,7 @@ class K8sTillerForm extends Component {
         this.setState({TillerCreateConfirmLoading: true})
         const _that = this;
         postAjax('/k8s/tillerconfig/', generateformdata(values), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("创建成功") 
                 _that.setState({TillerCreateConfirmLoading: false})
                 form.resetFields();
@@ -122,7 +121,7 @@ class K8sTillerForm extends Component {
         const _that = this;
         values.id = tiller_config_id;
         putAjax('/k8s/tillerconfig/', generateformdata(values), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("更新成功") 
                 _that.setState({TillerUpdateConfirmLoading: false})
                 form.resetFields();
@@ -159,7 +158,6 @@ class K8sTillerForm extends Component {
     }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
     return (
       <Layout className="config">
         <Sider>

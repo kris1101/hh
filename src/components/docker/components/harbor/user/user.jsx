@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dockersider from '../../../../common/LeftSider/dockersider';
-import { message, Layout, Form, Input, Button, Select, Table } from 'antd';
+import { message, Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../../components/BreadcrumbCustom';
 import { getharborusers } from './TableTpl/tabletpl';
@@ -12,7 +12,6 @@ import { generateformdata  } from '../../../utils/tools_helper'
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class HarborUserForm extends Component {
     constructor(props) {
@@ -67,7 +66,7 @@ class HarborUserForm extends Component {
         this.setState({UserCreateConfirmLoading: true})
         const _that = this;
         postAjax('/harbor/user/', generateformdata(values), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("创建成功") 
                 _that.setState({UserCreateConfirmLoading: false})
                 form.resetFields();

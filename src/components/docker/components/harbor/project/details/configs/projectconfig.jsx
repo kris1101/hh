@@ -8,9 +8,7 @@ import { generateformdata } from '../../../../../utils/tools_helper'
 const FormItem = Form.Item;
 
 class  ProjectConfigForm extends React.Component {
-  constructor(props){
-    super(props)
-  }
+
   state = {
     submit_isloading : false 
   }
@@ -21,7 +19,7 @@ class  ProjectConfigForm extends React.Component {
     console.log(value)
     putAjax('/harbor/changepublic/', generateformdata({project_id: this.props.project_id, public: value.public}), function(res){
       _that.setState({submit_isloading: false})
-      if(res.data.code == 0){                                                                                     
+      if(res.data.code === 0){                                                                                     
           _that.props.getProjectMetadata({project_id: _that.props.project_id});                                                                     
           message.success("更新成功");
       }else{
@@ -33,7 +31,7 @@ class  ProjectConfigForm extends React.Component {
   }
   
   render() {
-    const { form, project_id } = this.props;
+    const { form } = this.props;
     const { getFieldDecorator } = form;
     return (
         <Form >
@@ -48,7 +46,7 @@ class  ProjectConfigForm extends React.Component {
             )}
           </FormItem>
       <FormItem wrapperCol={{ span: 14 , offset:2  }}>
-        <Button type="primary" disabled={this.props.project_ispublic == this.props.form.getFieldsValue().public} loading={this.state.submit_isloading} onClick={this.handleSubmit}>更新</Button>
+        <Button type="primary" disabled={this.props.project_ispublic === this.props.form.getFieldsValue().public} loading={this.state.submit_isloading} onClick={this.handleSubmit}>更新</Button>
       </FormItem>
         </Form>
     );

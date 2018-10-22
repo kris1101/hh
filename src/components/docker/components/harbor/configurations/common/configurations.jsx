@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Dockersider from '../../../../../../components/common/LeftSider/dockersider';
 import { connect  } from 'react-redux';
-import { Tabs, Icon, message, Layout} from 'antd';
+import { Tabs, Icon, Layout} from 'antd';
 import BreadcrumbCustom from '../../../../../BreadcrumbCustom';
-import {getQueryString} from '../../../../utils/searchparse_helper'
 import './configurations.less';
 import HarborPermissionForm from '../permission/permission'
 import HarborSysconfigForm from '../sysconfig/sysconfig'
@@ -13,9 +12,7 @@ const { Sider, Content } = Layout;
 const TabPane = Tabs.TabPane;
 
 class harborConfigurationsCommon extends Component {
-    constructor(props) {
-        super(props);
-    }
+
     componentDidMount () {
       this.props.getHarborConfigurations();
     }

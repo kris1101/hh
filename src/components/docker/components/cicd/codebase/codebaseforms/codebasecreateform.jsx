@@ -6,6 +6,8 @@ import { getAjax  } from '../../../../utils/axios'
 
 const FormItem = Form.Item;
 const Option = Select.Option;
+
+// eslint-disable-next-line
 const codeinfonamePatten = new RegExp("^[0-9a-z][0-9a-z\._-]{1,}$"); 
 const defaultMessage = "项目名称由小写字符、数字和._-组成且至少两个字符并以小写字符或者数字开头"
 const { TextArea  } = Input;
@@ -21,7 +23,7 @@ const CodeInfoCreateForm = Form.create()(
            callback(defaultMessage); 
         }else{
           getAjax('/codeinfo/check/', {name: value}, function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 if(res.data.data){
                     callback("code名称已经存在");
                 }else{

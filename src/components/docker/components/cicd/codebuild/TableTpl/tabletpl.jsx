@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Tooltip, Icon, Popover, message, Col, Row, Modal } from 'antd';
+import React from 'react';
+import { Tooltip, Icon, message, Col, Row, Modal } from 'antd';
 import { formatStrDate } from '../../../../utils/time_helper'
 import { deleteAjax } from '../../../../utils/axios'
 
@@ -8,7 +8,7 @@ function deletetask(id, _that) {
   const hide = message.loading('请求处理中...', 0);
   deleteAjax('/codebuild/task/', "id=" + id, function (res){
     hide();
-    if(res.data.code == 0){
+    if(res.data.code === 0){
         message.success(res.data.msg);
         _that.handleCodeBuildQuery();
     }else{
@@ -51,7 +51,7 @@ export function getCodeBuildTask() {
     }, {
         title: '是否编译',
         dataIndex: 'is_compile',
-        render: (data) => (data == "false" ? "否" : "是")
+        render: (data) => (data ? "是" : "否")
 
     }, {
         title: '代码地址',

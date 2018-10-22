@@ -36,7 +36,7 @@ class VMSider extends Component{
       let openKey = [];
       let current = pathName;
 
-      if(pathName=="/vm/backup"||pathName=="/vm/snapshot"){
+      if(pathName === "/vm/backup"||pathName === "/vm/snapshot"){
           openKey = ["sub4"];
       }else if(pathName.startsWith('/vm/networks')){
           openKey = ["networks"];

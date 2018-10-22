@@ -70,7 +70,7 @@ class HarborProjectForm extends Component {
         this.setState({ProjectCreateConfirmLoading: true})
         const _that = this;
         postAjax('/harbor/projects/', generateformdata(values), function(res){
-            if(res.data.code == 0){
+            if(res.data.code === 0){
                 message.success("创建成功") 
                 _that.setState({ProjectCreateConfirmLoading: false})
                 form.resetFields();

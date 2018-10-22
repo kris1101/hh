@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { message, Form, Input, Button, Table, Row, Col } from 'antd';
+import { message, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
-import BreadcrumbCustom from '../../../../../../BreadcrumbCustom';
 import { getprojectmembers } from './TableTpl/tabletpl';
 import './members.less';
 import { getProjectMemberList } from '../../../../../../../containers/Paas/harbor/projectdetails.redux';
@@ -61,7 +60,7 @@ class HarborMembersForm extends Component {
         values.project_id = this.project_id;
         const _that = this;
         postAjax('/harbor/projectmember/', generateformdata(values), function(res){
-            if(res.data.code == 0){ 
+            if(res.data.code === 0){ 
                 message.success("添加成功") 
                 _that.setState({memberCreateConfirmLoading: false})
                 form.resetFields();

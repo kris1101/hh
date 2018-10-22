@@ -12,7 +12,7 @@ export function formatStrDate(strtime) {
 
 export function compareDate(startdate, enddate){
       if (startdate && enddate){
-          if (parseInt(enddate) > parseInt(startdate)){
+          if (parseInt(enddate, 10) > parseInt(startdate, 10)){
             return true
           }else{
             return false
