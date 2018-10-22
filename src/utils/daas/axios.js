@@ -2,6 +2,11 @@ import axios from 'axios';
 import {
     notification
 } from 'antd';
+import React, {
+    Component
+} from 'react';
+import Qs from 'qs';
+import qs from 'qs';
 import {
     BASE_URL
 } from '../../containers/Daas/constants';
@@ -68,7 +73,7 @@ export function putAjax(url, params, Callback) {
     if (token) {
         instance.defaults.headers.common['Authorization'] = token;
     }
-    instance.put(url, generateformdata(params))
+    instance.put(url, qs.stringify(params))
         .then(function(response) {
 
             Callback(response);
