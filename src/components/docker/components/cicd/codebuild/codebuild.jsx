@@ -7,7 +7,7 @@ import { getCodeBuildTask } from './TableTpl/tabletpl';
 import './codebuild.less';
 import {postAjax, putAjax} from '../../../utils/axios'
 import {generateformdata, combinekeyvalue} from '../../../utils/tools_helper'
-import { getCodeBuildTaskList, getUserCodeProjectList} from '../../../../../containers/Paas/k8s/paascodebuild.redux' 
+import { getCodeBuildTaskList, getUserCodeProjectList, clearCodeBuildData} from '../../../../../containers/Paas/k8s/paascodebuild.redux' 
 import CodeBuildCreateForm from './codebuildforms/codebuildcreate'
 import CodeBuildUpdateForm from './codebuildforms/codebuildupdate'
 import CodeBuildImageForm from './codebuildforms/codebuildimage'
@@ -32,6 +32,7 @@ class PaasCodeBuildForm extends Component {
     }
 
     componentDidMount () {
+        this.props.clearCodeBuildData();
         this.props.getCodeBuildTaskList();
     }
 
@@ -72,7 +73,7 @@ class PaasCodeBuildForm extends Component {
 
     handleCodeBuildImageCancel = () => {
         this.setState({CodeBuildImageVisible: false}); 
-        this.codeBuildImageFormRef.setState({current: 0});
+        this.codeBuildImageFormRef.setState({current: 0, codeString: ""});
         if(this.codeBuildImageFormRef.state.timer !== null){
             clearInterval(this.codeBuildImageFormRef.state.timer);
         }
@@ -325,4 +326,4 @@ class PaasCodeBuildForm extends Component {
 const PaasCodeBuildManage = Form.create()(PaasCodeBuildForm);
 export default connect(
   state => state.paasCodeBuild,
-  { getCodeBuildTaskList, getUserCodeProjectList })(PaasCodeBuildManage);
+  { getCodeBuildTaskList, getUserCodeProjectList, clearCodeBuildData })(PaasCodeBuildManage);

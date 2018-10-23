@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 export function getclusters() {
     return [{
@@ -13,6 +14,7 @@ export function getclusters() {
     },{
         title: '创建时间',
         dataIndex: 'fields.create_time',
+        render: (data) => formatStrDate(data)
     },{
         title: '操作',
         render: (data) => (

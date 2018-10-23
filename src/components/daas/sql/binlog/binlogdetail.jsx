@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 class RDBInstanceBinlogDetail extends Component {
   constructor(props) {
@@ -65,10 +66,10 @@ class RDBInstanceBinlogDetail extends Component {
               indexdata: binlogobj.fields.binlog_status.toString(),
           }, {
               title: '创建时间',
-              indexdata: binlogobj.fields.create_time,
+              indexdata: formatStrDate(binlogobj.fields.create_time),
           },  {
               title:'更新时间',
-              indexdata: binlogobj.fields.update_time,
+              indexdata: formatStrDate(binlogobj.fields.update_time),
           },  {
               title: '描述',
               indexdata: binlogobj.fields.description,

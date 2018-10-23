@@ -83,7 +83,7 @@ export function slowQueryGroupCreate(group_obj){
 
 export function getSlowQueryGroupDetail(pk){
     return dispatch=>{
-        getAjax('/slow/query/groups',{},function(response){
+        getAjax(`/slow/query/groups/${pk}`,{},function(response){
             dispatch(slow_query_group_detail(response.data));
         });
         // axios.get(BASE_URL + '/v1/api/slow/query/users' + "/" + pk )
@@ -98,7 +98,7 @@ export function getSlowQueryGroupDetail(pk){
 }
 export function slowQueryGroupUpdate(pk, groupObj){
     return dispatch=>{
-         putAjax('/slow/query/groups', groupObj, function(response){
+         putAjax(`/slow/query/groups/${pk}`, groupObj, function(response){
              dispatch(slow_query_group_update(response.data));
              if (response.data.code) {
                 message.error('组更新失败: ' + response.data.message);
@@ -106,18 +106,5 @@ export function slowQueryGroupUpdate(pk, groupObj){
                 message.success('组更新成功...');
             }
          });
-
-      // axios.put(BASE_URL + '/v1/api/slow/query/groups' + '/' + pk, groupObj)
-      //  .then(function (response) {
-             // dispatch(slow_query_user_update(response.data));
-      //      if (response.data.code) {
-      //         message.error('组更新失败: ' + response.data.message);
-      //    } else {
-      //         message.success('组更新成功...');
-      //     }
-      // })
-      // .catch(function (error) {
-      //     console.log(error);
-      // });
     }
 }

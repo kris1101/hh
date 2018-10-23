@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 class RDBInstanceBackupDetail extends Component {
   constructor(props) {
@@ -82,25 +83,25 @@ class RDBInstanceBackupDetail extends Component {
               indexdata: backupobj.fields.upload_status.toString(),
           },  {
               title: '备份开始时间',
-              indexdata: backupobj.fields.backup_start_time,
+              indexdata: formatStrDate(backupobj.fields.backup_start_time),
           },  {
               title: '备份结束时间',
-              indexdata: backupobj.fields.backup_end_time,
+              indexdata: formatStrDate(backupobj.fields.backup_end_time),
           },  {
               title:'上传开始时间',
-              indexdata: backupobj.fields.upload_start_time,
+              indexdata: formatStrDate(backupobj.fields.upload_start_time),
           },  {
               title: '上传结束时间',
-              indexdata: backupobj.fields.upload_end_time,
+              indexdata: formatStrDate(backupobj.fields.upload_end_time),
           },  {
               title: '创建时间',
-              indexdata: backupobj.fields.create_time,
+              indexdata: formatStrDate(backupobj.fields.create_time),
           },  {
               title:'更新时间',
-              indexdata: backupobj.fields.update_time,
+              indexdata: formatStrDate(backupobj.fields.update_time),
           },  {
               title: '描述',
-              indexdata: backupobj.fields.description,
+              indexdata: formatStrDate(backupobj.fields.description),
           },   
         ]
       });

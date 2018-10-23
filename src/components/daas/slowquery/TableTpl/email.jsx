@@ -1,3 +1,5 @@
+import { formatStrDate } from '../../../../utils/daas/time_helper'
+
 export function getemails() {
     return [{
         title: '组名',
@@ -14,9 +16,11 @@ export function getemails() {
     },{ 
         title: '创建时间',
         dataIndex: 'fields.create_time',
+        render: (data) => formatStrDate(data),
     },{ 
-        title: '创建时间',
+        title: '更新时间',
         dataIndex: 'fields.update_time',
+        render: (data) => formatStrDate(data),
     },{ 
         title: '描述',
         dataIndex: 'fields.description',

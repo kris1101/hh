@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd'
 import RDBInstanceBinlogDetailModel from '../binlog/binlogdetailmodel'
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 export function getbinlogs() {
     return [{
@@ -21,6 +22,7 @@ export function getbinlogs() {
     },{
         title: '创建时间',
         dataIndex: 'fields.create_time',
+        render: (data) => formatStrDate(data)
     },{
         title: '操作',
         render: (data, record, index) => (

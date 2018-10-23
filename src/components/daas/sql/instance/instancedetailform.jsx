@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import { getAjax } from '../../../../utils/daas/newaxios';
-
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 class DaasRdbInstanceDetailForm extends Component {
     constructor(props) {
@@ -80,22 +80,22 @@ class DaasRdbInstanceDetailForm extends Component {
                       indexdata: instanceObj.fields.capacity,
                     },{
                       title: '项目',
-                      indexdata: instanceObj.fields.projectname,
+                      indexdata: instanceObj.fields.project_name,
                     },{
                       title: '高可用',
-                      indexdata: instanceObj.fields.high_avail_name,
+                      indexdata: instanceObj.fields.high_avail.toString(),
                     },{
                       title: '版本',
                       indexdata: instanceObj.fields.db_version,
                     },{
                       title: '运行状态',
-                      indexdata: instanceObj.fields.run_status,
+                      indexdata: instanceObj.fields.run_status.toString(),
                     },{
                       title: '创建时间',
-                      indexdata: instanceObj.fields.create_time,
+                      indexdata: formatStrDate(instanceObj.fields.create_time),
                     },{
                       title:'更新时间',
-                      indexdata: instanceObj.fields.update_time,
+                      indexdata: formatStrDate(instanceObj.fields.update_time),
                     },{
                       title: '描述',
                       indexdata: instanceObj.fields.description,

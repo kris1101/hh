@@ -12,7 +12,7 @@
 
 
 //后台地址
-export const BASE_URL = "http://192.168.43.130:80";
+export const BASE_URL = "http://127.0.0.1:8000";
 
 //慢查询用户操作
 export const FETCHSLOWQUERYUSERS = "FETCHSLOWQUERYUSERS"; //获取用户

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import { getAjax } from '../../../../utils/daas/newaxios';
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 
 class DaasRdbProjectDetailForm extends Component {
@@ -47,24 +48,19 @@ class DaasRdbProjectDetailForm extends Component {
                   {
                     title: '项目ID',
                     indexdata: projectObj.pk,
-                  },
-                  {
+                  }, {
                     title: '名称',
                     indexdata: projectObj.fields.name,
-                  },
-                  {
+                  }, {
                     title: '上级项目',
                     indexdata: projectObj.fields.parentname,
-                  },
-                  {
+                  }, {
                     title: '创建时间',
-                    indexdata: projectObj.fields.create_time,
-                  },
-                  {
+                    indexdata: formatStrDate(projectObj.fields.create_time),
+                  }, {
                     title:'更新时间',
-                    indexdata: projectObj.fields.update_time,
-                  },
-                  {
+                    indexdata: formatStrDate(projectObj.fields.update_time),
+                  }, {
                     title: '描述',
                     indexdata: projectObj.fields.description,
                   },

@@ -26,6 +26,7 @@ const CodeBuildImageForm = Form.create()(
                 _that.setState({timer : setInterval(()=>{
                   getAjax("/" + res.headers.location.split("/").slice(3).join("/"),{}, function(res){
                     _that.setState({codeString: res.data.state});
+                    if(res.data.code === 0){
                       switch (res.data.state){
                          case "PROGRESS":
                            _that.setState({current: res.data.status});
@@ -47,6 +48,11 @@ const CodeBuildImageForm = Form.create()(
                          default:
                           console.log("未知状态");
                       }
+                    }else{
+                        message.error('构建异常');
+                        clearInterval(_that.state.timer);
+                        _that.setState({timer: null});
+                    }
                     console.log(res.data);
                   })
                 }, 2000)})

@@ -9,10 +9,8 @@
 # 备注：无
 #=========================================================
 */
-import { BASE_URL } from '../constants';
 import { SLOWQUERYINSTATNCESFETCH, SLOWQUERYINSTANCEUPDATE, SLOWQUERYINSTANCEDELETE } from '../constants';
-import { getAjax, deleteAjax } from '../../../utils/daas/axios';
-import axios from 'axios';
+import { getAjax, deleteAjax, putAjax } from '../../../utils/daas/axios';
 import { message } from 'antd';
 
 export function slow_query_instance_fetch(instances) {
@@ -48,19 +46,27 @@ export function slowQueryInstatncesFetch(params={}){
 
 export function slowQueryInstanceUpdate(pk, instanceObj){
     return dispatch=>{
-        axios.put(BASE_URL + '/v1/api/slow/query/instances/'+ pk, instanceObj)
-        .then(function (response) {
-            console.log(response);
+      putAjax(`/slow/query/instances/${pk}`, instanceObj, function(response){
             dispatch(slow_query_instance_update(response.data));
             if (response.data.code) {
                 message.error('实例更新失败: ' + response.data.message);
             } else {
                 message.success('实例更新成功...');
             }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+         });
+      //axios.put(BASE_URL + '/v1/api/slow/query/instances' + '/' + pk, instanceObj)
+      // .then(function (response) {
+      //    console.log(response);
+      //    dispatch(slow_query_instance_update(response.data));
+      //    if (response.data.code) {
+      //        message.error('实例更新失败: ' + response.data.message);
+      //    } else {
+      //        message.success('实例更新成功...');
+      //    }
+      //})
+      //.catch(function (error) {
+      //    console.log(error);
+      //});
     }
 }
 
