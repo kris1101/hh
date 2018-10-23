@@ -27,6 +27,7 @@ function showConfirm(id, _that) {
 }
 
 
+
 export function getBuildHistory() {
   return [
     {
@@ -48,6 +49,18 @@ export function getBuildHistory() {
         title: '是否编译',
         dataIndex: 'is_compile',
         render: (data) => (data ? "是" : "否")
+    }, {
+        title: '构建日志',
+        dataIndex: 'build_result',
+        render: (data) => (data ? <Icon type="eye" style={{cursor: "pointer"}} onClick={() => (this.showBuildHistoryLogModel("shell", "构建日志", data)) } theme="outlined" /> : "无")
+    }, {
+        title: '编译日志',
+        dataIndex: 'compile_result',
+        render: (data) => (data ? <Icon type="eye" style={{cursor: "pointer"}} onClick={() => (this.showBuildHistoryLogModel("shell", "编译日志", data)) } theme="outlined" /> : "无")
+    }, {
+        title: 'Dockerfile',
+        dataIndex: 'dockerfile',
+        render: (data) => (data ? <Icon type="eye" style={{cursor: "pointer"}} onClick={() => (this.showBuildHistoryLogModel("dockerfile", "Dockerfile", data)) } theme="outlined" /> : "无")
     }, {
         title: '创建时间',
         dataIndex: 'create_time',

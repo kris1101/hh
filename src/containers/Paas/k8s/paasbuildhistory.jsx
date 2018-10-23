@@ -2,6 +2,7 @@ import { notification } from 'antd';
 import { getAjax } from '../../../components/docker/utils/axios'
 
 const LOAD_DATA = 'LOAD_BUILDHISTORY_DATA'
+const CLEAN_DATA = 'CLEAN_BUILDHISTORY_DATA'
 const START_LOADING = 'START_BUILDHISTORY_LOADING'
 const END_LOADING = 'END_BUILDHISTORY_LOADING'
 
@@ -21,6 +22,8 @@ export function paasBuildHistory(state = initState, action) {
                 buildHistoryList: action.payload.result,
                 total: action.payload.total,
             }
+        case CLEAN_DATA:
+            return initState
         case START_LOADING:
             return { ...state,
                 loading: true
@@ -38,6 +41,12 @@ export function loadData(listinfo) {
     return {
         type: LOAD_DATA,
         payload: listinfo
+    }
+}
+
+export function cleanBuildHistoryData() {
+    return {
+        type: CLEAN_DATA
     }
 }
 

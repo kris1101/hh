@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Dockersider from '../../../../common/LeftSider/dockersider';
-import { Icon, message, Layout, Form, Input, Button, Table } from 'antd';
+import { Icon, Layout, Form, Input, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import BreadcrumbCustom from '../../../../BreadcrumbCustom';
 import { getBuildHistory } from './TableTpl/tabletpl';
-import { getBuildHistoryList }  from '../../../../../containers/Paas/k8s/paasbuildhistory'
+import BuildHistoryLogForm from './buildhistoryforms/buildhistorylog'
+import { getBuildHistoryList, cleanBuildHistoryData }  from '../../../../../containers/Paas/k8s/paasbuildhistory'
 import './buildhistory.less';
 
 const { Sider, Content } = Layout;
@@ -19,16 +20,24 @@ class PaasBuildHistoryForm extends Component {
     state = {
         currentPage: 1,
         pageSize: 10,
+        BuildHistoryLogVisible: false,
     }
 
     componentDidMount () {
+         this.props.cleanBuildHistoryData();
          this.props.getBuildHistoryList();
     }
 
-    //重置表单
-    handleReset = () => {
-        this.props.form.resetFields();
+    handleBuildHistoryLogCancel = () => {
+        this.setState({BuildHistoryLogVisible: false}); 
+        this.BuildHistoryLogFormRef.setState({language: "shell", codeString: ""});
     }
+
+    showBuildHistoryLogModel = (language, title, logtext) => {
+        this.setState({BuildHistoryLogVisible: true}); 
+        this.BuildHistoryLogFormRef.setState({language: language, codeString: logtext, title }); 
+    }
+
 
     handleBuildHistoryQuery = () => {
        let value = this.props.form.getFieldsValue()
@@ -40,6 +49,10 @@ class PaasBuildHistoryForm extends Component {
        page_args.search = value.task_name !== undefined  ? value.task_name : "";
        this.props.getBuildHistoryList(page_args);
     }
+
+    saveBuildHistoryLogFormRef = (formRef) => {
+      this.BuildHistoryLogFormRef = formRef;
+    } 
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -92,6 +105,11 @@ class PaasBuildHistoryForm extends Component {
                              />      
                          )}
                     </FormItem>
+                        <BuildHistoryLogForm
+                          wrappedComponentRef={this.saveBuildHistoryLogFormRef}
+                          visible={this.state.BuildHistoryLogVisible}
+                          onCancel={this.handleBuildHistoryLogCancel}
+                        />
                     <div style={{ float:'right'}}>
                         <FormItem label="" style={{ marginRight: 0 }}>
                           <Button  onClick={this.handleBuildHistoryQuery} type="primary">< Icon type="reload" style={{color: "white"}}/>刷新</Button>
@@ -113,4 +131,4 @@ class PaasBuildHistoryForm extends Component {
 const PaasBuildHistoryManage = Form.create()(PaasBuildHistoryForm);
 export default connect(
   state => state.paasBuildHistory,
-  { getBuildHistoryList })(PaasBuildHistoryManage);
+  { getBuildHistoryList, cleanBuildHistoryData })(PaasBuildHistoryManage);
