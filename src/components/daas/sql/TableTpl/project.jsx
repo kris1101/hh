@@ -3,6 +3,7 @@ import { Row, Col} from 'antd';
 import DaasRdbProjectDetailModle from '../project/projectdetailmodel';
 import DaasRdbProjectUpdateModel from '../project/projectupdatemodel';
 import DaasRdbProjectDeleteModel from '../project/projectdeletemodel';
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 export function getprojects() {
     return [{
@@ -17,6 +18,7 @@ export function getprojects() {
     },{
         title: '创建时间',
         dataIndex: 'fields.create_time',
+        render: (data) => formatStrDate(data)
     },{
         title: '操作',
         render: (data) => (
