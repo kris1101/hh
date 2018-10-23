@@ -8,17 +8,17 @@ import { formatStrDate } from '../../../../utils/daas/time_helper'
 export function getprojects() {
     return [{
         title: '项目ID',
-        dataIndex: 'pk'
+        dataIndex: 'pk',
     },{
         title: '项目名称',
         dataIndex: 'fields.name',
     },{
         title: '上级项目',
-        dataIndex: 'fields.parentname'
+        dataIndex: 'fields.parentname',
     },{
         title: '创建时间',
         dataIndex: 'fields.create_time',
-        render: (data) => formatStrDate(data)
+        render: (data) => formatStrDate(data),
     },{
         title: '操作',
         render: (data) => (
