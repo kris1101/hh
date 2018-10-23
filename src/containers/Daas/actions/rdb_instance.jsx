@@ -74,7 +74,7 @@ export function rdbInstanceCreate(instance_obj){
 
 export function rdbInstanceUpdate(pk, instance_obj){
     return dispatch=>{
-        putAjax('/v1/api/rdb/instances/' + pk,instance_obj, function(response){
+        putAjax(`/v1/api/rdb/instances/${pk}`, instance_obj, function(response){
             dispatch(rdb_instance_update(response.data));
             if (response.data.code) {
                 message.error('实例更新失败: ' + response.data.message);

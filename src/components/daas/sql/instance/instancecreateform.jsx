@@ -165,7 +165,7 @@ class RdbInstanceCreateManager extends Component {
             <Input min={1} />
           )}
         </FormItem>
-        <FormItem
+        {/*<FormItem
           {...formItemLayout}
           label={(
             <span>
@@ -185,7 +185,7 @@ class RdbInstanceCreateManager extends Component {
           })(
             <Input min={1} />
           )}
-        </FormItem>
+        </FormItem>*/}
         <FormItem
           {...formItemLayout}
           label="项目"

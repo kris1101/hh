@@ -5,6 +5,7 @@ import DaasRdbInstanceUpdateModel from '../instance/instanceupdatemodel';
 import DaasRdbInstanceDeleteModel from '../instance/instancedeletemodel';
 import DaasRdbInstanceStopModel from '../instance/instancestopmodel';
 import DaasRdbInstanceRestartModel from '../instance/instancerestartmodel';
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 export function getinstances() {
     return [{
@@ -22,6 +23,7 @@ export function getinstances() {
     },{
         title: '创建时间',
         dataIndex: 'fields.create_time',
+        render: (data) => formatStrDate(data)
     },{
         title: '操作',
         render: (data) => (
