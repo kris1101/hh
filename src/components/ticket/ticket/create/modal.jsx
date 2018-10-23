@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Form, Input, Select,notification,Modal,message } from 'antd';
+import { Form, Input, Select,notification,Modal,message,Upload,Button, Icon } from 'antd';
 import * as Ajax from '../../../../utils/ticket/axios';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 
 let options=[];
-let groups=[];
+let objects=[];
+
+
 
 class ModalForm extends Component {
     state = {
@@ -15,14 +17,14 @@ class ModalForm extends Component {
         autoCompleteResult: [],
         currentId: this.props.currentData && this.props.currentData.id ? this.props.currentData.id : "",
         children:[],
-        groups:[],
+        objects:[],
         uuid:'',
         defaultObject:[],
     };
 
     componentWillMount(){
         let _this = this;
-        Ajax.getAjax('/ticket/objects',{},function (response) {
+        Ajax.getAjax('/ticket/types',{},function (response) {
             console.log(response.data.objects);
             if (response.data.code === 30000) {
                 let data = response.data.objects;
@@ -36,17 +38,22 @@ class ModalForm extends Component {
                 })
             }
         });
-        Ajax.getAjax('/ticket/groups',{},function (response) {
-            console.log(response.data.objects);
+
+    }
+    handleChange = (value) => {
+      console.log(`selected ${value}`);
+      let _this = this;
+      objects = [];
+      this.props.form.setFieldsValue({ object_name:""});
+      Ajax.getAjax('/ticket/type/'+value,{},function (response) {
             if (response.data.code === 30000) {
-                let data = response.data.objects;
+                let data = response.data.object.maintainers;
                 console.log(data);
                 _this.setState({
-                    groups:data
+                    objects:data
                 });
-                groups=[];
-                _this.state.groups.map((item,index) => {
-                    return groups.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
+                _this.state.objects.map((item,index) => {
+                    return objects.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
                 })
             }
         })
@@ -54,32 +61,21 @@ class ModalForm extends Component {
 
     componentDidMount () {
         let _this = this;
-        Ajax.getAjax('/ticket/objects',{},function (response) {
-            console.log(response.data.objects);
-                    if (response.data.code === 30000) {
-                        let data = response.data.objects;
-                        _this.setState({
-                            children:data
-                        });
-                        options=[];
-                        _this.state.children.map((item,index) => {
-                            return options.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
-                        })
-                    }
-                })
-        Ajax.getAjax('/ticket/groups',{},function (response) {
+        Ajax.getAjax('/ticket/types',{},function (response) {
             console.log(response.data.objects);
             if (response.data.code === 30000) {
                 let data = response.data.objects;
                 _this.setState({
-                    groups:data
+                    children:data
                 });
-                groups=[];
-                _this.state.groups.map((item,index) => {
-                    return groups.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
+                options=[];
+                _this.state.children.map((item,index) => {
+                    return options.push(<Option key={item.uuid} value={item.uuid}>{item.name}</Option>)
                 })
             }
         })
+
+
         const data = this.props.currentData;
         if(data) {
             this.setState({uuid: data.uuid});
@@ -94,7 +90,6 @@ class ModalForm extends Component {
                return groupList.push(item.uuid);
             });
             this.setState({ defaultGroup:groupList });
-            console.log(this.state.groups)
             this.props.form.setFieldsValue({
                 name: data.name,
                 comments: data.comments,
@@ -111,11 +106,6 @@ class ModalForm extends Component {
             });
     }
 
-    handleConfirmBlur = (e) => {
-        const value = e.target.value;
-        this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-    }
-
     handleCancel = () => {
         this.setState({
           visible: false,
@@ -126,7 +116,7 @@ class ModalForm extends Component {
             let url = '';
             const data = this.props.currentData;
             if(data){//编辑
-                url = '/ticket/type/'+this.state.uuid;
+                url = '/ticket/'+this.state.uuid+'/detail';
                 let $this = this;
                 this.setState({
                   confirmLoading: false,
@@ -146,9 +136,12 @@ class ModalForm extends Component {
                     }
                 })
             }else {
-                url = '/ticket/types';
+                url = '/tickets';
                 let $this = this;
                 let data = values;
+                let units=[];
+                units.push({object_name:data.object_name,priority:data.priority,purpose:data.purpose,content:data.content});
+                data.units=units;
                 this.setState({
                   confirmLoading: false,
                 });
@@ -187,7 +180,7 @@ class ModalForm extends Component {
 
         return (
             <Modal
-                title={this.props.modalType === 'add' ? '添加工单类型' : '编辑工单类型'}
+                title={this.props.modalType === 'add' ? '新增工单' : '编辑工单'}
                 visible={this.props.isOpen}
                 onOk={this.commitInfo}
                 onCancel={this.props.hideModal}
@@ -201,12 +194,26 @@ class ModalForm extends Component {
                   {...formItemLayout}
                   label={(
                     <span>
-                      名称&nbsp;
+                      工单标题&nbsp;
                     </span>
                   )}
                 >
-                  {getFieldDecorator('name', {
-                    rules: [{ required: true, message: '请输入名称！', whitespace: true }]
+                  {getFieldDecorator('title', {
+                    rules: [{ required: true, message: '请输入工单标题！', whitespace: true }]
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+                <FormItem
+                  {...formItemLayout}
+                  label={(
+                    <span>
+                      抄送邮箱&nbsp;
+                    </span>
+                  )}
+                >
+                  {getFieldDecorator('CC_users', {
+                    rules: [{ required: false}],initialValue:null
                   })(
                     <Input />
                   )}
@@ -215,11 +222,11 @@ class ModalForm extends Component {
                   {...formItemLayout}
                   label={(<span>工单类型&nbsp;</span>)}
                 >
-                    {getFieldDecorator('objects',{initialValue:this.state.defaultObject})(
+                    {getFieldDecorator('type_id',{rules: [{ required: true}],initialValue:this.state.defaultObject})(
                         <Select
-                        mode="tags"
                         style={{ width: '100%' }}
                         placeholder="选择工单类型"
+                        onChange={this.handleChange}
                       >
                         {options}
                       </Select>
@@ -228,18 +235,43 @@ class ModalForm extends Component {
                 </FormItem>
                 <FormItem
                   {...formItemLayout}
-                  label={(<span>业务组&nbsp;</span>)}
+                  label={(<span>对象名称&nbsp;</span>)}
                 >
-                    {getFieldDecorator('groups',{initialValue:this.state.defaultGroup})(
+                    {getFieldDecorator('object_name',{rules: [{ required: true}],initialValue:""})(
                         <Select
-                        mode="tags"
                         style={{ width: '100%' }}
-                        placeholder="选择业务组"
+                        placeholder="选择工单类型"
                       >
-                        {groups}
+                        {objects}
                       </Select>
                     )}
 
+                </FormItem>
+                <FormItem
+                 {...formItemLayout}
+                   label={(<span>优先级&nbsp;</span>)}
+                >
+                    {getFieldDecorator('priority',{rules: [{ required: true}],initialValue:""})(
+                        <Select style={{width: '100%'}} placeholder="选择优先级">
+                            <Option key='低' value="0">低</Option>
+                            <Option key='普通' value="1">普通</Option>
+                            <Option key='紧急' value="2">紧急</Option>
+                            <Option key='严重' value="3">严重</Option>
+                        </Select>
+                    )}
+                </FormItem>
+                <FormItem
+                 {...formItemLayout}
+                   label={(<span>对应环境&nbsp;</span>)}
+                >
+                    {getFieldDecorator('purpose',{rules: [{ required: true}],initialValue:""})(
+                        <Select style={{width: '100%'}} placeholder="选择环境">
+                            <Option key='开发' value="0">开发</Option>
+                            <Option key='测试' value="1">测试</Option>
+                            <Option key='生产' value="2">生产</Option>
+                            <Option key='其他' value="3">其他</Option>
+                        </Select>
+                    )}
                 </FormItem>
                 <FormItem
                   {...formItemLayout}
@@ -251,6 +283,24 @@ class ModalForm extends Component {
                     <Input />
                   )}
                 </FormItem>
+                <FormItem
+                  {...formItemLayout}
+                  label="上传"
+                  extra="上传文件"
+                >
+                  {getFieldDecorator('upload', {
+                    valuePropName: 'fileList',
+                    getValueFromEvent: this.normFile,
+                  })(
+                    <Upload name="logo" action="/upload.do" listType="picture">
+                      <Button>
+                        <Icon type="upload" /> Click to upload
+                      </Button>
+                    </Upload>
+                  )}
+                </FormItem>
+
+
             </Form>
             </div>
         </Modal>

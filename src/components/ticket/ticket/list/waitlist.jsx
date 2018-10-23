@@ -27,6 +27,7 @@ class WaitManageForm extends Component {
         isOpen: false,
         currentData: [],
     }
+
     getWaitList = (value) =>  {
         let params = {
             "page": this.state.currentPage,
@@ -153,7 +154,7 @@ class WaitManageForm extends Component {
               _that.setState({
                   currentPage: this.current,
               }, () => {
-                  _that.getDeviceList(value)
+                  _that.getWaitList(value)
               })
           }
     };
