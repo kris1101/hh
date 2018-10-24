@@ -99,6 +99,9 @@ import {
 import {
     daasRdbHostInstanceRelationship
 } from '../containers/Daas/reducers/rdb_host_instance_relationship';
+import {
+    paasBuildHistory
+} from '../containers/Paas/k8s/paasbuildhistory';
 const App = combineReducers({
     todos,
     setCounter,
@@ -115,6 +118,7 @@ const App = combineReducers({
     helmChart,
     helmRelease,
     PaasCommon,
+    paasBuildHistory,
     helmTaskState,
     harborUser,
     harborConfigurations,

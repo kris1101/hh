@@ -6,6 +6,7 @@ import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getbackups } from './TableTpl/backup';
 import './list.less';
 import { rdbInstanceBackupFetch } from '../../../containers/Daas/actions/rdb_backup_info';
+import DaasRdbInstanceCreateModel from './instance/instancecreatemodel';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -63,7 +64,8 @@ class DaasBackupManageForm extends Component {
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline" onSubmit={this.handleSubmit}>
                     <FormItem>
-                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建实例</Button>
+                      {/*<Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建实例</Button>*/}
+                        <DaasRdbInstanceCreateModel instancelist={this.props.instancesList} />
                     </FormItem>
                     <div style={{ float:'right'}}>
 

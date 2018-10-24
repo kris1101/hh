@@ -3,7 +3,7 @@ import React from 'react';
 export function getdeletes() {
     return [{
         title: '编号',
-        dataIndex: 'id',
+        dataIndex: 'key',
     }, {
         title: '名称',
         dataIndex: 'title'

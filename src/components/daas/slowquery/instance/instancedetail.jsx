@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 
 class SlowQueryInstanceDetail extends Component {
@@ -12,24 +13,19 @@ class SlowQueryInstanceDetail extends Component {
         {
           title: '名称',
           indexdata: "数据加载中...",
-        },
-        {
+        }, {
           title: '实例ip',
           indexdata: "数据加载中...",
-        },
-        {
+        }, {
           title: '端口号',
           indexdata: "数据加载中...",
-        },
-        {
+        }, {
           title: '创建时间',
           indexdata: "数据加载中...",
-        },
-        {
+        }, {
           title:'更新时间',
           indexdata: "数据加载中...",
-        },
-        {
+        }, {
           title: '描述',
           indexdata: "数据加载中...",
         },
@@ -49,24 +45,19 @@ class SlowQueryInstanceDetail extends Component {
           {
             title: '名称',
             indexdata: instanceobj.fields.name,
-          },
-          {
+          }, {
             title: '实例ip',
             indexdata: instanceobj.fields.host_ip,
-          },
-          {
+          }, {
             title: '端口号',
             indexdata: instanceobj.fields.port,
-          },
-          {
+          }, {
             title: '创建时间',
-            indexdata: instanceobj.fields.create_time,
-          },
-          {
+            indexdata: formatStrDate(instanceobj.fields.create_time),
+          }, {
             title:'更新时间',
-            indexdata: instanceobj.fields.update_time,
-          },
-          {
+            indexdata: formatStrDate(instanceobj.fields.update_time),
+          }, {
             title: '描述',
             indexdata: instanceobj.fields.description,
           },

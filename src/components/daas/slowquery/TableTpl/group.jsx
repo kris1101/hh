@@ -4,6 +4,7 @@ import DaasSlowQueryGroupDetailModel from '../group/groupdetailmodel';
 import DaasSlowQueryGroupEditModel from '../group/groupeditmodel';
 import DaasSlowQueryGroupDeleteModel from '../group/groupdeletemodel';
 import DaasSlowQueryGroupUserRelationshipEditModel from '../group/groupuserrelationshipeditmodel';
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 
 export function getgroups() {
@@ -16,9 +17,11 @@ export function getgroups() {
     }, {
         title: '创建时间',
         dataIndex: 'fields.create_time',
+        render: (data) => formatStrDate(data)
     }, {
         title: '更新时间',
         dataIndex: 'fields.update_time',
+        render: (data) => formatStrDate(data)
     },{
         title: '操作',
         render: (data, record, index) => (

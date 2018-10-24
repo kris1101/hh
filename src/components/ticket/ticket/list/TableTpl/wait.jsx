@@ -1,24 +1,27 @@
 import React from 'react';
-import { Menu,Dropdown,Icon } from 'antd';
+import { Menu,Dropdown,Icon,message } from 'antd';
 
-
+function handleMenuClick(e) {
+  message.info('Click on menu item.');
+  console.log('click', e);
+}
 const menu = (
-    <Menu>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">编辑</a>
+    <Menu onClick={handleMenuClick}>
+    <Menu.Item key="1">
+        编辑
     </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">接受</a>
+    <Menu.Item key="2">
+      接受
     </Menu.Item>
     <Menu.Item>
       <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">详情</a>
     </Menu.Item>
     <Menu.Divider />
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">撤销</a>
+    <Menu.Item key="4">
+     撤销
     </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">删除</a>
+    <Menu.Item key="5">
+      删除
     </Menu.Item>
   </Menu>
 );
@@ -26,7 +29,7 @@ const menu = (
 export function getwaits() {
     return [{
         title: '编号',
-        dataIndex: 'id',
+        dataIndex: 'key',
     }, {
         title: '名称',
         dataIndex: 'title'
@@ -50,9 +53,9 @@ export function getwaits() {
         dataIndex: 'status',
     },{
         title: '操作',
-        render: (data) => (
+        render: (data,record) => (
             <div>
-                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>指派</span>
+                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}} onClick={(e) => this.openModal(record, e)}>指派</span>
                 <span style={{cursor: 'pointer',color:'#0350CF'}}>
                 <Dropdown overlay={menu}>
                     <a className="ant-dropdown-link" href="">

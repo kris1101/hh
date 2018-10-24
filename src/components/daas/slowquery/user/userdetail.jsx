@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 
 class SlowQueryUserDetail extends Component {
@@ -12,24 +13,19 @@ class SlowQueryUserDetail extends Component {
         {
           title: '名称',
           indexdata: "数据加载中...",
-        },
-        {
+        }, {
           title: '邮箱',
           indexdata: "数据加载中...",
-        },
-        {
+        }, {
           title: '电话',
           indexdata: "数据加载中...",
-        },
-        {
+        }, {
           title: '创建时间',
           indexdata: "数据加载中...",
-        },
-        {
+        }, {
           title:'更新时间',
           indexdata: "数据加载中...",
-        },
-        {
+        }, {
           title: '描述',
           indexdata: "数据加载中...",
         },
@@ -48,24 +44,19 @@ class SlowQueryUserDetail extends Component {
           {
             title: '名称',
             indexdata: userobj.fields.name,
-          },
-          {
+          }, {
             title: '邮箱',
             indexdata: userobj.fields.email,
-          },
-          {
+          }, {
             title: '电话',
             indexdata: userobj.fields.phone,
-          },
-          {
+          }, {
             title: '创建时间',
-            indexdata: userobj.fields.create_time,
-          },
-          {
+            indexdata: formatStrDate(userobj.fields.create_time),
+          }, {
             title:'更新时间',
-            indexdata: userobj.fields.update_time,
-          },
-          {
+            indexdata: formatStrDate(userobj.fields.update_time),
+          }, {
             title: '描述',
             indexdata: userobj.fields.description,
           },

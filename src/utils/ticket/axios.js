@@ -4,10 +4,13 @@ import { notification } from 'antd';
 
 export const baseUrl = "http://10.26.17.40:8080";
 
+
 // export var baseUrl = BASE_URL + '/v1/api';
 var instance = axios.create({
     baseURL: baseUrl, //测试环境
-    timeout: 2000,
+    timeout: 10000,
+    retry: 5,
+    retryDelay: 1000
 });
 
 // instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -23,14 +26,14 @@ export function getAjax(url, params, Callback) {
         .then(function(response) {
             Callback(response);
         })
-        // .catch(function(error, resoponse) {
-        //     /* return Promise.reject(error);*/
-        //     notification.error({
-        //         message: '提示',
-        //         description: `服务器错误！`,
-        //         duration: 2,
-        //     });
-        // });
+        .catch(function(error, resoponse) {
+            /* return Promise.reject(error);*/
+            notification.error({
+                message: '提示',
+                description: `服务器错误！`,
+                duration: 2,
+            });
+        });
 }
 
 export function postAjax(url, params, Callback) {
@@ -103,12 +106,5 @@ export function deleteAjax(url, Callback) {
 
             Callback(response);
         })
-        // .catch(function(error) {
-        //     console.log(error);
-        //     notification.error({
-        //         message: '提示',
-        //         description: `登录超时，请重新登录`,
-        //         duration: 2,
-        //     });
-        // });
+
 }
