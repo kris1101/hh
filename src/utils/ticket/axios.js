@@ -26,14 +26,14 @@ export function getAjax(url, params, Callback) {
         .then(function(response) {
             Callback(response);
         })
-        // .catch(function(error, resoponse) {
-        //     /* return Promise.reject(error);*/
-        //     notification.error({
-        //         message: '提示',
-        //         description: `服务器错误！`,
-        //         duration: 2,
-        //     });
-        // });
+        .catch(function(error, resoponse) {
+            /* return Promise.reject(error);*/
+            notification.error({
+                message: '提示',
+                description: `服务器错误！`,
+                duration: 2,
+            });
+        });
 }
 
 export function postAjax(url, params, Callback) {
@@ -106,12 +106,5 @@ export function deleteAjax(url, Callback) {
 
             Callback(response);
         })
-        // .catch(function(error) {
-        //     console.log(error);
-        //     notification.error({
-        //         message: '提示',
-        //         description: `登录超时，请重新登录`,
-        //         duration: 2,
-        //     });
-        // });
+
 }
