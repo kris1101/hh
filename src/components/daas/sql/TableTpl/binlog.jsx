@@ -28,7 +28,7 @@ export function getbinlogs() {
         render: (data, record, index) => (
             <div>
                 <Row>
-                    <Col span={5} style={{color:'#0350CF'}}><RDBInstanceBinlogDetailModel pk={ data.pk } /></Col>
+                    <Col span={5} offset={10} style={{color:'#0350CF'}}><RDBInstanceBinlogDetailModel pk={ data.pk } /></Col>
                 </Row>
             </div>
         )

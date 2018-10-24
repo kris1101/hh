@@ -49,7 +49,7 @@ class DaasSlowQueryUserEditManager extends Component {
         <Button onClick={this.showModal}>
           编辑
         </Button>
-        <Modal title="用户创建"
+        <Modal title="用户编辑"
           visible={visible}
           onOk={this.handleOk}
           confirmLoading={confirmLoading}

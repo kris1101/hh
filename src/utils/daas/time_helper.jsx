@@ -21,3 +21,20 @@ export function compareDate(startdate, enddate){
           return true
       }
 }
+
+export function uploadStatus(uploadstatus){
+      if (uploadstatus == 0){
+          return '上传成功'
+      }else{
+          return '上传失败'
+      }
+      if (startdate && enddate){
+          if (parseInt(enddate, 10) > parseInt(startdate, 10)){
+            return true
+          }else{
+            return false
+          }
+      }else{
+          return true
+      }
+}

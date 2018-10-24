@@ -24,7 +24,7 @@ export function getusers() {
         render: (data) => (
             <div>
                 <Row>
-                    <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryUserDetailModel pk={ data.pk } /></Col>
+                    <Col span={5} offset={4} style={{color:'#0350CF'}}><DaasSlowQueryUserDetailModel pk={ data.pk } /></Col>
                     <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryUserEditModel pk={data.pk} /></Col>
                     <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryUserDeleteModel pk={data.pk} /></Col>
                 </Row>

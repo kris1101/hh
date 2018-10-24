@@ -24,7 +24,7 @@ export function getprojects() {
         render: (data) => (
             <div>
                 <Row>
-                    <Col span={6} style={{color:'#0350CF'}}><DaasRdbProjectDetailModle pk={ data.pk } /></Col>
+                    <Col span={6} offset={2} style={{color:'#0350CF'}}><DaasRdbProjectDetailModle pk={ data.pk } /></Col>
                     <Col span={6} style={{color:'#0350CF'}}><DaasRdbProjectUpdateModel pk={data.pk} /></Col>
                     <Col span={6} style={{color:'#0350CF'}}><DaasRdbProjectDeleteModel pk={data.pk} /></Col>
                 </Row>
