@@ -79,7 +79,7 @@ import {
     paasCodeBase
 } from '../containers/Paas/k8s/paascodebase.redux';
 import {
-  paasCodeBuild
+    paasCodeBuild
 } from '../containers/Paas/k8s/paascodebuild.redux';
 import {
     daasRdbInstance
@@ -90,7 +90,15 @@ import {
 import {
     daasRdbCluster
 } from '../containers/Daas/reducers/rdb_cluster';
-
+import {
+    daasRdbClusterInstanceRelationship
+} from '../containers/Daas/reducers/rdb_cluster_instance_relationship';
+import {
+    daasRdbHost
+} from '../containers/Daas/reducers/rdb_host';
+import {
+    daasRdbHostInstanceRelationship
+} from '../containers/Daas/reducers/rdb_host_instance_relationship';
 const App = combineReducers({
     todos,
     setCounter,
@@ -122,6 +130,9 @@ const App = combineReducers({
     daasRdbCluster,
     RDBInstanceBackup,
     RDBInstanceBinlog,
+    daasRdbClusterInstanceRelationship,
+    daasRdbHost,
+    daasRdbHostInstanceRelationship,
 });
 
 export default App

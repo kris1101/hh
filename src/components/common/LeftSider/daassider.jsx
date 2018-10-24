@@ -42,7 +42,7 @@ class DassSider extends Component{
           openKey = [];
       }else if(pathName==="/daas/slowquery/group"||pathName==="/daas/slowquery/user"||pathName==="/daas/slowquery/instance"||pathName==="/daas/slowquery/email"){
           openKey = ["slowquery"];
-      }else if(pathName==="/daas/rdb/instance"||pathName==="/daas/rdb/project"||pathName==="/daas/rdb/cluster"){
+      }else if(pathName==="/daas/rdb/instance"||pathName==="/daas/rdb/project"||pathName==="/daas/rdb/cluster"||pathName==="/daas/rdb/host"){
           openKey = ["rdb"];
       }else {
           openKey = ["rdb"];
@@ -68,6 +68,7 @@ class DassSider extends Component{
              <SubMenu key="rdb" title={<span><Icon type="database" /><span>关系型数据库</span></span>} >
                 <Menu.Item key="/daas/rdb/instance"><Link to="/daas/rdb/instance">实例</Link></Menu.Item>
                 <Menu.Item key="/daas/rdb/cluster"><Link to="/daas/rdb/cluster">集群</Link></Menu.Item>
+                <Menu.Item key="/daas/rdb/host"><Link to="/daas/rdb/host">主机</Link></Menu.Item>
                 <Menu.Item key="/daas/backup"><Link to="/daas/backup">备份</Link></Menu.Item>
                 <Menu.Item key="/daas/binlog"><Link to="/daas/binlog">binlog日志</Link></Menu.Item>
                 <Menu.Item key="/daas/verify"><Link to="/daas/verify">sql审核</Link></Menu.Item>
