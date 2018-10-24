@@ -1,4 +1,9 @@
 import React from 'react';
+import { Row, Col} from 'antd';
+import DaasRdbClusterDetailModle from '../cluster/clusterdetailmodel';
+import DaasRdbClusterUpdateModel from '../cluster/clusterupdatemodel';
+import DaasRdbClusterDeleteModel from '../cluster/clusterdeletemodel';
+import DaasRdbClusterInstanceRelationshipUpdateModel from '../cluster/clusterinstancerelationshipupdatemodel';
 import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 export function getclusters() {
@@ -19,10 +24,12 @@ export function getclusters() {
         title: '操作',
         render: (data) => (
             <div>
-                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>详情</span>
-                <span style={{cursor: 'pointer',color:'#0350CF',marginRight:30}}>编辑</span>
-                <span style={{cursor: 'pointer',color:'#cf1f0f',marginRight:30}}>删除</span>
-                <span style={{cursor: 'pointer',color:'#cf1f0f',marginRight:30}}>编辑成员</span>
+                <Row>
+                    <Col span={6} style={{color:'#0350CF'}}><DaasRdbClusterDetailModle pk={ data.pk } /></Col>
+                    <Col span={6} style={{color:'#0350CF'}}><DaasRdbClusterUpdateModel pk={ data.pk } /></Col>
+                    <Col span={6} style={{color:'#0350CF'}}><DaasRdbClusterDeleteModel pk={ data.pk } /></Col>
+                    <Col span={6} style={{color:'#0350CF'}}><DaasRdbClusterInstanceRelationshipUpdateModel pk={ data.pk } /></Col>
+                </Row>
             </div>
         )
     }];

@@ -1,6 +1,7 @@
 import Daas_RDB_Instance from '../components/daas/sql/instance/instance';
 import Daas_RDB_Project from '../components/daas/sql/project/project';
 import Daas_RDB_Cluster from '../components/daas/sql/cluster/cluster';
+import Daas_RDB_Host from '../components/daas/sql/host/host';
 import Daas_Backup from '../components/daas/sql/backup';
 import Daas_Binlog from '../components/daas/sql/binlog';
 import Daas_Verify from '../components/daas/sql/verify';
@@ -28,6 +29,10 @@ const daas_routes =
         exact: true,
         path: '/daas/rdb/cluster',
         component: Daas_RDB_Cluster,
+    }, {
+        exact: true,
+        path: '/daas/rdb/host',
+        component: Daas_RDB_Host,
     }, {
         exact: true,
         path: '/daas/backup',

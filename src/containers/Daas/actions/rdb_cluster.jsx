@@ -83,7 +83,7 @@ export function rdbClusterUpdate(pk, clusterObj){
     }
 }
 
-export function rdbProjectDelete(pk){
+export function rdbClusterDelete(pk){
     return dispatch=>{
         deleteAjax('/v1/api/rdb/clusters/' + pk, function(response){
             dispatch(rdb_cluster_delete(response.data));
