@@ -29,7 +29,7 @@ export function getinstances() {
         render: (data) => (
             <div>
                 <Row>
-                    <Col span={4} style={{color:'#0350CF'}}><DaasRdbInstanceDetailModle pk={ data.pk } /></Col>
+                    <Col span={4} offset={2} style={{color:'#0350CF'}}><DaasRdbInstanceDetailModle pk={ data.pk } /></Col>
                     <Col span={4} style={{color:'#0350CF'}}><DaasRdbInstanceUpdateModel pk={ data.pk } /></Col>
                     <Col span={4} style={{color:'#0350CF'}}><DaasRdbInstanceDeleteModel pk={ data.pk } /></Col>
                     <Col span={4} style={{color:'#0350CF'}}><DaasRdbInstanceStopModel pk={ data.pk } /></Col>

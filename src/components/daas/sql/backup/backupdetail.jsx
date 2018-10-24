@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
-import { formatStrDate } from '../../../../utils/daas/time_helper'
+import { formatStrDate, uploadStatus } from '../../../../utils/daas/time_helper'
 
 class RDBInstanceBackupDetail extends Component {
   constructor(props) {
@@ -80,7 +80,7 @@ class RDBInstanceBackupDetail extends Component {
               indexdata: backupobj.fields.backup_type.toString(),
           },  {
               title: '上传状态',
-              indexdata: backupobj.fields.upload_status.toString(),
+              indexdata: uploadStatus(backupobj.fields.upload_status),
           },  {
               title: '备份开始时间',
               indexdata: formatStrDate(backupobj.fields.backup_start_time),
@@ -101,7 +101,7 @@ class RDBInstanceBackupDetail extends Component {
               indexdata: formatStrDate(backupobj.fields.update_time),
           },  {
               title: '描述',
-              indexdata: formatStrDate(backupobj.fields.description),
+              indexdata: backupobj.fields.description,
           },   
         ]
       });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd'
 import RDBInstanceBackupDetailModel from '../backup/backupdetailmodel'
-import { formatStrDate } from '../../../../utils/daas/time_helper'
+import { formatStrDate, uploadStatus } from '../../../../utils/daas/time_helper'
 
 export function getbackups() {
     return [{
@@ -16,6 +16,7 @@ export function getbackups() {
     },{
         title: '上传状态',
         dataIndex: 'fields.upload_status',
+        render: (data) => uploadStatus(data)
     },{
         title: '创建时间',
         dataIndex: 'fields.create_time',
@@ -25,7 +26,7 @@ export function getbackups() {
         render: (data,record, index) => (
             <div>
                 <Row>
-                    <Col span={5} style={{color:'#0350CF'}}><RDBInstanceBackupDetailModel pk={ data.pk } /></Col>
+                    <Col span={5} offset={10} style={{color:'#0350CF'}}><RDBInstanceBackupDetailModel pk={ data.pk } /></Col>
                 </Row>
             </div>
         )

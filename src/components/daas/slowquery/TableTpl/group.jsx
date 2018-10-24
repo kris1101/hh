@@ -27,7 +27,7 @@ export function getgroups() {
         render: (data, record, index) => (
             <div>
                 <Row>
-                    <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryGroupDetailModel pk={ data.pk } /></Col>
+                    <Col span={5} offset={2} style={{color:'#0350CF'}}><DaasSlowQueryGroupDetailModel pk={ data.pk } /></Col>
                     <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryGroupEditModel pk={data.pk} /></Col>
                     <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryGroupDeleteModel pk={data.pk} /></Col>
                     <Col span={5} style={{color:'#0350CF'}}><DaasSlowQueryGroupUserRelationshipEditModel pk={data.pk} /></Col>

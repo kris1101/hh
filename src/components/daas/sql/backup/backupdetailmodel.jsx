@@ -44,7 +44,7 @@ class RDBInstanceBackupDetailManager extends Component {
         <Button onClick={this.showModal}>
           详情
         </Button>
-        <Modal title="详情"
+        <Modal title="备份详情"
           visible={visible}
           onOk={this.handleOk}
           confirmLoading={confirmLoading}

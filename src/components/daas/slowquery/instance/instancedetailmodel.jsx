@@ -9,7 +9,7 @@ class DaasSlowQueryInstanceDetailManager extends Component {
     ModalText: 'Content of the modal',
     visible: false,
     confirmLoading: false,
-    userObj:{}
+    instanceObj:{}
   }
 
   showModal = () => {
@@ -43,7 +43,7 @@ class DaasSlowQueryInstanceDetailManager extends Component {
         <Button onClick={this.showModal}>
           详情
         </Button>
-        <Modal title="详情"
+        <Modal title="实例详情"
           visible={visible}
           onOk={this.handleOk}
           confirmLoading={confirmLoading}
@@ -57,4 +57,4 @@ class DaasSlowQueryInstanceDetailManager extends Component {
 }
 
 const DaasSlowQueryInstanceDetailModel = Form.create()(DaasSlowQueryInstanceDetailManager);
-export default connect(state => state.daasSlowQueryUser) (DaasSlowQueryInstanceDetailModel);
+export default connect(state => state.daasSlowQueryInstance) (DaasSlowQueryInstanceDetailModel);
