@@ -28,13 +28,4 @@ export function uploadStatus(uploadstatus){
       }else{
           return '上传失败'
       }
-      if (startdate && enddate){
-          if (parseInt(enddate, 10) > parseInt(startdate, 10)){
-            return true
-          }else{
-            return false
-          }
-      }else{
-          return true
-      }
 }
