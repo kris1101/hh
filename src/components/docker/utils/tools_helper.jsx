@@ -29,4 +29,6 @@ export function combinekeyvalue(keylist, valuelist){
         return [0, result] 
   }
 }
-
+export function randomchoice(itemlist){
+  return itemlist[Math.round(Math.random()*(itemlist.length-1))]
+}

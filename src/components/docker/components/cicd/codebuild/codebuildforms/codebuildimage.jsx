@@ -1,5 +1,5 @@
 import React from 'react'
-import { message, Form, Modal, Row, Col, Steps, Divider} from 'antd';
+import { message, Form, Modal, Steps} from 'antd';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { arta } from 'react-syntax-highlighter/styles/hljs';
 import { postAjax, getAjax } from '../../../../utils/axios'
@@ -68,13 +68,7 @@ const CodeBuildImageForm = Form.create()(
         <Modal
           visible={visible}
           centered
-          width={900}
-          maskClosable={false}
-          onCancel={onCancel}
-          footer={null}
-        >
-          <Row>
-            <Col span={24}>
+          title={
             <Steps  size="small" progressDot  current={this.state.current}>
                 <Step title="开始" description="开始处理,请等待..." />
                 <Step title="clone代码" description="开始clone,请等待..." />
@@ -85,25 +79,18 @@ const CodeBuildImageForm = Form.create()(
                 <Step title="上传" description="构建完成,上传镜像中..." />
                 <Step title="完成" description="处理完成" />
             </Steps>
-            </Col>
-          </Row>
-            <Divider>
-              日志
-            </Divider>
-
-          <Row>
-            <Col span={24}>
-                <SyntaxHighlighter language='shell' customStyle={{height: 200}} showLineNumbers style={arta}>{this.state.codeString}</SyntaxHighlighter>
-            </Col>
-          </Row>
+          }
+          width={900}
+          maskClosable={false}
+          bodyStyle={{padding: 0}}
+          onCancel={onCancel}
+          footer={null}
+        >
+          <SyntaxHighlighter language='shell' customStyle={{height: 200}} showLineNumbers style={arta}>{this.state.codeString}</SyntaxHighlighter>
         </Modal>
       );
     }
   }
 )
-
-//export default connect(
-//  state => state.paasCodeBase,
-//  { getCodeRepoList })(CodeBuildImageForm);
 
 export default CodeBuildImageForm 

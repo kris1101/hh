@@ -40,7 +40,7 @@ export function getk8sclusters() {
         title: '操作',
         render: (data, record, index) => {
             return (
-            <Row>
+            <Row gutter={24}>
               <Col span={6} offset={6}>
               <Popconfirm title={"确认删除" + record.cluster_name + "集群?"} onConfirm={() => confirm(record.id, this)} okText="确定" cancelText="取消">
             <div>
