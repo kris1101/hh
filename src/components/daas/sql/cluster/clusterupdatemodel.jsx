@@ -61,7 +61,7 @@ class DaasRdbClusterUpdateModelManager extends Component {
         <Button onClick={this.showModal}>
           编辑
         </Button>
-        <Modal title="编辑"
+        <Modal title="集群编辑"
           visible={visible}
           onOk={this.handleOk}
           confirmLoading={confirmLoading}

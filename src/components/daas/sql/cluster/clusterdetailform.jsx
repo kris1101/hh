@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import { getAjax } from '../../../../utils/daas/newaxios';
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 
 class DaasRdbClusterDetailForm extends Component {
@@ -50,10 +51,10 @@ class DaasRdbClusterDetailForm extends Component {
                     indexdata: instanceObj.fields.port,
                   },{
                     title: '创建时间',
-                    indexdata: instanceObj.fields.create_time,
+                    indexdata: formatStrDate(instanceObj.fields.create_time),
                   },{
                     title:'更新时间',
-                    indexdata: instanceObj.fields.update_time,
+                    indexdata: formatStrDate(instanceObj.fields.update_time),
                   },{
                     title: '描述',
                     indexdata: instanceObj.fields.description,
