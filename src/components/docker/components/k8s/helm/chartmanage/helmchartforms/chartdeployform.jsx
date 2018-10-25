@@ -1,5 +1,5 @@
 import React from 'react'
-import {Switch, Form, Input, Drawer, Row, Col, Select, Button, Checkbox, Divider, Icon } from 'antd';
+import {Card, Switch, Form, Input, Drawer, Row, Col, Select, Button, Checkbox, Icon, Divider } from 'antd';
 import { connect  } from 'react-redux';
 import './chartdeployform.less'
 import { getClusterNamespaceList } from '../../../../../../../containers/Paas/common/paascommon.redux'
@@ -144,12 +144,19 @@ const HelmChartDeployForm = Form.create()(
                   visible={visible}
                   destroyOnClose={true}
                   style={{
+                    padding: 10,
                     height: 'calc(100%- 55px)',
                     overflow: 'auto',
                     paddingBottom: 53,
                   }}
                 >
                   <Form  layout="horizontal" hideRequiredMark id="deployform">
+                    <Card 
+                      title="基础配置"
+                      headStyle={{
+                                    background: '#F5F5F5'
+                                }}
+                    >
                         <Form.Item className="formitem" label="chart名称" labelCol={{ span: 4}} wrapperCol={{span: 20}}>
                               <span style={{fontSize: 15}}>{this.state.chartinfo.chart_name}</span>
                         </Form.Item>
@@ -230,14 +237,26 @@ const HelmChartDeployForm = Form.create()(
                                     </Select>
                              )}
                         </Form.Item>
+                    </Card> 
                         {this.state.values ? (
                         <div>
-                        <Divider orientation="left">values替换</Divider>
+                        <Divider />
+                         <Card 
+                           title="values替换"
+                           headStyle={{
+                                         background: '#F5F5F5'
+                              }}>
        						  {formItems}
-                         </div>) : null}
+                            </Card>
+                          </div>) : null}
                         {this.state.valuesfile ? (
                         <div>
-                          <Divider orientation="left">values文件替换</Divider>
+                        <Divider />
+                         <Card 
+                           title="valuefile替换"
+                           headStyle={{
+                                         background: '#F5F5F5'
+                              }}>
 							 <CodeMirror 
 							   value="" 
 							   ref={this.getInstance} 
@@ -248,7 +267,8 @@ const HelmChartDeployForm = Form.create()(
 							     mode: "yaml", 
 							   }}
 							/> 
-                        </div>) : null}
+                          </Card>
+                      </div>) : null}
                   </Form>
                   <div
                     style={{
