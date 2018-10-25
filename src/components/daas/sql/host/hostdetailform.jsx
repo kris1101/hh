@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import { getAjax } from '../../../../utils/daas/newaxios';
+import { formatStrDate } from '../../../../utils/daas/time_helper';
 
 
 class DaasRdbHostDetailForm extends Component {
@@ -69,10 +70,10 @@ class DaasRdbHostDetailForm extends Component {
                         dataIndex: hostObj.fields.host_type_name,
                     },{
                         title: '创建时间',
-                        dataIndex: hostObj.fields.create_time,
+                        dataIndex: formatStrDate(hostObj.fields.create_time),
                     },{
                         title: '更新时间',
-                        dataIndex: hostObj.fields.update_time,
+                        dataIndex: formatStrDate(hostObj.fields.update_time),
                     },{
                         title: '描述',
                         dataIndex: hostObj.fields.description,
