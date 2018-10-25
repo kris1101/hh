@@ -57,7 +57,7 @@ class DaasProjectManageForm extends Component {
                     <div style={{ float:'right'}}>
                         <FormItem label="">
                             {getFieldDecorator('name')(
-                                <Input placeholder="实例名称" />
+                                <Input placeholder="项目名" />
                             )}
                         </FormItem>
                     <FormItem>

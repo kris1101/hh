@@ -27,6 +27,7 @@ class RdbInstanceCreateManager extends Component {
             confirmDirty: false,
             autoCompleteResult: [],
             projectsOption: [],
+            hostsOption: [],
         };
     }
 
@@ -41,6 +42,17 @@ class RdbInstanceCreateManager extends Component {
                 });
                 _that.setState({
                     projectsOption: projectOptions,
+                });
+            }
+        });
+      getAjax('/v1/api/rdb/hosts',{},function(response){
+            console.log(response);
+            if (response.data.data.length) {
+                const hostOptions = response.data.data.map((item,index)=>{
+                    return <Option key={index} value={item.pk}>{item.fields.host_ip}</Option>
+                });
+                _that.setState({
+                    hostsOption: hostOptions,
                 });
             }
         });
@@ -88,7 +100,8 @@ class RdbInstanceCreateManager extends Component {
             <Input />
           )}
         </FormItem>
-        <FormItem
+
+        {/*<FormItem
           {...formItemLayout}
           label={(
             <span>
@@ -100,6 +113,20 @@ class RdbInstanceCreateManager extends Component {
             rules: [{ required: true, message: '请输入实例IP!', whitespace: true }],
           })(
             <Input />
+          )}
+        </FormItem>*/}
+
+        <FormItem
+          {...formItemLayout}
+          label="IP"
+        >
+          {getFieldDecorator('host', {
+            initialValue: '0',
+          })(
+            <Select>
+                <Option value='0'>请选择一个IP</Option>
+                { this.state.hostsOption }
+            </Select>
           )}
         </FormItem>
         <FormItem
@@ -165,7 +192,7 @@ class RdbInstanceCreateManager extends Component {
             <Input min={1} />
           )}
         </FormItem>
-        <FormItem
+        {/*<FormItem
           {...formItemLayout}
           label={(
             <span>
@@ -185,7 +212,7 @@ class RdbInstanceCreateManager extends Component {
           })(
             <Input min={1} />
           )}
-        </FormItem>
+        </FormItem>*/}
         <FormItem
           {...formItemLayout}
           label="项目"
@@ -239,7 +266,7 @@ class RdbInstanceCreateManager extends Component {
               <Option value="2">starting</Option>
               <Option value="3">running</Option>
               <Option value="4">stopping</Option>
-              <Option value="5">stopping</Option>
+              <Option value="5">stopped</Option>
               <Option value="6">rebooting</Option>
               <Option value="7">paused</Option>
               <Option value="8">suspended</Option>

@@ -150,7 +150,7 @@ class UserManageForm extends Component {
               _that.setState({
                   currentPage: this.current,
               }, () => {
-                  _that.getDeviceList(value)
+                  _that.getUserList(value)
               })
           }
     };

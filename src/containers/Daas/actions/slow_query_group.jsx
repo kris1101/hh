@@ -61,6 +61,7 @@ export function slowQueryGroupFetch(params={}){
 }
 
 export function slowQueryGroupCreate(group_obj){
+    console.log(group_obj)
     return dispatch=>{
         postAjax('/slow/query/groups', group_obj, function(response){
             dispatch(slow_query_group_create(response.data));

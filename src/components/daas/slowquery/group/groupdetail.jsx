@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
+import { formatStrDate } from '../../../../utils/daas/time_helper'
 
 
 class SlowQueryGroupDetail extends Component {
@@ -51,11 +52,11 @@ class SlowQueryGroupDetail extends Component {
           },
           {
             title: '创建时间',
-            indexdata: groupobj.fields.create_time,
+            indexdata: formatStrDate(groupobj.fields.create_time),
           },
           {
             title:'更新时间',
-            indexdata: groupobj.fields.update_time,
+            indexdata: formatStrDate(groupobj.fields.update_time),
           },
           {
             title: '描述',

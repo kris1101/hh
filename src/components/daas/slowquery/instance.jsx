@@ -58,7 +58,12 @@ class SlowQueryInstatnceManager extends Component {
                     <div style={{ float:'right'}}>
                         <FormItem label="">
                             {getFieldDecorator('name')(
-                                <Input placeholder="用户名" />
+                                <Input placeholder="实例名" />
+                            )}
+                        </FormItem>
+                        <FormItem label="">
+                            {getFieldDecorator('host_ip')(
+                                <Input placeholder="实例ip" />
                             )}
                         </FormItem>
                         <FormItem>

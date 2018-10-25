@@ -68,6 +68,11 @@ class DaasInstanceManageForm extends Component {
                                 <Input placeholder="实例名称" />
                             )}
                         </FormItem>
+                        <FormItem label="">
+                            {getFieldDecorator('port')(
+                                <Input placeholder="端口号" />
+                            )}
+                        </FormItem>
                     <FormItem>
                         <Button type="primary" className="btn-search" onClick={this.handleSubmit.bind(this)} style={{marginRight: 10}}>查询</Button>
                         <Button className="btn-search" onClick={this.handleReset}>重置</Button>

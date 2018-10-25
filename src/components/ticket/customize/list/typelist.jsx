@@ -50,6 +50,12 @@ class TypeManageForm extends Component {
                     let total = response.data.total ||0;
                     for(let key in deviceList){
                         deviceList[key].key = key-0+1;
+                        let user_names='';
+                        let users=deviceList[key].maintainers;
+                        for (let name in users){
+                            user_names = user_names+users[name].name+ ','
+                        }
+                        deviceList[key].recipient=user_names
                     }
                     $this.setState({deviceList: response.data.objects,total:total,currentPage:params.page});
                 } else {
@@ -151,7 +157,7 @@ class TypeManageForm extends Component {
               _that.setState({
                   currentPage: this.current,
               }, () => {
-                  _that.getDeviceList(value)
+                  _that.getTypeList(value)
               })
           }
     };

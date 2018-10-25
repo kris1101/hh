@@ -6,6 +6,7 @@ import BreadcrumbCustom from '../../BreadcrumbCustom';
 import { getbinlogs } from './TableTpl/binlog';
 import './list.less';
 import { rdbInstanceBinlogFetch } from '../../../containers/Daas/actions/rdb_binlog_info';
+import DaasRdbInstanceCreateModel from './instance/instancecreatemodel';
 
 const { Sider, Content } = Layout;
 const FormItem = Form.Item;
@@ -67,7 +68,9 @@ class DaasBinlogManageForm extends Component {
             <div className="form-search-box" style={{ background:'#fff',padding:10, }}>
                 <Form layout="inline" onSubmit={this.handleSubmit}>
                     <FormItem>
-                        <Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建实例</Button>
+                      {/*<Button type="primary" onClick={(e) => this.openAddDevicePage('add',e)}>新建实例</Button>*/}
+
+                       <DaasRdbInstanceCreateModel instancelist={this.props.instancesList} />
                     </FormItem>
                     <div style={{ float:'right'}}>
 
