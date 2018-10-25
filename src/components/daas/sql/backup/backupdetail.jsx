@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import axios from 'axios';
-import { formatStrDate, uploadStatus } from '../../../../utils/daas/time_helper'
+import { formatStrDate } from '../../../../utils/daas/time_helper'
+import { uploadStatus } from '../../../../utils/daas/rdb_utils'
 
 class RDBInstanceBackupDetail extends Component {
   constructor(props) {
