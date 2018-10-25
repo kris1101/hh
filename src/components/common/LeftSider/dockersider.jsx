@@ -9,7 +9,7 @@ const SubMenu = Menu.SubMenu;
 
 class DockerSider extends Component{
 
-  rootSubmenuKeys = ['dockerregistry', 'paashelmmanage', 'paasworkload', 'paascicd' ];
+  rootSubmenuKeys = ['dockerregistry', 'paashelmmanage', 'paasworkload', 'paascicd', "infrastructure", "monitorcenter", "applicationdelivery"];
 
   constructor(props){
       super(props);
@@ -41,7 +41,7 @@ class DockerSider extends Component{
       if (current === "paasregistrylog" || current === "paasregistryproject" || current === "paasregistryprojectdetails" || current === "paasregistryprojectrepositories"){
             openKeys = ["dockerregistry"]
       }else if(current === "paasregistryuser" || current === "paasregistryconfig"){
-            openKeys = ["dockerregistry", "registrysystem"]
+            openKeys = ["dockerregistry"]
       }
 
       if (current === "paascodebase" || current === "paascodeimagebuild" || current === "paascodebuildhistory"){
@@ -52,6 +52,13 @@ class DockerSider extends Component{
 
       if (current === "paastillerconfig" || current === "paashelmrepomanage" || current === "paashelmchartmanage" || current === "paashelmreleasemanage" || current === "paashelmtaskstate"){
             openKeys = ["paashelmmanage"]
+      }
+
+      if (current === "paasclustersettings"){
+            openKeys = ["infrastructure"]
+      }
+      if (current === "paasmonitorcenter"){
+            openKeys = ["monitorcenter"]
       }
 
     if (current === "paasregistryprojectdetails" || current === "paasregistryprojectrepositories"){
@@ -74,11 +81,33 @@ class DockerSider extends Component{
           selectedKeys={[this.state.current]}
           style={{ width: 200 }}
         >
-            <Menu.Item key="paasdashboard"><Link to="/paas/dashboard"><Icon type="desktop" />概述</Link></Menu.Item>
-            <Menu.Item key="paasapplication"><Link to="/paas/application"><Icon type="wallet" />应用</Link></Menu.Item>
-            <Menu.Item key="paasservce"><Link to="/paas/service"><Icon type="customer-service" />服务</Link></Menu.Item>
-            <Menu.Item key="paascontainer"><Link to="/paas/container"><Icon type="link" />容器</Link></Menu.Item>
-            <Menu.Item key="paasclustersettings"><Link to="/paas/clustersettings"><Icon type="folder-add" />集群配置</Link></Menu.Item>
+            <Menu.Item key="paasdashboard"><Link to="/paas/dashboard"><Icon type="dashboard" />概述</Link></Menu.Item>
+            <SubMenu
+               key="applicationdelivery"
+               title={<span><Icon type="fork" /><span>应用交付</span></span>}
+            >
+                <Menu.Item key="paasapplication"><Link to="/paas/application"><Icon type="wallet" />应用</Link></Menu.Item>
+                <Menu.Item key="paasservce"><Link to="/paas/service"><Icon type="customer-service" />服务</Link></Menu.Item>
+                <Menu.Item key="paascontainer"><Link to="/paas/container"><Icon type="link" />容器</Link></Menu.Item>
+            </SubMenu>
+            <SubMenu
+               key="infrastructure"
+               title={<span><Icon type="appstore" /><span>基础设施</span></span>}
+            >
+                <Menu.Item key="paasclustersettings"><Link to="/paas/clustersettings"><Icon type="folder-add" />集群管理</Link></Menu.Item>
+            </SubMenu>
+            <SubMenu
+               key="monitorcenter"
+               title={<span><Icon type="video-camera" /><span>监控中心</span></span>}
+            >
+                <Menu.Item key="paasmonitorcenter"><Link to="/paas/monitorcenter"><Icon type="area-chart" />监控面板</Link></Menu.Item>
+            </SubMenu>
+            <SubMenu
+               key="applogcenter"
+               title={<span><Icon type="copy" /><span>应用日志</span></span>}
+            >
+                <Menu.Item key="2"><Link to="/paas/clustersettings"><Icon type="folder-add" />集群管理</Link></Menu.Item>
+            </SubMenu>
             <SubMenu
                key="paashelmmanage"
                title={<span><Icon type="rocket" /><span>helm管理</span></span>}
@@ -114,13 +143,8 @@ class DockerSider extends Component{
             >
               <Menu.Item key="paasregistryproject"><Link to="/paas/registryproject"><span>项目</span></Link></Menu.Item>
               <Menu.Item key="paasregistrylog"><Link to="/paas/registrylog"><span>日志</span></Link></Menu.Item>
-                <SubMenu
-                   key="registrysystem"
-                   title={<span><Icon type="setting" /><span>系统管理</span></span>}
-                >
-                  <Menu.Item key="paasregistryuser"><Link to="/paas/registryuser"><span>用户管理</span></Link></Menu.Item>
-                  <Menu.Item key="paasregistryconfig"><Link to="/paas/registryconfig"><span>配置管理</span></Link></Menu.Item>
-                </SubMenu>
+              <Menu.Item key="paasregistryuser"><Link to="/paas/registryuser"><span>用户管理</span></Link></Menu.Item>
+              <Menu.Item key="paasregistryconfig"><Link to="/paas/registryconfig"><span>配置管理</span></Link></Menu.Item>
             </SubMenu>
             <SubMenu
                key="paascicd"
