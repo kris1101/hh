@@ -1,5 +1,4 @@
 
-import VM_Machine from '../components/vm/machine/list/machinelist';
 import VM_Recycle from '../components/vm/recycle/list/recyclelist';
 import VM_Snapshot from "../components/vm/snapshot/list/list"
 import VM_Backup from "../components/vm/snapshot/list/backlist"
@@ -19,6 +18,7 @@ import VM_LogList from "../components/vm/accounts/LogList"
 import VM_Key from "../components/vm/key/KeyList"
 import VM_KeyCreate from "../components/vm/key/KeyCreate"
 
+import VM_InstanceList from '../components/vm/instances/InstanceList';
 import VM_ImageList from "../components/vm/images/ImageList"
 
 import VM_NetworkList from "../components/vm/networks/NetworkList"
@@ -30,8 +30,8 @@ import VM_SGRuleApprovalDetail from "../components/vm/networks/SGRuleApprovalDet
 
 const vm_routes=[{
         exact: true,
-        path: '/vm/machine',
-        component: VM_Machine,
+        path: '/vm/instances',
+        component: VM_InstanceList,
     },
     {
         exact: true,

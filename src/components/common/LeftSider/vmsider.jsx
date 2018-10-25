@@ -77,7 +77,7 @@ class VMSider extends Component{
           style={{ width: 200 }}
         >
             <Menu.Item key="sub1"><Link to="/config/device"><Icon type="desktop" />概述</Link></Menu.Item>
-            <Menu.Item key="/vm/machine"><Link to="/vm/machine"><Icon type="cloud" />虚拟机管理</Link></Menu.Item>
+            <Menu.Item key="/vm/instances"><Link to="/vm/instances"><Icon type="cloud" />虚拟机管理</Link></Menu.Item>
             <Menu.Item key="/vm/recycle"><Link to="/vm/recycle"><Icon type="delete" />虚拟机回收站</Link></Menu.Item>
             <SubMenu key="sub4" title={<span><Icon type="camera-o" /><span>快照管理</span></span>} >
                 <Menu.Item key="/vm/snapshot"><Link to="/vm/snapshot">快照管理</Link></Menu.Item>
