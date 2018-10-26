@@ -16,7 +16,9 @@ import k8sWorkloadPodsComponent from '../components/k8s/workload/pods'
 import PaasCodeBaseComponent from '../components/cicd/codebase/codebase'
 import PaasCodeBuildTaskComponent from '../components/cicd/codebuild/codebuild'
 import PaasBuildHistoryForm from '../components/cicd/buildhistory/buildhistory'
+import ApplicationManageForm from '../components/applicationdelivery/application/appmanage'
 import MonitorCenterManageForm from '../components/monitorcenter/monitorcenter'
+import NodeManagementForm from '../components/k8s/nodemanagement/nodemanagement'
 import notFoundPage from '../components/404/404page'
 
 class PaasChildRouter extends Component {
@@ -39,6 +41,8 @@ class PaasChildRouter extends Component {
                   <Route path={`${this.props.match.path}codeimagebuild`} exact component={PaasCodeBuildTaskComponent}></Route>
                   <Route path={`${this.props.match.path}codebuildhistory`} exact component={PaasBuildHistoryForm}></Route>
                   <Route path={`${this.props.match.path}monitorcenter`} exact component={MonitorCenterManageForm}></Route>
+                  <Route path={`${this.props.match.path}application`} exact component={ApplicationManageForm}></Route>
+                  <Route path={`${this.props.match.path}nodemanagement`} exact component={NodeManagementForm}></Route>
 
                   <Route path={`${this.props.match.path}workload/podlist`} exact component={k8sWorkloadPodsComponent}></Route>
                   <Route component={notFoundPage}></Route>

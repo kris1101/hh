@@ -12,6 +12,12 @@ class K8sClusterSelectForm extends Component {
   componentDidMount () {
       this.props.getUserClusterList();
   }
+
+  //重置表单
+  handleReset = () => {
+      this.props.form.resetFields();
+  }
+
   render() {
     const { getFieldDecorator  } = this.props.form;
     const { handleSelctEvent } = this.props;
