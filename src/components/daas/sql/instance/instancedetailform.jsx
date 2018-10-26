@@ -3,6 +3,7 @@ import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import { getAjax } from '../../../../utils/daas/newaxios';
 import { formatStrDate } from '../../../../utils/daas/time_helper'
+import { runStatus } from '../../../../utils/daas/rdb_utils'
 
 class DaasRdbInstanceDetailForm extends Component {
     constructor(props) {
@@ -89,7 +90,7 @@ class DaasRdbInstanceDetailForm extends Component {
                       indexdata: instanceObj.fields.db_version,
                     },{
                       title: '运行状态',
-                      indexdata: instanceObj.fields.run_status.toString(),
+                      indexdata: runStatus(instanceObj.fields.run_status),
                     },{
                       title: '创建时间',
                       indexdata: formatStrDate(instanceObj.fields.create_time),
@@ -113,7 +114,7 @@ class DaasRdbInstanceDetailForm extends Component {
             renderItem={item => (
               <List.Item>
                 <List.Item.Meta
-                  title={<a href="https://ant.design">{item.title}</a>}
+                  title={<a>{item.title}</a>}
                   description={ item.indexdata }
                 />
               </List.Item>
