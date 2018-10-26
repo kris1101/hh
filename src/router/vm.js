@@ -19,6 +19,7 @@ import VM_Key from "../components/vm/key/KeyList"
 import VM_KeyCreate from "../components/vm/key/KeyCreate"
 
 import VM_InstanceList from '../components/vm/instances/InstanceList';
+import VM_InstanceDetail from "../components/vm/instances/InstanceDetail"
 import VM_ImageList from "../components/vm/images/ImageList"
 
 import VM_NetworkList from "../components/vm/networks/NetworkList"
@@ -32,8 +33,12 @@ const vm_routes=[{
         exact: true,
         path: '/vm/instances',
         component: VM_InstanceList,
-    },
-    {
+    }, {
+        exact: true,
+        path: '/vm/instances/:id',
+        component: VM_InstanceDetail,
+    }, {
+
         exact: true,
         path: '/vm/recycle',
         component: VM_Recycle,
