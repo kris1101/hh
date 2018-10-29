@@ -44,6 +44,15 @@ class SlowQueryUserEditManager extends Component {
     });
   }
 
+   checkphoneexists = (rule, value, callback) =>{
+       if(!value.length){
+          callback("手机号不能为空")
+       }
+       if(!(/^1(3|4|5|7|8|9)\d{9}$/.test(value))){ 
+         callback("手机号格式有误，请重新填写")
+       }  
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form;
 
@@ -106,7 +115,7 @@ class SlowQueryUserEditManager extends Component {
           label="电话"
         >
           {getFieldDecorator('phone', {
-            rules: [{ required: true, message: '请输入您的联系电话!' }],
+            rules: [{ required: true, validator: this.checkphoneexists}],
             initialValue: this.state.userObj.fields ? this.state.userObj.fields.phone : '',
           })(
             <Input addonBefore={prefixSelector} style={{ width: '100%' }} />

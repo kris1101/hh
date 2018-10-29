@@ -15,7 +15,8 @@ import { Form, Input, Tooltip, Icon,  } from 'antd';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
-
+const ipPatten = /^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/
+//const ipPatten = new RegExp("/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/")
 
 class SlowQueryInstanceCreateManager extends Component {
   state = {
@@ -30,6 +31,15 @@ class SlowQueryInstanceCreateManager extends Component {
         console.log('Received values of form: ', values);
       }
     });
+  }
+  
+  checkip = (rule, value, callback) => {
+      if(!value.length){
+          callback("IP不能为空")
+      }
+      if(!ipPatten.test(value)){
+          callback("请用正确的IP地址格式填写")
+      }
   }
 
   render() {
@@ -70,9 +80,8 @@ class SlowQueryInstanceCreateManager extends Component {
         >
           {getFieldDecorator('host_ip', {
             rules: [{
-              type: 'string', message: '输入实例IP!',
-            }, {
-              required: true, message: '请输入实例IP地址!',
+              type: 'string' }, {
+              required: true, validator: this.checkip,
             }],
           })(
             <Input />

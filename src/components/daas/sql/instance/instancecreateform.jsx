@@ -124,7 +124,7 @@ class RdbInstanceCreateManager extends Component {
             initialValue: '0',
           })(
             <Select>
-                <Option value='0'>请选择一台机器执行:</Option>
+                <Option value='0'>请选择一台机器执行</Option>
                 { this.state.hostsOption }
             </Select>
           )}
