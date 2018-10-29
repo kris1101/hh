@@ -4,7 +4,6 @@ import { BASE_URL } from '../../../../containers/Daas/constants';
 import { getAjax } from '../../../../utils/daas/newaxios';
 import { formatStrDate } from '../../../../utils/daas/time_helper';
 
-
 class DaasRdbHostDetailForm extends Component {
     constructor(props) {
     super(props);
@@ -24,7 +23,7 @@ class DaasRdbHostDetailForm extends Component {
                 dataIndex: '数据加载中...',
             },{
                 title: '硬盘(G)',
-                dataIndex: '数据加载中...y',
+                dataIndex: '数据加载中...',
             },{
                 title: '主机类型',
                 dataIndex: '数据加载中...',

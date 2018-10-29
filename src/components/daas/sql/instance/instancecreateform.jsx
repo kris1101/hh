@@ -49,7 +49,7 @@ class RdbInstanceCreateFormManager extends Component {
             console.log(response);
             if (response.data.data.length) {
                 const hostOptions = response.data.data.map((item,index)=>{
-                    return <Option key={index} value={item.pk}>{item.fields.host_ip}</Option>
+                    return <Option key={index} value={item.fields.host_ip}>{item.fields.name}</Option>
                 });
                 _that.setState({
                     hostsOption: hostOptions,
@@ -108,7 +108,7 @@ class RdbInstanceCreateFormManager extends Component {
             initialValue: '0',
           })(
             <Select>
-                <Option value='0'>请选择一个IP</Option>
+                <Option value='0'>请选择一台机器执行:</Option>
                 { this.state.hostsOption }
             </Select>
           )}

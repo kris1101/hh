@@ -102,6 +102,9 @@ import {
 import {
     paasBuildHistory
 } from '../containers/Paas/k8s/paasbuildhistory';
+import {
+    k8sNode 
+} from '../containers/Paas/k8s/k8snodemanagement.redux';
 const App = combineReducers({
     todos,
     setCounter,
@@ -121,6 +124,7 @@ const App = combineReducers({
     paasBuildHistory,
     helmTaskState,
     harborUser,
+    k8sNode,
     harborConfigurations,
     harborProjectDetails,
     daasSlowQueryUser,

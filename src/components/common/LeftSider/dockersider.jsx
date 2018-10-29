@@ -54,7 +54,11 @@ class DockerSider extends Component{
             openKeys = ["paashelmmanage"]
       }
 
-      if (current === "paasclustersettings"){
+      if (current === "paasapplication" || current === "paascontainer" || current === "paasservice"){
+            openKeys = ["applicationdelivery"]
+      }
+
+      if (current === "paasclustersettings" || current === "paasnodemanagement"){
             openKeys = ["infrastructure"]
       }
       if (current === "paasmonitorcenter"){
@@ -87,7 +91,7 @@ class DockerSider extends Component{
                title={<span><Icon type="fork" /><span>应用交付</span></span>}
             >
                 <Menu.Item key="paasapplication"><Link to="/paas/application"><Icon type="wallet" />应用</Link></Menu.Item>
-                <Menu.Item key="paasservce"><Link to="/paas/service"><Icon type="customer-service" />服务</Link></Menu.Item>
+                <Menu.Item key="paasservice"><Link to="/paas/service"><Icon type="customer-service" />服务</Link></Menu.Item>
                 <Menu.Item key="paascontainer"><Link to="/paas/container"><Icon type="link" />容器</Link></Menu.Item>
             </SubMenu>
             <SubMenu
@@ -95,6 +99,7 @@ class DockerSider extends Component{
                title={<span><Icon type="appstore" /><span>基础设施</span></span>}
             >
                 <Menu.Item key="paasclustersettings"><Link to="/paas/clustersettings"><Icon type="folder-add" />集群管理</Link></Menu.Item>
+                <Menu.Item key="paasnodemanagement"><Link to="/paas/nodemanagement"><Icon type="hdd" />节点治理</Link></Menu.Item>
             </SubMenu>
             <SubMenu
                key="monitorcenter"

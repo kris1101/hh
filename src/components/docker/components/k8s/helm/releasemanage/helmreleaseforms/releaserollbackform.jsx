@@ -1,5 +1,5 @@
 import React from 'react'
-import {Switch, Form, Drawer, Select, Button} from 'antd';
+import {Card, Switch, Form, Drawer, Select, Button} from 'antd';
 import { connect  } from 'react-redux';
 import './releaseform.less'
 import { getHelmReleaseVersionList } from '../../../../../../../containers/Paas/k8s/k8shelmrelease.redux'
@@ -28,12 +28,18 @@ const HelmReleaseRollBackForm = Form.create()(
                   visible={visible}
                   destroyOnClose={true}
                   style={{
+                    padding:10,
                     height: 'calc(100%- 55px)',
                     overflow: 'auto',
                     paddingBottom: 53,
                   }}
                 >
                   <Form  layout="horizontal" hideRequiredMark id="deployform">
+                         <Card 
+                           title="基础配置"
+                           headStyle={{
+                                         background: '#F5F5F5'
+                              }}>
                         <Form.Item className="formitem" label="release名称" labelCol={{ span: 4}} wrapperCol={{span: 20}}>
                               <span style={{fontSize: 15}}>{this.state.releasename}</span>
                         </Form.Item>
@@ -72,6 +78,7 @@ const HelmReleaseRollBackForm = Form.create()(
                                     </Select>
                              )}
                         </Form.Item>
+                     </Card>
                   </Form>
                   <div
                     style={{
