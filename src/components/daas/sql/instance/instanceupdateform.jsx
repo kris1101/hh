@@ -27,6 +27,7 @@ class DaasRdbInstanceUpdateFormManager extends Component {
       confirmDirty: false,
       autoCompleteResult: [],
       projectsOption: [],
+      hostsOption: [],
       high_avail: 0,
     };
   }
@@ -36,6 +37,7 @@ class DaasRdbInstanceUpdateFormManager extends Component {
     const instanceId=_that.props.instanceId;
     const base_project_url='/v1/api/rdb/projects';
     const base_instance_url='/v1/api/rdb/instances';
+    const base_host_url='/v1/api/rdb/hosts';
     getAjax(base_project_url,{},function(response){
         if (response.data.data.length) {
             const projectOptions = response.data.data.map((item,index)=>{
@@ -45,7 +47,14 @@ class DaasRdbInstanceUpdateFormManager extends Component {
                 projectsOption: projectOptions,
             });
         }
-        getAjax(base_instance_url + '/' + instanceId, {}, function(response){
+        getAjax(base_host_url,{},function(response){
+          const hostsOption = response.data.data.map((item,index)=>{
+            return <Option key={index} value={item.fields.host_ip}>{item.fields.name}</Option>
+          });
+          _that.setState({
+            hostsOption: hostsOption,
+          });
+          getAjax(base_instance_url + '/' + instanceId, {}, function(response){
             let resDat=response.data.data[0].fields;
             delete resDat.create_time;
             delete resDat.update_time;
@@ -53,6 +62,7 @@ class DaasRdbInstanceUpdateFormManager extends Component {
             resDat.high_avail=Number(resDat.high_avail).toString();
             delete resDat.high_avail;
             _that.props.form.setFieldsValue(resDat);
+          });
         });
     });
   }
@@ -99,8 +109,12 @@ class DaasRdbInstanceUpdateFormManager extends Component {
         >
           {getFieldDecorator('host', {
             rules: [{ required: true, message: '请输入实例IP!', whitespace: true }],
-          })(
-            <Input />
+            initialValue: '0',
+          },)(
+            <Select>
+                <Option value='0'>请选择一台主机</Option>
+                { this.state.hostsOption }
+            </Select>
           )}
         </FormItem>
         <FormItem
@@ -121,7 +135,7 @@ class DaasRdbInstanceUpdateFormManager extends Component {
                     required: true, message: '请输入CPU个数!', whitespace: false 
                 }],
           })(
-            <Input min={1} />
+            <Input disabled />
           )}
         </FormItem>
         <FormItem
@@ -142,7 +156,7 @@ class DaasRdbInstanceUpdateFormManager extends Component {
                     required: true, message: '请输入内存容量!', whitespace: false 
                 }],
           })(
-            <Input min={1} />
+            <Input disabled />
           )}
         </FormItem>
         <FormItem
@@ -163,7 +177,7 @@ class DaasRdbInstanceUpdateFormManager extends Component {
                     required: true, message: '请输入硬盘容量,单位G!', whitespace: false 
                 }],
           })(
-            <Input min={1} />
+            <Input disabled />
           )}
         </FormItem>
         <FormItem
@@ -184,7 +198,7 @@ class DaasRdbInstanceUpdateFormManager extends Component {
                     required: true, message: '请输入端口!', whitespace: false 
                 }],
           })(
-            <Input min={1} />
+            <Input disabled />
           )}
         </FormItem>
         <FormItem

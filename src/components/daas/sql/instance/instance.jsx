@@ -64,13 +64,8 @@ class DaasInstanceManageForm extends Component {
                     </FormItem>
                     <div style={{ float:'right'}}>
                         <FormItem label="">
-                            {getFieldDecorator('name')(
-                                <Input placeholder="实例名称" />
-                            )}
-                        </FormItem>
-                        <FormItem label="">
-                            {getFieldDecorator('port')(
-                                <Input placeholder="端口号" />
+                            {getFieldDecorator('nameport')(
+                                <Input placeholder="实例名称或端口号" />
                             )}
                         </FormItem>
                     <FormItem>
