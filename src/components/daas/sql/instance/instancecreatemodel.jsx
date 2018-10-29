@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import DaasRdbInstanceCreateForm  from './instancecreateform';
 import { rdbInstanceCreate,rdbInstanceFetch } from '../../../../containers/Daas/actions/rdb_instance';
 
-class DaasRdbInstanceCreateManager extends Component {
+class DaasRdbInstanceCreateModelManager extends Component {
   state = {
     ModalText: 'Content of the modal',
     visible: false,
@@ -59,5 +59,5 @@ class DaasRdbInstanceCreateManager extends Component {
   }
 }
 
-const DaasRdbInstanceCreateModel = Form.create()(DaasRdbInstanceCreateManager);
+const DaasRdbInstanceCreateModel = Form.create()(DaasRdbInstanceCreateModelManager);
 export default connect(state => state.daasRdbInstance, { rdbInstanceCreate,rdbInstanceFetch }) (DaasRdbInstanceCreateModel);
