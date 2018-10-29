@@ -3,8 +3,7 @@ import { Row, Col} from 'antd';
 import DaasRdbHostDetailModle from '../host/hostdetailmodel';
 import DaasRdbHostUpdateModel from '../host/hostupdatemodel';
 import DaasRdbHostDeleteModel from '../host/hostdeletemodel';
-import { formatStrDate } from '../../../../utils/daas/time_helper'
-
+import { formatStrDate } from '../../../../utils/daas/time_helper';
 export function gethosts() {
     return [{
         title: '名称',
@@ -27,7 +26,7 @@ export function gethosts() {
     },{
         title: '创建时间',
         dataIndex: 'fields.create_time',
-        render: (data) => formatStrDate(data),
+        render: (data) =>(formatStrDate(data)),
     },{
         title: '操作',
         render: (data) => (

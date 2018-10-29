@@ -20,7 +20,7 @@ const Option = Select.Option;
 const { TextArea } = Input;
 
 
-class RdbInstanceCreateManager extends Component {
+class RdbInstanceCreateFormManager extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -45,7 +45,7 @@ class RdbInstanceCreateManager extends Component {
                 });
             }
         });
-      getAjax('/v1/api/rdb/hosts',{},function(response){
+        getAjax('/v1/api/rdb/hosts',{},function(response){
             console.log(response);
             if (response.data.data.length) {
                 const hostOptions = response.data.data.map((item,index)=>{
@@ -100,22 +100,6 @@ class RdbInstanceCreateManager extends Component {
             <Input />
           )}
         </FormItem>
-
-        {/*<FormItem
-          {...formItemLayout}
-          label={(
-            <span>
-              IP&nbsp;
-            </span>
-          )}
-        >
-          {getFieldDecorator('host', {
-            rules: [{ required: true, message: '请输入实例IP!', whitespace: true }],
-          })(
-            <Input />
-          )}
-        </FormItem>*/}
-
         <FormItem
           {...formItemLayout}
           label="IP"
@@ -141,13 +125,17 @@ class RdbInstanceCreateManager extends Component {
           )}
         >
           {getFieldDecorator('cpu', {
-            rules: [{
-                    type: 'string', message: '输入CPU个数必须为整数!',
-                }, {
-                    required: true, message: '请输入CPU个数!', whitespace: false 
-                }],
+            rules: [
+                    {
+                        type: 'string', message: '输入CPU个数必须为整数!',
+                    },
+                    {
+                        required: true, message: '请输入CPU个数!', whitespace: false
+                    },
+                ],
+            initialValue: '4',
           })(
-            <Input min={1} />
+            <Input disabled />
           )}
         </FormItem>
         <FormItem
@@ -167,8 +155,9 @@ class RdbInstanceCreateManager extends Component {
                 }, {
                     required: true, message: '请输入内存容量!', whitespace: false 
                 }],
+            initialValue: '2048',
           })(
-            <Input min={1} />
+            <Input disabled />
           )}
         </FormItem>
         <FormItem
@@ -188,8 +177,9 @@ class RdbInstanceCreateManager extends Component {
                 }, {
                     required: true, message: '请输入硬盘容量,单位G!', whitespace: false 
                 }],
+            initialValue: '100',
           })(
-            <Input min={1} />
+            <Input disabled />
           )}
         </FormItem>
         {/*<FormItem
@@ -291,5 +281,5 @@ class RdbInstanceCreateManager extends Component {
     }
 }
 
-const RdbInstanceCreateForm = Form.create()(RdbInstanceCreateManager);
+const RdbInstanceCreateForm = Form.create()(RdbInstanceCreateFormManager);
 export default connect() (RdbInstanceCreateForm);

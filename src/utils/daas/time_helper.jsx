@@ -21,4 +21,3 @@ export function compareDate(startdate, enddate){
           return true
       }
 }
-

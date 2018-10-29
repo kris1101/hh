@@ -6,7 +6,7 @@ import DaasRdbInstanceDeleteModel from '../instance/instancedeletemodel';
 import DaasRdbInstanceStopModel from '../instance/instancestopmodel';
 import DaasRdbInstanceRestartModel from '../instance/instancerestartmodel';
 import { formatStrDate } from '../../../../utils/daas/time_helper'
-import { runStatus } from '../../../../utils/daas/rdb_utils'
+import { instanceRunStatus } from '../../../../utils/daas/rdb_utils';
 
 export function getinstances() {
     return [{
@@ -21,11 +21,11 @@ export function getinstances() {
     },{
         title: '运行状态',
         dataIndex: 'fields.run_status',
-        render: (data) => runStatus(data)
+        render: (data)=>instanceRunStatus(data),
     },{
         title: '创建时间',
         dataIndex: 'fields.create_time',
-        render: (data) => formatStrDate(data)
+        render: (data) => formatStrDate(data),
     },{
         title: '操作',
         render: (data) => (

@@ -45,12 +45,10 @@ export function rdb_host_delete(hosts) {
 export function rdbHostFetch(params={}){
     return dispatch=>{
         getAjax('/v1/api/rdb/hosts', params, function(response){
-            console.log(response);
             let resDat = response.data.data;
             if (!params.isdispach) {
                 dispatch(rdb_host_fetch(resDat));
             }
-            console.log(resDat);
         });
     }
 }
@@ -59,7 +57,6 @@ export function rdbHostFetch(params={}){
 export function rdbHostCreate(hostObj){
     return dispatch=>{
         postAjax('/v1/api/rdb/hosts', hostObj, function(response){
-            console.log(hostObj);
             dispatch(rdb_host_create(response.data));
             if (response.data.code) {
                 message.error('主机创建失败: ' + response.data.message);
