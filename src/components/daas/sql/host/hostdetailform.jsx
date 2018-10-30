@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'antd';
 import { BASE_URL } from '../../../../containers/Daas/constants';
 import { getAjax } from '../../../../utils/daas/newaxios';
-import { formatStrDate } from '../../../../utils/daas/time_helper'
+import { formatStrDate } from '../../../../utils/daas/time_helper';
 
 class DaasRdbHostDetailForm extends Component {
     constructor(props) {

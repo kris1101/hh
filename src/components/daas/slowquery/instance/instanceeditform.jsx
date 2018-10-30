@@ -17,7 +17,7 @@ import { getAjax } from '../../../../utils/daas/axios';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
-
+const ipPatten = /^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/
 
 class SlowQueryInstanceEditManager extends Component {
   constructor(props){
@@ -42,6 +42,15 @@ class SlowQueryInstanceEditManager extends Component {
       delete resDat.update_time;
       _that.props.form.setFieldsValue(resDat);
     });
+  }
+
+    checkip = (rule, value, callback) => {
+      if(!value.length){
+          callback("IP不能为空")
+      }
+      if(!ipPatten.test(value)){
+          callback("请用正确的IP地址格式填写")
+      }
   }
 
   render() {
@@ -84,10 +93,8 @@ class SlowQueryInstanceEditManager extends Component {
         >
           {getFieldDecorator('host_ip', {
             rules: [{
-              type: 'string', message: '请输入实例机器IP地址!',
-            }, {
-              required: true, message: '请输入实例机器IP地址!',
-            }],
+            type: 'string', },
+            { required: true, validator: this.checkip }],
             initialValue: this.state.instanceObj.fields ? this.state.instanceObj.fields.host_ip : '',
           })(
             <Input />
