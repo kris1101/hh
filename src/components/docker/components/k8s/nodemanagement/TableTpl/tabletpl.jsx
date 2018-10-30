@@ -103,6 +103,10 @@ function switchconfirm(e, name, _that){
        case "cordon":
           showdisablenodeConfirm(name, _that) 
        break;
+       case "label":
+          console.log("label");
+           _that.showNodeLabelModel(name);
+       break;
        case "uncordon":
           showenablenodeConfirm(name, _that) 
        break;
@@ -132,28 +136,28 @@ export function getNode() {
     }, {
         title: '调度状态',
         dataIndex: 'spec.unschedulable',
-        render: (data) => (data === true ? <Icon type="safety" style={{color: "red"}}/> : <Icon type="safety" style={{color: "green"}} />)
+        render: (data) => (data === true ? <Icon type="close-circle" style={{color: "red"}}/> : <Icon type="check-circle" style={{color: "green"}} />)
     }, {
         title: '运行状态',
         dataIndex: 'status.conditions[4].status',
-        render: (data) => (data === "True" ? <Icon type="safety" style={{color: "green"}}/> : <Icon type="safety" style={{color: "red"}} />)
+        render: (data) => (data === "True" ? <Icon type="check-circle" style={{color: "green"}}/> : <Icon type="close-circle" style={{color: "red"}} />)
 
     }, {
         title: '磁盘空间',
         dataIndex: 'status.conditions[0].status',
-        render: (data) => (data === "False" ? <Icon type="safety" style={{color: "green"}}/> : <Icon type="safety" style={{color: "red"}} />)
+        render: (data) => (data === "False" ? <Icon type="check-circle" style={{color: "green"}}/> : <Icon type="close-circle" style={{color: "red"}} />)
     }, {
         title: '磁盘压力',
         dataIndex: 'status.conditions[2].status',
-        render: (data) => (data === "False" ? <Icon type="safety" style={{color: "green"}}/> : <Icon type="safety" style={{color: "red"}} />)
+        render: (data) => (data === "False" ? <Icon type="check-circle" style={{color: "green"}}/> : <Icon type="close-circle" style={{color: "red"}} />)
     }, {
         title: 'pid压力',
         dataIndex: 'status.conditions[3].status',
-        render: (data) => (data === "False" ? <Icon type="safety" style={{color: "green"}}/> : <Icon type="safety" style={{color: "red"}} />)
+        render: (data) => (data === "False" ? <Icon type="check-circle" style={{color: "green"}}/> : <Icon type="close-circle" style={{color: "red"}} />)
     }, {
         title: '内存空间',
         dataIndex: 'status.conditions[1].status',
-        render: (data) => (data === "False" ? <Icon type="safety" style={{color: "green"}}/> : <Icon type="safety" style={{color: "red"}} />)
+        render: (data) => (data === "False" ? <Icon type="check-circle" style={{color: "green"}}/> : <Icon type="close-circle" style={{color: "red"}} />)
     },{
         title: '操作',
         render: (data, record, index) => {
@@ -173,7 +177,7 @@ export function getNode() {
                              维护
                            </Menu.Item>
                                <Menu.Divider />
-                           <Menu.Item>
+                           <Menu.Item key="label">
                              标签
                            </Menu.Item>
                                <Menu.Divider />
